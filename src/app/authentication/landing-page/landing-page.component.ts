@@ -61,109 +61,92 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   user: UserAffiliate | null = null;
   readonly heroBadgeIcon = 'fa-trophy';
   readonly primaryCtaArrow = 'fa-arrow-right';
-  readonly heroMetrics = [
-    { value: '98%', label: 'Rentabilidad' },
-    { value: '$500M+', label: 'Gestionados' },
-    { value: '10K+', label: 'Inversores' },
+  heroMetrics = [
+    { value: '98%', label: '' },
+    { value: '$500M+', label: '' },
+    { value: '10K+', label: '' },
   ];
-  readonly featureCards = [
+  featureCards = [
     {
       icon: 'fa-chart-line',
-      title: 'Trading Avanzado',
-      description:
-        'Algoritmos de última generación para maximizar tus inversiones en tiempo real.',
+      title: '',
+      description: '',
     },
     {
       icon: 'fa-shield-alt',
-      title: 'Seguridad Total',
-      description:
-        'Tus activos protegidos con la más alta tecnología de seguridad bancaria.',
+      title: '',
+      description: '',
     },
     {
       icon: 'fa-chart-pie',
-      title: 'Análisis Profundo',
-      description:
-        'Informes detallados y análisis de mercado para decisiones informadas.',
+      title: '',
+      description: '',
     },
     {
       icon: 'fa-user-tie',
-      title: 'Asesoría Personalizada',
-      description:
-        'Expertos dedicados a ayudarte a alcanzar tus objetivos financieros.',
+      title: '',
+      description: '',
     },
     {
       icon: 'fa-eye',
-      title: 'Transparencia',
-      description:
-        'Total claridad en cada operación y movimiento de tu portafolio.',
+      title: '',
+      description: '',
     },
     {
       icon: 'fa-headset',
-      title: '24/7 Soporte',
-      description:
-        'Atención continua para que nunca te pierdas una oportunidad.',
+      title: '',
+      description: '',
     },
   ];
   readonly tradingImage = 'assets/images/TradingSection.png';
-  readonly tradingHighlights = [
-    'Rendimientos superiores al mercado',
-    'Diversificación inteligente de portafolio',
-    'Gestión de riesgos avanzada',
-    'Acceso a mercados exclusivos',
-  ];
+  tradingHighlights: string[] = [];
   readonly checkIcon = 'fa-check';
-  readonly processSteps = [
+  processSteps = [
     {
       number: '01',
       icon: 'fa-user-plus',
-      title: 'Registro',
-      description:
-        'Crea tu cuenta en minutos y verifica tu identidad de forma segura.',
+      title: '',
+      description: '',
     },
     {
       number: '02',
       icon: 'fa-clipboard-list',
-      title: 'Planificación',
-      description:
-        'Nuestros expertos diseñan una estrategia personalizada para ti.',
+      title: '',
+      description: '',
     },
     {
       number: '03',
       icon: 'fa-coins',
-      title: 'Inversión',
-      description:
-        'Comienza a invertir con el respaldo de tecnología de punta.',
+      title: '',
+      description: '',
     },
     {
       number: '04',
       icon: 'fa-chart-area',
-      title: 'Crecimiento',
-      description: 'Observa cómo tu patrimonio crece consistentemente.',
+      title: '',
+      description: '',
     },
   ];
-  readonly testimonials = [
+  testimonials = [
     {
-      quote:
-        '"La mejor decisión financiera que he tomado. En 6 meses, mi portafolio creció un 85%. El equipo es excepcional."',
+      quote: '',
       avatar: 'assets/images/user.png',
-      name: 'Carlos Mendoza',
-      role: 'CEO, TechVentures',
+      name: '',
+      role: '',
       rating: 5,
     },
     {
-      quote:
-        '"Profesionalismo y resultados reales. La asesoría personalizada marca la diferencia. Altamente recomendado."',
+      quote: '',
       avatar: 'assets/images/user.png',
-      name: 'María González',
-      role: 'Emprendedora',
+      name: '',
+      role: '',
       rating: 5,
     },
     {
-      quote:
-        '"Transparencia total y rendimientos consistentes. Finalmente encontré una plataforma en la que puedo confiar."',
+      quote: '',
       avatar: 'assets/images/user.png',
-      name: 'Roberto Silva',
-      role: 'Inversor',
+      name: '',
+      role: '',
       rating: 5,
     },
   ];
@@ -176,28 +159,30 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     phone: 'fa-phone',
     location: 'fa-map-marker-alt',
   };
-  readonly ctaStats = [
-    { value: 'A+', label: 'Calificación' },
-    { value: '100%', label: 'Seguro' },
-    { value: '24/7', label: 'Soporte' },
+  ctaStats = [
+    { value: 'A+', label: '' },
+    { value: '100%', label: '' },
+    { value: '24/7', label: '' },
   ];
   readonly footerLinks = [
     {
+      key: 'LINKS',
       heading: 'Enlaces',
       items: [
-        { label: 'Servicios', href: '#servicios' },
-        { label: 'Nosotros', href: '#nosotros' },
-        { label: 'Testimonios', href: '#testimonios' },
-        { label: 'Contacto', href: '#contacto' },
+        { key: 'SERVICES', label: '', href: '#servicios' },
+        { key: 'ABOUT_US', label: '', href: '#nosotros' },
+        { key: 'TESTIMONIALS', label: '', href: '#testimonios' },
+        { key: 'CONTACT', label: '', href: '#contacto' },
       ],
     },
     {
+      key: 'LEGAL',
       heading: 'Legal',
       items: [
-        { label: 'Privacidad', href: '#privacidad' },
-        { label: 'Términos', href: '#terminos' },
-        { label: 'Regulación', href: '#regulacion' },
-        { label: 'Seguridad', href: '#seguridad' },
+        { key: 'PRIVACY', label: '', href: '#privacidad' },
+        { key: 'TERMS', label: '', href: '#terminos' },
+        { key: 'REGULATION', label: '', href: '#regulacion' },
+        { key: 'SECURITY', label: '', href: '#seguridad' },
       ],
     },
   ];
@@ -237,6 +222,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     } else {
       this.changeLanguage('en');
     }
+    this.updateTranslations();
   }
 
   ngOnDestroy() {
@@ -264,6 +250,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
     this.isLanguageDropdownOpen = false;
+    this.updateTranslations();
   }
 
   toggleLanguageDropdown(event: Event) {
@@ -319,5 +306,93 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   getCurrentFlagIcon(): string {
     return this.languageFlags[this.currentLang] || this.languageFlags['en'];
+  }
+
+  updateTranslations(): void {
+    // Update hero metrics
+    this.translate.get('LANDING_PAGE.HERO.METRICS').subscribe(metrics => {
+      this.heroMetrics = [
+        { value: '98%', label: metrics.PROFITABILITY },
+        { value: '$500M+', label: metrics.MANAGED },
+        { value: '10K+', label: metrics.INVESTORS },
+      ];
+    });
+
+    // Update feature cards
+    this.translate.get('LANDING_PAGE.FEATURES.CARDS').subscribe(cards => {
+      this.featureCards[0].title = cards.TRADING.TITLE;
+      this.featureCards[0].description = cards.TRADING.DESCRIPTION;
+      this.featureCards[1].title = cards.SECURITY.TITLE;
+      this.featureCards[1].description = cards.SECURITY.DESCRIPTION;
+      this.featureCards[2].title = cards.ANALYSIS.TITLE;
+      this.featureCards[2].description = cards.ANALYSIS.DESCRIPTION;
+      this.featureCards[3].title = cards.ADVISORY.TITLE;
+      this.featureCards[3].description = cards.ADVISORY.DESCRIPTION;
+      this.featureCards[4].title = cards.TRANSPARENCY.TITLE;
+      this.featureCards[4].description = cards.TRANSPARENCY.DESCRIPTION;
+      this.featureCards[5].title = cards.SUPPORT.TITLE;
+      this.featureCards[5].description = cards.SUPPORT.DESCRIPTION;
+    });
+
+    // Update trading highlights
+    this.translate
+      .get('LANDING_PAGE.TRADING_SECTION.HIGHLIGHTS')
+      .subscribe(highlights => {
+        this.tradingHighlights = [
+          highlights.ITEM1,
+          highlights.ITEM2,
+          highlights.ITEM3,
+          highlights.ITEM4,
+        ];
+      });
+
+    // Update process steps
+    this.translate.get('LANDING_PAGE.HOW_IT_WORKS.STEPS').subscribe(steps => {
+      this.processSteps[0].title = steps.STEP1.TITLE;
+      this.processSteps[0].description = steps.STEP1.DESCRIPTION;
+      this.processSteps[1].title = steps.STEP2.TITLE;
+      this.processSteps[1].description = steps.STEP2.DESCRIPTION;
+      this.processSteps[2].title = steps.STEP3.TITLE;
+      this.processSteps[2].description = steps.STEP3.DESCRIPTION;
+      this.processSteps[3].title = steps.STEP4.TITLE;
+      this.processSteps[3].description = steps.STEP4.DESCRIPTION;
+    });
+
+    // Update CTA stats
+    this.translate.get('LANDING_PAGE.CTA_SECTION.STATS').subscribe(stats => {
+      this.ctaStats = [
+        { value: 'A+', label: stats.RATING },
+        { value: '100%', label: stats.SECURE },
+        { value: '24/7', label: stats.SUPPORT },
+      ];
+    });
+
+    // Update footer links
+    this.translate.get('LANDING_PAGE.FOOTER.LINKS').subscribe(links => {
+      this.footerLinks[0].items[0].label = links.SERVICES;
+      this.footerLinks[0].items[1].label = links.ABOUT_US;
+      this.footerLinks[0].items[2].label = links.TESTIMONIALS;
+      this.footerLinks[0].items[3].label = links.CONTACT;
+    });
+
+    this.translate.get('LANDING_PAGE.FOOTER.LEGAL').subscribe(legal => {
+      this.footerLinks[1].items[0].label = legal.PRIVACY;
+      this.footerLinks[1].items[1].label = legal.TERMS;
+      this.footerLinks[1].items[2].label = legal.REGULATION;
+      this.footerLinks[1].items[3].label = legal.SECURITY;
+    });
+
+    // Update testimonials
+    this.translate
+      .get('LANDING_PAGE.TESTIMONIALS_SECTION.TESTIMONIALS')
+      .subscribe((testimonials: any[]) => {
+        for (let index = 0; index < testimonials.length; index++) {
+          if (this.testimonials[index]) {
+            this.testimonials[index].quote = testimonials[index].QUOTE;
+            this.testimonials[index].name = testimonials[index].NAME;
+            this.testimonials[index].role = testimonials[index].ROLE;
+          }
+        }
+      });
   }
 }

@@ -1,5 +1,151 @@
 {
   "HEADER": {
     "LANGUAGE": "Português"
+  },
+  "LANDING_PAGE": {
+    "NAVBAR": {
+      "SERVICES": "Serviços",
+      "ABOUT_US": "Sobre Nós",
+      "TESTIMONIALS": "Depoimentos",
+      "CONTACT": "Contato",
+      "LOGIN": "Entrar",
+      "START": "Começar"
+    },
+    "HERO": {
+      "BADGE": "Trading Premium",
+      "TITLE": "SUCESSO JUNTOS",
+      "SUBTITLE": "Unidos no caminho para o sucesso. Investimentos inteligentes, retornos excepcionais e um futuro financeiro brilhante.",
+      "CTA_PRIMARY": "Começar a Investir",
+      "CTA_SECONDARY": "Agendar Consulta",
+      "METRICS": {
+        "PROFITABILITY": "Rentabilidade",
+        "MANAGED": "Gerenciados",
+        "INVESTORS": "Investidores"
+      }
+    },
+    "FEATURES": {
+      "TAG": "NOSSOS SERVIÇOS",
+      "TITLE": "Investimento de Elite",
+      "DESCRIPTION": "Oferecemos serviços premium projetados para investidores que buscam excelência",
+      "CARDS": {
+        "TRADING": {
+          "TITLE": "Trading Avançado",
+          "DESCRIPTION": "Algoritmos de última geração para maximizar seus investimentos em tempo real."
+        },
+        "SECURITY": {
+          "TITLE": "Segurança Total",
+          "DESCRIPTION": "Seus ativos protegidos com a mais alta tecnologia de segurança bancária."
+        },
+        "ANALYSIS": {
+          "TITLE": "Análise Profunda",
+          "DESCRIPTION": "Relatórios detalhados e análise de mercado para decisões informadas."
+        },
+        "ADVISORY": {
+          "TITLE": "Consultoria Personalizada",
+          "DESCRIPTION": "Especialistas dedicados a ajudá-lo a alcançar seus objetivos financeiros."
+        },
+        "TRANSPARENCY": {
+          "TITLE": "Transparência",
+          "DESCRIPTION": "Total clareza em cada operação e movimento do seu portfólio."
+        },
+        "SUPPORT": {
+          "TITLE": "Suporte 24/7",
+          "DESCRIPTION": "Atendimento contínuo para que você nunca perca uma oportunidade."
+        }
+      }
+    },
+    "TRADING_SECTION": {
+      "TAG": "TRADING PROFISSIONAL",
+      "TITLE": "Tecnologia que",
+      "TITLE_HIGHLIGHT": "Multiplica Resultados",
+      "DESCRIPTION": "Nossa plataforma utiliza inteligência artificial e análise preditiva para identificar oportunidades antes do mercado.",
+      "HIGHLIGHTS": {
+        "ITEM1": "Retornos superiores ao mercado",
+        "ITEM2": "Diversificação inteligente de portfólio",
+        "ITEM3": "Gestão avançada de riscos",
+        "ITEM4": "Acesso a mercados exclusivos"
+      },
+      "STAT_LABEL": "Retorno Anual",
+      "STAT_VALUE": "+142.5%"
+    },
+    "HOW_IT_WORKS": {
+      "TAG": "PROCESSO SIMPLES",
+      "TITLE": "Como Funciona",
+      "DESCRIPTION": "Em apenas 4 passos simples, você estará no caminho para o sucesso financeiro",
+      "STEPS": {
+        "STEP1": {
+          "TITLE": "Registro",
+          "DESCRIPTION": "Crie sua conta em minutos e verifique sua identidade de forma segura."
+        },
+        "STEP2": {
+          "TITLE": "Planejamento",
+          "DESCRIPTION": "Nossos especialistas elaboram uma estratégia personalizada para você."
+        },
+        "STEP3": {
+          "TITLE": "Investimento",
+          "DESCRIPTION": "Comece a investir com o suporte de tecnologia de ponta."
+        },
+        "STEP4": {
+          "TITLE": "Crescimento",
+          "DESCRIPTION": "Observe seu patrimônio crescer consistentemente."
+        }
+      }
+    },
+    "TESTIMONIALS_SECTION": {
+      "TAG": "DEPOIMENTOS",
+      "TITLE": "Histórias de Sucesso",
+      "DESCRIPTION": "Milhares de investidores já estão alcançando suas metas financeiras",
+      "TESTIMONIALS": [
+        {
+          "QUOTE": "A melhor decisão financeira que tomei. Em 6 meses, meu portfólio cresceu 85%. A equipe é excepcional.",
+          "NAME": "Carlos Mendoza",
+          "ROLE": "CEO, TechVentures"
+        },
+        {
+          "QUOTE": "Profissionalismo e resultados reais. A assessoria personalizada faz toda a diferença. Altamente recomendado.",
+          "NAME": "María González",
+          "ROLE": "Empreendedora"
+        },
+        {
+          "QUOTE": "Transparência total e retornos consistentes. Finalmente encontrei uma plataforma em que posso confiar.",
+          "NAME": "Roberto Silva",
+          "ROLE": "Investidor"
+        }
+      ]
+    },
+    "CTA_SECTION": {
+      "TITLE": "Comece Sua",
+      "TITLE_HIGHLIGHT": "Jornada para o Sucesso",
+      "DESCRIPTION": "Junte-se a milhares de investidores que já estão construindo seu futuro financeiro. A oportunidade é agora.",
+      "CTA_PRIMARY": "Abrir Conta Grátis",
+      "CTA_SECONDARY": "Falar com um Especialista",
+      "STATS": {
+        "RATING": "Classificação",
+        "SECURE": "Seguro",
+        "SUPPORT": "Suporte"
+      }
+    },
+    "FOOTER": {
+      "TAGLINE": "Investimentos inteligentes para um futuro brilhante.",
+      "LINKS": {
+        "HEADING": "Links",
+        "SERVICES": "Serviços",
+        "ABOUT_US": "Sobre Nós",
+        "TESTIMONIALS": "Depoimentos",
+        "CONTACT": "Contato"
+      },
+      "LEGAL": {
+        "HEADING": "Legal",
+        "PRIVACY": "Privacidade",
+        "TERMS": "Termos",
+        "REGULATION": "Regulamentação",
+        "SECURITY": "Segurança"
+      },
+      "CONTACT": {
+        "HEADING": "Contato"
+      },
+      "COPYRIGHT": "© 2025 GoldTrade. Todos os direitos reservados.",
+      "DISCLAIMER": "Os investimentos envolvem riscos. O desempenho passado não garante resultados futuros."
+    }
   }
 }

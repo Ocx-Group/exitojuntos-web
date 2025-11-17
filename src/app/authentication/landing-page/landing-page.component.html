@@ -6,10 +6,10 @@
     </div>
 
     <div class="navbar-links">
-      <a href="#servicios" class="nav-link">Servicios</a>
-      <a href="#nosotros" class="nav-link">Nosotros</a>
-      <a href="#testimonios" class="nav-link">Testimonios</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
+      <a href="#servicios" class="nav-link">{{ 'LANDING_PAGE.NAVBAR.SERVICES' | translate }}</a>
+      <a href="#nosotros" class="nav-link">{{ 'LANDING_PAGE.NAVBAR.ABOUT_US' | translate }}</a>
+      <a href="#testimonios" class="nav-link">{{ 'LANDING_PAGE.NAVBAR.TESTIMONIALS' | translate }}</a>
+      <a href="#contacto" class="nav-link">{{ 'LANDING_PAGE.NAVBAR.CONTACT' | translate }}</a>
     </div>
 
     <div class="navbar-actions">
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <button class="btn-navbar-secondary" routerLink="/signin">Iniciar Sesión</button>
+      <button class="btn-navbar-secondary" routerLink="/signin">{{ 'LANDING_PAGE.NAVBAR.LOGIN' | translate }}</button>
     </div>
   </div>
 </nav>
@@ -63,22 +63,21 @@
     <div class="hero-content">
       <div class="hero-badge">
         <i class="fas {{ heroBadgeIcon }} badge-icon"></i>
-        <span>Trading Premium</span>
+        <span>{{ 'LANDING_PAGE.HERO.BADGE' | translate }}</span>
       </div>
 
-      <h1 class="hero-title">ÉXITO JUNTOS</h1>
+      <h1 class="hero-title">{{ 'LANDING_PAGE.HERO.TITLE' | translate }}</h1>
 
       <p class="hero-subtitle">
-        Unidos en el camino al éxito. Inversiones inteligentes, rendimientos excepcionales y un futuro financiero
-        brillante.
+        {{ 'LANDING_PAGE.HERO.SUBTITLE' | translate }}
       </p>
 
       <div class="hero-buttons">
         <button class="btn-primary-gold" routerLink="/authentication/signup">
-          Comenzar a Invertir
+          {{ 'LANDING_PAGE.HERO.CTA_PRIMARY' | translate }}
           <i class="fas {{ primaryCtaArrow }}"></i>
         </button>
-        <button class="btn-secondary-gold">Agendar Consulta</button>
+        <button class="btn-secondary-gold">{{ 'LANDING_PAGE.HERO.CTA_SECONDARY' | translate }}</button>
       </div>
 
       <div class="hero-metrics">
@@ -96,9 +95,9 @@
 
     <div class="features-container">
       <div class="section-header">
-        <p class="section-tag">NUESTROS SERVICIOS</p>
-        <h2 class="section-title">Inversión de Elite</h2>
-        <p class="section-description">Ofrecemos servicios premium diseñados para inversores que buscan excelencia</p>
+        <p class="section-tag">{{ 'LANDING_PAGE.FEATURES.TAG' | translate }}</p>
+        <h2 class="section-title">{{ 'LANDING_PAGE.FEATURES.TITLE' | translate }}</h2>
+        <p class="section-description">{{ 'LANDING_PAGE.FEATURES.DESCRIPTION' | translate }}</p>
       </div>
 
       <div class="features-grid">
@@ -119,14 +118,13 @@
 
     <div class="trading-container">
       <div class="trading-content">
-        <p class="section-tag">TRADING PROFESIONAL</p>
+        <p class="section-tag">{{ 'LANDING_PAGE.TRADING_SECTION.TAG' | translate }}</p>
         <h2 class="trading-title">
-          Tecnología que<br />
-          <span class="text-gradient">Multiplica Resultados</span>
+          {{ 'LANDING_PAGE.TRADING_SECTION.TITLE' | translate }}<br />
+          <span class="text-gradient">{{ 'LANDING_PAGE.TRADING_SECTION.TITLE_HIGHLIGHT' | translate }}</span>
         </h2>
         <p class="trading-description">
-          Nuestra plataforma utiliza inteligencia artificial y análisis predictivo para identificar oportunidades antes
-          que el mercado.
+          {{ 'LANDING_PAGE.TRADING_SECTION.DESCRIPTION' | translate }}
         </p>
 
         <div class="trading-highlights">
@@ -145,8 +143,8 @@
           <div class="image-overlay"></div>
         </div>
         <div class="trading-stat">
-          <p class="stat-label">Rendimiento Anual</p>
-          <p class="stat-value">+142.5%</p>
+          <p class="stat-label">{{ 'LANDING_PAGE.TRADING_SECTION.STAT_LABEL' | translate }}</p>
+          <p class="stat-value">{{ 'LANDING_PAGE.TRADING_SECTION.STAT_VALUE' | translate }}</p>
         </div>
       </div>
     </div>
@@ -156,9 +154,9 @@
   <section class="how-it-works-section">
     <div class="section-container">
       <div class="section-header">
-        <p class="section-tag">PROCESO SIMPLE</p>
-        <h2 class="section-title">Cómo Funciona</h2>
-        <p class="section-description">En solo 4 pasos simples, estarás en camino hacia el éxito financiero</p>
+        <p class="section-tag">{{ 'LANDING_PAGE.HOW_IT_WORKS.TAG' | translate }}</p>
+        <h2 class="section-title">{{ 'LANDING_PAGE.HOW_IT_WORKS.TITLE' | translate }}</h2>
+        <p class="section-description">{{ 'LANDING_PAGE.HOW_IT_WORKS.DESCRIPTION' | translate }}</p>
       </div>
 
       <div class="steps-container">
@@ -183,9 +181,9 @@
 
     <div class="section-container">
       <div class="section-header">
-        <p class="section-tag">TESTIMONIOS</p>
-        <h2 class="section-title">Historias de Éxito</h2>
-        <p class="section-description">Miles de inversores ya están alcanzando sus metas financieras</p>
+        <p class="section-tag">{{ 'LANDING_PAGE.TESTIMONIALS_SECTION.TAG' | translate }}</p>
+        <h2 class="section-title">{{ 'LANDING_PAGE.TESTIMONIALS_SECTION.TITLE' | translate }}</h2>
+        <p class="section-description">{{ 'LANDING_PAGE.TESTIMONIALS_SECTION.DESCRIPTION' | translate }}</p>
       </div>
 
       <div class="testimonials-grid">
@@ -218,20 +216,20 @@
       <img [src]="brandIcon" alt="icon" class="cta-icon" />
 
       <h2 class="cta-title">
-        Comienza Tu<br />
-        <span class="text-gradient">Viaje al Éxito</span>
+        {{ 'LANDING_PAGE.CTA_SECTION.TITLE' | translate }}<br />
+        <span class="text-gradient">{{ 'LANDING_PAGE.CTA_SECTION.TITLE_HIGHLIGHT' | translate }}</span>
       </h2>
 
       <p class="cta-description">
-        Únete a miles de inversores que ya están construyendo su futuro financiero. La oportunidad es ahora.
+        {{ 'LANDING_PAGE.CTA_SECTION.DESCRIPTION' | translate }}
       </p>
 
       <div class="cta-buttons">
         <button class="btn-primary-gold" routerLink="/authentication/signup">
-          Abrir Cuenta Gratis
+          {{ 'LANDING_PAGE.CTA_SECTION.CTA_PRIMARY' | translate }}
           <i class="fas {{ primaryCtaArrow }}"></i>
         </button>
-        <button class="btn-secondary-gold">Hablar con un Experto</button>
+        <button class="btn-secondary-gold">{{ 'LANDING_PAGE.CTA_SECTION.CTA_SECONDARY' | translate }}</button>
       </div>
 
       <div class="cta-stats">
@@ -252,11 +250,11 @@
             <img [src]="navbarIcon" alt="Éxito Juntos" class="logo-svg" />
             <p class="logo-text">Éxito Juntos</p>
           </div>
-          <p class="footer-tagline">Inversiones inteligentes para un futuro brillante.</p>
+          <p class="footer-tagline">{{ 'LANDING_PAGE.FOOTER.TAGLINE' | translate }}</p>
         </div>
 
         <div class="footer-links" *ngFor="let linkGroup of footerLinks">
-          <h4 class="footer-heading">{{ linkGroup.heading }}</h4>
+          <h4 class="footer-heading">{{ 'LANDING_PAGE.FOOTER.' + linkGroup.key + '.HEADING' | translate }}</h4>
           <ul class="footer-list">
             <li *ngFor="let link of linkGroup.items">
               <a [href]="link.href">{{ link.label }}</a>
@@ -265,7 +263,7 @@
         </div>
 
         <div class="footer-contact">
-          <h4 class="footer-heading">Contacto</h4>
+          <h4 class="footer-heading">{{ 'LANDING_PAGE.FOOTER.CONTACT.HEADING' | translate }}</h4>
           <ul class="footer-list">
             <li class="contact-item">
               <i class="fas {{ contactIcons.mail }}"></i>
@@ -284,9 +282,8 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copyright">© 2025 GoldTrade. Todos los derechos reservados.</p>
-        <p class="footer-disclaimer">Las inversiones conllevan riesgos. El rendimiento pasado no garantiza resultados
-          futuros.</p>
+        <p class="footer-copyright">{{ 'LANDING_PAGE.FOOTER.COPYRIGHT' | translate }}</p>
+        <p class="footer-disclaimer">{{ 'LANDING_PAGE.FOOTER.DISCLAIMER' | translate }}</p>
       </div>
     </div>
   </footer>
