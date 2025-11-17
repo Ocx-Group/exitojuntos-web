@@ -2372,8 +2372,37 @@
     }
   },
   "SIGNIN": {
+    "BRAND_TITLE": "ÉXITO JUNTOS",
+    "BRAND_SUBTITLE": "Unidos en el camino al éxito",
+    "FEATURE_1_TITLE": "Trading Profesional",
+    "FEATURE_1_DESC": "Herramientas avanzadas para traders experimentados",
+    "FEATURE_2_TITLE": "Análisis en Tiempo Real",
+    "FEATURE_2_DESC": "Datos actualizados al instante para tomar mejores decisiones",
+    "FEATURE_3_TITLE": "Seguridad Garantizada",
+    "FEATURE_3_DESC": "Tu información y capital protegidos con los más altos estándares",
+    "LOGIN_TITLE": "Iniciar Sesión",
+    "LOGIN_SUBTITLE": "Accede a tu cuenta de trading",
+    "PHONE_LABEL": "Número de Teléfono",
+    "PHONE_PLACEHOLDER": "+1 1234 5678",
+    "PASSWORD_LABEL": "Contraseña",
+    "PASSWORD_PLACEHOLDER": "********",
+    "REMEMBER_ME": "Recordarme",
+    "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
+    "LOGIN_BUTTON": "Iniciar Sesión",
+    "OR_CONTINUE": "O continúa con",
+    "GOOGLE_BUTTON": "Google",
+    "GITHUB_BUTTON": "GitHub",
+    "NO_ACCOUNT": "¿No tienes una cuenta?",
+    "REGISTER_LINK": "Regístrate aquí",
+    "FOOTER_TEXT": "© 2025 Trading Platform. Todos los derechos reservados.",
+    "PHONE": {
+      "TEXT": "Número de Teléfono"
+    },
+    "PHONE-IS-REQUIRED": {
+      "TEXT": "El número de teléfono es requerido."
+    },
     "FORGOT-PASS": {
-      "TEXT": "Cambiar contraseña"
+      "TEXT": "¿Olvidaste tu contraseña?"
     },
     "PASS-IS-REQUIRED": {
       "TEXT": "La contraseña es requerida."
@@ -2385,7 +2414,7 @@
       "TEXT": "Contraseña"
     },
     "REMEMBER-ME": {
-      "TEXT": "Recordar"
+      "TEXT": "Recordarme"
     },
     "TITLE": {
       "TEXT": "Iniciar sesión"

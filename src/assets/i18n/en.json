@@ -2375,6 +2375,35 @@
     }
   },
   "SIGNIN": {
+    "BRAND_TITLE": "SUCCESS TOGETHER",
+    "BRAND_SUBTITLE": "United on the road to success",
+    "FEATURE_1_TITLE": "Professional Trading",
+    "FEATURE_1_DESC": "Advanced tools for experienced traders",
+    "FEATURE_2_TITLE": "Real-Time Analysis",
+    "FEATURE_2_DESC": "Instantly updated data to make better decisions",
+    "FEATURE_3_TITLE": "Guaranteed Security",
+    "FEATURE_3_DESC": "Your information and capital protected with the highest standards",
+    "LOGIN_TITLE": "Sign In",
+    "LOGIN_SUBTITLE": "Access your trading account",
+    "PHONE_LABEL": "Phone Number",
+    "PHONE_PLACEHOLDER": "+1 1234 5678",
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_PLACEHOLDER": "********",
+    "REMEMBER_ME": "Remember me",
+    "FORGOT_PASSWORD": "Forgot your password?",
+    "LOGIN_BUTTON": "Sign In",
+    "OR_CONTINUE": "Or continue with",
+    "GOOGLE_BUTTON": "Google",
+    "GITHUB_BUTTON": "GitHub",
+    "NO_ACCOUNT": "Don't have an account?",
+    "REGISTER_LINK": "Register here",
+    "FOOTER_TEXT": "© 2025 Trading Platform. All rights reserved.",
+    "PHONE": {
+      "TEXT": "Phone Number"
+    },
+    "PHONE-IS-REQUIRED": {
+      "TEXT": "Phone number is required."
+    },
     "FORGOT-PASS": {
       "TEXT": "Forgot password"
     },

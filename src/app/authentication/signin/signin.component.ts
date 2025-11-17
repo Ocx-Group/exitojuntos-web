@@ -61,6 +61,12 @@ export class SigninComponent implements OnInit {
     this.getTheme();
     this.setLabels();
     this.setErrorMessages();
+
+    // Suscribirse a cambios de idioma
+    this.translate.onLangChange.subscribe(() => {
+      this.setLabels();
+      this.setErrorMessages();
+    });
   }
 
   authLogin = new FormGroup({

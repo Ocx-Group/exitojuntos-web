@@ -1,4 +1,62 @@
 {
+  "SIGNIN": {
+    "BRAND_TITLE": "SUCESSO JUNTOS",
+    "BRAND_SUBTITLE": "Unidos no caminho do sucesso",
+    "FEATURE_1_TITLE": "Trading Profissional",
+    "FEATURE_1_DESC": "Ferramentas avançadas para traders experientes",
+    "FEATURE_2_TITLE": "Análise em Tempo Real",
+    "FEATURE_2_DESC": "Dados atualizados instantaneamente para tomar melhores decisões",
+    "FEATURE_3_TITLE": "Segurança Garantida",
+    "FEATURE_3_DESC": "Suas informações e capital protegidos com os mais altos padrões",
+    "LOGIN_TITLE": "Entrar",
+    "LOGIN_SUBTITLE": "Acesse sua conta de trading",
+    "PHONE_LABEL": "Número de Telefone",
+    "PHONE_PLACEHOLDER": "+55 11 1234 5678",
+    "PASSWORD_LABEL": "Senha",
+    "PASSWORD_PLACEHOLDER": "********",
+    "REMEMBER_ME": "Lembrar de mim",
+    "FORGOT_PASSWORD": "Esqueceu sua senha?",
+    "LOGIN_BUTTON": "Entrar",
+    "OR_CONTINUE": "Ou continue com",
+    "GOOGLE_BUTTON": "Google",
+    "GITHUB_BUTTON": "GitHub",
+    "NO_ACCOUNT": "Não tem uma conta?",
+    "REGISTER_LINK": "Registre-se aqui",
+    "FOOTER_TEXT": "© 2025 Trading Platform. Todos os direitos reservados.",
+    "PHONE": {
+      "TEXT": "Número de Telefone"
+    },
+    "PHONE-IS-REQUIRED": {
+      "TEXT": "O número de telefone é obrigatório."
+    },
+    "FORGOT-PASS": {
+      "TEXT": "Esqueceu sua senha?"
+    },
+    "PASS-IS-REQUIRED": {
+      "TEXT": "A senha é obrigatória."
+    },
+    "PASS-MESSAGE-ERROR": {
+      "TEXT": "A senha deve ter pelo menos 6 e no máximo 15 caracteres."
+    },
+    "PASSWORD": {
+      "TEXT": "Senha"
+    },
+    "REMEMBER-ME": {
+      "TEXT": "Lembrar de mim"
+    },
+    "TITLE": {
+      "TEXT": "Entrar"
+    },
+    "USER-NAME": {
+      "TEXT": "Seu Usuário"
+    },
+    "USER-NAME-IS-REQUIRED": {
+      "TEXT": "O usuário é obrigatório."
+    },
+    "USER-NAME-MESSAGE-ERROR": {
+      "TEXT": "O usuário é inválido."
+    }
+  },
   "HEADER": {
     "LANGUAGE": "Português"
   },

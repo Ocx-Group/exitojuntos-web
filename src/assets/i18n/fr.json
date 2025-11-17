@@ -1,4 +1,62 @@
 {
+  "SIGNIN": {
+    "BRAND_TITLE": "SUCCÈS ENSEMBLE",
+    "BRAND_SUBTITLE": "Unis sur le chemin du succès",
+    "FEATURE_1_TITLE": "Trading Professionnel",
+    "FEATURE_1_DESC": "Outils avancés pour traders expérimentés",
+    "FEATURE_2_TITLE": "Analyse en Temps Réel",
+    "FEATURE_2_DESC": "Données mises à jour instantanément pour prendre de meilleures décisions",
+    "FEATURE_3_TITLE": "Sécurité Garantie",
+    "FEATURE_3_DESC": "Vos informations et votre capital protégés avec les plus hauts standards",
+    "LOGIN_TITLE": "Se Connecter",
+    "LOGIN_SUBTITLE": "Accédez à votre compte de trading",
+    "PHONE_LABEL": "Numéro de Téléphone",
+    "PHONE_PLACEHOLDER": "+33 1 23 45 67 89",
+    "PASSWORD_LABEL": "Mot de Passe",
+    "PASSWORD_PLACEHOLDER": "********",
+    "REMEMBER_ME": "Se souvenir de moi",
+    "FORGOT_PASSWORD": "Mot de passe oublié?",
+    "LOGIN_BUTTON": "Se Connecter",
+    "OR_CONTINUE": "Ou continuer avec",
+    "GOOGLE_BUTTON": "Google",
+    "GITHUB_BUTTON": "GitHub",
+    "NO_ACCOUNT": "Vous n'avez pas de compte?",
+    "REGISTER_LINK": "Inscrivez-vous ici",
+    "FOOTER_TEXT": "© 2025 Trading Platform. Tous droits réservés.",
+    "PHONE": {
+      "TEXT": "Numéro de Téléphone"
+    },
+    "PHONE-IS-REQUIRED": {
+      "TEXT": "Le numéro de téléphone est requis."
+    },
+    "FORGOT-PASS": {
+      "TEXT": "Mot de passe oublié?"
+    },
+    "PASS-IS-REQUIRED": {
+      "TEXT": "Le mot de passe est requis."
+    },
+    "PASS-MESSAGE-ERROR": {
+      "TEXT": "Le mot de passe doit contenir au moins 6 et un maximum de 15 caractères."
+    },
+    "PASSWORD": {
+      "TEXT": "Mot de Passe"
+    },
+    "REMEMBER-ME": {
+      "TEXT": "Se souvenir de moi"
+    },
+    "TITLE": {
+      "TEXT": "Se Connecter"
+    },
+    "USER-NAME": {
+      "TEXT": "Votre Utilisateur"
+    },
+    "USER-NAME-IS-REQUIRED": {
+      "TEXT": "L'utilisateur est requis."
+    },
+    "USER-NAME-MESSAGE-ERROR": {
+      "TEXT": "L'utilisateur est invalide."
+    }
+  },
   "HEADER": {
     "LANGUAGE": "Français"
   },

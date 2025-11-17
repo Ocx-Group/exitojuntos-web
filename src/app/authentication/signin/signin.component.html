@@ -10,9 +10,9 @@
     <!-- Left section - Branding -->
     <div class="left-section">
       <div class="branding-content">
-        <h1 class="brand-title">ÉXITO JUNTOS</h1>
+        <h1 class="brand-title">{{ 'SIGNIN.BRAND_TITLE' | translate }}</h1>
         <div class="brand-underline"></div>
-        <p class="brand-subtitle">Unidos en el camino al éxito</p>
+        <p class="brand-subtitle">{{ 'SIGNIN.BRAND_SUBTITLE' | translate }}</p>
 
         <div class="features-list">
           <div class="feature-item">
@@ -24,8 +24,8 @@
               </svg>
             </div>
             <div class="feature-text">
-              <h3>Trading Profesional</h3>
-              <p>Herramientas avanzadas para traders experimentados</p>
+              <h3>{{ 'SIGNIN.FEATURE_1_TITLE' | translate }}</h3>
+              <p>{{ 'SIGNIN.FEATURE_1_DESC' | translate }}</p>
             </div>
           </div>
 
@@ -38,8 +38,8 @@
               </svg>
             </div>
             <div class="feature-text">
-              <h3>Análisis en Tiempo Real</h3>
-              <p>Datos actualizados al instante para tomar mejores decisiones</p>
+              <h3>{{ 'SIGNIN.FEATURE_2_TITLE' | translate }}</h3>
+              <p>{{ 'SIGNIN.FEATURE_2_DESC' | translate }}</p>
             </div>
           </div>
 
@@ -52,14 +52,14 @@
               </svg>
             </div>
             <div class="feature-text">
-              <h3>Seguridad Garantizada</h3>
-              <p>Tu información y capital protegidos con los más altos estándares</p>
+              <h3>{{ 'SIGNIN.FEATURE_3_TITLE' | translate }}</h3>
+              <p>{{ 'SIGNIN.FEATURE_3_DESC' | translate }}</p>
             </div>
           </div>
         </div>
 
         <div class="footer-branding">
-          <span class="footer-text">ÉXITO JUNTOS</span>
+          <span class="footer-text">{{ 'SIGNIN.BRAND_TITLE' | translate }}</span>
           <div class="footer-icon">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="4" width="24" height="24" rx="4" stroke="#FFB800" stroke-width="2" />
@@ -79,13 +79,13 @@
           <img [src]="navbarIcon" alt="Éxito Juntos" class="logo-svg" />
         </div>
 
-        <h2 class="login-title">Iniciar Sesión</h2>
-        <p class="login-subtitle">Accede a tu cuenta de trading</p>
+        <h2 class="login-title">{{ 'SIGNIN.LOGIN_TITLE' | translate }}</h2>
+        <p class="login-subtitle">{{ 'SIGNIN.LOGIN_SUBTITLE' | translate }}</p>
 
         <form [formGroup]="authLogin" (ngSubmit)="loginSubmitted()" class="login-form">
           <!-- Phone Field -->
           <div class="form-group">
-            <label class="form-label" for="phone-input">Número de Teléfono</label>
+            <label class="form-label" for="phone-input">{{ 'SIGNIN.PHONE_LABEL' | translate }}</label>
             <div class="input-wrapper">
               <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -93,17 +93,17 @@
                   d="M3 3H6L8 8L6 9.5C7.5 12.5 10 15 13 16.5L14.5 14.5L19 16.5V19C19 19.5523 18.5523 20 18 20C10.8203 20 5 14.1797 5 7C5 6.44772 5.44772 6 6 6H9"
                   stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              <input type="tel" id="phone-input" formControlName="phone" class="form-input" placeholder="+1 1234 5678"
-                [class.error]="submitted && f['phone'].errors" />
+              <input type="tel" id="phone-input" formControlName="phone" class="form-input"
+                [placeholder]="'SIGNIN.PHONE_PLACEHOLDER' | translate" [class.error]="submitted && f['phone'].errors" />
             </div>
             <div *ngIf="submitted && f['phone'].errors" class="error-message">
-              <span *ngIf="f['phone'].errors['required']">{{ userNameIsRequerid }}</span>
+              <span *ngIf="f['phone'].errors['required']">{{ 'SIGNIN.PHONE-IS-REQUIRED.TEXT' | translate }}</span>
             </div>
           </div>
 
           <!-- Password Field -->
           <div class="form-group">
-            <label class="form-label" for="password-input">Contraseña</label>
+            <label class="form-label" for="password-input">{{ 'SIGNIN.PASSWORD_LABEL' | translate }}</label>
             <div class="input-wrapper">
               <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +112,8 @@
                   stroke-width="1.5" />
               </svg>
               <input [type]="showPassword ? 'text' : 'password'" id="password-input" formControlName="pwd"
-                class="form-input" placeholder="********" [class.error]="submitted && f['pwd'].errors" />
+                class="form-input" [placeholder]="'SIGNIN.PASSWORD_PLACEHOLDER' | translate"
+                [class.error]="submitted && f['pwd'].errors" />
               <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
                 <svg *ngIf="!showPassword" width="20" height="20" viewBox="0 0 20 20" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
@@ -135,9 +136,9 @@
               </button>
             </div>
             <div *ngIf="submitted && f['pwd'].errors" class="error-message">
-              <span *ngIf="f['pwd'].errors['required']">{{ passwordIsRequerid }}</span>
-              <span *ngIf="f['pwd'].errors['minlength'] || f['pwd'].errors['maxlength']">{{ passwordErrorMessage
-                }}</span>
+              <span *ngIf="f['pwd'].errors['required']">{{ 'SIGNIN.PASS-IS-REQUIRED.TEXT' | translate }}</span>
+              <span *ngIf="f['pwd'].errors['minlength'] || f['pwd'].errors['maxlength']">{{
+                'SIGNIN.PASS-MESSAGE-ERROR.TEXT' | translate }}</span>
             </div>
           </div>
 
@@ -145,14 +146,15 @@
           <div class="form-options">
             <label class="checkbox-label">
               <input type="checkbox" formControlName="remeber" class="checkbox-input">
-              <span class="checkbox-text">Recordarme</span>
+              <span class="checkbox-text">{{ 'SIGNIN.REMEMBER_ME' | translate }}</span>
             </label>
-            <a [routerLink]="['/authentication/forgot']" class="forgot-link">¿Olvidaste tu contraseña?</a>
+            <a [routerLink]="['/authentication/forgot']" class="forgot-link">{{ 'SIGNIN.FORGOT_PASSWORD' | translate
+              }}</a>
           </div>
 
           <!-- Login Button -->
           <button type="submit" class="login-button" [disabled]="loading">
-            <span *ngIf="!loading">Iniciar Sesión</span>
+            <span *ngIf="!loading">{{ 'SIGNIN.LOGIN_BUTTON' | translate }}</span>
             <span *ngIf="loading" class="loading-spinner">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="10" cy="10" r="8" stroke="white" stroke-width="2" stroke-opacity="0.3" />
@@ -164,7 +166,7 @@
 
           <!-- Divider -->
           <div class="divider">
-            <span>O continúa con</span>
+            <span>{{ 'SIGNIN.OR_CONTINUE' | translate }}</span>
           </div>
 
           <!-- Social Login Buttons -->
@@ -184,7 +186,7 @@
                   d="M18.1713 8.36796H17.5V8.33337H10V11.6667H14.7096C14.3809 12.5902 13.7889 13.3972 13.0067 13.9879L13.0079 13.9871L15.5871 16.1696C15.4046 16.3355 18.3333 14.1667 18.3333 10C18.3333 9.44129 18.2758 8.89587 18.1713 8.36796Z"
                   fill="#1976D2" />
               </svg>
-              <span>Google</span>
+              <span>{{ 'SIGNIN.GOOGLE_BUTTON' | translate }}</span>
             </button>
             <button type="button" class="social-button github-button">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -192,14 +194,15 @@
                   d="M10 0C4.475 0 0 4.475 0 10C0 14.425 2.8625 18.1625 6.8375 19.4875C7.3375 19.575 7.525 19.275 7.525 19.0125C7.525 18.775 7.5125 17.9875 7.5125 17.15C5 17.6125 4.35 16.5375 4.15 15.975C4.0375 15.6875 3.55 14.8 3.125 14.5625C2.775 14.375 2.275 13.9125 3.1125 13.9C3.9 13.8875 4.4625 14.625 4.65 14.925C5.55 16.4375 6.9875 16.0125 7.5625 15.75C7.65 15.1 7.9125 14.6625 8.2 14.4125C5.975 14.1625 3.65 13.3 3.65 9.475C3.65 8.3875 4.0375 7.4875 4.675 6.7875C4.575 6.5375 4.225 5.5125 4.775 4.1375C4.775 4.1375 5.6125 3.875 7.525 5.1625C8.325 4.9375 9.175 4.825 10.025 4.825C10.875 4.825 11.725 4.9375 12.525 5.1625C14.4375 3.8625 15.275 4.1375 15.275 4.1375C15.825 5.5125 15.475 6.5375 15.375 6.7875C16.0125 7.4875 16.4 8.375 16.4 9.475C16.4 13.3125 14.0625 14.1625 11.8375 14.4125C12.2 14.725 12.5125 15.325 12.5125 16.2625C12.5125 17.6 12.5 18.675 12.5 19.0125C12.5 19.275 12.6875 19.5875 13.1875 19.4875C17.1375 18.1625 20 14.4125 20 10C20 4.475 15.525 0 10 0Z"
                   fill="white" />
               </svg>
-              <span>GitHub</span>
+              <span>{{ 'SIGNIN.GITHUB_BUTTON' | translate }}</span>
             </button>
           </div>
 
           <!-- Sign up link -->
           <div class="signup-link">
-            <span>¿No tienes una cuenta?</span>
-            <a [routerLink]="['/authentication/signup']" class="register-link">Regístrate aquí</a>
+            <span>{{ 'SIGNIN.NO_ACCOUNT' | translate }}</span>
+            <a [routerLink]="['/authentication/signup']" class="register-link">{{ 'SIGNIN.REGISTER_LINK' | translate
+              }}</a>
           </div>
         </form>
       </div>
@@ -208,6 +211,6 @@
 
   <!-- Footer -->
   <div class="page-footer">
-    <p>© 2025 Trading Platform. Todos los derechos reservados.</p>
+    <p>{{ 'SIGNIN.FOOTER_TEXT' | translate }}</p>
   </div>
 </div>
