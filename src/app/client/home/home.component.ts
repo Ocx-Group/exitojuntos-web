@@ -16,6 +16,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import { RouterLink } from '@angular/router';
 
+// Importar componentes compartidos
+import {
+  StatsCardComponent,
+  StatsCardData,
+} from '@app/shared/components/stats-card/stats-card.component';
+import {
+  MarketOverviewComponent,
+  MarketAsset,
+} from '@app/shared/components/market-overview/market-overview.component';
+import {
+  QuickTradePanelComponent,
+  TradeData,
+} from '@app/shared/components/quick-trade-panel/quick-trade-panel.component';
+import {
+  PortfolioDistributionComponent,
+  PortfolioAsset,
+} from '@app/shared/components/portfolio-distribution/portfolio-distribution.component';
+import { TradingVolumeChartComponent } from '@app/shared/components/trading-volume-chart/trading-volume-chart.component';
+
 @Component({
   selector: 'app-main',
   templateUrl: './home.component.html',
@@ -27,6 +46,11 @@ import { RouterLink } from '@angular/router';
     TranslateModule,
     NgxEchartsModule,
     RouterLink,
+    StatsCardComponent,
+    MarketOverviewComponent,
+    QuickTradePanelComponent,
+    PortfolioDistributionComponent,
+    TradingVolumeChartComponent,
   ],
   providers: [
     provideEchartsCore({
@@ -55,6 +79,110 @@ export class HomeComponent implements OnInit {
   public portfolioChartOptions: any;
   public pieChartOptionsModel1A: any;
   public pieChartOptionsModel1B: any;
+
+  // Datos para los componentes
+  marketAssets: MarketAsset[] = [
+    {
+      name: 'Bitcoin',
+      icon: 'fab fa-bitcoin',
+      iconColor: 'text-warning',
+      price: '$42,587.23',
+      change: '+2.45%',
+      changeType: 'success',
+    },
+    {
+      name: 'Ethereum',
+      icon: 'fab fa-ethereum',
+      iconColor: 'text-primary',
+      price: '$2,234.56',
+      change: '+1.87%',
+      changeType: 'success',
+    },
+    {
+      name: 'BNB',
+      icon: 'fas fa-coins',
+      iconColor: 'text-info',
+      price: '$312.45',
+      change: '-0.52%',
+      changeType: 'danger',
+    },
+    {
+      name: 'Total Market Cap',
+      icon: 'fas fa-chart-line',
+      iconColor: 'text-success',
+      price: '$1.67T',
+      change: '+3.21%',
+      changeType: 'success',
+    },
+  ];
+
+  statsCards: StatsCardData[] = [
+    {
+      title: 'Portfolio Value',
+      value: '$47,823.45',
+      subtitle: '+12.5% this month',
+      icon: 'wallet',
+      iconColor: 'blue',
+      valueColor: 'primary',
+      subtitleType: 'success',
+    },
+    {
+      title: 'Available Balance',
+      value: '$12,450.00',
+      subtitle: 'Ready to trade',
+      icon: 'money-bill-wave',
+      iconColor: 'green',
+      valueColor: 'success',
+    },
+    {
+      title: 'Total Profit',
+      value: '$8,234.56',
+      subtitle: '+23.4%',
+      icon: 'chart-line',
+      iconColor: 'emerald',
+      valueColor: 'success',
+      subtitleType: 'success',
+    },
+    {
+      title: 'Active Trades',
+      value: '12',
+      subtitle: '8 winning positions',
+      icon: 'exchange-alt',
+      iconColor: 'cyan',
+      valueColor: 'info',
+    },
+  ];
+
+  portfolioAssets: PortfolioAsset[] = [
+    {
+      icon: 'fab fa-bitcoin',
+      iconColor: 'text-warning',
+      name: 'Bitcoin',
+      value: '$21,293.61',
+      amount: '0.5 BTC',
+    },
+    {
+      icon: 'fab fa-ethereum',
+      iconColor: 'text-primary',
+      name: 'Ethereum',
+      value: '$11,172.80',
+      amount: '5 ETH',
+    },
+    {
+      icon: 'fas fa-coins',
+      iconColor: 'text-info',
+      name: 'BNB',
+      value: '$3,124.50',
+      amount: '10 BNB',
+    },
+    {
+      icon: 'fas fa-coins',
+      iconColor: 'text-success',
+      name: 'Others',
+      value: '$12,232.54',
+      amount: 'Multiple assets',
+    },
+  ];
 
   constructor(
     private readonly authService: AuthService,
@@ -256,5 +384,19 @@ export class HomeComponent implements OnInit {
 
   private showCopyNotification(type: string) {
     this.toastr.success(`${type} copiado al portapapeles`);
+  }
+
+  onBuy(tradeData: TradeData): void {
+    console.log('Buy trade:', tradeData);
+    this.toastr.success(
+      `Buy order placed for ${tradeData.amount} ${tradeData.asset}`,
+    );
+  }
+
+  onSell(tradeData: TradeData): void {
+    console.log('Sell trade:', tradeData);
+    this.toastr.info(
+      `Sell order placed for ${tradeData.amount} ${tradeData.asset}`,
+    );
   }
 }

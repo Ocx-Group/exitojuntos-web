@@ -1,73 +1,154 @@
-<section class="section dashboard-section">
+<section class="section admin-dashboard">
   <ul class="breadcrumb breadcrumb-style">
     <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">{{ 'MENUITEMS.HOME.TEXT' | translate }}</h5>
+      <h5 class="page-title m-b-0">Admin Dashboard</h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
-      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+      <a routerLink="/admin/home"><i class="fas fa-tachometer-alt font-17"></i></a>
     </li>
   </ul>
+
   <div class="section-body">
-    <div class="row h-100">
-      <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 d-flex">
-        <div class="card flex-fill">
-          <div class="card-header">
-            <h4>{{ 'HOME-ADMIN-PAGE.INFORMATION.TEXT' | translate }}</h4>
+    <!-- Platform Overview -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <app-market-overview title="Platform Overview" [assets]="marketAssets" />
+      </div>
+    </div>
+
+    <!-- Admin Stats Cards -->
+    <div class="row">
+      @for (card of adminStatsCards; track card.title) {
+      <div class="col-xl-3 col-lg-6">
+        <app-stats-card [data]="card" />
+      </div>
+      }
+    </div>
+
+    <!-- Platform Analytics -->
+    <div class="row mt-4">
+      <!-- Platform Activity Chart -->
+      <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 mb-4">
+        <app-trading-volume-chart title="Platform Activity" [chartOptions]="platformActivityChart" />
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-4">
+        <div class="card h-100">
+          <div class="card-header bg-gradient-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Quick Actions</h5>
           </div>
-          <div class="card-body d-flex flex-column">
-            <div id="chart1" class="flex-grow-1">
-              <apx-chart [series]="pieChartOptions.series" [chart]="pieChartOptions.chart"
-                [labels]="pieChartOptions.labels" [responsive]="pieChartOptions.responsive"
-                [dataLabels]="pieChartOptions.dataLabels" [legend]="pieChartOptions.legend"
-                [colors]="pieChartOptions.colors" class="apex-pie-center">
-              </apx-chart>
+          <div class="card-body">
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary text-start">
+                <i class="fas fa-user-plus me-2"></i>Manage Users
+              </button>
+              <button class="btn btn-outline-success text-start">
+                <i class="fas fa-check-circle me-2"></i>Review Withdrawals
+              </button>
+              <button class="btn btn-outline-info text-start">
+                <i class="fas fa-chart-line me-2"></i>View Reports
+              </button>
+              <button class="btn btn-outline-warning text-start">
+                <i class="fas fa-cog me-2"></i>System Settings
+              </button>
+              <button class="btn btn-outline-danger text-start">
+                <i class="fas fa-exclamation-triangle me-2"></i>Security Alerts
+              </button>
             </div>
-            <div class="table-responsive mt-3">
-              <table class="table align-items-center table-row-border">
-                <thead class="sr-only">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform Portfolio Distribution -->
+    <div class="row">
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-4">
+        <app-portfolio-distribution [chartOptions]="platformPortfolioChartOptions" [assets]="platformAssets" />
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-4">
+        <div class="card h-100">
+          <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-history me-2"></i>Recent Platform Activity</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
                   <tr>
-                    <th scope="col">Concepto</th>
-                    <th scope="col">Valor</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Amount</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngIf="this.user.user_name == 'onecall'">
-                    <td class="col-yellow">
-                      <i class="fa fa-circle col-yellow msr-2"></i> Comisiones para el admin
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar avatar-sm me-2">
+                          <span class="avatar-title rounded-circle bg-primary">JD</span>
+                        </div>
+                        <span>John Doe</span>
+                      </div>
                     </td>
-                    <td class="col-yellow">USD {{ adminCommissions | truncateDecimals:2 }}</td>
+                    <td><span class="badge bg-success-light text-success">Deposit</span></td>
+                    <td>$5,000</td>
+                    <td><i class="fas fa-check-circle text-success"></i></td>
                   </tr>
                   <tr>
-                    <td class="col-red">
-                      <i class="fa fa-circle col-red msr-2"></i> Beneficio en billetera
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar avatar-sm me-2">
+                          <span class="avatar-title rounded-circle bg-info">MS</span>
+                        </div>
+                        <span>Maria Smith</span>
+                      </div>
                     </td>
-                    <td class="col-red">USD {{ walletProfit | truncateDecimals:2 }}</td>
+                    <td><span class="badge bg-primary-light text-primary">Trade</span></td>
+                    <td>0.5 BTC</td>
+                    <td><i class="fas fa-check-circle text-success"></i></td>
                   </tr>
                   <tr>
-                    <td class="col-blue">
-                      <i class="fa fa-circle col-blue msr-2 "></i>Total comisiones pagadas
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar avatar-sm me-2">
+                          <span class="avatar-title rounded-circle bg-warning">RJ</span>
+                        </div>
+                        <span>Robert Johnson</span>
+                      </div>
                     </td>
-                    <td class="col-blue">USD {{ commissionsPaid | truncateDecimals:2 }}</td>
+                    <td><span class="badge bg-danger-light text-danger">Withdrawal</span></td>
+                    <td>$2,500</td>
+                    <td><i class="fas fa-clock text-warning"></i></td>
                   </tr>
                   <tr>
-                    <td class="col-emerald">
-                      <i class="fa fa-circle col-emerald msr-2"></i>Total exitojuntoss vendidos
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar avatar-sm me-2">
+                          <span class="avatar-title rounded-circle bg-success">AL</span>
+                        </div>
+                        <span>Anna Lee</span>
+                      </div>
                     </td>
-                    <td class="col-emerald">USD {{ calculatedCommissions | truncateDecimals:2 }}</td>
+                    <td><span class="badge bg-success-light text-success">Deposit</span></td>
+                    <td>$10,000</td>
+                    <td><i class="fas fa-check-circle text-success"></i></td>
                   </tr>
                   <tr>
-                    <td class="col-green">
-                      <i class="fa fa-circle col-green msr-2 col-green"></i>
-                      Afiliados activos
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar avatar-sm me-2">
+                          <span class="avatar-title rounded-circle bg-danger">PW</span>
+                        </div>
+                        <span>Paul Williams</span>
+                      </div>
                     </td>
-                    <td class="col-green">USD {{ totalMembers | truncateDecimals:2 }}</td>
-                  </tr>
-                  <tr>
-                    <td class="col-purple">
-                      <i class="fa fa-circle col-purple msr-2 col-purple"></i>
-                      Saldo balance 2
-                    </td>
-                    <td class="col-purple">USD {{ totalReverseBalance | truncateDecimals:2 }}</td>
+                    <td><span class="badge bg-primary-light text-primary">Trade</span></td>
+                    <td>2.3 ETH</td>
+                    <td><i class="fas fa-check-circle text-success"></i></td>
                   </tr>
                 </tbody>
               </table>
@@ -75,120 +156,43 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 d-flex">
-        <div class="card flex-fill">
+    </div>
+
+    <!-- System Status -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
           <div class="card-header">
-            <h4>
-              {{ 'HOME-PAGE-CLIENT.TITTLE-FIRST-CHART.TEXT' | translate }}
-            </h4>
+            <h5 class="mb-0"><i class="fas fa-server me-2"></i>System Status</h5>
           </div>
           <div class="card-body">
             <div class="row">
-              <app-world-map-chart [countries]="maps" height="350px"></app-world-map-chart>
-            </div>
-            <div class="row">
-              <div id="new-orders" class="media-list"
-                style="position: relative; max-height: 315px !important; overflow-y: auto;">
-                <div class="table">
-                  <table id="new-orders-table" class="table table-hover table-xl table-row-border mb-0">
-                    <thead class="sr-only">
-                      <tr>
-                        <th scope="col">Título</th>
-                        <th scope="col">Valor</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of maps">
-                        <td class="text-truncate">{{ item.Title }}</td>
-                        <td class="text-truncate">{{ item.Value }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div class="col-md-3">
+                <div class="text-center p-3">
+                  <i class="fas fa-database fa-2x text-success mb-2"></i>
+                  <h6>Database</h6>
+                  <span class="badge bg-success-light text-success">Online</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 d-flex">
-        <div class="card flex-fill">
-          <div class="card-header">
-            <h4>Afiliados Ingresados</h4>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div echarts [options]="area_line_chart" class="echart-height flex-grow-1"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row align-items-stretch">
-      <!-- Primer card -->
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex mb-4">
-        <div class="card flex-fill h-100">
-          <div class="card-header">
-            <h4>Compras Realizadas</h4>
-          </div>
-          <div class="card-body mb-3">
-            <div echarts [options]="area_line_chart" class="echart-height"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Segundo card -->
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex mb-4">
-        <div class="card flex-fill h-100">
-          <div class="card-header">
-            <h4>{{ 'HOME-ADMIN-PAGE.LAST-REGISTERED-AFFILIATES.TEXT' | translate }}</h4>
-          </div>
-          <div class="card-body d-flex flex-column justify-content-center">
-            <div class="row">
-              <div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0" *ngFor="let user of lastRegisteredUsers.slice(0,4)">
-                <div class="avatar-item text-center">
-                  <div class="position-relative d-inline-block">
-                    <img alt="{{ user.id }}" [src]="
-                    user.image_profile_url ||
-                    './assets/images/users/user-1.png'
-                  " class="rounded-circle border" style="width: 100px; height: 100px; object-fit: cover;"
-                      data-toggle="tooltip" [title]="user.user_name" />
-                    <div class="avatar-badge position-absolute" style="top: -5px; right: -5px;"
-                      [title]="user.created_at" data-toggle="tooltip">
-                      <i class="fas fa-calendar text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="mt-2">
-                    <small class="d-block text-truncate fw-bold">{{
-                      user.user_name
-                      }}</small>
-                    <small class="text-muted">{{
-                      user.created_at | date: 'shortDate'
-                      }}</small>
-                  </div>
+              <div class="col-md-3">
+                <div class="text-center p-3">
+                  <i class="fas fa-server fa-2x text-success mb-2"></i>
+                  <h6>API Server</h6>
+                  <span class="badge bg-success-light text-success">Online</span>
                 </div>
               </div>
-            </div>
-
-            <div class="row mt-4">
-              <div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0" *ngFor="let user of lastRegisteredUsers.slice(4,8)">
-                <div class="avatar-item text-center">
-                  <div class="position-relative d-inline-block">
-                    <img alt="{{ user.id }}" [src]="
-                    user.image_profile_url ||
-                    './assets/images/users/user-1.png'
-                  " class="rounded-circle border" style="width: 100px; height: 100px; object-fit: cover;"
-                      data-toggle="tooltip" [title]="user.user_name" />
-                    <div class="avatar-badge position-absolute" style="top: -5px; right: -5px;"
-                      [title]="user.created_at" data-toggle="tooltip">
-                      <i class="fas fa-calendar text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="mt-2">
-                    <small class="d-block text-truncate fw-bold">{{
-                      user.user_name
-                      }}</small>
-                    <small class="text-muted">{{
-                      user.created_at | date: 'shortDate'
-                      }}</small>
-                  </div>
+              <div class="col-md-3">
+                <div class="text-center p-3">
+                  <i class="fas fa-shield-alt fa-2x text-success mb-2"></i>
+                  <h6>Security</h6>
+                  <span class="badge bg-success-light text-success">Active</span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center p-3">
+                  <i class="fas fa-sync-alt fa-2x text-info mb-2"></i>
+                  <h6>Backups</h6>
+                  <span class="badge bg-info-light text-info">Running</span>
                 </div>
               </div>
             </div>

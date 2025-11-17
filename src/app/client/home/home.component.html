@@ -11,183 +11,23 @@
     <!-- Market Overview -->
     <div class="row mb-4">
       <div class="col-12">
-        <div class="card">
-          <div class="card-body p-4">
-            <h5 class="mb-3"><i class="fas fa-globe me-2"></i>Market Overview</h5>
-            <div class="row g-3">
-              <div class="col-xl-3 col-lg-6">
-                <div class="d-flex align-items-center">
-                  <div class="me-3">
-                    <i class="fab fa-bitcoin fa-2x text-warning"></i>
-                  </div>
-                  <div>
-                    <small class="text-muted">Bitcoin</small>
-                    <h6 class="mb-0">$42,587.23</h6>
-                    <small class="text-success"><i class="fas fa-arrow-up"></i> +2.45%</small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="d-flex align-items-center">
-                  <div class="me-3">
-                    <i class="fab fa-ethereum fa-2x text-primary"></i>
-                  </div>
-                  <div>
-                    <small class="text-muted">Ethereum</small>
-                    <h6 class="mb-0">$2,234.56</h6>
-                    <small class="text-success"><i class="fas fa-arrow-up"></i> +1.87%</small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="d-flex align-items-center">
-                  <div class="me-3">
-                    <i class="fas fa-coins fa-2x text-info"></i>
-                  </div>
-                  <div>
-                    <small class="text-muted">BNB</small>
-                    <h6 class="mb-0">$312.45</h6>
-                    <small class="text-danger"><i class="fas fa-arrow-down"></i> -0.52%</small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="d-flex align-items-center">
-                  <div class="me-3">
-                    <i class="fas fa-chart-line fa-2x text-success"></i>
-                  </div>
-                  <div>
-                    <small class="text-muted">Total Market Cap</small>
-                    <h6 class="mb-0">$1.67T</h6>
-                    <small class="text-success"><i class="fas fa-arrow-up"></i> +3.21%</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-market-overview [assets]="marketAssets" />
       </div>
     </div>
 
     <div class="row">
       <!-- Portfolio Value -->
+      @for (card of statsCards; track card.title) {
       <div class="col-xl-3 col-lg-6">
-        <div class="card">
-          <div class="card-bg">
-            <div class="p-3 d-flex justify-content-between">
-              <div class="col">
-                <small class="text-muted">Portfolio Value</small>
-                <h4 class="mb-0 text-primary">
-                  $47,823.45
-                </h4>
-                <small class="text-success"><i class="fas fa-arrow-up"></i> +12.5% this month</small>
-              </div>
-              <i class="fas fa-wallet card-icon col-blue font-30 col-auto"></i>
-            </div>
-          </div>
-        </div>
+        <app-stats-card [data]="card" />
       </div>
-      <!-- Available Balance -->
-      <div class="col-xl-3 col-lg-6">
-        <div class="card">
-          <div class="card-bg">
-            <div class="p-3 d-flex justify-content-between">
-              <div class="col">
-                <small class="text-muted">Available Balance</small>
-                <h4 class="mb-0 text-success">
-                  $12,450.00
-                </h4>
-                <small class="text-muted">Ready to trade</small>
-              </div>
-              <i class="fas fa-money-bill-wave card-icon col-green font-30 col-auto"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Total Profit -->
-      <div class="col-xl-3 col-lg-6">
-        <div class="card">
-          <div class="card-bg">
-            <div class="p-3 d-flex justify-content-between">
-              <div class="col">
-                <small class="text-muted">Total Profit</small>
-                <h4 class="mb-0 text-success">
-                  $8,234.56
-                </h4>
-                <small class="text-success"><i class="fas fa-arrow-up"></i> +23.4%</small>
-              </div>
-              <i class="fas fa-chart-line card-icon col-emerald font-30 col-auto"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Active Trades -->
-      <div class="col-xl-3 col-lg-6">
-        <div class="card">
-          <div class="card-bg">
-            <div class="p-3 d-flex justify-content-between">
-              <div class="col">
-                <small class="text-muted">Active Trades</small>
-                <h4 class="mb-0 text-info">
-                  12
-                </h4>
-                <small class="text-muted">8 winning positions</small>
-              </div>
-              <i class="fas fa-exchange-alt card-icon col-cyan font-30 col-auto"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+      }
     </div>
 
     <!-- Quick Trade Panel -->
     <div class="row mb-4">
       <div class="col-lg-8">
-        <div class="card">
-          <div class="card-header bg-gradient-primary text-white">
-            <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Trade</h5>
-          </div>
-          <div class="card-body">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label" for="selectAsset">Select Asset</label>
-                <select class="form-select" id="selectAsset">
-                  <option>Bitcoin (BTC)</option>
-                  <option>Ethereum (ETH)</option>
-                  <option>BNB</option>
-                  <option>Cardano (ADA)</option>
-                  <option>Solana (SOL)</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" for="orderType">Order Type</label>
-                <select class="form-select" id="orderType">
-                  <option>Market Order</option>
-                  <option>Limit Order</option>
-                  <option>Stop Loss</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" for="tradeAmount">Amount</label>
-                <input type="number" class="form-control" id="tradeAmount" placeholder="0.00" value="0.5">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" for="tradeTotal">Total (USD)</label>
-                <input type="number" class="form-control" id="tradeTotal" placeholder="0.00" value="21293.61" readonly>
-              </div>
-              <div class="col-12">
-                <div class="d-flex gap-2">
-                  <button class="btn btn-success flex-fill">
-                    <i class="fas fa-arrow-up me-2"></i>Buy
-                  </button>
-                  <button class="btn btn-danger flex-fill">
-                    <i class="fas fa-arrow-down me-2"></i>Sell
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-quick-trade-panel (buy)="onBuy($event)" (sell)="onSell($event)" />
       </div>
       <div class="col-lg-4">
         <div class="card h-100">
@@ -291,66 +131,7 @@
 
       <!-- Portfolio Distribution -->
       <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-        <div class="card h-100">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Portfolio Distribution</h5>
-          </div>
-          <div class="card-body">
-            <div id="chart1">
-              <apx-chart [series]="portfolioChartOptions.series" [chart]="portfolioChartOptions.chart"
-                [labels]="portfolioChartOptions.labels" [responsive]="portfolioChartOptions.responsive"
-                [dataLabels]="portfolioChartOptions.dataLabels" [legend]="portfolioChartOptions.legend"
-                [colors]="portfolioChartOptions.colors" class="apex-pie-center">
-              </apx-chart>
-            </div>
-            <div class="table m-t-5">
-              <table class="table align-items-center table-row-border">
-                <tbody>
-                  <tr>
-                    <td>
-                      <i class="fab fa-bitcoin text-warning msr-2"></i>
-                      Bitcoin
-                    </td>
-                    <td class="text-end">
-                      <strong>$21,293.61</strong>
-                      <small class="d-block text-muted">0.5 BTC</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-ethereum text-primary msr-2"></i>
-                      Ethereum
-                    </td>
-                    <td class="text-end">
-                      <strong>$11,172.80</strong>
-                      <small class="d-block text-muted">5 ETH</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fas fa-coins text-info msr-2"></i>
-                      BNB
-                    </td>
-                    <td class="text-end">
-                      <strong>$3,124.50</strong>
-                      <small class="d-block text-muted">10 BNB</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fas fa-circle text-success msr-2"></i>
-                      Others
-                    </td>
-                    <td class="text-end">
-                      <strong>$5,782.54</strong>
-                      <small class="d-block text-muted">Various</small>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <app-portfolio-distribution [chartOptions]="portfolioChartOptions" [assets]="portfolioAssets" />
       </div>
 
       <!-- Top Gainers -->
@@ -425,14 +206,7 @@
 
       <!-- Trading Volume Chart -->
       <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-4">
-        <div class="card h-100">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Trading Volume</h5>
-          </div>
-          <div class="card-body">
-            <div echarts [options]="volumeChart" class="echart-height"></div>
-          </div>
-        </div>
+        <app-trading-volume-chart [chartOptions]="volumeChart" />
       </div>
     </div>
 
