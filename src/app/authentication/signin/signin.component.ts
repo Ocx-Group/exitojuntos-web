@@ -53,8 +53,7 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
     // Verificar si el usuario ya está logueado usando signals
     if (this.authService.isLoggedIn()) {
-      // Redirigir al dashboard unificado
-      this.router.navigate(['/dashboard']);
+      this.redirectByRole(this.authService.userAffiliate()?.role?.name);
       return;
     }
 
@@ -123,12 +122,7 @@ export class SigninComponent implements OnInit {
         // Determinar ruta según el rol del usuario
         const roleName = response.data.user?.role?.name?.toLowerCase();
 
-        if (roleName === 'admin') {
-          this.router.navigate(['/admin/home-admin']).then();
-        } else {
-          // Cliente o afiliado
-          this.router.navigate(['/app/home']).then();
-        }
+        this.redirectByRole(roleName);
       } else {
         this.showError(response.message);
       }
@@ -162,5 +156,13 @@ export class SigninComponent implements OnInit {
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  private redirectByRole(roleName?: string | null): void {
+    const normalizedRole = roleName?.toLowerCase();
+    const targetRoute =
+      normalizedRole === 'admin' ? '/admin/home-admin' : '/app/home';
+
+    this.router.navigate([targetRoute]).then();
   }
 }

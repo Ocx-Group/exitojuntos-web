@@ -41,7 +41,7 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'home-admin', pathMatch: 'full' },
       {
         path: '',
         loadChildren: () =>
