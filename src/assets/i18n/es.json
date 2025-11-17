@@ -2427,7 +2427,9 @@
     },
     "USER-NAME-MESSAGE-ERROR": {
       "TEXT": "El usuario es invalido."
-    }
+    },
+    "INVALID_CREDENTIALS": "Credenciales inválidas. Verifica tu usuario y contraseña.",
+    "GENERIC_ERROR": "Ocurrió un error al iniciar sesión. Inténtalo nuevamente."
   },
   "SIGNUP": {
     "TITLE": "REGISTRO",

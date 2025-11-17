@@ -20,7 +20,6 @@ import { ROUTES_ADMIN } from './sidebar-admin-items';
 import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
-import { LogoComponent } from '../logo/logo.component';
 import { ImgProfileComponent } from '../img-profile/img-profile.component';
 import { IconsModule } from '@app/shared';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -33,7 +32,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [
     CommonModule,
     RouterLink,
-    LogoComponent,
     ImgProfileComponent,
     IconsModule,
     TranslatePipe,
@@ -49,6 +47,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   listMaxWidth: string;
   headerHeight = 60;
   routerObj = null;
+  readonly navbarIcon = 'assets/exito-logo.svg';
+  homeLink = '/app/home';
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -111,6 +111,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.sidebarItems = isAdmin
         ? ROUTES_ADMIN.filter(Boolean)
         : ROUTES.filter(Boolean);
+
+      this.homeLink = isAdmin ? '/admin/home-admin' : '/app/home';
     }
 
     this.initLeftSidebar();

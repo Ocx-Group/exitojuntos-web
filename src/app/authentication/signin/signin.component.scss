@@ -260,6 +260,17 @@ $error-color: #ff4444;
   margin: 0 0 32px 0;
 }
 
+.server-error {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 68, 68, 0.4);
+  border-radius: 10px;
+  background: rgba(255, 68, 68, 0.12);
+  color: $error-color;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 // Form styles
 .login-form {
   display: flex;

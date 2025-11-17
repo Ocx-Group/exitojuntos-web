@@ -55,7 +55,9 @@
     },
     "USER-NAME-MESSAGE-ERROR": {
       "TEXT": "L'utilisateur est invalide."
-    }
+    },
+    "INVALID_CREDENTIALS": "Identifiants invalides. Vérifiez votre téléphone et votre mot de passe.",
+    "GENERIC_ERROR": "Impossible de vous connecter. Veuillez réessayer."
   },
   "HEADER": {
     "LANGUAGE": "Français"

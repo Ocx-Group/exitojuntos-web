@@ -82,6 +82,10 @@
         <h2 class="login-title">{{ 'SIGNIN.LOGIN_TITLE' | translate }}</h2>
         <p class="login-subtitle">{{ 'SIGNIN.LOGIN_SUBTITLE' | translate }}</p>
 
+        <div *ngIf="error" class="server-error" role="alert">
+          {{ error }}
+        </div>
+
         <form [formGroup]="authLogin" (ngSubmit)="loginSubmitted()" class="login-form">
           <!-- Phone Field -->
           <div class="form-group">

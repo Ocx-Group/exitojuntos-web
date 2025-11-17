@@ -2430,7 +2430,9 @@
     },
     "USER-NAME-MESSAGE-ERROR": {
       "TEXT": "User name is invalid"
-    }
+    },
+    "INVALID_CREDENTIALS": "Invalid credentials. Check your phone and password.",
+    "GENERIC_ERROR": "We couldn't sign you in. Please try again."
   },
   "SIGNUP": {
     "TITLE": "REGISTER",

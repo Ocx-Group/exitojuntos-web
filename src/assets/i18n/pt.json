@@ -55,7 +55,9 @@
     },
     "USER-NAME-MESSAGE-ERROR": {
       "TEXT": "O usuário é inválido."
-    }
+    },
+    "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu telefone e senha.",
+    "GENERIC_ERROR": "Não foi possível iniciar sessão. Tente novamente."
   },
   "HEADER": {
     "LANGUAGE": "Português"

@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { Signin } from '@app/core/models/signin-model/signin.model';
 import { LogoService } from '@app/core/service/logo-service/logo.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signin',
@@ -106,28 +107,36 @@ export class SigninComponent implements OnInit {
   }
 
   loginSubmitted() {
-    let signin = new Signin();
+    const signin = new Signin();
     this.submitted = true;
     this.error = '';
-    signin.phone = this.authLogin.value.phone;
-    signin.password = this.authLogin.value.pwd;
 
-    if (signin.phone === '' || signin.password === '') {
+    if (this.authLogin.invalid) {
       return;
     }
+
+    signin.phone = this.authLogin.value.phone ?? '';
+    signin.password = this.authLogin.value.pwd ?? '';
     this.loading = true;
 
-    this.authService.loginUser(signin).subscribe((response: Response) => {
-      if (response.success) {
-        // Determinar ruta según el rol del usuario
-        const roleName = response.data.user?.role?.name?.toLowerCase();
-
-        this.redirectByRole(roleName);
-      } else {
-        this.showError(response.message);
-      }
-      this.loading = false;
-    });
+    this.authService
+      .loginUser(signin)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (response: Response) => {
+          if (response.success) {
+            const roleName = response.data.user?.role?.name?.toLowerCase();
+            this.redirectByRole(roleName);
+          } else {
+            const message = this.resolveErrorMessage(response);
+            this.displayLoginError(message);
+          }
+        },
+        error: error => {
+          const message = this.resolveErrorMessage(error);
+          this.displayLoginError(message);
+        },
+      });
   }
 
   showSuccess(message: string) {
@@ -136,6 +145,120 @@ export class SigninComponent implements OnInit {
 
   showError(message: string) {
     this.toastr.error(message, 'Error!');
+  }
+
+  private displayLoginError(message: string) {
+    this.error = message;
+    this.showError(message);
+  }
+
+  private resolveErrorMessage(error: unknown): string {
+    const statusCode = this.extractStatusCode(error);
+    const codeKey = this.mapStatusCodeToKey(statusCode);
+
+    if (codeKey) {
+      return this.getLocalizedText(codeKey, this.getFallbackForKey(codeKey));
+    }
+
+    const backendMessage = this.extractMessage(error);
+    const backendKey = this.mapBackendMessageToKey(backendMessage);
+
+    if (backendKey) {
+      return this.getLocalizedText(
+        backendKey,
+        this.getFallbackForKey(backendKey),
+      );
+    }
+
+    if (backendMessage) {
+      return backendMessage;
+    }
+
+    return this.getLocalizedText(
+      'SIGNIN.GENERIC_ERROR',
+      this.getFallbackForKey('SIGNIN.GENERIC_ERROR'),
+    );
+  }
+
+  private extractMessage(error: unknown): string {
+    if (!error) {
+      return '';
+    }
+
+    if (typeof error === 'string') {
+      return error;
+    }
+
+    const anyError = error as {
+      message?: string;
+      error?: { message?: string };
+    };
+    return anyError?.message || anyError?.error?.message || '';
+  }
+
+  private extractStatusCode(error: unknown): number | undefined {
+    if (!error || typeof error !== 'object') {
+      return undefined;
+    }
+
+    const anyError = error as { code?: number; status?: number };
+    return anyError.code ?? anyError.status;
+  }
+
+  private mapStatusCodeToKey(code?: number): string | null {
+    if (!code) {
+      return null;
+    }
+
+    if (code === 401) {
+      return 'SIGNIN.INVALID_CREDENTIALS';
+    }
+
+    return null;
+  }
+
+  private mapBackendMessageToKey(message: string): string | null {
+    if (!message) {
+      return null;
+    }
+
+    const normalized = this.normalizeText(message);
+    const backendMatches: Record<string, string> = {
+      'credenciales invalidas': 'SIGNIN.INVALID_CREDENTIALS',
+      'credencial invalida': 'SIGNIN.INVALID_CREDENTIALS',
+      'invalid credentials': 'SIGNIN.INVALID_CREDENTIALS',
+      'usuario o contrasena incorrectos': 'SIGNIN.INVALID_CREDENTIALS',
+    };
+
+    return backendMatches[normalized] || null;
+  }
+
+  private normalizeText(value: string): string {
+    const combiningMarksRegex = /[\u0300-\u036f]/g;
+
+    return (
+      value
+        .toLowerCase()
+        .normalize('NFD')
+        // eslint-disable-next-line unicorn/prefer-string-replace-all -- replaceAll not available on all targeted browsers
+        .replace(combiningMarksRegex, '')
+    );
+  }
+
+  private getFallbackForKey(key: string): string {
+    const fallbacks: Record<string, string> = {
+      'SIGNIN.INVALID_CREDENTIALS':
+        'Credenciales inválidas. Verifica tu usuario y contraseña.',
+      'SIGNIN.GENERIC_ERROR':
+        'Ocurrió un error al iniciar sesión. Inténtalo nuevamente.',
+    };
+
+    return fallbacks[key] || '';
+  }
+
+  private getLocalizedText(key: string, fallback: string): string {
+    const translated = this.translate.instant(key);
+    return translated === key ? fallback : translated;
   }
 
   get f() {
