@@ -22,7 +22,8 @@
               <div class="btn btn-sm badge-outline col-red" *ngIf="user.status == false"><i
                   class="bi bi-person-exclamation"></i> Inactivo</div>
               <div class="btn btn-sm badge-outline col-green" *ngIf="user.status != null"><i
-                  class="bi bi-person-fill-check"></i> {{ grading === null ? 'Activo' : grading.name }}</div>
+                  class="bi bi-person-fill-check"></i> {{ user?.role?.name ? (user.role.name | translate) : 'Activo' }}
+              </div>
             </div>
 
           </div>
