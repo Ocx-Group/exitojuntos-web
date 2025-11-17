@@ -194,4 +194,24 @@ export class AuthService {
       .get<{ ip: string }>('https://api.ipify.org?format=json')
       .pipe(map(data => data.ip));
   }
+
+  /**
+   * Obtiene todos los usuarios con paginación
+   * @param page Número de página (default: 1)
+   * @param limit Cantidad de registros por página (default: 10)
+   */
+  findAll(page: number = 1, limit: number = 10): Observable<any> {
+    const params = { page: page.toString(), limit: limit.toString() };
+    return this.http
+      .get<Response>(`${this.urlApi}/auth/users`, { params, ...httpOptions })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          this.toastr.error('Error al obtener usuarios', 'Error');
+          return throwError(() => error);
+        }),
+      );
+  }
 }
