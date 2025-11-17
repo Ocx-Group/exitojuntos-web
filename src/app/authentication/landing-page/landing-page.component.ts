@@ -56,6 +56,14 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       url: '5VY0Hu8EW-c',
       title: 'Watch Information Video',
     },
+    fr: {
+      url: '5VY0Hu8EW-c',
+      title: 'Regarder la vidéo informative',
+    },
+    pt: {
+      url: '5VY0Hu8EW-c',
+      title: 'Assistir ao vídeo informativo',
+    },
   };
   isPreviewHovered: boolean = false;
   user: UserAffiliate | null = null;
@@ -217,12 +225,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const savedLang = localStorage.getItem('lang');
-    if (savedLang) {
-      this.changeLanguage(savedLang);
-    } else {
-      this.changeLanguage('en');
-    }
-    this.updateTranslations();
+    this.changeLanguage(savedLang || 'en');
   }
 
   ngOnDestroy() {
@@ -246,9 +249,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   changeLanguage(lang: string) {
-    this.currentLang = lang;
-    this.translate.use(lang);
-    localStorage.setItem('lang', lang);
+    const normalizedLang = this.normalizeLanguage(lang);
+    this.currentLang = normalizedLang;
+    this.translate.use(normalizedLang);
+    localStorage.setItem('lang', normalizedLang);
     this.isLanguageDropdownOpen = false;
     this.updateTranslations();
   }
@@ -283,8 +287,12 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   showVideo(): void {
-    const videoId = this.videos[this.currentLang].url;
+    const selectedVideo = this.videos[this.currentLang] || this.videos['en'];
+    if (!selectedVideo) {
+      return;
+    }
 
+    const videoId = selectedVideo.url;
     this.currentVideoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0`;
     this.showVideoModal = true;
   }
@@ -308,89 +316,163 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     return this.languageFlags[this.currentLang] || this.languageFlags['en'];
   }
 
+  private normalizeLanguage(lang?: string | null): string {
+    if (!lang) {
+      return 'en';
+    }
+
+    const normalizedLang = lang.toLowerCase().split('-')[0];
+    return this.languageFlags[normalizedLang] ? normalizedLang : 'en';
+  }
+
   updateTranslations(): void {
     // Update hero metrics
     this.translate.get('LANDING_PAGE.HERO.METRICS').subscribe(metrics => {
-      this.heroMetrics = [
-        { value: '98%', label: metrics.PROFITABILITY },
-        { value: '$500M+', label: metrics.MANAGED },
-        { value: '10K+', label: metrics.INVESTORS },
-      ];
+      if (
+        metrics &&
+        typeof metrics === 'object' &&
+        !metrics.hasOwnProperty('LANDING_PAGE.HERO.METRICS')
+      ) {
+        this.heroMetrics = [
+          { value: '98%', label: metrics.PROFITABILITY || '' },
+          { value: '$500M+', label: metrics.MANAGED || '' },
+          { value: '10K+', label: metrics.INVESTORS || '' },
+        ];
+      }
     });
 
     // Update feature cards
     this.translate.get('LANDING_PAGE.FEATURES.CARDS').subscribe(cards => {
-      this.featureCards[0].title = cards.TRADING.TITLE;
-      this.featureCards[0].description = cards.TRADING.DESCRIPTION;
-      this.featureCards[1].title = cards.SECURITY.TITLE;
-      this.featureCards[1].description = cards.SECURITY.DESCRIPTION;
-      this.featureCards[2].title = cards.ANALYSIS.TITLE;
-      this.featureCards[2].description = cards.ANALYSIS.DESCRIPTION;
-      this.featureCards[3].title = cards.ADVISORY.TITLE;
-      this.featureCards[3].description = cards.ADVISORY.DESCRIPTION;
-      this.featureCards[4].title = cards.TRANSPARENCY.TITLE;
-      this.featureCards[4].description = cards.TRANSPARENCY.DESCRIPTION;
-      this.featureCards[5].title = cards.SUPPORT.TITLE;
-      this.featureCards[5].description = cards.SUPPORT.DESCRIPTION;
+      if (
+        cards &&
+        typeof cards === 'object' &&
+        !cards.hasOwnProperty('LANDING_PAGE.FEATURES.CARDS')
+      ) {
+        if (cards.TRADING) {
+          this.featureCards[0].title = cards.TRADING.TITLE || '';
+          this.featureCards[0].description = cards.TRADING.DESCRIPTION || '';
+        }
+        if (cards.SECURITY) {
+          this.featureCards[1].title = cards.SECURITY.TITLE || '';
+          this.featureCards[1].description = cards.SECURITY.DESCRIPTION || '';
+        }
+        if (cards.ANALYSIS) {
+          this.featureCards[2].title = cards.ANALYSIS.TITLE || '';
+          this.featureCards[2].description = cards.ANALYSIS.DESCRIPTION || '';
+        }
+        if (cards.ADVISORY) {
+          this.featureCards[3].title = cards.ADVISORY.TITLE || '';
+          this.featureCards[3].description = cards.ADVISORY.DESCRIPTION || '';
+        }
+        if (cards.TRANSPARENCY) {
+          this.featureCards[4].title = cards.TRANSPARENCY.TITLE || '';
+          this.featureCards[4].description =
+            cards.TRANSPARENCY.DESCRIPTION || '';
+        }
+        if (cards.SUPPORT) {
+          this.featureCards[5].title = cards.SUPPORT.TITLE || '';
+          this.featureCards[5].description = cards.SUPPORT.DESCRIPTION || '';
+        }
+      }
     });
 
     // Update trading highlights
     this.translate
       .get('LANDING_PAGE.TRADING_SECTION.HIGHLIGHTS')
       .subscribe(highlights => {
-        this.tradingHighlights = [
-          highlights.ITEM1,
-          highlights.ITEM2,
-          highlights.ITEM3,
-          highlights.ITEM4,
-        ];
+        if (
+          highlights &&
+          typeof highlights === 'object' &&
+          !highlights.hasOwnProperty('LANDING_PAGE.TRADING_SECTION.HIGHLIGHTS')
+        ) {
+          this.tradingHighlights = [
+            highlights.ITEM1 || '',
+            highlights.ITEM2 || '',
+            highlights.ITEM3 || '',
+            highlights.ITEM4 || '',
+          ];
+        }
       });
 
     // Update process steps
     this.translate.get('LANDING_PAGE.HOW_IT_WORKS.STEPS').subscribe(steps => {
-      this.processSteps[0].title = steps.STEP1.TITLE;
-      this.processSteps[0].description = steps.STEP1.DESCRIPTION;
-      this.processSteps[1].title = steps.STEP2.TITLE;
-      this.processSteps[1].description = steps.STEP2.DESCRIPTION;
-      this.processSteps[2].title = steps.STEP3.TITLE;
-      this.processSteps[2].description = steps.STEP3.DESCRIPTION;
-      this.processSteps[3].title = steps.STEP4.TITLE;
-      this.processSteps[3].description = steps.STEP4.DESCRIPTION;
+      if (
+        steps &&
+        typeof steps === 'object' &&
+        !steps.hasOwnProperty('LANDING_PAGE.HOW_IT_WORKS.STEPS')
+      ) {
+        if (steps.STEP1) {
+          this.processSteps[0].title = steps.STEP1.TITLE || '';
+          this.processSteps[0].description = steps.STEP1.DESCRIPTION || '';
+        }
+        if (steps.STEP2) {
+          this.processSteps[1].title = steps.STEP2.TITLE || '';
+          this.processSteps[1].description = steps.STEP2.DESCRIPTION || '';
+        }
+        if (steps.STEP3) {
+          this.processSteps[2].title = steps.STEP3.TITLE || '';
+          this.processSteps[2].description = steps.STEP3.DESCRIPTION || '';
+        }
+        if (steps.STEP4) {
+          this.processSteps[3].title = steps.STEP4.TITLE || '';
+          this.processSteps[3].description = steps.STEP4.DESCRIPTION || '';
+        }
+      }
     });
 
     // Update CTA stats
     this.translate.get('LANDING_PAGE.CTA_SECTION.STATS').subscribe(stats => {
-      this.ctaStats = [
-        { value: 'A+', label: stats.RATING },
-        { value: '100%', label: stats.SECURE },
-        { value: '24/7', label: stats.SUPPORT },
-      ];
+      if (
+        stats &&
+        typeof stats === 'object' &&
+        !stats.hasOwnProperty('LANDING_PAGE.CTA_SECTION.STATS')
+      ) {
+        this.ctaStats = [
+          { value: 'A+', label: stats.RATING || '' },
+          { value: '100%', label: stats.SECURE || '' },
+          { value: '24/7', label: stats.SUPPORT || '' },
+        ];
+      }
     });
 
     // Update footer links
     this.translate.get('LANDING_PAGE.FOOTER.LINKS').subscribe(links => {
-      this.footerLinks[0].items[0].label = links.SERVICES;
-      this.footerLinks[0].items[1].label = links.ABOUT_US;
-      this.footerLinks[0].items[2].label = links.TESTIMONIALS;
-      this.footerLinks[0].items[3].label = links.CONTACT;
+      if (
+        links &&
+        typeof links === 'object' &&
+        !links.hasOwnProperty('LANDING_PAGE.FOOTER.LINKS')
+      ) {
+        this.footerLinks[0].items[0].label = links.SERVICES || '';
+        this.footerLinks[0].items[1].label = links.ABOUT_US || '';
+        this.footerLinks[0].items[2].label = links.TESTIMONIALS || '';
+        this.footerLinks[0].items[3].label = links.CONTACT || '';
+      }
     });
 
     this.translate.get('LANDING_PAGE.FOOTER.LEGAL').subscribe(legal => {
-      this.footerLinks[1].items[0].label = legal.PRIVACY;
-      this.footerLinks[1].items[1].label = legal.TERMS;
-      this.footerLinks[1].items[2].label = legal.REGULATION;
-      this.footerLinks[1].items[3].label = legal.SECURITY;
+      if (
+        legal &&
+        typeof legal === 'object' &&
+        !legal.hasOwnProperty('LANDING_PAGE.FOOTER.LEGAL')
+      ) {
+        this.footerLinks[1].items[0].label = legal.PRIVACY || '';
+        this.footerLinks[1].items[1].label = legal.TERMS || '';
+        this.footerLinks[1].items[2].label = legal.REGULATION || '';
+        this.footerLinks[1].items[3].label = legal.SECURITY || '';
+      }
     });
 
     // Update testimonials
     this.translate
       .get('LANDING_PAGE.TESTIMONIALS_SECTION.TESTIMONIALS')
-      .subscribe((testimonials: any[]) => {
-        for (let index = 0; index < testimonials.length; index++) {
-          if (this.testimonials[index]) {
-            this.testimonials[index].quote = testimonials[index].QUOTE;
-            this.testimonials[index].name = testimonials[index].NAME;
-            this.testimonials[index].role = testimonials[index].ROLE;
+      .subscribe((testimonials: any) => {
+        if (testimonials && Array.isArray(testimonials)) {
+          for (let index = 0; index < testimonials.length; index++) {
+            if (this.testimonials[index] && testimonials[index]) {
+              this.testimonials[index].quote = testimonials[index].QUOTE || '';
+              this.testimonials[index].name = testimonials[index].NAME || '';
+              this.testimonials[index].role = testimonials[index].ROLE || '';
+            }
           }
         }
       });
