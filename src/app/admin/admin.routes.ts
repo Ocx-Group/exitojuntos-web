@@ -11,7 +11,10 @@ export const ADMIN_ROUTES: Routes = [
   {
     path: 'home-admin',
     loadComponent: () =>
-      import('./home/home-admin.component').then(m => m.HomeAdminComponent),
+      import('@app/shared/pages/dashboard-page/dashboard-page.component').then(
+        m => m.DashboardPageComponent,
+      ),
+    data: { pageType: 'admin' },
     canActivate: [AuthGuardAdmin, MaintenanceGuard],
   },
 ];

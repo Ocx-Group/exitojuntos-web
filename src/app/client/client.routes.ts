@@ -11,7 +11,10 @@ export const CLIENT_ROUTES: Routes = [
   {
     path: 'home',
     loadComponent: () =>
-      import('./home/home.component').then(m => m.HomeComponent),
+      import('@app/shared/pages/dashboard-page/dashboard-page.component').then(
+        m => m.DashboardPageComponent,
+      ),
+    data: { pageType: 'client' },
     canActivate: [AuthGuard, MaintenanceGuard],
   },
   {
