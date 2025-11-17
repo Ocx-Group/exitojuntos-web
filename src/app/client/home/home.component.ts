@@ -87,27 +87,31 @@ export class HomeComponent implements OnInit {
 
     this.currentYear = new Date().getFullYear();
     this.previousYear = this.currentYear - 1;
-    this.ngOnInit();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Usar signal para obtener el usuario afiliado
-    const user = this.authService.userAffiliate();
+    this.user = this.authService.userAffiliate();
+    this.initializeBalanceCharts();
   }
 
-  initializeBalanceCharts() {
+  private initializeBalanceCharts(): void {
     try {
       this.initPortfolioChart();
+      this.initVolumeChart();
     } catch (error) {
-      console.error('Error initializing Portfolio Chart:', error);
+      console.error('Error initializing charts:', error);
     }
   }
 
   get registerUrl() {
-    return `https://www.exitojuntos.net/welcome/${this.user.phone.toString()}`;
+    const phone = this.user?.phone;
+    return phone
+      ? `https://www.exitojuntos.net/welcome/${phone.toString()}`
+      : '';
   }
 
-  private initPortfolioChart() {
+  private initPortfolioChart(): void {
     // Datos quemados para portfolio de trading
     this.portfolioChartOptions = {
       series: [21293.61, 11172.8, 3124.5, 5782.54],
@@ -148,8 +152,9 @@ export class HomeComponent implements OnInit {
     window.open(url);
   }
 
-  initVolumeChart() {
+  private initVolumeChart(): void {
     this.volumeChart = {
+      backgroundColor: 'transparent',
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -175,6 +180,14 @@ export class HomeComponent implements OnInit {
           axisLabel: {
             color: '#9aa0ac',
           },
+          axisLine: {
+            lineStyle: {
+              color: 'rgba(255, 255, 255, 0.15)',
+            },
+          },
+          splitLine: {
+            show: false,
+          },
         },
       ],
       yAxis: [
@@ -183,6 +196,16 @@ export class HomeComponent implements OnInit {
           axisLabel: {
             color: '#9aa0ac',
             formatter: '${value}K',
+          },
+          axisLine: {
+            lineStyle: {
+              color: 'rgba(255, 255, 255, 0.15)',
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: 'rgba(255, 255, 255, 0.05)',
+            },
           },
         },
       ],
@@ -194,7 +217,11 @@ export class HomeComponent implements OnInit {
           emphasis: {
             focus: 'series',
           },
+          barWidth: 18,
           data: [120, 132, 101, 134, 190, 230, 210],
+          itemStyle: {
+            borderRadius: [6, 6, 0, 0],
+          },
         },
         {
           name: 'Sell Volume',
@@ -203,7 +230,11 @@ export class HomeComponent implements OnInit {
           emphasis: {
             focus: 'series',
           },
+          barWidth: 18,
           data: [220, 182, 191, 234, 290, 330, 310],
+          itemStyle: {
+            borderRadius: [6, 6, 0, 0],
+          },
         },
       ],
       color: ['#10b981', '#ef4444'],
