@@ -20,7 +20,7 @@ import { CountryService } from '@app/core/service/country-service/country.servic
 import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
@@ -51,6 +51,7 @@ export class SignupComponent implements OnInit {
     private readonly affiliateService: AffiliateService,
     private readonly toastr: ToastrService,
     private readonly pdfViewerService: PdfViewerService,
+    private readonly translate: TranslateService,
   ) {
     this.key = this.activatedRoute.snapshot.params.key || '';
     this.side = this.user.side?.toString() || '';
@@ -71,13 +72,17 @@ export class SignupComponent implements OnInit {
           this.listcountry = data;
         } else {
           console.error('Invalid countries data:', data);
-          this.toastr.warning('No se pudieron cargar los países');
+          this.toastr.warning(
+            this.translate.instant('SIGNUP.WARNING_NO_COUNTRIES'),
+          );
           this.listcountry = [];
         }
       },
       error: error => {
         console.error('Error loading countries:', error);
-        this.toastr.error('Error al cargar los países');
+        this.toastr.error(
+          this.translate.instant('SIGNUP.ERROR_LOADING_COUNTRIES'),
+        );
         this.listcountry = [];
       },
     });
@@ -165,13 +170,13 @@ export class SignupComponent implements OnInit {
           console.log('User loaded successfully:', this.user);
         } else {
           console.error('User not found or invalid data for phone:', phone);
-          this.toastr.error('Usuario no encontrado');
+          this.toastr.error(this.translate.instant('SIGNUP.USER_NOT_FOUND'));
           this.router.navigate(['/signin']).then();
         }
       },
       error: error => {
         console.error('Error fetching user by phone:', error);
-        this.toastr.error('Error al buscar el usuario');
+        this.toastr.error(this.translate.instant('SIGNUP.ERROR_FETCHING_USER'));
         this.router.navigate(['/signin']).then();
       },
     });
@@ -186,7 +191,7 @@ export class SignupComponent implements OnInit {
     this.error = '';
 
     if (this.registerForm.invalid) {
-      this.showError('Formulario invalido.');
+      this.showError(this.translate.instant('SIGNUP.INVALID_FORM'));
       return;
     }
 
