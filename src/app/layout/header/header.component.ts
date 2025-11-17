@@ -19,6 +19,7 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 import { IconsModule } from '@app/shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigService } from '@app/core/service/config/config.service';
 
 @Component({
   selector: 'app-header',
@@ -49,6 +50,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly router: Router,
     public readonly languageService: LanguageService,
+    private readonly configService: ConfigService,
   ) {}
 
   listLang = [
@@ -57,6 +59,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   ngOnInit() {
+    this.config = this.configService.configData;
     this.user = this.authService.currentUserAffiliateValue;
 
     this.langStoreValue = localStorage.getItem('lang');
