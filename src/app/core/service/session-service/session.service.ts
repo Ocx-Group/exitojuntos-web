@@ -1,26 +1,33 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject, DestroyRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
   private readonly idleTimeout = 30 * 60 * 1000;
-  private idleTimer: any;
-  private userActivity = new Subject<void>();
+  private idleTimer: ReturnType<typeof setTimeout> | null = null;
+  private readonly userActivity = new Subject<void>();
+  private readonly ngZone = inject(NgZone);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
-
-  constructor(private ngZone: NgZone, private router: Router) {
+  constructor() {
     this.listenToUserActivity();
     this.startTimer();
   }
 
   private listenToUserActivity(): void {
     this.ngZone.runOutsideAngular(() => {
-      window.addEventListener('mousemove', () => this.ngZone.run(() => this.userHasBeenActive()));
-      window.addEventListener('keypress', () => this.ngZone.run(() => this.userHasBeenActive()));
-      window.addEventListener('scroll', () => this.ngZone.run(() => this.userHasBeenActive()));
+      const events = ['mousemove', 'keypress', 'scroll'] as const;
+
+      for (const event of events) {
+        globalThis.addEventListener(event, () =>
+          this.ngZone.run(() => this.userHasBeenActive()),
+        );
+      }
     });
   }
 
@@ -29,12 +36,15 @@ export class SessionService {
   }
 
   private startTimer(): void {
-    this.userActivity.subscribe(() => {
-      clearTimeout(this.idleTimer);
-      this.idleTimer = setTimeout(() => {
-
-        this.router.navigate(['/signin']).then();
-      }, this.idleTimeout);
-    });
+    this.userActivity
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (this.idleTimer) {
+          clearTimeout(this.idleTimer);
+        }
+        this.idleTimer = setTimeout(() => {
+          this.router.navigate(['/signin']);
+        }, this.idleTimeout);
+      });
   }
 }
