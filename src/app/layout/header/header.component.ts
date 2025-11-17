@@ -56,6 +56,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
     { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
+    { text: 'French', flag: 'assets/images/flags/france.png', lang: 'fr' },
+    { text: 'Portuguese', flag: 'assets/images/flags/brazil.png', lang: 'pt' },
   ];
 
   ngOnInit() {
