@@ -22,21 +22,14 @@ export type DashboardPageType = 'client' | 'admin';
   imports: [HomeComponent, HomeAdminComponent],
 })
 export class DashboardPageComponent implements OnInit {
-  // Usando signal input (Angular 17.1+)
   pageType = input<DashboardPageType>('client');
-
-  // Signal para el tipo de página actual
   protected readonly currentPageType = signal<DashboardPageType>('client');
-
-  // Inyección moderna usando inject()
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    // Inicializar con el valor del input
     this.currentPageType.set(this.pageType());
 
-    // Usar takeUntilDestroyed en lugar de Subject
     this.route.data
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(data => this.applyRouteData(data));
