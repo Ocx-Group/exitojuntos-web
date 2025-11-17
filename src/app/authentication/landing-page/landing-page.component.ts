@@ -202,6 +202,13 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     },
   ];
 
+  readonly languageFlags: { [key: string]: string } = {
+    es: 'assets/images/flags/spain.jpg',
+    en: 'assets/images/flags/us.jpg',
+    fr: 'assets/images/flags/france.png',
+    pt: 'assets/images/flags/brazil.png',
+  };
+
   constructor(
     private readonly pdfViewerService: PdfViewerService,
     private readonly translate: TranslateService,
@@ -308,5 +315,9 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   hidePreview(): void {
     this.isPreviewHovered = false;
+  }
+
+  getCurrentFlagIcon(): string {
+    return this.languageFlags[this.currentLang] || this.languageFlags['en'];
   }
 }

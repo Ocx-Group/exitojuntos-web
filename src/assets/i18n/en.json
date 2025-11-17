@@ -1267,6 +1267,7 @@
     }
   },
   "HEADER": {
+    "LANGUAGE": "English",
     "LOGOUT": {
       "TEXT": "Logout"
     },

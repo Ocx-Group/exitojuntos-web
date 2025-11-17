@@ -13,8 +13,33 @@
     </div>
 
     <div class="navbar-actions">
+      <!-- Language Selector -->
+      <div class="language-selector" (click)="toggleLanguageDropdown($event)"
+        (keydown)="toggleLanguageDropdown($event)">
+        <div class="language-current">
+          <img [src]="getCurrentFlagIcon()" [alt]="currentLang" class="flag-icon" />
+        </div>
+        <div class="language-dropdown" [class.open]="isLanguageDropdownOpen">
+          <button class="language-option" (click)="changeLanguage('es')" type="button">
+            <img src="assets/images/flags/spain.jpg" alt="Español" class="flag-icon" />
+            <span>Español</span>
+          </button>
+          <button class="language-option" (click)="changeLanguage('en')" type="button">
+            <img src="assets/images/flags/us.jpg" alt="English" class="flag-icon" />
+            <span>English</span>
+          </button>
+          <button class="language-option" (click)="changeLanguage('fr')" type="button">
+            <img src="assets/images/flags/france.png" alt="Français" class="flag-icon" />
+            <span>Français</span>
+          </button>
+          <button class="language-option" (click)="changeLanguage('pt')" type="button">
+            <img src="assets/images/flags/brazil.png" alt="Português" class="flag-icon" />
+            <span>Português</span>
+          </button>
+        </div>
+      </div>
+
       <button class="btn-navbar-secondary" routerLink="/signin">Iniciar Sesión</button>
-      <button class="btn-navbar-primary" routerLink="/signup">Comenzar</button>
     </div>
   </div>
 </nav>
