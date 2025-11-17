@@ -1,0 +1,42 @@
+<section class="section admin-dashboard">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Gestión de Usuarios</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/admin/home-admin"><i class="fas fa-users font-17"></i></a>
+    </li>
+  </ul>
+
+  <div class="section-body">
+    <!-- Admin Stats Cards -->
+    <div class="row">
+      @for (card of statsCards; track card.title) {
+      <div class="col-xl-3 col-lg-6">
+        <app-stats-card [data]="card" />
+      </div>
+      }
+    </div>
+
+    <!-- Users Table -->
+    <div class="row mt-4">
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0"><i class="fas fa-users me-2"></i>Lista de Usuarios</h5>
+              <button class="btn btn-primary btn-sm" (click)="refreshUsers()" [disabled]="loading()">
+                <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <app-reusable-datatable [rows]="users()" [columns]="columns" [actions]="actions" [config]="tableConfig"
+              [loadingIndicator]="loading()" (rowClicked)="onRowClicked($event)" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

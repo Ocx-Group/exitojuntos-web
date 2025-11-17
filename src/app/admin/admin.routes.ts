@@ -17,4 +17,12 @@ export const ADMIN_ROUTES: Routes = [
     data: { pageType: 'admin' },
     canActivate: [AuthGuardAdmin, MaintenanceGuard],
   },
+  {
+    path: 'users-management',
+    loadComponent: () =>
+      import('./users-management/users-management.component').then(
+        m => m.UsersManagementComponent,
+      ),
+    canActivate: [AuthGuardAdmin, MaintenanceGuard],
+  },
 ];

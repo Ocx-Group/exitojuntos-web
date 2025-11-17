@@ -12,4 +12,15 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: '/admin/users-management',
+    title: 'Gestión de Usuarios',
+    iconType: 'feather',
+    icon: 'users',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];
