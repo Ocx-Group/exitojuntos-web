@@ -1,0 +1,38 @@
+<div class="ng13-org-chart-entity">
+  <div class="ng13-org-chart-entity-connector ng13-org-chart-entity-border" *ngIf="hasParent"></div>
+  <ng-template #popTitle>
+    <b>{{data?.userName || data?.userName}}</b>
+    <br>
+    <b *ngIf="data?.qualificationCount && data.qualificationCount > 0">Circuito: {{data?.qualificationCount}}</b>
+  </ng-template>
+  <ng-template #popContent>
+  </ng-template>
+  <button (click)="onloadFamilyTree(data?.id)" [class]="data?.cssClass" class="ng13-org-chart-entity-box"
+    [style]="data?.css" type="button" triggers="mouseenter:mouseleave" [ngbPopover]="popContent"
+    [popoverTitle]="popTitle">
+    <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: data }">
+    </ng-container>
+  </button>
+  <div class="ng13-org-chart-entity-connector ng13-org-chart-entity-border"
+    *ngIf="data?.children?.length && !data?.hideChildren"></div>
+</div>
+
+<div *ngIf="data?.children && data.children.length > 0 && !data?.hideChildren" class="ng13-org-chart-container">
+  <ng-container *ngFor="let childNode of data?.children; first as isFirst; last as isLast">
+    <div class="ng13-org-chart-sub-container">
+      <div class="ng13-org-chart-connector-container">
+        <div class="ng13-org-chart-connector ng13-org-chart-entity-border"
+          [style.border-color]="isFirst ? 'transparent' : ''"></div>
+        <div class="ng13-org-chart-entity-border"></div>
+        <div class="ng13-org-chart-connector ng13-org-chart-entity-border"
+          [style.border-color]="isLast ? 'transparent' : ''"></div>
+      </div>
+      <app-client-unilevel-tree-component [data]="childNode" [hasParent]="true" [nodeTemplate]="nodeTemplate"
+        (loadFamilyTree)="onloadFamilyTree($event)">
+      </app-client-unilevel-tree-component>
+    </div>
+  </ng-container>
+</div>
+<div class="ng13-org-chart-zoom-button-container">
+  <ng-content select="[zoom-button]"></ng-content>
+</div>

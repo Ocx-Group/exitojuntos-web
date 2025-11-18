@@ -218,4 +218,45 @@ export class AuthService {
         }),
       );
   }
+
+  /**
+   * Obtiene el árbol unilevel del usuario
+   * @param userId ID del usuario raíz del árbol (opcional, solo para administradores)
+   * @param maxLevel Nivel máximo de profundidad del árbol (1-20)
+   * @returns Observable con el árbol unilevel
+   */
+  getUnilevelTree(userId?: number, maxLevel?: number): Observable<any> {
+    const token = this.currentUserAffiliateValue?.access_token ?? '';
+    const headers = token
+      ? httpOptions.headers.set('Authorization', `Bearer ${token}`)
+      : httpOptions.headers;
+
+    let params: any = {};
+    if (userId !== undefined && userId !== null) {
+      params.userId = userId.toString();
+    }
+    if (maxLevel !== undefined && maxLevel !== null) {
+      params.maxLevel = maxLevel.toString();
+    }
+
+    return this.http
+      .get<Response>(`${this.urlApi}/auth/unilevel-tree`, { params, headers })
+      .pipe(
+        map(response => {
+          if (response.success) {
+            return response.data;
+          }
+          throw new Error(
+            response.message || 'Error al obtener árbol unilevel',
+          );
+        }),
+        catchError(error => {
+          this.toastr.error(
+            error.error?.message || 'Error al obtener árbol unilevel',
+            'Error',
+          );
+          return throwError(() => error);
+        }),
+      );
+  }
 }

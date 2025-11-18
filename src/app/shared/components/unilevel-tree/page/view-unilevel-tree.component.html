@@ -1,0 +1,72 @@
+<section class="main-content m-t-0">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'MY-NETWORK-PAGE.TITLE.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a><i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'MY-NETWORK-PAGE.NETWORK-TREES.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="card">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="padding-20">
+            <ul ngbNav #nav="ngbNav" [activeId]="active" (activeIdChange)="onTabChange($event)" class="nav-tabs">
+              <li [ngbNavItem]="1">
+                <a ngbNavLink>{{ 'MY-NETWORK-PAGE.UNILEVEL-MODEL.TEXT' | translate }}</a>
+                <ng-template ngbNavContent>
+                  <div class="tab-pane">
+                    <div class="card-body">
+                      <div class="row mt-2">
+                        <div class="col-2">
+                          <button type="button" (click)="onloadFamilyTree(userId)" class="btn btn-primary">
+                            <i class="bi bi-backspace"></i>
+                            {{ 'MY-NETWORK-PAGE.BACK.TEXT' | translate }}
+                          </button>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-12">
+                          <div class="card-body media-list position-relative scrollable-container"
+                            style="overflow-y: auto;">
+                            <div *ngIf="showDiv">
+                              <app-client-unilevel-tree-component [nodeTemplate]="nodeTemplate" [data]="tree"
+                                (loadFamilyTree)="onloadFamilyTree($event)">
+                              </app-client-unilevel-tree-component>
+                              <ng-template #nodeTemplate let-node>
+                                <div class="chart-node">
+                                  <img title="user image" alt="node" [src]="node.image || 'assets/images/user.png'"
+                                    class="node-image" />
+                                  <div class="name">
+                                    <span class="user-name">
+                                      {{ node.userName || node.user_name }}
+                                    </span>
+                                  </div>
+                                  <button *ngIf="node.children && node.children.length"
+                                    (click)="node.hideChildren = !node.hideChildren"
+                                    (keypress)="node.hideChildren = !node.hideChildren" class="tree-fold-btn"
+                                    type="button">
+                                    {{ node.hideChildren ? '+' : '-' }}
+                                  </button>
+                                </div>
+                              </ng-template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

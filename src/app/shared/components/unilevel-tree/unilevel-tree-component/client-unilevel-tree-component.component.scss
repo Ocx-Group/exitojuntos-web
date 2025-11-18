@@ -1,0 +1,153 @@
+$connectorHeight: 1.2em;
+$boxColor: #1a1d2e;
+$connectorColor: #5c53d9;
+$hoverColor: #667eea;
+
+$minBoxSize: 95px;
+$maxBoxSize: 105px;
+
+// Variable CSS para el fondo que cambia según el tema
+:root {
+  --node-bg-light: rgba(92, 83, 217, 0.05);
+  --node-bg-dark: rgba(92, 83, 217, 0.15);
+}
+
+app-client-unilevel-tree-component {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+}
+
+.ng13-org-chart-entity {
+  margin: 0 0.8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.ng13-org-chart-entity-border {
+  border-left: 2px solid $connectorColor;
+  border-top: 2px solid $connectorColor;
+}
+
+.ng13-org-chart-zoom-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ng13-org-chart-sub-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ng13-org-chart-container {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+
+.ng13-org-chart-connector {
+  flex: 1;
+}
+
+.ng13-org-chart-connector-container {
+  display: flex;
+}
+
+.ng13-org-chart-entity-connector {
+  height: $connectorHeight;
+  transition: height 250ms;
+}
+
+.ng13-org-chart-entity-box {
+  position: relative;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #5c53d9;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(92, 83, 217, 0.3), 0 0 20px rgba(92, 83, 217, 0.1);
+  max-width: $maxBoxSize;
+  max-height: $maxBoxSize;
+  min-width: $minBoxSize;
+  min-height: $minBoxSize;
+  overflow: visible;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  // Usa variable CSS que se define según el tema
+  background-color: var(--node-bg-light);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(92, 83, 217, 0.5),
+      0 0 30px rgba(92, 83, 217, 0.2);
+    border-color: $hoverColor;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+// Para tema oscuro - cambiar variable
+:host-context(.dark),
+:host-context([data-theme='dark']),
+:host-context(body.dark),
+:host-context(html.dark) {
+  --node-bg-light: var(--node-bg-dark);
+
+  .ng13-org-chart-entity-box {
+    background-color: var(--node-bg-dark);
+  }
+}
+
+.ng13-org-chart-zoom-out {
+  .ng13-org-chart-entity-box {
+    &:not(:hover) {
+      max-width: 60px;
+      max-height: 60px;
+      border-radius: 50%;
+      padding: 8px;
+    }
+  }
+
+  .ng13-org-chart-entity-connector {
+    height: 0.8em;
+  }
+
+  .ng13-org-chart-entity {
+    margin: 0 0.4em;
+  }
+
+  .chart-node {
+    .node-image {
+      width: 45px !important;
+      height: 45px !important;
+    }
+
+    .name,
+    .tree-fold-btn {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 200ms, visibility 200ms;
+    }
+  }
+
+  .ng13-org-chart-entity-box:hover {
+    .chart-node {
+      .name,
+      .tree-fold-btn {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
