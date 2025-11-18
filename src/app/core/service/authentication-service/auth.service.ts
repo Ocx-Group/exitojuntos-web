@@ -202,8 +202,12 @@ export class AuthService {
    */
   findAll(page: number = 1, limit: number = 10): Observable<any> {
     const params = { page: page.toString(), limit: limit.toString() };
+    const token = this.currentUserAffiliateValue?.access_token ?? '';
+    const headers = token
+      ? httpOptions.headers.set('Authorization', `Bearer ${token}`)
+      : httpOptions.headers;
     return this.http
-      .get<Response>(`${this.urlApi}/auth/users`, { params, ...httpOptions })
+      .get<Response>(`${this.urlApi}/auth/users`, { params, headers })
       .pipe(
         map(response => {
           return response;

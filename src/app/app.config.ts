@@ -8,7 +8,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import {
   provideHttpClient,
   HttpClient,
-  HTTP_INTERCEPTORS,
+  withInterceptors,
 } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
@@ -32,7 +32,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { provideToastr } from 'ngx-toastr';
 
 // Interceptor
-import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 // Routes
 import { routes } from './app.routes';
@@ -46,8 +46,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     // Note: Animations are now handled through animate.enter/animate.leave APIs in components
     // No global provider needed in Angular 20+
-    provideHttpClient(),
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideToastr({
       timeOut: 3000,
       positionClass: 'toast-top-right',
