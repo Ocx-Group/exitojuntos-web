@@ -1,7 +1,7 @@
 import { Component, OnInit, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 // Servicios
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
@@ -59,6 +59,7 @@ interface PaginationMeta {
 export class UsersManagementComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
 
   // Signals
   protected readonly users = signal<UserData[]>([]);
@@ -132,6 +133,12 @@ export class UsersManagementComponent implements OnInit {
   ];
 
   protected actions: TableAction[] = [
+    {
+      label: 'Ver Árbol',
+      icon: 'fas fa-project-diagram',
+      class: 'btn-sm btn-success',
+      callback: (row: UserData) => this.viewUserTree(row),
+    },
     {
       label: 'Ver Detalles',
       icon: 'fas fa-eye',
@@ -248,6 +255,19 @@ export class UsersManagementComponent implements OnInit {
   protected onRowClicked(row: UserData): void {
     console.log('Usuario seleccionado:', row);
     this.viewUserDetails(row);
+  }
+
+  private viewUserTree(user: UserData): void {
+    console.log('Ver árbol del usuario:', user);
+    // Navegar al componente del árbol con el userId como parámetro
+    this.router.navigate(['/admin/unilevel-tree'], {
+      queryParams: { userId: user.id },
+    });
+  }
+
+  protected viewCompleteNetworkTree(): void {
+    // Navegar al componente del árbol sin userId para ver toda la red
+    this.router.navigate(['/admin/unilevel-tree']);
   }
 
   private viewUserDetails(user: UserData): void {

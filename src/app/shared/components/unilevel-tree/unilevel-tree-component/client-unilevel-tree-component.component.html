@@ -1,8 +1,10 @@
 <div class="ng13-org-chart-entity">
   <div class="ng13-org-chart-entity-connector ng13-org-chart-entity-border" *ngIf="hasParent"></div>
   <ng-template #popTitle>
-    <b>{{data?.userName || data?.userName}}</b>
-    <br>
+    <b>{{data?.phone || data?.email || 'Usuario ' + data?.id}}</b>
+    <br *ngIf="data?.email && data?.phone">
+    <span *ngIf="data?.email && data?.phone">{{data?.email}}</span>
+    <br *ngIf="data?.qualificationCount && data.qualificationCount > 0">
     <b *ngIf="data?.qualificationCount && data.qualificationCount > 0">Circuito: {{data?.qualificationCount}}</b>
   </ng-template>
   <ng-template #popContent>

@@ -1,15 +1,23 @@
 :host {
   display: block;
-  text-align: center;
 }
 
-// Container styles
-.scrollable-container {
-  position: relative;
-  max-width: 100% !important;
-  border-radius: 12px;
-  padding: 30px 20px;
-  min-height: 500px;
+// Tree wrapper - sin espacios innecesarios
+.tree-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px 0;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+// Card body ajustado
+.card-body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  border-radius: 8px;
+  min-height: 400px;
 }
 
 // Zoom button styles
@@ -21,14 +29,18 @@
   width: 40px;
   height: 40px;
   overflow: hidden;
-  border: 2px solid #5c53d9;
-  box-shadow: 0 4px 15px rgba(92, 83, 217, 0.3);
+  border: 2px solid #d4af37;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4),
+    0 0 15px rgba(255, 215, 0, 0.2);
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(92, 83, 217, 0.5);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6),
+      0 0 25px rgba(255, 215, 0, 0.4);
+    border-color: #f0c14b;
   }
 }
 
@@ -54,11 +66,12 @@
     width: 55px;
     height: 55px;
     object-fit: cover;
-    border: 3px solid #5c53d9;
-    box-shadow: 0 2px 8px rgba(92, 83, 217, 0.3);
+    border: 3px solid #d4af37;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.5),
+      0 0 15px rgba(255, 215, 0, 0.3), inset 0 1px 0 rgba(255, 215, 0, 0.2);
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    background-color: rgba(92, 83, 217, 0.1);
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
@@ -69,8 +82,10 @@
     font-weight: 600;
     text-align: center;
     width: 100%;
+    max-width: 90px;
     margin-top: 6px;
     transition: all 250ms ease-in-out;
+    overflow: hidden;
 
     .user-name {
       font-size: 11px;
@@ -78,17 +93,24 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 80px;
+      width: 100%;
       font-weight: 600;
+      color: #d4af37;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
     }
 
     .description {
       -webkit-user-select: none;
       user-select: none;
       font-size: 9px;
+      display: block;
       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
       opacity: 0.7;
       margin-top: 2px;
+      color: #f0c14b;
     }
   }
 
@@ -99,21 +121,23 @@
     line-height: 18px;
     top: 2px;
     right: 2px;
-    background-color: #5c53d9;
+    background: linear-gradient(135deg, #d4af37 0%, #f0c14b 100%);
     border-radius: 50%;
     padding: 0;
     text-align: center;
     font-weight: bold;
     font-size: 12px;
-    color: white;
+    color: #0a0a0a;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(212, 175, 55, 0.4),
+      0 0 10px rgba(255, 215, 0, 0.3);
 
     &:hover {
-      transform: scale(1.1);
-      box-shadow: 0 3px 10px rgba(92, 83, 217, 0.4);
-      background-color: #667eea;
+      transform: scale(1.15);
+      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.6),
+        0 0 20px rgba(255, 215, 0, 0.5);
+      background: linear-gradient(135deg, #f0c14b 0%, #ffd700 100%);
     }
 
     &:active {
@@ -142,10 +166,12 @@
 @keyframes pulse {
   0%,
   100% {
-    box-shadow: 0 4px 15px rgba(92, 83, 217, 0.3);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4),
+      0 0 20px rgba(255, 215, 0, 0.15);
   }
   50% {
-    box-shadow: 0 4px 25px rgba(92, 83, 217, 0.5);
+    box-shadow: 0 4px 25px rgba(212, 175, 55, 0.6),
+      0 0 35px rgba(255, 215, 0, 0.3);
   }
 }
 
@@ -155,16 +181,45 @@
 
 // Mejoras para el popover
 ::ng-deep .popover {
-  border: 2px solid #5c53d9;
+  border: 2px solid #d4af37;
   border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(92, 83, 217, 0.3);
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4),
+    0 0 30px rgba(255, 215, 0, 0.2);
 
   .popover-header {
-    border-bottom: 1px solid #5c53d9;
+    border-bottom: 1px solid #d4af37;
     font-weight: 600;
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.15);
+  }
+
+  .popover-body {
+    color: #f0c14b;
   }
 
   .arrow::before {
-    border-top-color: #5c53d9;
+    border-top-color: #d4af37;
+  }
+}
+
+// Ajustes para el spinner
+.spinner-border.text-warning {
+  color: #d4af37 !important;
+  border-color: #d4af37;
+  border-right-color: transparent;
+}
+
+// Estilos para mejorar el espaciado
+.section-body {
+  .card {
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    padding: 1rem 1.5rem;
   }
 }

@@ -10,17 +10,17 @@ export interface TreeNode {
 
 export interface MyTreeNode extends TreeNode {
   id: number;
-  user_name: string;
-  description?: string;
-  image?: string;
+  phone: string;
+  email: string;
+  imageProfileUrl?: string;
   children: MyTreeNode[];
 }
 
 export interface MyTreeNodeClient extends TreeNode {
   id: number;
-  userName: string;
-  description?: string;
-  image?: string;
+  phone: string;
+  email?: string;
+  imageProfileUrl?: string;
   children: MyTreeNodeClient[];
   qualificationCount?: number;
 }

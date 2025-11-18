@@ -25,4 +25,12 @@ export const ADMIN_ROUTES: Routes = [
       ),
     canActivate: [AuthGuardAdmin, MaintenanceGuard],
   },
+  {
+    path: 'unilevel-tree',
+    loadComponent: () =>
+      import(
+        '@app/shared/components/unilevel-tree/page/view-unilevel-tree.component'
+      ).then(m => m.ViewUnilevelTreeComponent),
+    canActivate: [AuthGuardAdmin, MaintenanceGuard],
+  },
 ];
