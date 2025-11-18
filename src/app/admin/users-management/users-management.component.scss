@@ -92,3 +92,57 @@
     }
   }
 }
+
+:host ::ng-deep .admin-table-skin app-reusable-datatable {
+  .table-search-area {
+    .input-group-text {
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      color: #ffd700;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      color: #ffffff;
+      box-shadow: none;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      &:focus {
+        border-color: #ffd700;
+      }
+    }
+  }
+
+  .btn {
+    &.btn-primary {
+      background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+      border: none;
+      color: #000000;
+
+      &:hover {
+        background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+      }
+    }
+
+    &.btn-outline-primary {
+      border-color: rgba(255, 215, 0, 0.6);
+      color: #ffd700;
+
+      &:hover {
+        background: rgba(255, 215, 0, 0.2);
+        color: #000;
+      }
+    }
+  }
+
+  .admin-table-skin {
+    .ngx-datatable.material {
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+  }
+}

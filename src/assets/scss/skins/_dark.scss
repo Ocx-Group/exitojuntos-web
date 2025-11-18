@@ -230,6 +230,65 @@ $color-font: #96a2b4;
     }
   }
 
+  // Admin-specific datatable styling (golden theme)
+  .admin-dashboard {
+    .ngx-datatable.material {
+      background: #000000 !important;
+
+      .datatable-header {
+        background: #000000 !important;
+        border-bottom: 2px solid rgba(255, 215, 0, 0.3) !important;
+
+        .datatable-header-cell {
+          background: #000000 !important;
+          color: #ffd700 !important;
+          font-weight: 600 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.5px !important;
+        }
+      }
+
+      .datatable-body {
+        background: #000000 !important;
+
+        .datatable-body-row {
+          background: #000000 !important;
+
+          &:hover {
+            background: rgba(255, 215, 0, 0.08) !important;
+          }
+
+          .datatable-body-cell {
+            background: #000000 !important;
+            color: #ffd700 !important;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1) !important;
+          }
+        }
+      }
+
+      .datatable-footer {
+        border-top: 1px solid rgba(255, 215, 0, 0.3) !important;
+
+        .datatable-pager {
+          li {
+            &.active a {
+              background: #ffd700 !important;
+              color: #000 !important;
+            }
+
+            a {
+              color: rgba(255, 255, 255, 0.7) !important;
+
+              &:hover {
+                color: #ffd700 !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .ngxTableHeader .table-search-area {
     .search-icon {
       color: $color-font;
