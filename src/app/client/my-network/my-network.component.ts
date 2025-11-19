@@ -35,13 +35,6 @@ interface ClientData {
   };
 }
 
-interface PaginationMeta {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-
 @Component({
   selector: 'app-my-network',
   standalone: true,
