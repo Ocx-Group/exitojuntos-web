@@ -11,4 +11,15 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: '/app/my-network',
+    title: 'Mi Red',
+    iconType: 'feather',
+    icon: 'users',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];

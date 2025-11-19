@@ -25,4 +25,12 @@ export const CLIENT_ROUTES: Routes = [
       ),
     canActivate: [AuthGuard, MaintenanceGuard],
   },
+  {
+    path: 'my-network',
+    loadComponent: () =>
+      import('./my-network/my-network.component').then(
+        m => m.MyNetworkComponent,
+      ),
+    canActivate: [AuthGuard, MaintenanceGuard],
+  },
 ];
