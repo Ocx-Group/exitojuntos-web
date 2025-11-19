@@ -33,4 +33,12 @@ export const CLIENT_ROUTES: Routes = [
       ),
     canActivate: [AuthGuard, MaintenanceGuard],
   },
+  {
+    path: 'network-tree',
+    loadComponent: () =>
+      import(
+        '@app/shared/components/unilevel-tree/page/view-unilevel-tree.component'
+      ).then(m => m.ViewUnilevelTreeComponent),
+    canActivate: [AuthGuard, MaintenanceGuard],
+  },
 ];

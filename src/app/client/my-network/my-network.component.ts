@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 // Servicios
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
-import { NetworkService } from '@app/core/service/network-service/network.service';
 
 // Componentes reutilizables
 import {
@@ -52,7 +51,6 @@ interface PaginationMeta {
 })
 export class MyNetworkComponent implements OnInit {
   private readonly authService = inject(AuthService);
-  private readonly networkService = inject(NetworkService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
 
@@ -153,13 +151,14 @@ export class MyNetworkComponent implements OnInit {
   private loadClients(): void {
     this.loading.set(true);
 
-    this.networkService
-      .getMyNetwork()
+    this.authService
+      .getUnilevelTree()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: response => {
-          this.clients.set(response.data);
-          this.filteredClients.set(response.data);
+        next: treeData => {
+          const clientsData = this.flattenTreeToClients(treeData);
+          this.clients.set(clientsData);
+          this.filteredClients.set(clientsData);
           this.loading.set(false);
         },
         error: error => {
@@ -218,6 +217,57 @@ export class MyNetworkComponent implements OnInit {
           this.filteredClients.set(mockData);
         },
       });
+  }
+
+  /**
+   * Convierte el árbol unilevel a una lista plana de clientes
+   */
+  private flattenTreeToClients(
+    node: any,
+    level: 'direct' | 'indirect' = 'direct',
+    parentName?: string,
+  ): ClientData[] {
+    if (!node) return [];
+
+    const clients: ClientData[] = [];
+
+    // Agregar nodo actual (excepto el nodo raíz que es el usuario actual)
+    if (node.id && parentName !== undefined) {
+      clients.push({
+        id: node.id,
+        name: node.name || '',
+        lastName: node.lastName || '',
+        email: node.email || '',
+        phone: node.phone || '',
+        identification: node.identification || '',
+        address: node.address || '',
+        city: node.city || '',
+        state: node.state || '',
+        imageProfileUrl: node.imageProfileUrl || '',
+        createdAt: node.createdAt || '',
+        level: level,
+        referredBy: parentName,
+        role: node.role || { id: 2, name: 'Cliente' },
+      });
+    }
+
+    // Procesar hijos como directos si es el primer nivel, indirectos en adelante
+    if (node.children && Array.isArray(node.children)) {
+      const currentName = `${node.name || ''} ${node.lastName || ''}`.trim();
+      const childLevel =
+        level === 'direct' && !parentName ? 'direct' : 'indirect';
+
+      for (const child of node.children) {
+        const childClients = this.flattenTreeToClients(
+          child,
+          childLevel,
+          currentName || parentName,
+        );
+        clients.push(...childClients);
+      }
+    }
+
+    return clients;
   }
 
   /**
@@ -280,8 +330,7 @@ export class MyNetworkComponent implements OnInit {
    * Navega a la vista completa de la red
    */
   protected viewCompleteNetwork(): void {
-    console.log('Ver red completa');
-    // Implementación futura: vista de árbol completo de la red
+    this.router.navigate(['/app/network-tree']);
   }
 
   /**
