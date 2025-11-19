@@ -259,4 +259,42 @@ export class AuthService {
         }),
       );
   }
+
+  /**
+   * Obtiene la red personal del usuario (todos los niveles descendientes)
+   * @param userId ID del usuario raíz de la red (opcional, solo para administradores)
+   * @returns Observable con la red personal
+   */
+  getPersonalNetwork(userId?: number): Observable<any> {
+    const token = this.currentUserAffiliateValue?.access_token ?? '';
+    const headers = token
+      ? httpOptions.headers.set('Authorization', `Bearer ${token}`)
+      : httpOptions.headers;
+
+    let params: any = {};
+    if (userId !== undefined && userId !== null) {
+      params.userId = userId.toString();
+    }
+
+    return this.http
+      .get<Response>(`${this.urlApi}/auth/personal-network`, {
+        params,
+        headers,
+      })
+      .pipe(
+        map(response => {
+          if (response.success) {
+            return response.data;
+          }
+          throw new Error(response.message || 'Error al obtener red personal');
+        }),
+        catchError(error => {
+          this.toastr.error(
+            error.error?.message || 'Error al obtener red personal',
+            'Error',
+          );
+          return throwError(() => error);
+        }),
+      );
+  }
 }

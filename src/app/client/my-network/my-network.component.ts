@@ -145,11 +145,11 @@ export class MyNetworkComponent implements OnInit {
     this.loading.set(true);
 
     this.authService
-      .getUnilevelTree()
+      .getPersonalNetwork()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: treeData => {
-          const clientsData = this.flattenTreeToClients(treeData);
+        next: response => {
+          const clientsData = this.mapNetworkToClients(response.network);
           this.clients.set(clientsData);
           this.filteredClients.set(clientsData);
           this.loading.set(false);
@@ -157,110 +157,40 @@ export class MyNetworkComponent implements OnInit {
         error: error => {
           console.error('Error al cargar clientes:', error);
           this.loading.set(false);
-          // Mantener datos de prueba en caso de error
-          const mockData: ClientData[] = [
-            {
-              id: 1,
-              name: 'Juan',
-              lastName: 'Pérez',
-              email: 'juan.perez@example.com',
-              phone: '+57 300 123 4567',
-              identification: '123456789',
-              address: 'Calle 123',
-              city: 'Bogotá',
-              state: 'Cundinamarca',
-              imageProfileUrl: '',
-              createdAt: '2024-01-15',
-              level: 'direct',
-              role: { id: 2, name: 'Cliente' },
-            },
-            {
-              id: 2,
-              name: 'María',
-              lastName: 'González',
-              email: 'maria.gonzalez@example.com',
-              phone: '+57 310 987 6543',
-              identification: '987654321',
-              address: 'Carrera 45',
-              city: 'Medellín',
-              state: 'Antioquia',
-              imageProfileUrl: '',
-              createdAt: '2024-02-20',
-              level: 'direct',
-              role: { id: 2, name: 'Cliente' },
-            },
-            {
-              id: 3,
-              name: 'Carlos',
-              lastName: 'Rodríguez',
-              email: 'carlos.rodriguez@example.com',
-              phone: '+57 320 555 8888',
-              identification: '456789123',
-              address: 'Avenida 20',
-              city: 'Cali',
-              state: 'Valle del Cauca',
-              imageProfileUrl: '',
-              createdAt: '2024-03-10',
-              level: 'indirect',
-              referredBy: 'Juan Pérez',
-              role: { id: 2, name: 'Cliente' },
-            },
-          ];
-          this.clients.set(mockData);
-          this.filteredClients.set(mockData);
+          this.clients.set([]);
+          this.filteredClients.set([]);
         },
       });
   }
 
   /**
-   * Convierte el árbol unilevel a una lista plana de clientes
+   * Mapea los datos de la red personal al formato ClientData
    */
-  private flattenTreeToClients(
-    node: any,
-    level: 'direct' | 'indirect' = 'direct',
-    parentName?: string,
-  ): ClientData[] {
-    if (!node) return [];
+  private mapNetworkToClients(network: any[]): ClientData[] {
+    if (!network || !Array.isArray(network)) return [];
 
-    const clients: ClientData[] = [];
+    const currentUserId = this.authService.currentUserAffiliateValue?.id;
 
-    // Agregar nodo actual (excepto el nodo raíz que es el usuario actual)
-    if (node.id && parentName !== undefined) {
-      clients.push({
-        id: node.id,
-        name: node.name || '',
-        lastName: node.lastName || '',
-        email: node.email || '',
-        phone: node.phone || '',
-        identification: node.identification || '',
-        address: node.address || '',
-        city: node.city || '',
-        state: node.state || '',
-        imageProfileUrl: node.imageProfileUrl || '',
-        createdAt: node.createdAt || '',
-        level: level,
-        referredBy: parentName,
-        role: node.role || { id: 2, name: 'Cliente' },
-      });
-    }
+    return network.map(user => {
+      // Determinar si es directo o indirecto comparando el padre con el usuario actual
+      const isDirect = user.father === currentUserId;
 
-    // Procesar hijos como directos si es el primer nivel, indirectos en adelante
-    if (node.children && Array.isArray(node.children)) {
-      const currentName = `${node.name || ''} ${node.lastName || ''}`.trim();
-      const childLevel =
-        level === 'direct' && !parentName ? 'direct' : 'indirect';
-
-      for (const child of node.children) {
-        const childClients = this.flattenTreeToClients(
-          child,
-          childLevel,
-          currentName || parentName,
-        );
-        clients.push(...childClients);
-      }
-    }
-
-    return clients;
+      return {
+        id: user.id,
+        name: user.full_name?.split(' ')[0] || '',
+        lastName: user.full_name?.split(' ').slice(1).join(' ') || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        identification: '',
+        address: '',
+        city: user.country_name || '',
+        state: '',
+        imageProfileUrl: '',
+        createdAt: user.created_at || '',
+        level: isDirect ? 'direct' : 'indirect',
+        role: { id: 2, name: 'Cliente' },
+      };
+    });
   }
 
   /**
