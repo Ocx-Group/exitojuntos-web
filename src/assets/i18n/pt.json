@@ -94,14 +94,14 @@
     "CTA_SECTION": {
       "CTA_PRIMARY": "Abrir Conta Grátis",
       "CTA_SECONDARY": "Falar com um Especialista",
-      "DESCRIPTION": "Junte-se a milhares de investidores que já estão construindo seu futuro financeiro. A oportunidade é agora.",
+      "DESCRIPTION": "Junte-se a milhares de membros que já participam desta comunidade informativa e colaborativa. A oportunidade é agora.",
       "STATS": {
         "RATING": "Classificação",
         "SECURE": "Seguro",
         "SUPPORT": "Suporte"
       },
-      "TITLE": "Comece Sua",
-      "TITLE_HIGHLIGHT": "Jornada para o Sucesso"
+      "TITLE": "Comece Seu",
+      "TITLE_HIGHLIGHT": "Caminho para o Crescimento"
     },
     "FEATURES": {
       "CARDS": {
@@ -122,24 +122,24 @@
           "TITLE": "Suporte 24/7"
         },
         "TRADING": {
-          "DESCRIPTION": "Algoritmos de última geração para maximizar seus investimentos em tempo real.",
-          "TITLE": "Trading Avançado"
+          "DESCRIPTION": "Ferramentas digitais para nos manter informados e conectados em tempo real.",
+          "TITLE": "Organização Colaborativa"
         },
         "TRANSPARENCY": {
-          "DESCRIPTION": "Total clareza em cada operação e movimento do seu portfólio.",
+          "DESCRIPTION": "Comunicação aberta e clareza em todas as informações compartilhadas entre os membros.",
           "TITLE": "Transparência"
         }
       },
-      "DESCRIPTION": "Oferecemos serviços premium projetados para investidores que buscam excelência",
+      "DESCRIPTION": "Oferecemos espaços colaborativos projetados para pessoas que buscam crescimento e excelência pessoal",
       "TAG": "NOSSOS SERVIÇOS",
-      "TITLE": "Investimento de Elite"
+      "TITLE": "Comunidade de Excelência"
     },
     "FOOTER": {
       "CONTACT": {
         "HEADING": "Contato"
       },
-      "COPYRIGHT": "© 2025 GoldTrade. Todos os direitos reservados.",
-      "DISCLAIMER": "Os investimentos envolvem riscos. O desempenho passado não garante resultados futuros.",
+      "COPYRIGHT": "© 2025 Éxito Juntos. Todos os direitos reservados.",
+      "DISCLAIMER": "Este grupo é exclusivamente informativo e social. Não realizamos, promovemos ou facilitamos atividades financeiras de qualquer tipo.",
       "LEGAL": {
         "HEADING": "Legal",
         "PRIVACY": "Privacidade",
@@ -154,37 +154,37 @@
         "SERVICES": "Serviços",
         "TESTIMONIALS": "Depoimentos"
       },
-      "TAGLINE": "Investimentos inteligentes para um futuro brilhante."
+      "TAGLINE": "Colaboração inteligente para um futuro compartilhado."
     },
     "HERO": {
       "BADGE": "Trading Premium",
-      "CTA_PRIMARY": "Começar a Investir",
+      "CTA_PRIMARY": "Solicite Sua Admissão",
       "CTA_SECONDARY": "Agendar Consulta",
       "METRICS": {
-        "INVESTORS": "Investidores",
-        "MANAGED": "Gerenciados",
-        "PROFITABILITY": "Rentabilidade"
+        "INVESTORS": "Membros Ativos",
+        "MANAGED": "Organizados",
+        "PROFITABILITY": "Crescimento Pessoal e Colaborativo"
       },
-      "SUBTITLE": "Unidos no caminho para o sucesso. Investimentos inteligentes, retornos excepcionais e um futuro financeiro brilhante.",
+      "SUBTITLE": "Unidos no caminho do crescimento pessoal. Colaboração, aprendizado compartilhado e um futuro de oportunidades.",
       "TITLE": "SUCESSO JUNTOS"
     },
     "HOW_IT_WORKS": {
       "DESCRIPTION": "Em apenas 4 passos simples, você estará no caminho para o sucesso financeiro",
       "STEPS": {
         "STEP1": {
-          "DESCRIPTION": "Crie sua conta em minutos e verifique sua identidade de forma segura.",
+          "DESCRIPTION": "Junte-se em poucos minutos e confirme suas informações básicas com segurança.",
           "TITLE": "Registro"
         },
         "STEP2": {
-          "DESCRIPTION": "Nossos especialistas elaboram uma estratégia personalizada para você.",
-          "TITLE": "Planejamento"
+          "DESCRIPTION": "Nossa equipe facilita espaços informativos e apoio colaborativo para todos os membros.",
+          "TITLE": "Organização"
         },
         "STEP3": {
-          "DESCRIPTION": "Comece a investir com o suporte de tecnologia de ponta.",
-          "TITLE": "Investimento"
+          "DESCRIPTION": "Faça parte da nossa comunidade informativa com ferramentas modernas de comunicação.",
+          "TITLE": "Participação"
         },
         "STEP4": {
-          "DESCRIPTION": "Observe seu patrimônio crescer consistentemente.",
+          "DESCRIPTION": "Participe de um ambiente onde compartilhamos experiências, aprendizados e novidades.",
           "TITLE": "Crescimento"
         }
       },
@@ -200,40 +200,40 @@
       "TESTIMONIALS": "Depoimentos"
     },
     "TESTIMONIALS_SECTION": {
-      "DESCRIPTION": "Milhares de investidores já estão alcançando suas metas financeiras",
+      "DESCRIPTION": "Milhares de membros compartilham como a comunidade os ajudou a se manterem informados e organizados.",
       "TAG": "DEPOIMENTOS",
       "TESTIMONIALS": [
         {
           "NAME": "Carlos Mendoza",
-          "QUOTE": "A melhor decisão financeira que tomei. Em 6 meses, meu portfólio cresceu 85%. A equipe é excepcional.",
+          "QUOTE": "A melhor decisão foi me juntar a uma comunidade organizada e transparente. A informação compartilhada tem sido de grande valor. A equipe humana é excepcional.",
           "ROLE": "CEO, TechVentures"
         },
         {
           "NAME": "María González",
-          "QUOTE": "Profissionalismo e resultados reais. A assessoria personalizada faz toda a diferença. Altamente recomendado.",
+          "QUOTE": "Profissionalismo e apoio genuíno. A comunicação clara e o ambiente colaborativo fazem a diferença. Altamente recomendado.",
           "ROLE": "Empreendedora"
         },
         {
           "NAME": "Roberto Silva",
-          "QUOTE": "Transparência total e retornos consistentes. Finalmente encontrei uma plataforma em que posso confiar.",
+          "QUOTE": "Transparência total e comunicação confiável. Finalmente encontrei uma comunidade na qual posso confiar.",
           "ROLE": "Investidor"
         }
       ],
-      "TITLE": "Histórias de Sucesso"
+      "TITLE": "Histórias de Colaboração"
     },
     "TRADING_SECTION": {
-      "DESCRIPTION": "Nossa plataforma utiliza inteligência artificial e análise preditiva para identificar oportunidades antes do mercado.",
+      "DESCRIPTION": "Nossa plataforma utiliza ferramentas digitais e comunicação eficiente para manter todos os membros informados.",
       "HIGHLIGHTS": {
-        "ITEM1": "Retornos superiores ao mercado",
-        "ITEM2": "Diversificação inteligente de portfólio",
-        "ITEM3": "Gestão avançada de riscos",
-        "ITEM4": "Acesso a mercados exclusivos"
+        "ITEM1": "Aprendizado compartilhado",
+        "ITEM2": "Comunicação transparente",
+        "ITEM3": "Organização efetiva",
+        "ITEM4": "Acesso a informações atualizadas"
       },
       "STAT_LABEL": "Retorno Anual",
       "STAT_VALUE": "+142.5%",
-      "TAG": "TRADING PROFISSIONAL",
+      "TAG": "COLABORAÇÃO INTELIGENTE",
       "TITLE": "Tecnologia que",
-      "TITLE_HIGHLIGHT": "Multiplica Resultados"
+      "TITLE_HIGHLIGHT": "Potencializa a Organização"
     }
   },
   "MENUITEMS": {

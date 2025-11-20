@@ -1572,14 +1572,14 @@
     "CTA_SECTION": {
       "CTA_PRIMARY": "Open Free Account",
       "CTA_SECONDARY": "Talk to an Expert",
-      "DESCRIPTION": "Join thousands of investors who are already building their financial future. The opportunity is now.",
+      "DESCRIPTION": "Join thousands of members already taking part in this informative, collaborative community. The moment is now.",
       "STATS": {
         "RATING": "Rating",
         "SECURE": "Secure",
         "SUPPORT": "Support"
       },
       "TITLE": "Start Your",
-      "TITLE_HIGHLIGHT": "Journey to Success"
+      "TITLE_HIGHLIGHT": "Path to Growth"
     },
     "FEATURES": {
       "CARDS": {
@@ -1600,24 +1600,24 @@
           "TITLE": "24/7 Support"
         },
         "TRADING": {
-          "DESCRIPTION": "State-of-the-art algorithms to maximize your investments in real time.",
-          "TITLE": "Advanced Trading"
+          "DESCRIPTION": "Digital tools to keep us informed and connected in real time.",
+          "TITLE": "Collaborative Organization"
         },
         "TRANSPARENCY": {
-          "DESCRIPTION": "Complete clarity in every operation and portfolio movement.",
+          "DESCRIPTION": "Open communication and clarity in all information shared among members.",
           "TITLE": "Transparency"
         }
       },
-      "DESCRIPTION": "We offer premium services designed for investors seeking excellence",
+      "DESCRIPTION": "We offer collaborative spaces designed for people seeking growth and personal excellence",
       "TAG": "OUR SERVICES",
-      "TITLE": "Elite Investment"
+      "TITLE": "Excellence Community"
     },
     "FOOTER": {
       "CONTACT": {
         "HEADING": "Contact"
       },
-      "COPYRIGHT": "© 2025 GoldTrade. All rights reserved.",
-      "DISCLAIMER": "Investments involve risks. Past performance does not guarantee future results.",
+      "COPYRIGHT": "© 2025 Éxito Juntos. All rights reserved.",
+      "DISCLAIMER": "This group is exclusively informational and social. We do not conduct, promote, or facilitate financial activities of any kind.",
       "LEGAL": {
         "HEADING": "Legal",
         "PRIVACY": "Privacy",
@@ -1632,37 +1632,37 @@
         "SERVICES": "Services",
         "TESTIMONIALS": "Testimonials"
       },
-      "TAGLINE": "Smart investments for a bright future."
+      "TAGLINE": "Smart collaboration for a shared future."
     },
     "HERO": {
       "BADGE": "Premium Trading",
-      "CTA_PRIMARY": "Start Investing",
+      "CTA_PRIMARY": "Request Your Admission",
       "CTA_SECONDARY": "Schedule Consultation",
       "METRICS": {
-        "INVESTORS": "Investors",
-        "MANAGED": "Managed",
-        "PROFITABILITY": "Profitability"
+        "INVESTORS": "Active Members",
+        "MANAGED": "Organized",
+        "PROFITABILITY": "Personal and Collaborative Growth"
       },
-      "SUBTITLE": "United on the path to success. Smart investments, exceptional returns, and a bright financial future.",
+      "SUBTITLE": "United on the path to personal growth. Collaboration, shared learning, and a future full of opportunities.",
       "TITLE": "SUCCESS TOGETHER"
     },
     "HOW_IT_WORKS": {
       "DESCRIPTION": "In just 4 simple steps, you'll be on your way to financial success",
       "STEPS": {
         "STEP1": {
-          "DESCRIPTION": "Create your account in minutes and verify your identity securely.",
+          "DESCRIPTION": "Join in just a few minutes and securely confirm your basic information.",
           "TITLE": "Registration"
         },
         "STEP2": {
-          "DESCRIPTION": "Our experts design a personalized strategy for you.",
-          "TITLE": "Planning"
+          "DESCRIPTION": "Our team facilitates informational spaces and collaborative support for every member.",
+          "TITLE": "Organization"
         },
         "STEP3": {
-          "DESCRIPTION": "Start investing with cutting-edge technology backing.",
-          "TITLE": "Investment"
+          "DESCRIPTION": "Be part of our informational community with modern communication tools.",
+          "TITLE": "Participation"
         },
         "STEP4": {
-          "DESCRIPTION": "Watch your wealth grow consistently.",
+          "DESCRIPTION": "Engage in an environment where we share experiences, learnings, and news.",
           "TITLE": "Growth"
         }
       },
@@ -1678,40 +1678,40 @@
       "TESTIMONIALS": "Testimonials"
     },
     "TESTIMONIALS_SECTION": {
-      "DESCRIPTION": "Thousands of investors are already reaching their financial goals",
+      "DESCRIPTION": "Thousands of members share how the community has helped them stay informed and organized.",
       "TAG": "TESTIMONIALS",
       "TESTIMONIALS": [
         {
           "NAME": "Carlos Mendoza",
-          "QUOTE": "The best financial decision I've made. In 6 months, my portfolio grew 85%. The team is exceptional.",
+          "QUOTE": "The best decision was joining an organized and transparent community. The shared information has been incredibly valuable. The human team is exceptional.",
           "ROLE": "CEO, TechVentures"
         },
         {
           "NAME": "María González",
-          "QUOTE": "Professionalism and real results. Personalized advice makes all the difference. Highly recommended.",
+          "QUOTE": "Professionalism and genuine support. Clear communication and a collaborative environment make the difference. Highly recommended.",
           "ROLE": "Entrepreneur"
         },
         {
           "NAME": "Roberto Silva",
-          "QUOTE": "Total transparency and consistent returns. Finally found a platform I can trust.",
+          "QUOTE": "Total transparency and reliable communication. I finally found a community I can trust.",
           "ROLE": "Investor"
         }
       ],
-      "TITLE": "Success Stories"
+      "TITLE": "Collaboration Stories"
     },
     "TRADING_SECTION": {
-      "DESCRIPTION": "Our platform uses artificial intelligence and predictive analysis to identify opportunities before the market.",
+      "DESCRIPTION": "Our platform uses digital tools and efficient communication to keep every member informed.",
       "HIGHLIGHTS": {
-        "ITEM1": "Returns above market average",
-        "ITEM2": "Smart portfolio diversification",
-        "ITEM3": "Advanced risk management",
-        "ITEM4": "Access to exclusive markets"
+        "ITEM1": "Shared learning",
+        "ITEM2": "Transparent communication",
+        "ITEM3": "Effective organization",
+        "ITEM4": "Access to updated information"
       },
       "STAT_LABEL": "Annual Return",
       "STAT_VALUE": "+142.5%",
-      "TAG": "PROFESSIONAL TRADING",
+      "TAG": "SMART COLLABORATION",
       "TITLE": "Technology that",
-      "TITLE_HIGHLIGHT": "Multiplies Results"
+      "TITLE_HIGHLIGHT": "Strengthens Organization"
     }
   },
   "LANDING-PAGE": {
