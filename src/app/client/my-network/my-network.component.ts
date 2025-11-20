@@ -4,6 +4,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ClipboardService } from 'ngx-clipboard';
+import { ToastrService } from 'ngx-toastr';
 
 // Servicios
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
@@ -54,6 +56,8 @@ export class MyNetworkComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
+  private readonly clipboardService = inject(ClipboardService);
+  private readonly toastr = inject(ToastrService);
 
   constructor() {
     this.setupLocalizedResources();
@@ -393,5 +397,25 @@ export class MyNetworkComponent implements OnInit {
 
     const csvRows = [headers, ...rows];
     return csvRows.map(row => row.join(',')).join('\n');
+  }
+
+  /**
+   * Comparte el enlace de referido del usuario
+   */
+  protected shareReferralLink(): void {
+    const currentUser = this.authService.currentUserAffiliateValue;
+
+    if (!currentUser?.phone) {
+      this.toastr.error(
+        this.translate.instant('MY-NETWORK-PAGE.VIEW.SHARE.ERROR'),
+      );
+      return;
+    }
+
+    const referralUrl = `exitojuntos.com/signup/${currentUser.phone}`;
+    this.clipboardService.copyFromContent(referralUrl);
+    this.toastr.success(
+      this.translate.instant('MY-NETWORK-PAGE.VIEW.SHARE.SUCCESS'),
+    );
   }
 }

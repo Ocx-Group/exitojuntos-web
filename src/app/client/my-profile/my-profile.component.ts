@@ -186,4 +186,19 @@ export class MyProfileComponent implements OnInit {
       this.toastr.success('Copied ' + this.temp.length + ' rows successfully');
     }
   }
+
+  shareReferralLink() {
+    if (!this.user.phone) {
+      this.toastr.error(
+        this.translate.instant('CLIENT-MY-PROFILE.HEADER.REFERRAL-LINK-ERROR'),
+      );
+      return;
+    }
+
+    const referralUrl = `exitojuntos.com/signup/${this.user.phone}`;
+    this.clipboardService.copyFromContent(referralUrl);
+    this.toastr.success(
+      this.translate.instant('CLIENT-MY-PROFILE.HEADER.REFERRAL-LINK-COPIED'),
+    );
+  }
 }

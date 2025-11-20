@@ -894,7 +894,10 @@
       "BTN-CANCEL": "Cancel",
       "BTN-EDIT": "Edit Profile",
       "BTN-SAVE": "Save Changes",
-      "BTN-SAVING": "Saving..."
+      "BTN-SAVING": "Saving...",
+      "BTN-SHARE-NETWORK": "Share My Network",
+      "REFERRAL-LINK-COPIED": "Referral link copied!",
+      "REFERRAL-LINK-ERROR": "Error copying link"
     },
     "LOCATION": {
       "ADDRESS": "Address",
@@ -1871,6 +1874,9 @@
     },
     "VIEW": {
       "BUTTONS": {
+        "SHARE-NETWORK": {
+          "TEXT": "Share My Network"
+        },
         "VIEW-COMPLETE": {
           "TEXT": "View Complete Network"
         }
@@ -1887,6 +1893,10 @@
           "LABEL": "Search by Phone",
           "PLACEHOLDER": "Enter phone..."
         }
+      },
+      "SHARE": {
+        "ERROR": "Error copying referral link",
+        "SUCCESS": "Referral link copied!"
       },
       "STATS": {
         "DIRECT": {

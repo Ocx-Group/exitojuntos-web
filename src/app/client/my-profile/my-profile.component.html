@@ -49,6 +49,10 @@
 
               <!-- Action Buttons -->
               <div class="profile-header-actions">
+                <button *ngIf="!isEditMode" class="btn-golden btn-share" (click)="shareReferralLink()" type="button">
+                  <i class="bi bi-share-fill"></i>
+                  {{ 'CLIENT-MY-PROFILE.HEADER.BTN-SHARE-NETWORK' | translate }}
+                </button>
                 <button *ngIf="!isEditMode" class="btn-golden btn-edit" (click)="toggleEditMode()" type="button">
                   <i class="bi bi-pencil-fill"></i>
                   {{ 'CLIENT-MY-PROFILE.HEADER.BTN-EDIT' | translate }}

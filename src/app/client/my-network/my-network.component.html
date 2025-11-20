@@ -22,7 +22,11 @@
                 {{ 'MY-NETWORK-PAGE.VIEW.CARD-TITLE.TEXT' | translate }}
               </h5>
               <div>
-                <button class="btn btn-gold btn-sm me-2 ms-2" (click)="viewCompleteNetwork()">
+                <button class="btn btn-gold btn-sm me-2 ms-2" (click)="shareReferralLink()">
+                  <i class="bi bi-share-fill me-1"></i>
+                  {{ 'MY-NETWORK-PAGE.VIEW.BUTTONS.SHARE-NETWORK.TEXT' | translate }}
+                </button>
+                <button class="btn btn-gold btn-sm me-2" (click)="viewCompleteNetwork()">
                   <i class="fas fa-project-diagram me-1"></i>
                   {{ 'MY-NETWORK-PAGE.VIEW.BUTTONS.VIEW-COMPLETE.TEXT' | translate }}
                 </button>
