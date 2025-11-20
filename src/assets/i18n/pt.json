@@ -14,7 +14,10 @@
       "BTN-CANCEL": "Cancelar",
       "BTN-EDIT": "Editar Perfil",
       "BTN-SAVE": "Salvar Alterações",
-      "BTN-SAVING": "Salvando..."
+      "BTN-SAVING": "Salvando...",
+      "BTN-SHARE-NETWORK": "Compartilhar Minha Rede",
+      "REFERRAL-LINK-COPIED": "Link de indicação copiado!",
+      "REFERRAL-LINK-ERROR": "Erro ao copiar o link"
     },
     "LOCATION": {
       "ADDRESS": "Endereço",
@@ -291,6 +294,9 @@
     },
     "VIEW": {
       "BUTTONS": {
+        "SHARE-NETWORK": {
+          "TEXT": "Compartilhar Minha Rede"
+        },
         "VIEW-COMPLETE": {
           "TEXT": "Ver Rede Completa"
         }
@@ -307,6 +313,10 @@
           "LABEL": "Buscar por Telefone",
           "PLACEHOLDER": "Digite o telefone..."
         }
+      },
+      "SHARE": {
+        "ERROR": "Erro ao copiar o link de indicação",
+        "SUCCESS": "Link de indicação copiado!"
       },
       "STATS": {
         "DIRECT": {
