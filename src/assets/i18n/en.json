@@ -1757,6 +1757,63 @@
     },
     "UNILEVEL-MODEL": {
       "TEXT": "Unimax"
+    },
+    "LEVELS": {
+      "DIRECT": "Direct",
+      "INDIRECT": "Indirect"
+    },
+    "VIEW": {
+      "TITLE": {
+        "TEXT": "My Client Network"
+      },
+      "CARD-TITLE": {
+        "TEXT": "Direct and Indirect Clients"
+      },
+      "BUTTONS": {
+        "VIEW-COMPLETE": {
+          "TEXT": "View Complete Network"
+        }
+      },
+      "FILTERS": {
+        "EMAIL": {
+          "LABEL": "Search by Email",
+          "PLACEHOLDER": "Enter email..."
+        },
+        "PHONE": {
+          "LABEL": "Search by Phone",
+          "PLACEHOLDER": "Enter phone..."
+        }
+      },
+      "STATS": {
+        "DIRECT": {
+          "TEXT": "Direct Clients"
+        },
+        "INDIRECT": {
+          "TEXT": "Indirect Clients"
+        }
+      }
+    },
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "ID",
+        "NAME": "Name",
+        "LAST-NAME": "Last Name",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "CITY": "City",
+        "TYPE": "Type",
+        "REGISTERED-AT": "Registration Date"
+      },
+      "ACTIONS": {
+        "VIEW-NETWORK": "View Network",
+        "VIEW-PROFILE": "View Profile"
+      },
+      "SEARCH-PLACEHOLDER": "Search clients...",
+      "MESSAGES": {
+        "EMPTY": "No clients to display",
+        "TOTAL": "total",
+        "SELECTED": "selected"
+      }
     }
   },
   "NETWORK-PAGE": {
@@ -2940,6 +2997,12 @@
     },
     "EXPORT": {
       "TEXT": "Export"
+    },
+    "CLEAR": {
+      "TEXT": "Clear"
+    },
+    "REFRESH": {
+      "TEXT": "Refresh"
     }
   }
 }

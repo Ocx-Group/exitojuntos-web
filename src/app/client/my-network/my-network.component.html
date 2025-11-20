@@ -1,7 +1,9 @@
 <section class="section client-dashboard">
   <ul class="breadcrumb breadcrumb-style">
     <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">Mi Red de Clientes</h5>
+      <h5 class="page-title m-b-0">
+        {{ 'MY-NETWORK-PAGE.VIEW.TITLE.TEXT' | translate }}
+      </h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
       <a routerLink="/client/home"><i class="fas fa-network-wired font-17"></i></a>
@@ -16,16 +18,17 @@
           <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
               <h5 class="mb-0">
-                <i class="fas fa-users me-2"></i>Clientes Directos e Indirectos
+                <i class="fas fa-users me-2"></i>
+                {{ 'MY-NETWORK-PAGE.VIEW.CARD-TITLE.TEXT' | translate }}
               </h5>
               <div>
                 <button class="btn btn-gold btn-sm me-2 ms-2" (click)="viewCompleteNetwork()">
                   <i class="fas fa-project-diagram me-1"></i>
-                  Ver Red Completa
+                  {{ 'MY-NETWORK-PAGE.VIEW.BUTTONS.VIEW-COMPLETE.TEXT' | translate }}
                 </button>
                 <button class="btn btn-gold-outline btn-sm" (click)="refreshClients()" [disabled]="loading()">
                   <i class="fas fa-sync-alt me-1" [class.fa-spin]="loading()"></i>
-                  Actualizar
+                  {{ 'COMMON.REFRESH.TEXT' | translate }}
                 </button>
               </div>
             </div>
@@ -36,33 +39,37 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="searchEmail" class="form-label">
-                    <i class="fas fa-envelope me-1"></i>Buscar por Email
+                    <i class="fas fa-envelope me-1"></i>
+                    {{ 'MY-NETWORK-PAGE.VIEW.FILTERS.EMAIL.LABEL' | translate }}
                   </label>
-                  <input type="text" id="searchEmail" class="form-control" placeholder="Ingrese email..."
+                  <input type="text" id="searchEmail" class="form-control"
+                    [placeholder]="'MY-NETWORK-PAGE.VIEW.FILTERS.EMAIL.PLACEHOLDER' | translate"
                     [(ngModel)]="searchEmail" (ngModelChange)="applyFilters()" />
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="searchPhone" class="form-label">
-                    <i class="fas fa-phone me-1"></i>Buscar por Teléfono
+                    <i class="fas fa-phone me-1"></i>
+                    {{ 'MY-NETWORK-PAGE.VIEW.FILTERS.PHONE.LABEL' | translate }}
                   </label>
-                  <input type="text" id="searchPhone" class="form-control" placeholder="Ingrese teléfono..."
+                  <input type="text" id="searchPhone" class="form-control"
+                    [placeholder]="'MY-NETWORK-PAGE.VIEW.FILTERS.PHONE.PLACEHOLDER' | translate"
                     [(ngModel)]="searchPhone" (ngModelChange)="applyFilters()" />
                 </div>
               </div>
               <div class="col-md-6 d-flex justify-content-end gap-2">
                 <button class="btn btn-dark-gold btn-sm" (click)="clearFilters()">
                   <i class="fas fa-times me-1"></i>
-                  Limpiar
+                  {{ 'COMMON.CLEAR.TEXT' | translate }}
                 </button>
                 <button class="btn btn-dark-gold btn-sm" (click)="copyTableData()">
                   <i class="bi bi-clipboard-check me-1"></i>
-                  Copiar
+                  {{ 'COMMON.COPY.TEXT' | translate }}
                 </button>
                 <button class="btn btn-dark-gold btn-sm" (click)="exportToCSV()">
                   <i class="bi bi-file-earmark-spreadsheet me-1"></i>
-                  Exportar
+                  {{ 'COMMON.EXPORT.TEXT' | translate }}
                 </button>
               </div>
             </div>
@@ -72,14 +79,14 @@
               <div class="col-md-6">
                 <div class="alert alert-success mb-0">
                   <i class="fas fa-user-check me-2"></i>
-                  <strong>Clientes Directos:</strong>
+                  <strong>{{ 'MY-NETWORK-PAGE.VIEW.STATS.DIRECT.TEXT' | translate }}:</strong>
                   {{ getDirectClientsCount() }}
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="alert alert-info mb-0">
                   <i class="fas fa-users me-2"></i>
-                  <strong>Clientes Indirectos:</strong>
+                  <strong>{{ 'MY-NETWORK-PAGE.VIEW.STATS.INDIRECT.TEXT' | translate }}:</strong>
                   {{ getIndirectClientsCount() }}
                 </div>
               </div>

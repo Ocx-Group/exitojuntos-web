@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 // Servicios
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
@@ -38,7 +39,13 @@ interface ClientData {
 @Component({
   selector: 'app-my-network',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, ReusableDatatableComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    FormsModule,
+    TranslateModule,
+    ReusableDatatableComponent,
+  ],
   templateUrl: './my-network.component.html',
   styleUrls: ['./my-network.component.scss'],
 })
@@ -46,6 +53,14 @@ export class MyNetworkComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
+
+  constructor() {
+    this.setupLocalizedResources();
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.setupLocalizedResources());
+  }
 
   // Signals
   protected readonly clients = signal<ClientData[]>([]);
@@ -57,85 +72,111 @@ export class MyNetworkComponent implements OnInit {
   protected searchPhone: string = '';
 
   // Configuración de la tabla
-  protected columns: TableColumn[] = [
-    {
-      name: 'ID',
-      prop: 'id',
-      sortable: true,
-      width: 70,
-    },
-    {
-      name: 'Nombre',
-      prop: 'name',
-      sortable: true,
-      minWidth: 150,
-    },
-    {
-      name: 'Apellido',
-      prop: 'lastName',
-      sortable: true,
-      minWidth: 150,
-    },
-    {
-      name: 'Email',
-      prop: 'email',
-      sortable: true,
-      minWidth: 200,
-    },
-    {
-      name: 'Teléfono',
-      prop: 'phone',
-      sortable: true,
-      width: 150,
-    },
-    {
-      name: 'Ciudad',
-      prop: 'city',
-      sortable: true,
-      width: 150,
-    },
-    {
-      name: 'Tipo',
-      prop: 'level',
-      sortable: true,
-      width: 120,
-    },
-    {
-      name: 'Fecha Registro',
-      prop: 'createdAt',
-      sortable: true,
-      width: 150,
-    },
-  ];
-
-  protected actions: TableAction[] = [
-    {
-      label: 'Ver Red',
-      icon: 'fas fa-project-diagram',
-      class: 'btn-sm btn-success',
-      callback: (row: ClientData) => this.viewClientNetwork(row),
-    },
-    {
-      label: 'Ver Perfil',
-      icon: 'fas fa-user',
-      class: 'btn-sm btn-info',
-      callback: (row: ClientData) => this.viewClientProfile(row),
-    },
-  ];
-
-  protected tableConfig: TableConfig = {
-    columnMode: 'force',
-    headerHeight: 50,
-    footerHeight: 50,
-    rowHeight: 'auto',
-    limit: 10,
-    reorderable: false,
-    showSearch: false,
-    showActions: false,
-  };
+  protected columns: TableColumn[] = [];
+  protected actions: TableAction[] = [];
+  protected tableConfig: TableConfig = {};
 
   ngOnInit(): void {
     this.loadClients();
+  }
+
+  private setupLocalizedResources(): void {
+    this.columns = [
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.ID'),
+        prop: 'id',
+        sortable: true,
+        width: 70,
+      },
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.NAME'),
+        prop: 'name',
+        sortable: true,
+        minWidth: 150,
+      },
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.LAST-NAME'),
+        prop: 'lastName',
+        sortable: true,
+        minWidth: 150,
+      },
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.EMAIL'),
+        prop: 'email',
+        sortable: true,
+        minWidth: 200,
+      },
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.PHONE'),
+        prop: 'phone',
+        sortable: true,
+        width: 150,
+      },
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.CITY'),
+        prop: 'city',
+        sortable: true,
+        width: 150,
+      },
+      {
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.TYPE'),
+        prop: 'level',
+        sortable: true,
+        width: 120,
+      },
+      {
+        name: this.translate.instant(
+          'MY-NETWORK-PAGE.TABLE.COLUMNS.REGISTERED-AT',
+        ),
+        prop: 'createdAt',
+        sortable: true,
+        width: 150,
+      },
+    ];
+
+    this.actions = [
+      {
+        label: this.translate.instant(
+          'MY-NETWORK-PAGE.TABLE.ACTIONS.VIEW-NETWORK',
+        ),
+        icon: 'fas fa-project-diagram',
+        class: 'btn-sm btn-success',
+        callback: (row: ClientData) => this.viewClientNetwork(row),
+      },
+      {
+        label: this.translate.instant(
+          'MY-NETWORK-PAGE.TABLE.ACTIONS.VIEW-PROFILE',
+        ),
+        icon: 'fas fa-user',
+        class: 'btn-sm btn-info',
+        callback: (row: ClientData) => this.viewClientProfile(row),
+      },
+    ];
+
+    this.tableConfig = {
+      columnMode: 'force',
+      headerHeight: 50,
+      footerHeight: 50,
+      rowHeight: 'auto',
+      limit: 10,
+      reorderable: false,
+      showSearch: false,
+      showActions: false,
+      searchPlaceholder: this.translate.instant(
+        'MY-NETWORK-PAGE.TABLE.SEARCH-PLACEHOLDER',
+      ),
+      messages: {
+        emptyMessage: this.translate.instant(
+          'MY-NETWORK-PAGE.TABLE.MESSAGES.EMPTY',
+        ),
+        totalMessage: this.translate.instant(
+          'MY-NETWORK-PAGE.TABLE.MESSAGES.TOTAL',
+        ),
+        selectedMessage: this.translate.instant(
+          'MY-NETWORK-PAGE.TABLE.MESSAGES.SELECTED',
+        ),
+      },
+    };
   }
 
   /**
@@ -274,7 +315,11 @@ export class MyNetworkComponent implements OnInit {
    * Obtiene el texto del badge según el nivel
    */
   protected getLevelBadgeText(level: string): string {
-    return level === 'direct' ? 'Directo' : 'Indirecto';
+    const key =
+      level === 'direct'
+        ? 'MY-NETWORK-PAGE.LEVELS.DIRECT'
+        : 'MY-NETWORK-PAGE.LEVELS.INDIRECT';
+    return this.translate.instant(key);
   }
 
   /**
@@ -324,14 +369,14 @@ export class MyNetworkComponent implements OnInit {
    */
   private convertToCSV(data: ClientData[]): string {
     const headers = [
-      'ID',
-      'Nombre',
-      'Apellido',
-      'Email',
-      'Teléfono',
-      'Ciudad',
-      'Tipo',
-      'Fecha Registro',
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.ID'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.NAME'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.LAST-NAME'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.EMAIL'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.PHONE'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.CITY'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.TYPE'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.REGISTERED-AT'),
     ];
     const rows = data.map(client => [
       client.id,
@@ -340,7 +385,9 @@ export class MyNetworkComponent implements OnInit {
       client.email,
       client.phone,
       client.city,
-      client.level === 'direct' ? 'Directo' : 'Indirecto',
+      client.level === 'direct'
+        ? this.translate.instant('MY-NETWORK-PAGE.LEVELS.DIRECT')
+        : this.translate.instant('MY-NETWORK-PAGE.LEVELS.INDIRECT'),
       client.createdAt,
     ]);
 

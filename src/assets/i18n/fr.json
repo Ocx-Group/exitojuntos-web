@@ -255,5 +255,105 @@
     "WARNING_NO_COUNTRIES": "Impossible de charger les pays",
     "USER_NOT_FOUND": "Utilisateur non trouvé",
     "ERROR_FETCHING_USER": "Erreur lors de la recherche de l'utilisateur"
+  },
+  "MY-NETWORK-PAGE": {
+    "BACK": {
+      "TEXT": "Retour"
+    },
+    "BINARY-MODEL": {
+      "TEXT": "Structure Pro"
+    },
+    "MATRIX-MODEL-5": {
+      "TEXT": "Structure Plus"
+    },
+    "MATRIX-MODEL-6": {
+      "TEXT": "Structure Max"
+    },
+    "NETWORK-TREES": {
+      "TEXT": "Arbres de mon réseau"
+    },
+    "TITLE": {
+      "TEXT": "Mon Réseau"
+    },
+    "UNILEVEL-MODEL": {
+      "TEXT": "Unimax"
+    },
+    "LEVELS": {
+      "DIRECT": "Direct",
+      "INDIRECT": "Indirect"
+    },
+    "VIEW": {
+      "TITLE": {
+        "TEXT": "Mon Réseau de Clients"
+      },
+      "CARD-TITLE": {
+        "TEXT": "Clients directs et indirects"
+      },
+      "BUTTONS": {
+        "VIEW-COMPLETE": {
+          "TEXT": "Voir le réseau complet"
+        }
+      },
+      "FILTERS": {
+        "EMAIL": {
+          "LABEL": "Rechercher par e-mail",
+          "PLACEHOLDER": "Saisissez un e-mail..."
+        },
+        "PHONE": {
+          "LABEL": "Rechercher par téléphone",
+          "PLACEHOLDER": "Saisissez un téléphone..."
+        }
+      },
+      "STATS": {
+        "DIRECT": {
+          "TEXT": "Clients directs"
+        },
+        "INDIRECT": {
+          "TEXT": "Clients indirects"
+        }
+      }
+    },
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "ID",
+        "NAME": "Prénom",
+        "LAST-NAME": "Nom de famille",
+        "EMAIL": "Email",
+        "PHONE": "Téléphone",
+        "CITY": "Ville",
+        "TYPE": "Type",
+        "REGISTERED-AT": "Date d'inscription"
+      },
+      "ACTIONS": {
+        "VIEW-NETWORK": "Voir le réseau",
+        "VIEW-PROFILE": "Voir le profil"
+      },
+      "SEARCH-PLACEHOLDER": "Rechercher des clients...",
+      "MESSAGES": {
+        "EMPTY": "Aucun client à afficher",
+        "TOTAL": "total",
+        "SELECTED": "sélectionné"
+      }
+    }
+  },
+  "COMMON": {
+    "ACTIONS": {
+      "TEXT": "Actions"
+    },
+    "COPY": {
+      "TEXT": "Copier"
+    },
+    "PRINT": {
+      "TEXT": "Imprimer"
+    },
+    "EXPORT": {
+      "TEXT": "Exporter"
+    },
+    "CLEAR": {
+      "TEXT": "Effacer"
+    },
+    "REFRESH": {
+      "TEXT": "Actualiser"
+    }
   }
 }

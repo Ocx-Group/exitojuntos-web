@@ -1757,6 +1757,63 @@
     },
     "UNILEVEL-MODEL": {
       "TEXT": "Unimax"
+    },
+    "LEVELS": {
+      "DIRECT": "Directo",
+      "INDIRECT": "Indirecto"
+    },
+    "VIEW": {
+      "TITLE": {
+        "TEXT": "Mi Red de Clientes"
+      },
+      "CARD-TITLE": {
+        "TEXT": "Clientes Directos e Indirectos"
+      },
+      "BUTTONS": {
+        "VIEW-COMPLETE": {
+          "TEXT": "Ver Red Completa"
+        }
+      },
+      "FILTERS": {
+        "EMAIL": {
+          "LABEL": "Buscar por Email",
+          "PLACEHOLDER": "Ingrese email..."
+        },
+        "PHONE": {
+          "LABEL": "Buscar por Teléfono",
+          "PLACEHOLDER": "Ingrese teléfono..."
+        }
+      },
+      "STATS": {
+        "DIRECT": {
+          "TEXT": "Clientes Directos"
+        },
+        "INDIRECT": {
+          "TEXT": "Clientes Indirectos"
+        }
+      }
+    },
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "ID",
+        "NAME": "Nombre",
+        "LAST-NAME": "Apellido",
+        "EMAIL": "Email",
+        "PHONE": "Teléfono",
+        "CITY": "Ciudad",
+        "TYPE": "Tipo",
+        "REGISTERED-AT": "Fecha Registro"
+      },
+      "ACTIONS": {
+        "VIEW-NETWORK": "Ver Red",
+        "VIEW-PROFILE": "Ver Perfil"
+      },
+      "SEARCH-PLACEHOLDER": "Buscar clientes...",
+      "MESSAGES": {
+        "EMPTY": "No hay clientes para mostrar",
+        "TOTAL": "total",
+        "SELECTED": "seleccionado"
+      }
     }
   },
   "NETWORK-PAGE": {
@@ -2937,6 +2994,12 @@
     },
     "EXPORT": {
       "TEXT": "Exportar"
+    },
+    "CLEAR": {
+      "TEXT": "Limpiar"
+    },
+    "REFRESH": {
+      "TEXT": "Actualizar"
     }
   }
 }

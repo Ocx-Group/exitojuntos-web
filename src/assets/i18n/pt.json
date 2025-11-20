@@ -255,5 +255,105 @@
     "WARNING_NO_COUNTRIES": "Não foi possível carregar os países",
     "USER_NOT_FOUND": "Usuário não encontrado",
     "ERROR_FETCHING_USER": "Erro ao buscar o usuário"
+  },
+  "MY-NETWORK-PAGE": {
+    "BACK": {
+      "TEXT": "Voltar"
+    },
+    "BINARY-MODEL": {
+      "TEXT": "Estrutura Pro"
+    },
+    "MATRIX-MODEL-5": {
+      "TEXT": "Estrutura Plus"
+    },
+    "MATRIX-MODEL-6": {
+      "TEXT": "Estrutura Max"
+    },
+    "NETWORK-TREES": {
+      "TEXT": "Árvores da Minha Rede"
+    },
+    "TITLE": {
+      "TEXT": "Minha Rede"
+    },
+    "UNILEVEL-MODEL": {
+      "TEXT": "Unimax"
+    },
+    "LEVELS": {
+      "DIRECT": "Direto",
+      "INDIRECT": "Indireto"
+    },
+    "VIEW": {
+      "TITLE": {
+        "TEXT": "Minha Rede de Clientes"
+      },
+      "CARD-TITLE": {
+        "TEXT": "Clientes Diretos e Indiretos"
+      },
+      "BUTTONS": {
+        "VIEW-COMPLETE": {
+          "TEXT": "Ver Rede Completa"
+        }
+      },
+      "FILTERS": {
+        "EMAIL": {
+          "LABEL": "Buscar por E-mail",
+          "PLACEHOLDER": "Digite o e-mail..."
+        },
+        "PHONE": {
+          "LABEL": "Buscar por Telefone",
+          "PLACEHOLDER": "Digite o telefone..."
+        }
+      },
+      "STATS": {
+        "DIRECT": {
+          "TEXT": "Clientes Diretos"
+        },
+        "INDIRECT": {
+          "TEXT": "Clientes Indiretos"
+        }
+      }
+    },
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "ID",
+        "NAME": "Nome",
+        "LAST-NAME": "Sobrenome",
+        "EMAIL": "Email",
+        "PHONE": "Telefone",
+        "CITY": "Cidade",
+        "TYPE": "Tipo",
+        "REGISTERED-AT": "Data de Registro"
+      },
+      "ACTIONS": {
+        "VIEW-NETWORK": "Ver Rede",
+        "VIEW-PROFILE": "Ver Perfil"
+      },
+      "SEARCH-PLACEHOLDER": "Buscar clientes...",
+      "MESSAGES": {
+        "EMPTY": "Não há clientes para mostrar",
+        "TOTAL": "total",
+        "SELECTED": "selecionado"
+      }
+    }
+  },
+  "COMMON": {
+    "ACTIONS": {
+      "TEXT": "Ações"
+    },
+    "COPY": {
+      "TEXT": "Copiar"
+    },
+    "PRINT": {
+      "TEXT": "Imprimir"
+    },
+    "EXPORT": {
+      "TEXT": "Exportar"
+    },
+    "CLEAR": {
+      "TEXT": "Limpar"
+    },
+    "REFRESH": {
+      "TEXT": "Atualizar"
+    }
   }
 }
