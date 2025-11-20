@@ -78,4 +78,11 @@ export const AUTHENTICATION_ROUTES: Routes = [
         m => m.TestimonialsComponent,
       ),
   },
+  {
+    path: 'terms-conditions',
+    loadComponent: () =>
+      import(
+        '../shared/components/terms-conditions/terms-conditions.component'
+      ).then(m => m.TermsConditionsComponent),
+  },
 ];

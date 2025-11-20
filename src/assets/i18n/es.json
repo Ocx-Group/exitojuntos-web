@@ -2630,6 +2630,8 @@
     "TERMS_AND_CONDITIONS": "términos y condiciones",
     "TERMS_POLICY": "de uso y la política de privacidad",
     "TERMS_REQUIRED": "Debes aceptar los términos y condiciones",
+    "ERROR_LOADING_TERMS": "Error al cargar los términos y condiciones",
+    "RETRY": "Reintentar",
     "TITLE": "REGISTRO",
     "USER_NOT_FOUND": "Usuario no encontrado",
     "USERNAME": "Nombre de usuario",

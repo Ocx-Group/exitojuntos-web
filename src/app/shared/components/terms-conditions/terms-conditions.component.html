@@ -1,0 +1,63 @@
+<div class="terms-conditions-container" *ngIf="isVisible" (click)="close()" (keydown.escape)="close()" role="dialog"
+    aria-modal="true" tabindex="-1">
+    <div class="terms-content" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" role="document">
+        <!-- Header -->
+        <div class="terms-header">
+            <button class="close-btn" (click)="close()" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="loading-container">
+            <div class="spinner"></div>
+            <p>{{ 'LOADING' | translate }}...</p>
+        </div>
+
+        <!-- Terms Content -->
+        <div *ngIf="!isLoading && termsData" class="terms-body">
+            <!-- Title Section -->
+            <div class="title-section">
+                <h1 class="main-title">{{ termsData.title }}</h1>
+                <h2 class="subtitle">{{ termsData.subtitle }}</h2>
+                <p class="version">{{ termsData.version }}</p>
+            </div>
+
+            <!-- Sections -->
+            <div class="sections-container">
+                <div *ngFor="let section of termsData.sections" class="section">
+                    <h3 class="section-title">
+                        <span class="section-number">{{ section.number }}.</span> {{ section.title }}
+                    </h3>
+
+                    <div *ngFor="let item of section.items" class="section-item">
+                        <p class="item-text">
+                            <span *ngIf="item.number" class="item-number">{{ item.number }}.</span>
+                            {{ item.text }}
+                        </p>
+
+                        <ul *ngIf="item.subitems && item.subitems.length > 0" class="subitems-list">
+                            <li *ngFor="let subitem of item.subitems" class="subitem">
+                                {{ subitem }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acceptance Section -->
+            <div class="acceptance-section">
+                <p class="acceptance-text">{{ termsData.acceptance.text }}</p>
+                <p class="signature-text">{{ termsData.acceptance.signature }}</p>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div *ngIf="!isLoading && !termsData" class="error-container">
+            <p>{{ 'ERROR_LOADING_TERMS' | translate }}</p>
+            <button class="btn-retry" (click)="loadTermsConditions()">
+                {{ 'RETRY' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -17,17 +17,23 @@ import { Country } from '@app/core/models/country-model/country.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { CountryService } from '@app/core/service/country-service/country.service';
-import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TermsConditionsComponent } from '@app/shared/components/terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    TranslateModule,
+    TermsConditionsComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SignupComponent implements OnInit {
@@ -42,6 +48,7 @@ export class SignupComponent implements OnInit {
   readonly navbarIcon = 'assets/exito-logo.svg';
   showPassword = false;
   showConfirmPassword = false;
+  showTermsModal = false;
   private readonly countryService: CountryService = inject(CountryService);
 
   constructor(
@@ -50,7 +57,6 @@ export class SignupComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly affiliateService: AffiliateService,
     private readonly toastr: ToastrService,
-    private readonly pdfViewerService: PdfViewerService,
     private readonly translate: TranslateService,
   ) {
     this.key = this.activatedRoute.snapshot.params.key || '';
@@ -234,12 +240,12 @@ export class SignupComponent implements OnInit {
   }
 
   showTermsAndConditions() {
-    const doc = {
-      url: '/assets/pdf/T&C exitojuntos V1.2.pdf',
-      title: 'Términos y condiciones',
-    };
+    // Mostrar el modal de términos y condiciones
+    this.showTermsModal = true;
+  }
 
-    this.pdfViewerService.showPdf(doc);
+  closeTermsModal() {
+    this.showTermsModal = false;
   }
 
   togglePasswordVisibility() {

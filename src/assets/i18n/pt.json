@@ -438,6 +438,8 @@
     "TERMS_AND_CONDITIONS": "termos e condições",
     "TERMS_POLICY": "de uso e a política de privacidade",
     "TERMS_REQUIRED": "Você deve aceitar os termos e condições",
+    "ERROR_LOADING_TERMS": "Erro ao carregar os termos e condições",
+    "RETRY": "Tentar novamente",
     "TITLE": "REGISTRO",
     "USER_NOT_FOUND": "Usuário não encontrado",
     "USERNAME": "Nome de usuário",

@@ -2633,6 +2633,8 @@
     "TERMS_AND_CONDITIONS": "terms and conditions",
     "TERMS_POLICY": "of use and privacy policy",
     "TERMS_REQUIRED": "You must accept the terms and conditions",
+    "ERROR_LOADING_TERMS": "Error loading terms and conditions",
+    "RETRY": "Retry",
     "TITLE": "REGISTER",
     "USER_NOT_FOUND": "User not found",
     "USERNAME": "Username",
