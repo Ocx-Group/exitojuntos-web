@@ -1,168 +1,224 @@
 <section class="section profile-page">
   <ul class="breadcrumb breadcrumb-style">
     <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">Perfil</h5>
+      <h5 class="page-title m-b-0">Mi Perfil</h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
       <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
     </li>
   </ul>
+
   <div class="section-body">
     <div class="row">
       <div class="col-12">
-        <!-- Modern Profile Card -->
-        <div class="profile-card-modern">
-          <!-- Gradient Header -->
-          <div class="profile-header-gradient">
-            <!-- Options Button -->
-            <div class="profile-options-btn">
-              <div ngbDropdown container="body">
-                <button type="button" class="btn-icon-options" ngbDropdownToggle>
-                  <i class="bi bi-three-dots-vertical"></i>
-                </button>
-                <div ngbDropdownMenu>
-                  <a ngbDropdownItem id="btn-change-password">
-                    <i class="fa fa-key"></i>
-                    <span style="margin-left: 5px">
-                      {{
-                      'ADMIN-MY-PROFILE.LBL-CHANGE-PASSWORD.TEXT'
-                      | translate
-                      }}</span>
-                  </a>
-                  <a ngbDropdownItem id="btn-edit-question">
-                    <i class="bi bi-question-diamond-fill"></i>
-                    <span style="margin-left: 5px">{{
-                      'ADMIN-MY-PROFILE.LBL-CHANGE-SECRET-QUESTION.TEXT'
-                      | translate
-                      }}</span>
-                  </a>
-                  <a ngbDropdownItem id="btn-edit-personal-info">
-                    <i class="fas fa-edit"></i>
-                    <span style="margin-left: 5px">{{
-                      'ADMIN-MY-PROFILE.BTN-EDIT-PERSONAL-INFO.TEXT'
-                      | translate
-                      }}</span>
-                  </a>
-
-                  <a ngbDropdownItem id="btn-change-image-profile">
-                    <i class="fas fa-edit"></i>
-                    <span style="margin-left: 5px">
-                      Cambiar la foto de perfil
-                    </span>
-                  </a>
+        <!-- Profile Card -->
+        <div class="profile-card-golden">
+          <!-- Header with Background -->
+          <div class="profile-header">
+            <div class="profile-header-overlay"></div>
+            <div class="profile-header-content">
+              <!-- Profile Picture -->
+              <div class="profile-picture-container">
+                <div class="profile-picture-wrapper">
+                  <img [src]="previewUrl || user.imageProfileUrl || 'assets/images/user.png'" alt="Foto de perfil"
+                    class="profile-picture" />
+                  <div class="profile-picture-badge" *ngIf="user.status">
+                    <i class="bi bi-check-circle-fill"></i>
+                  </div>
                 </div>
+                <button *ngIf="isEditMode" class="btn-change-picture" (click)="fileInput.click()" type="button">
+                  <i class="bi bi-camera-fill"></i>
+                </button>
+                <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)"
+                  style="display: none" />
+              </div>
+
+              <!-- User Info -->
+              <div class="profile-header-info">
+                <h1 class="profile-name">{{ user.name + ' ' + user.lastName }}</h1>
+                <p class="profile-username">{{ '@' + user.name }}</p>
+                <div class="profile-status">
+                  <span class="status-badge" [class.active]="user.status" [class.inactive]="!user.status">
+                    <i class="bi" [class.bi-check-circle-fill]="user.status"
+                      [class.bi-x-circle-fill]="!user.status"></i>
+                    {{ user.status ? 'Cuenta Activa' : 'Cuenta Inactiva' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="profile-header-actions">
+                <button *ngIf="!isEditMode" class="btn-golden btn-edit" (click)="toggleEditMode()" type="button">
+                  <i class="bi bi-pencil-fill"></i>
+                  Editar Perfil
+                </button>
+                <button *ngIf="isEditMode" class="btn-golden btn-save" (click)="saveProfile()"
+                  [disabled]="isLoading || profileForm.invalid" type="button">
+                  <i class="bi bi-check-lg" *ngIf="!isLoading"></i>
+                  <span class="spinner-border spinner-border-sm" *ngIf="isLoading"></span>
+                  {{ isLoading ? 'Guardando...' : 'Guardar Cambios' }}
+                </button>
+                <button *ngIf="isEditMode" class="btn-golden-outline btn-cancel" (click)="toggleEditMode()"
+                  [disabled]="isLoading" type="button">
+                  <i class="bi bi-x-lg"></i>
+                  Cancelar
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- Card Content -->
-          <div class="profile-card-content">
-            <!-- Profile Header Section -->
-            <div class="profile-user-section">
-              <!-- Profile Picture -->
-              <div class="profile-picture-wrapper">
-                <button type="button" class="profile-picture-btn" aria-label="Cambiar foto de perfil">
-                  <img alt="Foto de perfil del usuario"
-                    [src]="user.imageProfileUrl ? user.imageProfileUrl : 'assets/images/user.png'"
-                    class="profile-picture-modern" />
-                </button>
-              </div> <!-- User Info -->
-              <div class="profile-user-info">
-                <h2 class="profile-user-name">
-                  {{ user.name + ' ' + user.lastName }}
-                </h2>
+          <!-- Profile Content -->
+          <div class="profile-content">
+            <form [formGroup]="profileForm">
+              <div class="row g-4">
+                <!-- Personal Information Section -->
+                <div class="col-lg-6">
+                  <h3 class="section-title">
+                    <i class="bi bi-person-fill"></i>
+                    Información Personal
+                  </h3>
 
-                <div class="profile-username">
-                  <i class="bi bi-person-circle"></i>
-                  <span>{{ '@' + user.name }}</span>
+                  <div class="info-grid">
+                    <!-- Name -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="name">
+                        <i class="bi bi-person"></i>
+                        Nombre
+                      </label>
+                      <input *ngIf="!isEditMode" type="text" class="form-control-static" [value]="user.name" readonly />
+                      <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="name"
+                        placeholder="Ingrese su nombre" id="name" />
+                      <div class="invalid-feedback"
+                        *ngIf="isEditMode && profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+                        El nombre es requerido (mínimo 2 caracteres)
+                      </div>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="lastName">
+                        <i class="bi bi-person"></i>
+                        Apellido
+                      </label>
+                      <input *ngIf="!isEditMode" type="text" class="form-control-static" [value]="user.lastName"
+                        readonly />
+                      <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="lastName"
+                        placeholder="Ingrese su apellido" id="lastName" />
+                      <div class="invalid-feedback"
+                        *ngIf="isEditMode && profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched">
+                        El apellido es requerido (mínimo 2 caracteres)
+                      </div>
+                    </div>
+
+                    <!-- Email (Read Only) -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="email">
+                        <i class="bi bi-envelope"></i>
+                        Correo Electrónico
+                      </label>
+                      <input type="email" class="form-control-static" [value]="user.email" readonly id="email" />
+                    </div>
+
+                    <!-- Phone (Read Only) -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="phone">
+                        <i class="bi bi-telephone"></i>
+                        Teléfono
+                      </label>
+                      <input type="text" class="form-control-static" [value]="user.phone || 'No especificado'" readonly
+                        id="phone" />
+                    </div>
+
+                    <!-- Birth Date -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="birthDate">
+                        <i class="bi bi-calendar-heart"></i>
+                        Fecha de Nacimiento
+                      </label>
+                      <input *ngIf="!isEditMode" type="text" class="form-control-static"
+                        [value]="(user.birtDate | date: 'dd/MM/yyyy') || 'No especificada'" readonly />
+                      <input *ngIf="isEditMode" type="date" class="form-control-golden" formControlName="birthDate"
+                        id="birthDate" />
+                    </div>
+                  </div>
                 </div>
 
-                <!-- Status Badges -->
-                <div class="profile-badges">
-                  <span *ngIf="user.status == true" class="badge-modern badge-active">
-                    Activo
-                  </span>
-                  <span *ngIf="user.status == false" class="badge-modern badge-inactive">
-                    Inactivo
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Divider -->
-            <div class="profile-divider"></div>
-
-            <!-- Information Grid -->
-            <div class="profile-info-grid">
-              <!-- Contact Information Column -->
-              <div class="profile-info-column">
-                <h3 class="profile-section-title">Información de Contacto</h3>
-
-                <!-- Phone -->
-                <div class="profile-info-item">
-                  <div class="profile-info-icon">
-                    <i class="bi bi-telephone-fill"></i>
-                  </div>
-                  <div class="profile-info-content">
-                    <div class="profile-info-label">Teléfono</div>
-                    <div class="profile-info-value">{{ user.phone || 'No especificado' }}</div>
-                  </div>
-                </div>
-
-                <!-- Email -->
-                <div class="profile-info-item">
-                  <div class="profile-info-icon">
-                    <i class="bi bi-envelope-fill"></i>
-                  </div>
-                  <div class="profile-info-content">
-                    <div class="profile-info-label">Correo Electrónico</div>
-                    <div class="profile-info-value">{{ user.email }}</div>
-                  </div>
-                </div>
-
-                <!-- Address -->
-                <div class="profile-info-item">
-                  <div class="profile-info-icon">
+                <!-- Location Information Section -->
+                <div class="col-lg-6">
+                  <h3 class="section-title">
                     <i class="bi bi-geo-alt-fill"></i>
-                  </div>
-                  <div class="profile-info-content">
-                    <div class="profile-info-label">Dirección</div>
-                    <div class="profile-info-value">{{ user.address || 'No especificada' }}</div>
+                    Ubicación
+                  </h3>
+
+                  <div class="info-grid">
+                    <!-- Address -->
+                    <div class="form-group-golden full-width">
+                      <label class="form-label" for="address">
+                        <i class="bi bi-house"></i>
+                        Dirección
+                      </label>
+                      <input *ngIf="!isEditMode" type="text" class="form-control-static"
+                        [value]="user.address || 'No especificada'" readonly id="address" />
+                      <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="address"
+                        placeholder="Calle, número, apartamento" />
+                    </div>
+
+                    <!-- City -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="city">
+                        <i class="bi bi-building"></i>
+                        Ciudad
+                      </label>
+                      <input *ngIf="!isEditMode" type="text" class="form-control-static"
+                        [value]="user.city || 'No especificada'" readonly />
+                      <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="city"
+                        placeholder="Ciudad" id="city" />
+                    </div>
+
+                    <!-- Country -->
+                    <div class="form-group-golden">
+                      <label class="form-label" for="country">
+                        <i class="bi bi-flag"></i>
+                        País
+                      </label>
+                      <input type="text" class="form-control-static" [value]="user.country?.name || 'No especificado'"
+                        readonly id="country" />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Account Information Column -->
-              <div class="profile-info-column">
-                <h3 class="profile-section-title">Información de Cuenta</h3>
+              <!-- Account Info Section -->
+              <div class="row g-4 mt-2">
+                <div class="col-12">
+                  <h3 class="section-title">
+                    <i class="bi bi-shield-check"></i>
+                    Información de Cuenta
+                  </h3>
 
-                <!-- Registration Date -->
-                <div class="profile-info-item profile-info-item-tall">
-                  <div class="profile-info-icon">
-                    <i class="bi bi-calendar-check-fill"></i>
-                  </div>
-                  <div class="profile-info-content">
-                    <div class="profile-info-label">Fecha de Registro</div>
-                    <div class="profile-info-value">{{ user.createdAt | date: 'dd \'de\' MMMM, yyyy' }}</div>
-                    <div class="profile-info-time">{{ user.createdAt | date: 'HH:mm:ss' }}</div>
-                  </div>
-                </div>
-
-                <!-- Authorization Status -->
-                <div class="profile-info-item">
-                  <div class="profile-info-icon">
-                    <i class="bi bi-shield-check-fill"></i>
+                  <div class="info-stats">
+                    <div class="stat-item">
+                      <div class="stat-icon">
+                        <i class="bi bi-calendar-check"></i>
+                      </div>
+                      <div class="stat-content">
+                        <span class="stat-label">Miembro desde</span>
+                        <span class="stat-value">{{ user.createdAt | date: 'dd/MM/yyyy' }}</span>
+                      </div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-icon">
+                        <i class="bi bi-clock-history"></i>
+                      </div>
+                      <div class="stat-content">
+                        <span class="stat-label">Última actualización</span>
+                        <span class="stat-value">{{ user.updatedAt | date: 'dd/MM/yyyy' }}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="profile-actions">
-              <button type="button" class="btn-action btn-action-primary">
-                Editar Perfil
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

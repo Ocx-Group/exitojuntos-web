@@ -63,11 +63,11 @@
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
         <div class="dropdown-title">Bienvenido {{ user?.name }}
           ...</div>
-        <a routerLink="app/my-profile" class="dropdown-item has-icon">
+        <a [routerLink]="['/app/my-profile']" class="dropdown-item has-icon">
           <i class="far fa-user"></i>
           {{ 'HEADER.PROFILE.TEXT' | translate }}
         </a>
-        <a routerLink="app/edit-user" class="dropdown-item has-icon">
+        <a [routerLink]="['/app/edit-user']" class="dropdown-item has-icon">
           <i class="far fa-edit"></i>
           {{ 'HEADER.USER-EDIT.TEXT' | translate }}
         </a>

@@ -18,6 +18,13 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 const header = ['Movimientos', 'IP', 'Fecha'];
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { RouterLink } from '@angular/router';
 
@@ -30,6 +37,8 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     TranslateModule,
     RouterLink,
+    FormsModule,
+    ReactiveFormsModule,
     NgbDropdownItem,
     NgbDropdown,
     NgbDropdownToggle,
@@ -38,7 +47,12 @@ import { RouterLink } from '@angular/router';
 })
 export class MyProfileComponent implements OnInit {
   public user: UserAffiliate = new UserAffiliate();
-  public userCookie: UserAffiliate;
+  public profileForm: FormGroup;
+  public isEditMode = false;
+  public isLoading = false;
+  public selectedFile: File | null = null;
+  public previewUrl: string | null = null;
+
   rows = [];
   temp = [];
   loadingIndicator = true;
@@ -49,22 +63,106 @@ export class MyProfileComponent implements OnInit {
     private readonly toastr: ToastrService,
     private readonly authService: AuthService,
     private readonly affiliateService: AffiliateService,
-  ) {}
+    private readonly fb: FormBuilder,
+  ) {
+    this.profileForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      birthDate: [''],
+      address: [''],
+      city: [''],
+    });
+  }
 
   ngOnInit(): void {
-    this.getUserInfo();
+    // Usar el signal para obtener el usuario actual
+    const currentUser = this.authService.currentUserAffiliateValue;
+    console.log(currentUser);
+    if (currentUser) {
+      this.user = { ...currentUser };
+      this.populateForm();
+    }
   }
 
   getUserInfo() {
-    this.userCookie = this.authService.currentUserAffiliateValue;
+    const currentUser = this.authService.currentUserAffiliateValue;
+    if (!currentUser) return;
+
     this.affiliateService
-      .getAffiliateById(this.userCookie.id)
+      .getAffiliateById(currentUser.id)
       .subscribe(response => {
         if (response.success) {
           this.user = response.data;
-          this.loadLoginMovements();
+          this.populateForm();
         }
       });
+  }
+
+  populateForm() {
+    this.profileForm.patchValue({
+      name: this.user.name || '',
+      lastName: this.user.lastName || '',
+      birthDate: this.user.birtDate || '',
+      address: this.user.address || '',
+      city: this.user.city || '',
+    });
+  }
+
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
+    if (!this.isEditMode) {
+      this.populateForm();
+      this.selectedFile = null;
+      this.previewUrl = null;
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  saveProfile() {
+    if (this.profileForm.invalid) {
+      this.toastr.error('Por favor complete todos los campos requeridos');
+      return;
+    }
+
+    this.isLoading = true;
+    const formData = this.profileForm.value;
+
+    // Actualizar el objeto user con los datos del formulario
+    this.user.name = formData.name;
+    this.user.lastName = formData.lastName;
+    this.user.birtDate = formData.birthDate;
+    this.user.address = formData.address;
+    this.user.city = formData.city;
+
+    this.affiliateService.updateAffiliate(this.user).subscribe({
+      next: response => {
+        if (response.success) {
+          this.toastr.success('Perfil actualizado exitosamente');
+          this.isEditMode = false;
+          this.getUserInfo();
+        } else {
+          this.toastr.error('Error al actualizar el perfil');
+        }
+        this.isLoading = false;
+      },
+      error: error => {
+        this.toastr.error('Error al actualizar el perfil');
+        this.isLoading = false;
+      },
+    });
   }
 
   clipBoardCopy() {
@@ -76,22 +174,5 @@ export class MyProfileComponent implements OnInit {
     } else {
       this.toastr.success('Copied ' + this.temp.length + ' rows successfully');
     }
-  }
-
-  loadLoginMovements() {
-    this.authService.getLoginMovementsByAffiliatedId(this.user.id).subscribe({
-      next: (response: LoginMovements[]) => {
-        console.log(response);
-        if (response !== null) {
-          this.temp = response;
-          this.rows = [...response];
-        }
-        this.loadingIndicator = false;
-      },
-      error: error => {
-        this.toastr.error('Error loading movements');
-        this.loadingIndicator = false;
-      },
-    });
   }
 }
