@@ -336,6 +336,53 @@
       }
     }
   },
+  "CLIENT-MY-PROFILE": {
+    "BREADCRUMB": {
+      "TITLE": "Meu Perfil"
+    },
+    "HEADER": {
+      "ACCOUNT-ACTIVE": "Conta Ativa",
+      "ACCOUNT-INACTIVE": "Conta Inativa",
+      "BTN-EDIT": "Editar Perfil",
+      "BTN-SAVE": "Salvar Alterações",
+      "BTN-SAVING": "Salvando...",
+      "BTN-CANCEL": "Cancelar"
+    },
+    "PERSONAL-INFO": {
+      "TITLE": "Informações Pessoais",
+      "NAME": "Nome",
+      "LASTNAME": "Sobrenome",
+      "EMAIL": "E-mail",
+      "PHONE": "Telefone",
+      "BIRTHDATE": "Data de Nascimento",
+      "PLACEHOLDER-NAME": "Digite seu nome",
+      "PLACEHOLDER-LASTNAME": "Digite seu sobrenome",
+      "NO-SPECIFIED": "Não especificado",
+      "NO-SPECIFIED-FEMALE": "Não especificada"
+    },
+    "LOCATION": {
+      "TITLE": "Localização",
+      "ADDRESS": "Endereço",
+      "CITY": "Cidade",
+      "COUNTRY": "País",
+      "PLACEHOLDER-ADDRESS": "Rua, número, apartamento",
+      "PLACEHOLDER-CITY": "Cidade"
+    },
+    "ACCOUNT-INFO": {
+      "TITLE": "Informações da Conta",
+      "MEMBER-SINCE": "Membro desde",
+      "LAST-UPDATE": "Última atualização"
+    },
+    "VALIDATIONS": {
+      "NAME-REQUIRED": "O nome é obrigatório (mínimo 2 caracteres)",
+      "LASTNAME-REQUIRED": "O sobrenome é obrigatório (mínimo 2 caracteres)",
+      "FIELDS-REQUIRED": "Por favor, preencha todos os campos obrigatórios"
+    },
+    "MESSAGES": {
+      "SUCCESS": "Perfil atualizado com sucesso",
+      "ERROR": "Erro ao atualizar o perfil"
+    }
+  },
   "COMMON": {
     "ACTIONS": {
       "TEXT": "Ações"

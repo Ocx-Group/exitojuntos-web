@@ -291,6 +291,53 @@
       "TEXT": "Cambiar contraseña Upload"
     }
   },
+  "CLIENT-MY-PROFILE": {
+    "BREADCRUMB": {
+      "TITLE": "Mi Perfil"
+    },
+    "HEADER": {
+      "ACCOUNT-ACTIVE": "Cuenta Activa",
+      "ACCOUNT-INACTIVE": "Cuenta Inactiva",
+      "BTN-EDIT": "Editar Perfil",
+      "BTN-SAVE": "Guardar Cambios",
+      "BTN-SAVING": "Guardando...",
+      "BTN-CANCEL": "Cancelar"
+    },
+    "PERSONAL-INFO": {
+      "TITLE": "Información Personal",
+      "NAME": "Nombre",
+      "LASTNAME": "Apellido",
+      "EMAIL": "Correo Electrónico",
+      "PHONE": "Teléfono",
+      "BIRTHDATE": "Fecha de Nacimiento",
+      "PLACEHOLDER-NAME": "Ingrese su nombre",
+      "PLACEHOLDER-LASTNAME": "Ingrese su apellido",
+      "NO-SPECIFIED": "No especificado",
+      "NO-SPECIFIED-FEMALE": "No especificada"
+    },
+    "LOCATION": {
+      "TITLE": "Ubicación",
+      "ADDRESS": "Dirección",
+      "CITY": "Ciudad",
+      "COUNTRY": "País",
+      "PLACEHOLDER-ADDRESS": "Calle, número, apartamento",
+      "PLACEHOLDER-CITY": "Ciudad"
+    },
+    "ACCOUNT-INFO": {
+      "TITLE": "Información de Cuenta",
+      "MEMBER-SINCE": "Miembro desde",
+      "LAST-UPDATE": "Última actualización"
+    },
+    "VALIDATIONS": {
+      "NAME-REQUIRED": "El nombre es requerido (mínimo 2 caracteres)",
+      "LASTNAME-REQUIRED": "El apellido es requerido (mínimo 2 caracteres)",
+      "FIELDS-REQUIRED": "Por favor complete todos los campos requeridos"
+    },
+    "MESSAGES": {
+      "SUCCESS": "Perfil actualizado exitosamente",
+      "ERROR": "Error al actualizar el perfil"
+    }
+  },
   "AFFILIATES-LIST-PAGE": {
     "BINARY-GENEALOGICAL-TREE": {
       "TEXT": "Árbol Sistema 1B"

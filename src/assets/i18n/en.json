@@ -291,6 +291,53 @@
       "TEXT": "Change password Upload"
     }
   },
+  "CLIENT-MY-PROFILE": {
+    "BREADCRUMB": {
+      "TITLE": "My Profile"
+    },
+    "HEADER": {
+      "ACCOUNT-ACTIVE": "Active Account",
+      "ACCOUNT-INACTIVE": "Inactive Account",
+      "BTN-EDIT": "Edit Profile",
+      "BTN-SAVE": "Save Changes",
+      "BTN-SAVING": "Saving...",
+      "BTN-CANCEL": "Cancel"
+    },
+    "PERSONAL-INFO": {
+      "TITLE": "Personal Information",
+      "NAME": "Name",
+      "LASTNAME": "Last Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "BIRTHDATE": "Date of Birth",
+      "PLACEHOLDER-NAME": "Enter your name",
+      "PLACEHOLDER-LASTNAME": "Enter your last name",
+      "NO-SPECIFIED": "Not specified",
+      "NO-SPECIFIED-FEMALE": "Not specified"
+    },
+    "LOCATION": {
+      "TITLE": "Location",
+      "ADDRESS": "Address",
+      "CITY": "City",
+      "COUNTRY": "Country",
+      "PLACEHOLDER-ADDRESS": "Street, number, apartment",
+      "PLACEHOLDER-CITY": "City"
+    },
+    "ACCOUNT-INFO": {
+      "TITLE": "Account Information",
+      "MEMBER-SINCE": "Member since",
+      "LAST-UPDATE": "Last update"
+    },
+    "VALIDATIONS": {
+      "NAME-REQUIRED": "Name is required (minimum 2 characters)",
+      "LASTNAME-REQUIRED": "Last name is required (minimum 2 characters)",
+      "FIELDS-REQUIRED": "Please complete all required fields"
+    },
+    "MESSAGES": {
+      "SUCCESS": "Profile updated successfully",
+      "ERROR": "Error updating profile"
+    }
+  },
   "AFFILIATES-LIST-PAGE": {
     "BINARY-GENEALOGICAL-TREE": {
       "TEXT": "Binary Genealogical tree"

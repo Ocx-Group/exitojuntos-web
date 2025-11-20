@@ -1,7 +1,7 @@
 <section class="section profile-page">
   <ul class="breadcrumb breadcrumb-style">
     <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">Mi Perfil</h5>
+      <h5 class="page-title m-b-0">{{ 'CLIENT-MY-PROFILE.BREADCRUMB.TITLE' | translate }}</h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
       <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
@@ -41,7 +41,8 @@
                   <span class="status-badge" [class.active]="user.status" [class.inactive]="!user.status">
                     <i class="bi" [class.bi-check-circle-fill]="user.status"
                       [class.bi-x-circle-fill]="!user.status"></i>
-                    {{ user.status ? 'Cuenta Activa' : 'Cuenta Inactiva' }}
+                    {{ (user.status ? 'CLIENT-MY-PROFILE.HEADER.ACCOUNT-ACTIVE' :
+                    'CLIENT-MY-PROFILE.HEADER.ACCOUNT-INACTIVE') | translate }}
                   </span>
                 </div>
               </div>
@@ -50,18 +51,19 @@
               <div class="profile-header-actions">
                 <button *ngIf="!isEditMode" class="btn-golden btn-edit" (click)="toggleEditMode()" type="button">
                   <i class="bi bi-pencil-fill"></i>
-                  Editar Perfil
+                  {{ 'CLIENT-MY-PROFILE.HEADER.BTN-EDIT' | translate }}
                 </button>
                 <button *ngIf="isEditMode" class="btn-golden btn-save" (click)="saveProfile()"
                   [disabled]="isLoading || profileForm.invalid" type="button">
                   <i class="bi bi-check-lg" *ngIf="!isLoading"></i>
                   <span class="spinner-border spinner-border-sm" *ngIf="isLoading"></span>
-                  {{ isLoading ? 'Guardando...' : 'Guardar Cambios' }}
+                  {{ (isLoading ? 'CLIENT-MY-PROFILE.HEADER.BTN-SAVING' : 'CLIENT-MY-PROFILE.HEADER.BTN-SAVE') |
+                  translate }}
                 </button>
                 <button *ngIf="isEditMode" class="btn-golden-outline btn-cancel" (click)="toggleEditMode()"
                   [disabled]="isLoading" type="button">
                   <i class="bi bi-x-lg"></i>
-                  Cancelar
+                  {{ 'CLIENT-MY-PROFILE.HEADER.BTN-CANCEL' | translate }}
                 </button>
               </div>
             </div>
@@ -75,7 +77,7 @@
                 <div class="col-lg-6">
                   <h3 class="section-title">
                     <i class="bi bi-person-fill"></i>
-                    Información Personal
+                    {{ 'CLIENT-MY-PROFILE.PERSONAL-INFO.TITLE' | translate }}
                   </h3>
 
                   <div class="info-grid">
@@ -83,14 +85,14 @@
                     <div class="form-group-golden">
                       <label class="form-label" for="name">
                         <i class="bi bi-person"></i>
-                        Nombre
+                        {{ 'CLIENT-MY-PROFILE.PERSONAL-INFO.NAME' | translate }}
                       </label>
                       <input *ngIf="!isEditMode" type="text" class="form-control-static" [value]="user.name" readonly />
                       <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="name"
-                        placeholder="Ingrese su nombre" id="name" />
+                        [placeholder]="'CLIENT-MY-PROFILE.PERSONAL-INFO.PLACEHOLDER-NAME' | translate" id="name" />
                       <div class="invalid-feedback"
                         *ngIf="isEditMode && profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
-                        El nombre es requerido (mínimo 2 caracteres)
+                        {{ 'CLIENT-MY-PROFILE.VALIDATIONS.NAME-REQUIRED' | translate }}
                       </div>
                     </div>
 
@@ -98,15 +100,16 @@
                     <div class="form-group-golden">
                       <label class="form-label" for="lastName">
                         <i class="bi bi-person"></i>
-                        Apellido
+                        {{ 'CLIENT-MY-PROFILE.PERSONAL-INFO.LASTNAME' | translate }}
                       </label>
                       <input *ngIf="!isEditMode" type="text" class="form-control-static" [value]="user.lastName"
                         readonly />
                       <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="lastName"
-                        placeholder="Ingrese su apellido" id="lastName" />
+                        [placeholder]="'CLIENT-MY-PROFILE.PERSONAL-INFO.PLACEHOLDER-LASTNAME' | translate"
+                        id="lastName" />
                       <div class="invalid-feedback"
                         *ngIf="isEditMode && profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched">
-                        El apellido es requerido (mínimo 2 caracteres)
+                        {{ 'CLIENT-MY-PROFILE.VALIDATIONS.LASTNAME-REQUIRED' | translate }}
                       </div>
                     </div>
 
@@ -114,7 +117,7 @@
                     <div class="form-group-golden">
                       <label class="form-label" for="email">
                         <i class="bi bi-envelope"></i>
-                        Correo Electrónico
+                        {{ 'CLIENT-MY-PROFILE.PERSONAL-INFO.EMAIL' | translate }}
                       </label>
                       <input type="email" class="form-control-static" [value]="user.email" readonly id="email" />
                     </div>
@@ -123,9 +126,10 @@
                     <div class="form-group-golden">
                       <label class="form-label" for="phone">
                         <i class="bi bi-telephone"></i>
-                        Teléfono
+                        {{ 'CLIENT-MY-PROFILE.PERSONAL-INFO.PHONE' | translate }}
                       </label>
-                      <input type="text" class="form-control-static" [value]="user.phone || 'No especificado'" readonly
+                      <input type="text" class="form-control-static"
+                        [value]="user.phone || ('CLIENT-MY-PROFILE.PERSONAL-INFO.NO-SPECIFIED' | translate)" readonly
                         id="phone" />
                     </div>
 
@@ -133,10 +137,11 @@
                     <div class="form-group-golden">
                       <label class="form-label" for="birthDate">
                         <i class="bi bi-calendar-heart"></i>
-                        Fecha de Nacimiento
+                        {{ 'CLIENT-MY-PROFILE.PERSONAL-INFO.BIRTHDATE' | translate }}
                       </label>
                       <input *ngIf="!isEditMode" type="text" class="form-control-static"
-                        [value]="(user.birtDate | date: 'dd/MM/yyyy') || 'No especificada'" readonly />
+                        [value]="(user.birtDate | date: 'dd/MM/yyyy') || ('CLIENT-MY-PROFILE.PERSONAL-INFO.NO-SPECIFIED-FEMALE' | translate)"
+                        readonly />
                       <input *ngIf="isEditMode" type="date" class="form-control-golden" formControlName="birthDate"
                         id="birthDate" />
                     </div>
@@ -147,7 +152,7 @@
                 <div class="col-lg-6">
                   <h3 class="section-title">
                     <i class="bi bi-geo-alt-fill"></i>
-                    Ubicación
+                    {{ 'CLIENT-MY-PROFILE.LOCATION.TITLE' | translate }}
                   </h3>
 
                   <div class="info-grid">
@@ -155,33 +160,36 @@
                     <div class="form-group-golden full-width">
                       <label class="form-label" for="address">
                         <i class="bi bi-house"></i>
-                        Dirección
+                        {{ 'CLIENT-MY-PROFILE.LOCATION.ADDRESS' | translate }}
                       </label>
                       <input *ngIf="!isEditMode" type="text" class="form-control-static"
-                        [value]="user.address || 'No especificada'" readonly id="address" />
+                        [value]="user.address || ('CLIENT-MY-PROFILE.PERSONAL-INFO.NO-SPECIFIED-FEMALE' | translate)"
+                        readonly id="address" />
                       <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="address"
-                        placeholder="Calle, número, apartamento" />
+                        [placeholder]="'CLIENT-MY-PROFILE.LOCATION.PLACEHOLDER-ADDRESS' | translate" />
                     </div>
 
                     <!-- City -->
                     <div class="form-group-golden">
                       <label class="form-label" for="city">
                         <i class="bi bi-building"></i>
-                        Ciudad
+                        {{ 'CLIENT-MY-PROFILE.LOCATION.CITY' | translate }}
                       </label>
                       <input *ngIf="!isEditMode" type="text" class="form-control-static"
-                        [value]="user.city || 'No especificada'" readonly />
+                        [value]="user.city || ('CLIENT-MY-PROFILE.PERSONAL-INFO.NO-SPECIFIED-FEMALE' | translate)"
+                        readonly />
                       <input *ngIf="isEditMode" type="text" class="form-control-golden" formControlName="city"
-                        placeholder="Ciudad" id="city" />
+                        [placeholder]="'CLIENT-MY-PROFILE.LOCATION.PLACEHOLDER-CITY' | translate" id="city" />
                     </div>
 
                     <!-- Country -->
                     <div class="form-group-golden">
                       <label class="form-label" for="country">
                         <i class="bi bi-flag"></i>
-                        País
+                        {{ 'CLIENT-MY-PROFILE.LOCATION.COUNTRY' | translate }}
                       </label>
-                      <input type="text" class="form-control-static" [value]="user.country?.name || 'No especificado'"
+                      <input type="text" class="form-control-static"
+                        [value]="user.country?.name || ('CLIENT-MY-PROFILE.PERSONAL-INFO.NO-SPECIFIED' | translate)"
                         readonly id="country" />
                     </div>
                   </div>
@@ -193,7 +201,7 @@
                 <div class="col-12">
                   <h3 class="section-title">
                     <i class="bi bi-shield-check"></i>
-                    Información de Cuenta
+                    {{ 'CLIENT-MY-PROFILE.ACCOUNT-INFO.TITLE' | translate }}
                   </h3>
 
                   <div class="info-stats">
@@ -202,7 +210,7 @@
                         <i class="bi bi-calendar-check"></i>
                       </div>
                       <div class="stat-content">
-                        <span class="stat-label">Miembro desde</span>
+                        <span class="stat-label">{{ 'CLIENT-MY-PROFILE.ACCOUNT-INFO.MEMBER-SINCE' | translate }}</span>
                         <span class="stat-value">{{ user.createdAt | date: 'dd/MM/yyyy' }}</span>
                       </div>
                     </div>
@@ -211,7 +219,7 @@
                         <i class="bi bi-clock-history"></i>
                       </div>
                       <div class="stat-content">
-                        <span class="stat-label">Última actualización</span>
+                        <span class="stat-label">{{ 'CLIENT-MY-PROFILE.ACCOUNT-INFO.LAST-UPDATE' | translate }}</span>
                         <span class="stat-value">{{ user.updatedAt | date: 'dd/MM/yyyy' }}</span>
                       </div>
                     </div>

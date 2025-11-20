@@ -17,7 +17,7 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 
 const header = ['Movimientos', 'IP', 'Fecha'];
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -64,6 +64,7 @@ export class MyProfileComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly affiliateService: AffiliateService,
     private readonly fb: FormBuilder,
+    private readonly translate: TranslateService,
   ) {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -133,7 +134,9 @@ export class MyProfileComponent implements OnInit {
 
   saveProfile() {
     if (this.profileForm.invalid) {
-      this.toastr.error('Por favor complete todos los campos requeridos');
+      this.toastr.error(
+        this.translate.instant('CLIENT-MY-PROFILE.VALIDATIONS.FIELDS-REQUIRED'),
+      );
       return;
     }
 
@@ -150,16 +153,22 @@ export class MyProfileComponent implements OnInit {
     this.affiliateService.updateAffiliate(this.user).subscribe({
       next: response => {
         if (response.success) {
-          this.toastr.success('Perfil actualizado exitosamente');
+          this.toastr.success(
+            this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.SUCCESS'),
+          );
           this.isEditMode = false;
           this.getUserInfo();
         } else {
-          this.toastr.error('Error al actualizar el perfil');
+          this.toastr.error(
+            this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR'),
+          );
         }
         this.isLoading = false;
       },
       error: error => {
-        this.toastr.error('Error al actualizar el perfil');
+        this.toastr.error(
+          this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR'),
+        );
         this.isLoading = false;
       },
     });
