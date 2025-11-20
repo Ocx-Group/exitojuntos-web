@@ -40,9 +40,9 @@
           <div class="card-body p-3">
             <!-- Loading State -->
             <div *ngIf="loading()" class="text-center py-5">
-              <div class="spinner-border text-warning mb-3" role="status">
+              <output class="spinner-border text-warning mb-3">
                 <span class="visually-hidden">Cargando...</span>
-              </div>
+              </output>
               <p class="text-muted">Cargando árbol de red...</p>
             </div>
 
@@ -58,10 +58,7 @@
                     class="node-image" />
                   <div class="name">
                     <span class="user-name">
-                      {{ node.phone || node.email || 'Usuario ' + node.id }}
-                    </span>
-                    <span class="description" *ngIf="node.email">
-                      {{ node.email }}
+                      {{ node.phone || 'Usuario ' + node.id }}
                     </span>
                   </div>
                   <button *ngIf="node.children && node.children.length" (click)="node.hideChildren = !node.hideChildren"
