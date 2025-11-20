@@ -14,7 +14,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
   },
   {
     path: '/admin/users-management',
-    title: 'Gestión de Usuarios',
+    title: 'MENUITEMS.USERS-MANAGEMENT.TEXT',
     iconType: 'feather',
     icon: 'users',
     class: '',

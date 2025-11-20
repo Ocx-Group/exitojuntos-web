@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/app/my-network',
-    title: 'Mi Red',
+    title: 'MENUITEMS.MY-NETWORK.TEXT',
     iconType: 'feather',
     icon: 'users',
     class: '',

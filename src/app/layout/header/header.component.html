@@ -45,7 +45,7 @@
       </a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right dropdown-list header-dropdown pullDown">
         <div class="dropdown-header">
-          Messages
+          {{ 'HEADER.MESSAGES.TEXT' | translate }}
         </div>
         <div class="dropdown-list-content dropdown-list-icons"
           style="position: relative; max-width: 600px; max-height: 250px; overflow-y: auto;">
@@ -61,8 +61,7 @@
         <span class="d-sm-none d-lg-inline-block"></span>
       </a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
-        <div class="dropdown-title">Bienvenido {{ user?.name }}
-          ...</div>
+        <div class="dropdown-title">{{ 'HEADER.WELCOME.TEXT' | translate }} {{ user?.name }}</div>
         <a [routerLink]="['/app/my-profile']" class="dropdown-item has-icon">
           <i class="far fa-user"></i>
           {{ 'HEADER.PROFILE.TEXT' | translate }}

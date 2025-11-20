@@ -291,53 +291,6 @@
       "TEXT": "Change password Upload"
     }
   },
-  "CLIENT-MY-PROFILE": {
-    "BREADCRUMB": {
-      "TITLE": "My Profile"
-    },
-    "HEADER": {
-      "ACCOUNT-ACTIVE": "Active Account",
-      "ACCOUNT-INACTIVE": "Inactive Account",
-      "BTN-EDIT": "Edit Profile",
-      "BTN-SAVE": "Save Changes",
-      "BTN-SAVING": "Saving...",
-      "BTN-CANCEL": "Cancel"
-    },
-    "PERSONAL-INFO": {
-      "TITLE": "Personal Information",
-      "NAME": "Name",
-      "LASTNAME": "Last Name",
-      "EMAIL": "Email",
-      "PHONE": "Phone",
-      "BIRTHDATE": "Date of Birth",
-      "PLACEHOLDER-NAME": "Enter your name",
-      "PLACEHOLDER-LASTNAME": "Enter your last name",
-      "NO-SPECIFIED": "Not specified",
-      "NO-SPECIFIED-FEMALE": "Not specified"
-    },
-    "LOCATION": {
-      "TITLE": "Location",
-      "ADDRESS": "Address",
-      "CITY": "City",
-      "COUNTRY": "Country",
-      "PLACEHOLDER-ADDRESS": "Street, number, apartment",
-      "PLACEHOLDER-CITY": "City"
-    },
-    "ACCOUNT-INFO": {
-      "TITLE": "Account Information",
-      "MEMBER-SINCE": "Member since",
-      "LAST-UPDATE": "Last update"
-    },
-    "VALIDATIONS": {
-      "NAME-REQUIRED": "Name is required (minimum 2 characters)",
-      "LASTNAME-REQUIRED": "Last name is required (minimum 2 characters)",
-      "FIELDS-REQUIRED": "Please complete all required fields"
-    },
-    "MESSAGES": {
-      "SUCCESS": "Profile updated successfully",
-      "ERROR": "Error updating profile"
-    }
-  },
   "AFFILIATES-LIST-PAGE": {
     "BINARY-GENEALOGICAL-TREE": {
       "TEXT": "Binary Genealogical tree"
@@ -926,6 +879,53 @@
       "TEXT": "Categories"
     }
   },
+  "CLIENT-MY-PROFILE": {
+    "ACCOUNT-INFO": {
+      "LAST-UPDATE": "Last update",
+      "MEMBER-SINCE": "Member since",
+      "TITLE": "Account Information"
+    },
+    "BREADCRUMB": {
+      "TITLE": "My Profile"
+    },
+    "HEADER": {
+      "ACCOUNT-ACTIVE": "Active Account",
+      "ACCOUNT-INACTIVE": "Inactive Account",
+      "BTN-CANCEL": "Cancel",
+      "BTN-EDIT": "Edit Profile",
+      "BTN-SAVE": "Save Changes",
+      "BTN-SAVING": "Saving..."
+    },
+    "LOCATION": {
+      "ADDRESS": "Address",
+      "CITY": "City",
+      "COUNTRY": "Country",
+      "PLACEHOLDER-ADDRESS": "Street, number, apartment",
+      "PLACEHOLDER-CITY": "City",
+      "TITLE": "Location"
+    },
+    "MESSAGES": {
+      "ERROR": "Error updating profile",
+      "SUCCESS": "Profile updated successfully"
+    },
+    "PERSONAL-INFO": {
+      "BIRTHDATE": "Date of Birth",
+      "EMAIL": "Email",
+      "LASTNAME": "Last Name",
+      "NAME": "Name",
+      "NO-SPECIFIED": "Not specified",
+      "NO-SPECIFIED-FEMALE": "Not specified",
+      "PHONE": "Phone",
+      "PLACEHOLDER-LASTNAME": "Enter your last name",
+      "PLACEHOLDER-NAME": "Enter your name",
+      "TITLE": "Personal Information"
+    },
+    "VALIDATIONS": {
+      "FIELDS-REQUIRED": "Please complete all required fields",
+      "LASTNAME-REQUIRED": "Last name is required (minimum 2 characters)",
+      "NAME-REQUIRED": "Name is required (minimum 2 characters)"
+    }
+  },
   "CLOSURE-CONCEPTS": {
     "BTN-CLOSE-CONCEPTS": {
       "TEXT": "Close selected concepts"
@@ -1034,6 +1034,32 @@
     },
     "TITLE": {
       "TEXT": "Commissions Paid"
+    }
+  },
+  "COMMON": {
+    "ACTIONS": {
+      "TEXT": "Actions"
+    },
+    "CLEAR": {
+      "TEXT": "Clear"
+    },
+    "COPY": {
+      "TEXT": "Copy"
+    },
+    "DATATABLE": {
+      "EMPTY": "No data to display",
+      "SEARCH_PLACEHOLDER": "Search...",
+      "SELECTED": "selected",
+      "TOTAL": "total"
+    },
+    "EXPORT": {
+      "TEXT": "Export"
+    },
+    "PRINT": {
+      "TEXT": "Print"
+    },
+    "REFRESH": {
+      "TEXT": "Refresh"
     }
   },
   "COMPENSANTIONS-PLANS-CONFIGURATION": {
@@ -1318,6 +1344,9 @@
     "LOGOUT": {
       "TEXT": "Logout"
     },
+    "MESSAGES": {
+      "TEXT": "Messages"
+    },
     "PROFILE": {
       "TEXT": "My profile"
     },
@@ -1329,152 +1358,9 @@
     },
     "USER-SUMMARY": {
       "TEXT": "Full summary"
-    }
-  },
-  "LANDING_PAGE": {
-    "NAVBAR": {
-      "SERVICES": "Services",
-      "ABOUT_US": "About Us",
-      "TESTIMONIALS": "Testimonials",
-      "CONTACT": "Contact",
-      "LOGIN": "Sign In",
-      "START": "Get Started"
     },
-    "HERO": {
-      "BADGE": "Premium Trading",
-      "TITLE": "SUCCESS TOGETHER",
-      "SUBTITLE": "United on the path to success. Smart investments, exceptional returns, and a bright financial future.",
-      "CTA_PRIMARY": "Start Investing",
-      "CTA_SECONDARY": "Schedule Consultation",
-      "METRICS": {
-        "PROFITABILITY": "Profitability",
-        "MANAGED": "Managed",
-        "INVESTORS": "Investors"
-      }
-    },
-    "FEATURES": {
-      "TAG": "OUR SERVICES",
-      "TITLE": "Elite Investment",
-      "DESCRIPTION": "We offer premium services designed for investors seeking excellence",
-      "CARDS": {
-        "TRADING": {
-          "TITLE": "Advanced Trading",
-          "DESCRIPTION": "State-of-the-art algorithms to maximize your investments in real time."
-        },
-        "SECURITY": {
-          "TITLE": "Total Security",
-          "DESCRIPTION": "Your assets protected with the highest banking security technology."
-        },
-        "ANALYSIS": {
-          "TITLE": "Deep Analysis",
-          "DESCRIPTION": "Detailed reports and market analysis for informed decisions."
-        },
-        "ADVISORY": {
-          "TITLE": "Personalized Advisory",
-          "DESCRIPTION": "Experts dedicated to helping you achieve your financial goals."
-        },
-        "TRANSPARENCY": {
-          "TITLE": "Transparency",
-          "DESCRIPTION": "Complete clarity in every operation and portfolio movement."
-        },
-        "SUPPORT": {
-          "TITLE": "24/7 Support",
-          "DESCRIPTION": "Continuous attention so you never miss an opportunity."
-        }
-      }
-    },
-    "TRADING_SECTION": {
-      "TAG": "PROFESSIONAL TRADING",
-      "TITLE": "Technology that",
-      "TITLE_HIGHLIGHT": "Multiplies Results",
-      "DESCRIPTION": "Our platform uses artificial intelligence and predictive analysis to identify opportunities before the market.",
-      "HIGHLIGHTS": {
-        "ITEM1": "Returns above market average",
-        "ITEM2": "Smart portfolio diversification",
-        "ITEM3": "Advanced risk management",
-        "ITEM4": "Access to exclusive markets"
-      },
-      "STAT_LABEL": "Annual Return",
-      "STAT_VALUE": "+142.5%"
-    },
-    "HOW_IT_WORKS": {
-      "TAG": "SIMPLE PROCESS",
-      "TITLE": "How It Works",
-      "DESCRIPTION": "In just 4 simple steps, you'll be on your way to financial success",
-      "STEPS": {
-        "STEP1": {
-          "TITLE": "Registration",
-          "DESCRIPTION": "Create your account in minutes and verify your identity securely."
-        },
-        "STEP2": {
-          "TITLE": "Planning",
-          "DESCRIPTION": "Our experts design a personalized strategy for you."
-        },
-        "STEP3": {
-          "TITLE": "Investment",
-          "DESCRIPTION": "Start investing with cutting-edge technology backing."
-        },
-        "STEP4": {
-          "TITLE": "Growth",
-          "DESCRIPTION": "Watch your wealth grow consistently."
-        }
-      }
-    },
-    "TESTIMONIALS_SECTION": {
-      "TAG": "TESTIMONIALS",
-      "TITLE": "Success Stories",
-      "DESCRIPTION": "Thousands of investors are already reaching their financial goals",
-      "TESTIMONIALS": [
-        {
-          "QUOTE": "The best financial decision I've made. In 6 months, my portfolio grew 85%. The team is exceptional.",
-          "NAME": "Carlos Mendoza",
-          "ROLE": "CEO, TechVentures"
-        },
-        {
-          "QUOTE": "Professionalism and real results. Personalized advice makes all the difference. Highly recommended.",
-          "NAME": "María González",
-          "ROLE": "Entrepreneur"
-        },
-        {
-          "QUOTE": "Total transparency and consistent returns. Finally found a platform I can trust.",
-          "NAME": "Roberto Silva",
-          "ROLE": "Investor"
-        }
-      ]
-    },
-    "CTA_SECTION": {
-      "TITLE": "Start Your",
-      "TITLE_HIGHLIGHT": "Journey to Success",
-      "DESCRIPTION": "Join thousands of investors who are already building their financial future. The opportunity is now.",
-      "CTA_PRIMARY": "Open Free Account",
-      "CTA_SECONDARY": "Talk to an Expert",
-      "STATS": {
-        "RATING": "Rating",
-        "SECURE": "Secure",
-        "SUPPORT": "Support"
-      }
-    },
-    "FOOTER": {
-      "TAGLINE": "Smart investments for a bright future.",
-      "LINKS": {
-        "HEADING": "Links",
-        "SERVICES": "Services",
-        "ABOUT_US": "About Us",
-        "TESTIMONIALS": "Testimonials",
-        "CONTACT": "Contact"
-      },
-      "LEGAL": {
-        "HEADING": "Legal",
-        "PRIVACY": "Privacy",
-        "TERMS": "Terms",
-        "REGULATION": "Regulation",
-        "SECURITY": "Security"
-      },
-      "CONTACT": {
-        "HEADING": "Contact"
-      },
-      "COPYRIGHT": "© 2025 GoldTrade. All rights reserved.",
-      "DISCLAIMER": "Investments involve risks. Past performance does not guarantee future results."
+    "WELCOME": {
+      "TEXT": "Welcome"
     }
   },
   "HOME-ADMIN-PAGE": {
@@ -1522,6 +1408,19 @@
     "AVAILABLE-BALANCE": {
       "TEXT": "Available Balance"
     },
+    "exitojuntos-DASHBOARD": {
+      "CHANGE-24H": "BNB Smart Chain",
+      "COMMISSION-PAID": "Paid commission",
+      "exitojuntos-AMOUNT": "exitojuntoss Amount",
+      "MARKET-CAP": "Public sale",
+      "MONTHLY-COMMISSION": "Monthly commission",
+      "REFERRAL-COMMISSION": "Referral Commissions",
+      "TITLE": "exitojuntos Information",
+      "TOKEN-AMOUNT": "Token Amount",
+      "TOKEN-BONUS": "Token bonus",
+      "TOKEN-CONTRACT": "Contract",
+      "USD-VALUE": "USD Value"
+    },
     "INFORMATION-1": {
       "TEXT": "Information Model 1"
     },
@@ -1536,19 +1435,6 @@
     },
     "PUBLIC-STORE": {
       "TEXT": "Public Store"
-    },
-    "exitojuntos-DASHBOARD": {
-      "CHANGE-24H": "BNB Smart Chain",
-      "COMMISSION-PAID": "Paid commission",
-      "MARKET-CAP": "Public sale",
-      "MONTHLY-COMMISSION": "Monthly commission",
-      "exitojuntos-AMOUNT": "exitojuntoss Amount",
-      "REFERRAL-COMMISSION": "Referral Commissions",
-      "TITLE": "exitojuntos Information",
-      "TOKEN-AMOUNT": "Token Amount",
-      "TOKEN-BONUS": "Token bonus",
-      "TOKEN-CONTRACT": "Contract",
-      "USD-VALUE": "USD Value"
     },
     "REGISTER": {
       "TEXT": "Register"
@@ -1679,6 +1565,152 @@
       "TEXT": "Search"
     }
   },
+  "LANDING_PAGE": {
+    "CTA_SECTION": {
+      "CTA_PRIMARY": "Open Free Account",
+      "CTA_SECONDARY": "Talk to an Expert",
+      "DESCRIPTION": "Join thousands of investors who are already building their financial future. The opportunity is now.",
+      "STATS": {
+        "RATING": "Rating",
+        "SECURE": "Secure",
+        "SUPPORT": "Support"
+      },
+      "TITLE": "Start Your",
+      "TITLE_HIGHLIGHT": "Journey to Success"
+    },
+    "FEATURES": {
+      "CARDS": {
+        "ADVISORY": {
+          "DESCRIPTION": "Experts dedicated to helping you achieve your financial goals.",
+          "TITLE": "Personalized Advisory"
+        },
+        "ANALYSIS": {
+          "DESCRIPTION": "Detailed reports and market analysis for informed decisions.",
+          "TITLE": "Deep Analysis"
+        },
+        "SECURITY": {
+          "DESCRIPTION": "Your assets protected with the highest banking security technology.",
+          "TITLE": "Total Security"
+        },
+        "SUPPORT": {
+          "DESCRIPTION": "Continuous attention so you never miss an opportunity.",
+          "TITLE": "24/7 Support"
+        },
+        "TRADING": {
+          "DESCRIPTION": "State-of-the-art algorithms to maximize your investments in real time.",
+          "TITLE": "Advanced Trading"
+        },
+        "TRANSPARENCY": {
+          "DESCRIPTION": "Complete clarity in every operation and portfolio movement.",
+          "TITLE": "Transparency"
+        }
+      },
+      "DESCRIPTION": "We offer premium services designed for investors seeking excellence",
+      "TAG": "OUR SERVICES",
+      "TITLE": "Elite Investment"
+    },
+    "FOOTER": {
+      "CONTACT": {
+        "HEADING": "Contact"
+      },
+      "COPYRIGHT": "© 2025 GoldTrade. All rights reserved.",
+      "DISCLAIMER": "Investments involve risks. Past performance does not guarantee future results.",
+      "LEGAL": {
+        "HEADING": "Legal",
+        "PRIVACY": "Privacy",
+        "REGULATION": "Regulation",
+        "SECURITY": "Security",
+        "TERMS": "Terms"
+      },
+      "LINKS": {
+        "ABOUT_US": "About Us",
+        "CONTACT": "Contact",
+        "HEADING": "Links",
+        "SERVICES": "Services",
+        "TESTIMONIALS": "Testimonials"
+      },
+      "TAGLINE": "Smart investments for a bright future."
+    },
+    "HERO": {
+      "BADGE": "Premium Trading",
+      "CTA_PRIMARY": "Start Investing",
+      "CTA_SECONDARY": "Schedule Consultation",
+      "METRICS": {
+        "INVESTORS": "Investors",
+        "MANAGED": "Managed",
+        "PROFITABILITY": "Profitability"
+      },
+      "SUBTITLE": "United on the path to success. Smart investments, exceptional returns, and a bright financial future.",
+      "TITLE": "SUCCESS TOGETHER"
+    },
+    "HOW_IT_WORKS": {
+      "DESCRIPTION": "In just 4 simple steps, you'll be on your way to financial success",
+      "STEPS": {
+        "STEP1": {
+          "DESCRIPTION": "Create your account in minutes and verify your identity securely.",
+          "TITLE": "Registration"
+        },
+        "STEP2": {
+          "DESCRIPTION": "Our experts design a personalized strategy for you.",
+          "TITLE": "Planning"
+        },
+        "STEP3": {
+          "DESCRIPTION": "Start investing with cutting-edge technology backing.",
+          "TITLE": "Investment"
+        },
+        "STEP4": {
+          "DESCRIPTION": "Watch your wealth grow consistently.",
+          "TITLE": "Growth"
+        }
+      },
+      "TAG": "SIMPLE PROCESS",
+      "TITLE": "How It Works"
+    },
+    "NAVBAR": {
+      "ABOUT_US": "About Us",
+      "CONTACT": "Contact",
+      "LOGIN": "Sign In",
+      "SERVICES": "Services",
+      "START": "Get Started",
+      "TESTIMONIALS": "Testimonials"
+    },
+    "TESTIMONIALS_SECTION": {
+      "DESCRIPTION": "Thousands of investors are already reaching their financial goals",
+      "TAG": "TESTIMONIALS",
+      "TESTIMONIALS": [
+        {
+          "NAME": "Carlos Mendoza",
+          "QUOTE": "The best financial decision I've made. In 6 months, my portfolio grew 85%. The team is exceptional.",
+          "ROLE": "CEO, TechVentures"
+        },
+        {
+          "NAME": "María González",
+          "QUOTE": "Professionalism and real results. Personalized advice makes all the difference. Highly recommended.",
+          "ROLE": "Entrepreneur"
+        },
+        {
+          "NAME": "Roberto Silva",
+          "QUOTE": "Total transparency and consistent returns. Finally found a platform I can trust.",
+          "ROLE": "Investor"
+        }
+      ],
+      "TITLE": "Success Stories"
+    },
+    "TRADING_SECTION": {
+      "DESCRIPTION": "Our platform uses artificial intelligence and predictive analysis to identify opportunities before the market.",
+      "HIGHLIGHTS": {
+        "ITEM1": "Returns above market average",
+        "ITEM2": "Smart portfolio diversification",
+        "ITEM3": "Advanced risk management",
+        "ITEM4": "Access to exclusive markets"
+      },
+      "STAT_LABEL": "Annual Return",
+      "STAT_VALUE": "+142.5%",
+      "TAG": "PROFESSIONAL TRADING",
+      "TITLE": "Technology that",
+      "TITLE_HIGHLIGHT": "Multiplies Results"
+    }
+  },
   "LANDING-PAGE": {
     "CTA": {
       "CONTACT_FORM": "Contact Form",
@@ -1700,9 +1732,9 @@
     "NAVBAR": {
       "BNB_SCANNER": "BNB Scanner",
       "COLLABORATORS": "Collaborators",
+      "exitojuntos_PROJECT": "exitojuntos Project",
       "LOGIN": "Login",
       "PRODUCT": "Product",
-      "exitojuntos_PROJECT": "exitojuntos Project",
       "WHITE_PAPER": "White Paper"
     },
     "VIDEO": {
@@ -1749,6 +1781,9 @@
     "MY-COMMISSIONS": {
       "TEXT": "Commissions"
     },
+    "MY-NETWORK": {
+      "TEXT": "My Network"
+    },
     "MY-TICKETS": {
       "TEXT": "Tickets"
     },
@@ -1779,6 +1814,9 @@
     "USER": {
       "POST": "DEVELOPER"
     },
+    "USERS-MANAGEMENT": {
+      "TEXT": "User Management"
+    },
     "WALLET": {
       "TEXT": "My wallet"
     }
@@ -1790,6 +1828,10 @@
     "BINARY-MODEL": {
       "TEXT": "Pro Structure"
     },
+    "LEVELS": {
+      "DIRECT": "Direct",
+      "INDIRECT": "Indirect"
+    },
     "MATRIX-MODEL-5": {
       "TEXT": "Plus Structure"
     },
@@ -1799,27 +1841,42 @@
     "NETWORK-TREES": {
       "TEXT": "My Network Trees"
     },
+    "TABLE": {
+      "ACTIONS": {
+        "VIEW-NETWORK": "View Network",
+        "VIEW-PROFILE": "View Profile"
+      },
+      "COLUMNS": {
+        "CITY": "City",
+        "EMAIL": "Email",
+        "ID": "ID",
+        "LAST-NAME": "Last Name",
+        "NAME": "Name",
+        "PHONE": "Phone",
+        "REGISTERED-AT": "Registration Date",
+        "TYPE": "Type"
+      },
+      "MESSAGES": {
+        "EMPTY": "No clients to display",
+        "SELECTED": "selected",
+        "TOTAL": "total"
+      },
+      "SEARCH-PLACEHOLDER": "Search clients..."
+    },
     "TITLE": {
       "TEXT": "My Network"
     },
     "UNILEVEL-MODEL": {
       "TEXT": "Unimax"
     },
-    "LEVELS": {
-      "DIRECT": "Direct",
-      "INDIRECT": "Indirect"
-    },
     "VIEW": {
-      "TITLE": {
-        "TEXT": "My Client Network"
-      },
-      "CARD-TITLE": {
-        "TEXT": "Direct and Indirect Clients"
-      },
       "BUTTONS": {
         "VIEW-COMPLETE": {
           "TEXT": "View Complete Network"
         }
+      },
+      "CARD-TITLE": {
+        "TEXT": "Direct and Indirect Clients"
       },
       "FILTERS": {
         "EMAIL": {
@@ -1838,28 +1895,9 @@
         "INDIRECT": {
           "TEXT": "Indirect Clients"
         }
-      }
-    },
-    "TABLE": {
-      "COLUMNS": {
-        "ID": "ID",
-        "NAME": "Name",
-        "LAST-NAME": "Last Name",
-        "EMAIL": "Email",
-        "PHONE": "Phone",
-        "CITY": "City",
-        "TYPE": "Type",
-        "REGISTERED-AT": "Registration Date"
       },
-      "ACTIONS": {
-        "VIEW-NETWORK": "View Network",
-        "VIEW-PROFILE": "View Profile"
-      },
-      "SEARCH-PLACEHOLDER": "Search clients...",
-      "MESSAGES": {
-        "EMPTY": "No clients to display",
-        "TOTAL": "total",
-        "SELECTED": "selected"
+      "TITLE": {
+        "TEXT": "My Client Network"
       }
     }
   },
@@ -2478,39 +2516,35 @@
       "TEXT": "News"
     }
   },
+  "SIDEBAR": {
+    "USER-STATUS": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    }
+  },
   "SIGNIN": {
-    "BRAND_TITLE": "SUCCESS TOGETHER",
     "BRAND_SUBTITLE": "United on the road to success",
-    "FEATURE_1_TITLE": "Professional Trading",
+    "BRAND_TITLE": "SUCCESS TOGETHER",
     "FEATURE_1_DESC": "Advanced tools for experienced traders",
-    "FEATURE_2_TITLE": "Real-Time Analysis",
+    "FEATURE_1_TITLE": "Professional Trading",
     "FEATURE_2_DESC": "Instantly updated data to make better decisions",
-    "FEATURE_3_TITLE": "Guaranteed Security",
+    "FEATURE_2_TITLE": "Real-Time Analysis",
     "FEATURE_3_DESC": "Your information and capital protected with the highest standards",
-    "LOGIN_TITLE": "Sign In",
-    "LOGIN_SUBTITLE": "Access your trading account",
-    "PHONE_LABEL": "Phone Number",
-    "PHONE_PLACEHOLDER": "+1 1234 5678",
-    "PASSWORD_LABEL": "Password",
-    "PASSWORD_PLACEHOLDER": "********",
-    "REMEMBER_ME": "Remember me",
-    "FORGOT_PASSWORD": "Forgot your password?",
-    "LOGIN_BUTTON": "Sign In",
-    "OR_CONTINUE": "Or continue with",
-    "GOOGLE_BUTTON": "Google",
-    "GITHUB_BUTTON": "GitHub",
-    "NO_ACCOUNT": "Don't have an account?",
-    "REGISTER_LINK": "Register here",
+    "FEATURE_3_TITLE": "Guaranteed Security",
     "FOOTER_TEXT": "© 2025 Trading Platform. All rights reserved.",
-    "PHONE": {
-      "TEXT": "Phone Number"
-    },
-    "PHONE-IS-REQUIRED": {
-      "TEXT": "Phone number is required."
-    },
+    "FORGOT_PASSWORD": "Forgot your password?",
     "FORGOT-PASS": {
       "TEXT": "Forgot password"
     },
+    "GENERIC_ERROR": "We couldn't sign you in. Please try again.",
+    "GITHUB_BUTTON": "GitHub",
+    "GOOGLE_BUTTON": "Google",
+    "INVALID_CREDENTIALS": "Invalid credentials. Check your phone and password.",
+    "LOGIN_BUTTON": "Sign In",
+    "LOGIN_SUBTITLE": "Access your trading account",
+    "LOGIN_TITLE": "Sign In",
+    "NO_ACCOUNT": "Don't have an account?",
+    "OR_CONTINUE": "Or continue with",
     "PASS-IS-REQUIRED": {
       "TEXT": "Password is required"
     },
@@ -2520,6 +2554,18 @@
     "PASSWORD": {
       "TEXT": "Password"
     },
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_PLACEHOLDER": "********",
+    "PHONE": {
+      "TEXT": "Phone Number"
+    },
+    "PHONE_LABEL": "Phone Number",
+    "PHONE_PLACEHOLDER": "+1 1234 5678",
+    "PHONE-IS-REQUIRED": {
+      "TEXT": "Phone number is required."
+    },
+    "REGISTER_LINK": "Register here",
+    "REMEMBER_ME": "Remember me",
     "REMEMBER-ME": {
       "TEXT": "Remember me"
     },
@@ -2534,57 +2580,55 @@
     },
     "USER-NAME-MESSAGE-ERROR": {
       "TEXT": "User name is invalid"
-    },
-    "INVALID_CREDENTIALS": "Invalid credentials. Check your phone and password.",
-    "GENERIC_ERROR": "We couldn't sign you in. Please try again."
+    }
   },
   "SIGNUP": {
-    "TITLE": "REGISTER",
-    "SUBTITLE": "Join the success",
-    "REFERRED_BY": "Referred by:",
-    "PHONE_LABEL": "Phone:",
-    "NAME": "Name",
-    "NAME_REQUIRED": "Name is required",
-    "LAST_NAME": "Last Name",
-    "LAST_NAME_REQUIRED": "Last name is required",
-    "EMAIL": "Email",
-    "EMAIL_REQUIRED": "Email is required",
-    "COUNTRY": "Country",
-    "COUNTRY_REQUIRED": "Country is required",
-    "COUNTRY_PLACEHOLDER": "Select your country",
-    "PHONE": "Phone Number",
-    "PHONE_REQUIRED": "Phone number is required",
-    "CITY": "City",
-    "CITY_REQUIRED": "City is required",
-    "STATE": "State/Province",
-    "STATE_REQUIRED": "State/province is required",
     "ADDRESS": "Address",
     "ADDRESS_REQUIRED": "Address is required",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
     "BIRTH_DATE": "Date of Birth",
     "BIRTH_DATE_REQUIRED": "Date of birth is required",
+    "CITY": "City",
+    "CITY_REQUIRED": "City is required",
+    "COUNTRY": "Country",
+    "COUNTRY_PLACEHOLDER": "Select your country",
+    "COUNTRY_REQUIRED": "Country is required",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email is required",
+    "ERROR_FETCHING_USER": "Error fetching user",
+    "ERROR_LOADING_COUNTRIES": "Error loading countries",
+    "INVALID_FORM": "Invalid form.",
+    "LAST_NAME": "Last Name",
+    "LAST_NAME_REQUIRED": "Last name is required",
+    "NAME": "Name",
+    "NAME_REQUIRED": "Name is required",
     "PASSWORD": "Password",
-    "PASSWORD_REQUIRED": "Password is required",
     "PASSWORD_MINLENGTH": "Password must be at least 8 characters",
+    "PASSWORD_MISMATCH": "Passwords do not match",
     "PASSWORD_PATTERN": "Password must contain uppercase, lowercase, numbers and a special character",
+    "PASSWORD_REQUIRED": "Password is required",
+    "PHONE": "Phone Number",
+    "PHONE_LABEL": "Phone:",
+    "PHONE_REQUIRED": "Phone number is required",
+    "REFERRED_BY": "Referred by:",
     "REPEAT_PASSWORD": "Confirm Password",
     "REPEAT_PASSWORD_REQUIRED": "Password confirmation is required",
-    "PASSWORD_MISMATCH": "Passwords do not match",
+    "SIGN_IN": "Sign in",
+    "SPONSOR": "Your sponsor's name is:",
+    "STATE": "State/Province",
+    "STATE_REQUIRED": "State/province is required",
+    "SUBMIT": "Register",
+    "SUBTITLE": "Join the success",
     "TERMS_ACCEPT": "I accept the",
     "TERMS_AND_CONDITIONS": "terms and conditions",
     "TERMS_POLICY": "of use and privacy policy",
     "TERMS_REQUIRED": "You must accept the terms and conditions",
-    "SUBMIT": "Register",
-    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
-    "SIGN_IN": "Sign in",
-    "INVALID_FORM": "Invalid form.",
-    "SPONSOR": "Your sponsor's name is:",
+    "TITLE": "REGISTER",
+    "USER_NOT_FOUND": "User not found",
     "USERNAME": "Username",
     "USERNAME_REQUIRED": "Username is required",
     "USERNAME_WHITESPACE": "Username cannot contain spaces",
-    "ERROR_LOADING_COUNTRIES": "Error loading countries",
-    "WARNING_NO_COUNTRIES": "Could not load countries",
-    "USER_NOT_FOUND": "User not found",
-    "ERROR_FETCHING_USER": "Error fetching user"
+    "WARNING_NO_COUNTRIES": "Could not load countries"
   },
   "THIRD_PARTY_PURCHASE": {
     "AMOUNT_TO_PAY": "Amount to pay",
@@ -2607,10 +2651,10 @@
     "REVIEW_SELECTION": "Review your selection",
     "SCAN_QR": "Scan the QR code to pay",
     "SELECT": "Select",
+    "SELECT_exitojuntosS": "Select exitojuntoss",
     "SELECT_FLOW": "What do you want to do?",
     "SELECT_MATRIX": "Select the matrix level",
     "SELECT_PAYMENT_METHOD": "Select Payment Method",
-    "SELECT_exitojuntosS": "Select exitojuntoss",
     "SELECTED": "Selected",
     "SUFFICIENT_BALANCE": "You have sufficient balance for this purchase",
     "TOTAL": "Total",
@@ -3030,32 +3074,6 @@
     },
     "TITLE": {
       "TEXT": "Wallet Withdrawal"
-    }
-  },
-  "COMMON": {
-    "ACTIONS": {
-      "TEXT": "Actions"
-    },
-    "COPY": {
-      "TEXT": "Copy"
-    },
-    "PRINT": {
-      "TEXT": "Print"
-    },
-    "EXPORT": {
-      "TEXT": "Export"
-    },
-    "CLEAR": {
-      "TEXT": "Clear"
-    },
-    "REFRESH": {
-      "TEXT": "Refresh"
-    },
-    "DATATABLE": {
-      "EMPTY": "No data to display",
-      "TOTAL": "total",
-      "SELECTED": "selected",
-      "SEARCH_PLACEHOLDER": "Search..."
     }
   }
 }

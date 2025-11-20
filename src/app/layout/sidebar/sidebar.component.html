@@ -20,9 +20,10 @@
             <div class="sidebar-userpic-name">{{ user.name + ' '+user.lastName }}</div>
             <div class="profile-usertitle-job mt-2">
               <div class="btn btn-sm badge-outline col-red" *ngIf="user.status == false"><i
-                  class="bi bi-person-exclamation"></i> Inactivo</div>
+                  class="bi bi-person-exclamation"></i> {{ 'SIDEBAR.USER-STATUS.INACTIVE' | translate }}</div>
               <div class="btn btn-sm badge-outline col-green" *ngIf="user.status != null"><i
-                  class="bi bi-person-fill-check"></i> {{ user?.role?.name ? (user.role.name | translate) : 'Activo' }}
+                  class="bi bi-person-fill-check"></i> {{ user?.role?.name ? (user.role.name | translate) :
+                ('SIDEBAR.USER-STATUS.ACTIVE' | translate) }}
               </div>
             </div>
 

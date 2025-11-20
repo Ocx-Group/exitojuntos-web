@@ -1,123 +1,224 @@
 {
-  "SIGNIN": {
-    "BRAND_TITLE": "SUCESSO JUNTOS",
-    "BRAND_SUBTITLE": "Unidos no caminho do sucesso",
-    "FEATURE_1_TITLE": "Trading Profissional",
-    "FEATURE_1_DESC": "Ferramentas avançadas para traders experientes",
-    "FEATURE_2_TITLE": "Análise em Tempo Real",
-    "FEATURE_2_DESC": "Dados atualizados instantaneamente para tomar melhores decisões",
-    "FEATURE_3_TITLE": "Segurança Garantida",
-    "FEATURE_3_DESC": "Suas informações e capital protegidos com os mais altos padrões",
-    "LOGIN_TITLE": "Entrar",
-    "LOGIN_SUBTITLE": "Acesse sua conta de trading",
-    "PHONE_LABEL": "Número de Telefone",
-    "PHONE_PLACEHOLDER": "+55 11 1234 5678",
-    "PASSWORD_LABEL": "Senha",
-    "PASSWORD_PLACEHOLDER": "********",
-    "REMEMBER_ME": "Lembrar de mim",
-    "FORGOT_PASSWORD": "Esqueceu sua senha?",
-    "LOGIN_BUTTON": "Entrar",
-    "OR_CONTINUE": "Ou continue com",
-    "GOOGLE_BUTTON": "Google",
-    "GITHUB_BUTTON": "GitHub",
-    "NO_ACCOUNT": "Não tem uma conta?",
-    "REGISTER_LINK": "Registre-se aqui",
-    "FOOTER_TEXT": "© 2025 Trading Platform. Todos os direitos reservados.",
-    "PHONE": {
-      "TEXT": "Número de Telefone"
+  "CLIENT-MY-PROFILE": {
+    "ACCOUNT-INFO": {
+      "LAST-UPDATE": "Última atualização",
+      "MEMBER-SINCE": "Membro desde",
+      "TITLE": "Informações da Conta"
     },
-    "PHONE-IS-REQUIRED": {
-      "TEXT": "O número de telefone é obrigatório."
+    "BREADCRUMB": {
+      "TITLE": "Meu Perfil"
     },
-    "FORGOT-PASS": {
-      "TEXT": "Esqueceu sua senha?"
+    "HEADER": {
+      "ACCOUNT-ACTIVE": "Conta Ativa",
+      "ACCOUNT-INACTIVE": "Conta Inativa",
+      "BTN-CANCEL": "Cancelar",
+      "BTN-EDIT": "Editar Perfil",
+      "BTN-SAVE": "Salvar Alterações",
+      "BTN-SAVING": "Salvando..."
     },
-    "PASS-IS-REQUIRED": {
-      "TEXT": "A senha é obrigatória."
+    "LOCATION": {
+      "ADDRESS": "Endereço",
+      "CITY": "Cidade",
+      "COUNTRY": "País",
+      "PLACEHOLDER-ADDRESS": "Rua, número, apartamento",
+      "PLACEHOLDER-CITY": "Cidade",
+      "TITLE": "Localização"
     },
-    "PASS-MESSAGE-ERROR": {
-      "TEXT": "A senha deve ter pelo menos 6 e no máximo 15 caracteres."
+    "MESSAGES": {
+      "ERROR": "Erro ao atualizar o perfil",
+      "SUCCESS": "Perfil atualizado com sucesso"
     },
-    "PASSWORD": {
-      "TEXT": "Senha"
+    "PERSONAL-INFO": {
+      "BIRTHDATE": "Data de Nascimento",
+      "EMAIL": "E-mail",
+      "LASTNAME": "Sobrenome",
+      "NAME": "Nome",
+      "NO-SPECIFIED": "Não especificado",
+      "NO-SPECIFIED-FEMALE": "Não especificada",
+      "PHONE": "Telefone",
+      "PLACEHOLDER-LASTNAME": "Digite seu sobrenome",
+      "PLACEHOLDER-NAME": "Digite seu nome",
+      "TITLE": "Informações Pessoais"
     },
-    "REMEMBER-ME": {
-      "TEXT": "Lembrar de mim"
+    "VALIDATIONS": {
+      "FIELDS-REQUIRED": "Por favor, preencha todos os campos obrigatórios",
+      "LASTNAME-REQUIRED": "O sobrenome é obrigatório (mínimo 2 caracteres)",
+      "NAME-REQUIRED": "O nome é obrigatório (mínimo 2 caracteres)"
+    }
+  },
+  "COMMON": {
+    "ACTIONS": {
+      "TEXT": "Ações"
     },
-    "TITLE": {
-      "TEXT": "Entrar"
+    "CLEAR": {
+      "TEXT": "Limpar"
     },
-    "USER-NAME": {
-      "TEXT": "Seu Usuário"
+    "COPY": {
+      "TEXT": "Copiar"
     },
-    "USER-NAME-IS-REQUIRED": {
-      "TEXT": "O usuário é obrigatório."
+    "DATATABLE": {
+      "EMPTY": "Não há dados para mostrar",
+      "SEARCH_PLACEHOLDER": "Pesquisar...",
+      "SELECTED": "selecionado",
+      "TOTAL": "total"
     },
-    "USER-NAME-MESSAGE-ERROR": {
-      "TEXT": "O usuário é inválido."
+    "EXPORT": {
+      "TEXT": "Exportar"
     },
-    "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu telefone e senha.",
-    "GENERIC_ERROR": "Não foi possível iniciar sessão. Tente novamente."
+    "PRINT": {
+      "TEXT": "Imprimir"
+    },
+    "REFRESH": {
+      "TEXT": "Atualizar"
+    }
   },
   "HEADER": {
-    "LANGUAGE": "Português"
+    "LANGUAGE": "Português",
+    "LOGOUT": {
+      "TEXT": "Sair"
+    },
+    "MESSAGES": {
+      "TEXT": "Mensagens"
+    },
+    "PROFILE": {
+      "TEXT": "Meu Perfil"
+    },
+    "WELCOME": {
+      "TEXT": "Bem-vindo"
+    }
   },
   "LANDING_PAGE": {
-    "NAVBAR": {
-      "SERVICES": "Serviços",
-      "ABOUT_US": "Sobre Nós",
-      "TESTIMONIALS": "Depoimentos",
-      "CONTACT": "Contato",
-      "LOGIN": "Entrar",
-      "START": "Começar"
+    "CTA_SECTION": {
+      "CTA_PRIMARY": "Abrir Conta Grátis",
+      "CTA_SECONDARY": "Falar com um Especialista",
+      "DESCRIPTION": "Junte-se a milhares de investidores que já estão construindo seu futuro financeiro. A oportunidade é agora.",
+      "STATS": {
+        "RATING": "Classificação",
+        "SECURE": "Seguro",
+        "SUPPORT": "Suporte"
+      },
+      "TITLE": "Comece Sua",
+      "TITLE_HIGHLIGHT": "Jornada para o Sucesso"
+    },
+    "FEATURES": {
+      "CARDS": {
+        "ADVISORY": {
+          "DESCRIPTION": "Especialistas dedicados a ajudá-lo a alcançar seus objetivos financeiros.",
+          "TITLE": "Consultoria Personalizada"
+        },
+        "ANALYSIS": {
+          "DESCRIPTION": "Relatórios detalhados e análise de mercado para decisões informadas.",
+          "TITLE": "Análise Profunda"
+        },
+        "SECURITY": {
+          "DESCRIPTION": "Seus ativos protegidos com a mais alta tecnologia de segurança bancária.",
+          "TITLE": "Segurança Total"
+        },
+        "SUPPORT": {
+          "DESCRIPTION": "Atendimento contínuo para que você nunca perca uma oportunidade.",
+          "TITLE": "Suporte 24/7"
+        },
+        "TRADING": {
+          "DESCRIPTION": "Algoritmos de última geração para maximizar seus investimentos em tempo real.",
+          "TITLE": "Trading Avançado"
+        },
+        "TRANSPARENCY": {
+          "DESCRIPTION": "Total clareza em cada operação e movimento do seu portfólio.",
+          "TITLE": "Transparência"
+        }
+      },
+      "DESCRIPTION": "Oferecemos serviços premium projetados para investidores que buscam excelência",
+      "TAG": "NOSSOS SERVIÇOS",
+      "TITLE": "Investimento de Elite"
+    },
+    "FOOTER": {
+      "CONTACT": {
+        "HEADING": "Contato"
+      },
+      "COPYRIGHT": "© 2025 GoldTrade. Todos os direitos reservados.",
+      "DISCLAIMER": "Os investimentos envolvem riscos. O desempenho passado não garante resultados futuros.",
+      "LEGAL": {
+        "HEADING": "Legal",
+        "PRIVACY": "Privacidade",
+        "REGULATION": "Regulamentação",
+        "SECURITY": "Segurança",
+        "TERMS": "Termos"
+      },
+      "LINKS": {
+        "ABOUT_US": "Sobre Nós",
+        "CONTACT": "Contato",
+        "HEADING": "Links",
+        "SERVICES": "Serviços",
+        "TESTIMONIALS": "Depoimentos"
+      },
+      "TAGLINE": "Investimentos inteligentes para um futuro brilhante."
     },
     "HERO": {
       "BADGE": "Trading Premium",
-      "TITLE": "SUCESSO JUNTOS",
-      "SUBTITLE": "Unidos no caminho para o sucesso. Investimentos inteligentes, retornos excepcionais e um futuro financeiro brilhante.",
       "CTA_PRIMARY": "Começar a Investir",
       "CTA_SECONDARY": "Agendar Consulta",
       "METRICS": {
-        "PROFITABILITY": "Rentabilidade",
+        "INVESTORS": "Investidores",
         "MANAGED": "Gerenciados",
-        "INVESTORS": "Investidores"
-      }
+        "PROFITABILITY": "Rentabilidade"
+      },
+      "SUBTITLE": "Unidos no caminho para o sucesso. Investimentos inteligentes, retornos excepcionais e um futuro financeiro brilhante.",
+      "TITLE": "SUCESSO JUNTOS"
     },
-    "FEATURES": {
-      "TAG": "NOSSOS SERVIÇOS",
-      "TITLE": "Investimento de Elite",
-      "DESCRIPTION": "Oferecemos serviços premium projetados para investidores que buscam excelência",
-      "CARDS": {
-        "TRADING": {
-          "TITLE": "Trading Avançado",
-          "DESCRIPTION": "Algoritmos de última geração para maximizar seus investimentos em tempo real."
+    "HOW_IT_WORKS": {
+      "DESCRIPTION": "Em apenas 4 passos simples, você estará no caminho para o sucesso financeiro",
+      "STEPS": {
+        "STEP1": {
+          "DESCRIPTION": "Crie sua conta em minutos e verifique sua identidade de forma segura.",
+          "TITLE": "Registro"
         },
-        "SECURITY": {
-          "TITLE": "Segurança Total",
-          "DESCRIPTION": "Seus ativos protegidos com a mais alta tecnologia de segurança bancária."
+        "STEP2": {
+          "DESCRIPTION": "Nossos especialistas elaboram uma estratégia personalizada para você.",
+          "TITLE": "Planejamento"
         },
-        "ANALYSIS": {
-          "TITLE": "Análise Profunda",
-          "DESCRIPTION": "Relatórios detalhados e análise de mercado para decisões informadas."
+        "STEP3": {
+          "DESCRIPTION": "Comece a investir com o suporte de tecnologia de ponta.",
+          "TITLE": "Investimento"
         },
-        "ADVISORY": {
-          "TITLE": "Consultoria Personalizada",
-          "DESCRIPTION": "Especialistas dedicados a ajudá-lo a alcançar seus objetivos financeiros."
-        },
-        "TRANSPARENCY": {
-          "TITLE": "Transparência",
-          "DESCRIPTION": "Total clareza em cada operação e movimento do seu portfólio."
-        },
-        "SUPPORT": {
-          "TITLE": "Suporte 24/7",
-          "DESCRIPTION": "Atendimento contínuo para que você nunca perca uma oportunidade."
+        "STEP4": {
+          "DESCRIPTION": "Observe seu patrimônio crescer consistentemente.",
+          "TITLE": "Crescimento"
         }
-      }
+      },
+      "TAG": "PROCESSO SIMPLES",
+      "TITLE": "Como Funciona"
+    },
+    "NAVBAR": {
+      "ABOUT_US": "Sobre Nós",
+      "CONTACT": "Contato",
+      "LOGIN": "Entrar",
+      "SERVICES": "Serviços",
+      "START": "Começar",
+      "TESTIMONIALS": "Depoimentos"
+    },
+    "TESTIMONIALS_SECTION": {
+      "DESCRIPTION": "Milhares de investidores já estão alcançando suas metas financeiras",
+      "TAG": "DEPOIMENTOS",
+      "TESTIMONIALS": [
+        {
+          "NAME": "Carlos Mendoza",
+          "QUOTE": "A melhor decisão financeira que tomei. Em 6 meses, meu portfólio cresceu 85%. A equipe é excepcional.",
+          "ROLE": "CEO, TechVentures"
+        },
+        {
+          "NAME": "María González",
+          "QUOTE": "Profissionalismo e resultados reais. A assessoria personalizada faz toda a diferença. Altamente recomendado.",
+          "ROLE": "Empreendedora"
+        },
+        {
+          "NAME": "Roberto Silva",
+          "QUOTE": "Transparência total e retornos consistentes. Finalmente encontrei uma plataforma em que posso confiar.",
+          "ROLE": "Investidor"
+        }
+      ],
+      "TITLE": "Histórias de Sucesso"
     },
     "TRADING_SECTION": {
-      "TAG": "TRADING PROFISSIONAL",
-      "TITLE": "Tecnologia que",
-      "TITLE_HIGHLIGHT": "Multiplica Resultados",
       "DESCRIPTION": "Nossa plataforma utiliza inteligência artificial e análise preditiva para identificar oportunidades antes do mercado.",
       "HIGHLIGHTS": {
         "ITEM1": "Retornos superiores ao mercado",
@@ -126,135 +227,19 @@
         "ITEM4": "Acesso a mercados exclusivos"
       },
       "STAT_LABEL": "Retorno Anual",
-      "STAT_VALUE": "+142.5%"
-    },
-    "HOW_IT_WORKS": {
-      "TAG": "PROCESSO SIMPLES",
-      "TITLE": "Como Funciona",
-      "DESCRIPTION": "Em apenas 4 passos simples, você estará no caminho para o sucesso financeiro",
-      "STEPS": {
-        "STEP1": {
-          "TITLE": "Registro",
-          "DESCRIPTION": "Crie sua conta em minutos e verifique sua identidade de forma segura."
-        },
-        "STEP2": {
-          "TITLE": "Planejamento",
-          "DESCRIPTION": "Nossos especialistas elaboram uma estratégia personalizada para você."
-        },
-        "STEP3": {
-          "TITLE": "Investimento",
-          "DESCRIPTION": "Comece a investir com o suporte de tecnologia de ponta."
-        },
-        "STEP4": {
-          "TITLE": "Crescimento",
-          "DESCRIPTION": "Observe seu patrimônio crescer consistentemente."
-        }
-      }
-    },
-    "TESTIMONIALS_SECTION": {
-      "TAG": "DEPOIMENTOS",
-      "TITLE": "Histórias de Sucesso",
-      "DESCRIPTION": "Milhares de investidores já estão alcançando suas metas financeiras",
-      "TESTIMONIALS": [
-        {
-          "QUOTE": "A melhor decisão financeira que tomei. Em 6 meses, meu portfólio cresceu 85%. A equipe é excepcional.",
-          "NAME": "Carlos Mendoza",
-          "ROLE": "CEO, TechVentures"
-        },
-        {
-          "QUOTE": "Profissionalismo e resultados reais. A assessoria personalizada faz toda a diferença. Altamente recomendado.",
-          "NAME": "María González",
-          "ROLE": "Empreendedora"
-        },
-        {
-          "QUOTE": "Transparência total e retornos consistentes. Finalmente encontrei uma plataforma em que posso confiar.",
-          "NAME": "Roberto Silva",
-          "ROLE": "Investidor"
-        }
-      ]
-    },
-    "CTA_SECTION": {
-      "TITLE": "Comece Sua",
-      "TITLE_HIGHLIGHT": "Jornada para o Sucesso",
-      "DESCRIPTION": "Junte-se a milhares de investidores que já estão construindo seu futuro financeiro. A oportunidade é agora.",
-      "CTA_PRIMARY": "Abrir Conta Grátis",
-      "CTA_SECONDARY": "Falar com um Especialista",
-      "STATS": {
-        "RATING": "Classificação",
-        "SECURE": "Seguro",
-        "SUPPORT": "Suporte"
-      }
-    },
-    "FOOTER": {
-      "TAGLINE": "Investimentos inteligentes para um futuro brilhante.",
-      "LINKS": {
-        "HEADING": "Links",
-        "SERVICES": "Serviços",
-        "ABOUT_US": "Sobre Nós",
-        "TESTIMONIALS": "Depoimentos",
-        "CONTACT": "Contato"
-      },
-      "LEGAL": {
-        "HEADING": "Legal",
-        "PRIVACY": "Privacidade",
-        "TERMS": "Termos",
-        "REGULATION": "Regulamentação",
-        "SECURITY": "Segurança"
-      },
-      "CONTACT": {
-        "HEADING": "Contato"
-      },
-      "COPYRIGHT": "© 2025 GoldTrade. Todos os direitos reservados.",
-      "DISCLAIMER": "Os investimentos envolvem riscos. O desempenho passado não garante resultados futuros."
+      "STAT_VALUE": "+142.5%",
+      "TAG": "TRADING PROFISSIONAL",
+      "TITLE": "Tecnologia que",
+      "TITLE_HIGHLIGHT": "Multiplica Resultados"
     }
   },
-  "SIGNUP": {
-    "TITLE": "REGISTRO",
-    "SUBTITLE": "Junte-se ao sucesso",
-    "REFERRED_BY": "Indicado por:",
-    "PHONE_LABEL": "Tel:",
-    "NAME": "Nome",
-    "NAME_REQUIRED": "O nome é obrigatório",
-    "LAST_NAME": "Sobrenome",
-    "LAST_NAME_REQUIRED": "O sobrenome é obrigatório",
-    "EMAIL": "Email",
-    "EMAIL_REQUIRED": "O email é obrigatório",
-    "COUNTRY": "País",
-    "COUNTRY_REQUIRED": "O país é obrigatório",
-    "COUNTRY_PLACEHOLDER": "Selecione seu país",
-    "PHONE": "Número de telefone",
-    "PHONE_REQUIRED": "O número de telefone é obrigatório",
-    "CITY": "Cidade",
-    "CITY_REQUIRED": "A cidade é obrigatória",
-    "STATE": "Estado/Província",
-    "STATE_REQUIRED": "O estado/província é obrigatório",
-    "ADDRESS": "Endereço",
-    "ADDRESS_REQUIRED": "O endereço é obrigatório",
-    "BIRTH_DATE": "Data de nascimento",
-    "BIRTH_DATE_REQUIRED": "A data de nascimento é obrigatória",
-    "PASSWORD": "Senha",
-    "PASSWORD_REQUIRED": "A senha é obrigatória",
-    "PASSWORD_MINLENGTH": "A senha deve ter pelo menos 8 caracteres",
-    "PASSWORD_PATTERN": "A senha deve conter maiúsculas, minúsculas, números e um caractere especial",
-    "REPEAT_PASSWORD": "Confirmar senha",
-    "REPEAT_PASSWORD_REQUIRED": "A confirmação da senha é obrigatória",
-    "PASSWORD_MISMATCH": "As senhas não correspondem",
-    "TERMS_ACCEPT": "Aceito os",
-    "TERMS_AND_CONDITIONS": "termos e condições",
-    "TERMS_POLICY": "de uso e a política de privacidade",
-    "TERMS_REQUIRED": "Você deve aceitar os termos e condições",
-    "SUBMIT": "Registrar-se",
-    "ALREADY_HAVE_ACCOUNT": "Já tem uma conta?",
-    "SIGN_IN": "Entrar",
-    "INVALID_FORM": "Formulário inválido.",
-    "SPONSOR": "O nome do seu patrocinador é:",
-    "USERNAME": "Nome de usuário",
-    "USERNAME_REQUIRED": "O nome de usuário é obrigatório",
-    "USERNAME_WHITESPACE": "O nome de usuário não pode conter espaços",
-    "ERROR_LOADING_COUNTRIES": "Erro ao carregar os países",
-    "WARNING_NO_COUNTRIES": "Não foi possível carregar os países",
-    "USER_NOT_FOUND": "Usuário não encontrado",
-    "ERROR_FETCHING_USER": "Erro ao buscar o usuário"
+  "MENUITEMS": {
+    "MY-NETWORK": {
+      "TEXT": "Minha Rede"
+    },
+    "USERS-MANAGEMENT": {
+      "TEXT": "Gestão de Usuários"
+    }
   },
   "MY-NETWORK-PAGE": {
     "BACK": {
@@ -262,6 +247,10 @@
     },
     "BINARY-MODEL": {
       "TEXT": "Estrutura Pro"
+    },
+    "LEVELS": {
+      "DIRECT": "Direto",
+      "INDIRECT": "Indireto"
     },
     "MATRIX-MODEL-5": {
       "TEXT": "Estrutura Plus"
@@ -272,27 +261,42 @@
     "NETWORK-TREES": {
       "TEXT": "Árvores da Minha Rede"
     },
+    "TABLE": {
+      "ACTIONS": {
+        "VIEW-NETWORK": "Ver Rede",
+        "VIEW-PROFILE": "Ver Perfil"
+      },
+      "COLUMNS": {
+        "CITY": "Cidade",
+        "EMAIL": "Email",
+        "ID": "ID",
+        "LAST-NAME": "Sobrenome",
+        "NAME": "Nome",
+        "PHONE": "Telefone",
+        "REGISTERED-AT": "Data de Registro",
+        "TYPE": "Tipo"
+      },
+      "MESSAGES": {
+        "EMPTY": "Não há clientes para mostrar",
+        "SELECTED": "selecionado",
+        "TOTAL": "total"
+      },
+      "SEARCH-PLACEHOLDER": "Buscar clientes..."
+    },
     "TITLE": {
       "TEXT": "Minha Rede"
     },
     "UNILEVEL-MODEL": {
       "TEXT": "Unimax"
     },
-    "LEVELS": {
-      "DIRECT": "Direto",
-      "INDIRECT": "Indireto"
-    },
     "VIEW": {
-      "TITLE": {
-        "TEXT": "Minha Rede de Clientes"
-      },
-      "CARD-TITLE": {
-        "TEXT": "Clientes Diretos e Indiretos"
-      },
       "BUTTONS": {
         "VIEW-COMPLETE": {
           "TEXT": "Ver Rede Completa"
         }
+      },
+      "CARD-TITLE": {
+        "TEXT": "Clientes Diretos e Indiretos"
       },
       "FILTERS": {
         "EMAIL": {
@@ -311,102 +315,124 @@
         "INDIRECT": {
           "TEXT": "Clientes Indiretos"
         }
-      }
-    },
-    "TABLE": {
-      "COLUMNS": {
-        "ID": "ID",
-        "NAME": "Nome",
-        "LAST-NAME": "Sobrenome",
-        "EMAIL": "Email",
-        "PHONE": "Telefone",
-        "CITY": "Cidade",
-        "TYPE": "Tipo",
-        "REGISTERED-AT": "Data de Registro"
       },
-      "ACTIONS": {
-        "VIEW-NETWORK": "Ver Rede",
-        "VIEW-PROFILE": "Ver Perfil"
-      },
-      "SEARCH-PLACEHOLDER": "Buscar clientes...",
-      "MESSAGES": {
-        "EMPTY": "Não há clientes para mostrar",
-        "TOTAL": "total",
-        "SELECTED": "selecionado"
+      "TITLE": {
+        "TEXT": "Minha Rede de Clientes"
       }
     }
   },
-  "CLIENT-MY-PROFILE": {
-    "BREADCRUMB": {
-      "TITLE": "Meu Perfil"
-    },
-    "HEADER": {
-      "ACCOUNT-ACTIVE": "Conta Ativa",
-      "ACCOUNT-INACTIVE": "Conta Inativa",
-      "BTN-EDIT": "Editar Perfil",
-      "BTN-SAVE": "Salvar Alterações",
-      "BTN-SAVING": "Salvando...",
-      "BTN-CANCEL": "Cancelar"
-    },
-    "PERSONAL-INFO": {
-      "TITLE": "Informações Pessoais",
-      "NAME": "Nome",
-      "LASTNAME": "Sobrenome",
-      "EMAIL": "E-mail",
-      "PHONE": "Telefone",
-      "BIRTHDATE": "Data de Nascimento",
-      "PLACEHOLDER-NAME": "Digite seu nome",
-      "PLACEHOLDER-LASTNAME": "Digite seu sobrenome",
-      "NO-SPECIFIED": "Não especificado",
-      "NO-SPECIFIED-FEMALE": "Não especificada"
-    },
-    "LOCATION": {
-      "TITLE": "Localização",
-      "ADDRESS": "Endereço",
-      "CITY": "Cidade",
-      "COUNTRY": "País",
-      "PLACEHOLDER-ADDRESS": "Rua, número, apartamento",
-      "PLACEHOLDER-CITY": "Cidade"
-    },
-    "ACCOUNT-INFO": {
-      "TITLE": "Informações da Conta",
-      "MEMBER-SINCE": "Membro desde",
-      "LAST-UPDATE": "Última atualização"
-    },
-    "VALIDATIONS": {
-      "NAME-REQUIRED": "O nome é obrigatório (mínimo 2 caracteres)",
-      "LASTNAME-REQUIRED": "O sobrenome é obrigatório (mínimo 2 caracteres)",
-      "FIELDS-REQUIRED": "Por favor, preencha todos os campos obrigatórios"
-    },
-    "MESSAGES": {
-      "SUCCESS": "Perfil atualizado com sucesso",
-      "ERROR": "Erro ao atualizar o perfil"
+  "SIDEBAR": {
+    "USER-STATUS": {
+      "ACTIVE": "Ativo",
+      "INACTIVE": "Inativo"
     }
   },
-  "COMMON": {
-    "ACTIONS": {
-      "TEXT": "Ações"
+  "SIGNIN": {
+    "BRAND_SUBTITLE": "Unidos no caminho do sucesso",
+    "BRAND_TITLE": "SUCESSO JUNTOS",
+    "FEATURE_1_DESC": "Ferramentas avançadas para traders experientes",
+    "FEATURE_1_TITLE": "Trading Profissional",
+    "FEATURE_2_DESC": "Dados atualizados instantaneamente para tomar melhores decisões",
+    "FEATURE_2_TITLE": "Análise em Tempo Real",
+    "FEATURE_3_DESC": "Suas informações e capital protegidos com os mais altos padrões",
+    "FEATURE_3_TITLE": "Segurança Garantida",
+    "FOOTER_TEXT": "© 2025 Trading Platform. Todos os direitos reservados.",
+    "FORGOT_PASSWORD": "Esqueceu sua senha?",
+    "FORGOT-PASS": {
+      "TEXT": "Esqueceu sua senha?"
     },
-    "COPY": {
-      "TEXT": "Copiar"
+    "GENERIC_ERROR": "Não foi possível fazer login. Por favor, tente novamente.",
+    "GITHUB_BUTTON": "GitHub",
+    "GOOGLE_BUTTON": "Google",
+    "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu telefone e senha.",
+    "LOGIN_BUTTON": "Entrar",
+    "LOGIN_SUBTITLE": "Acesse sua conta de trading",
+    "LOGIN_TITLE": "Entrar",
+    "NO_ACCOUNT": "Não tem uma conta?",
+    "OR_CONTINUE": "Ou continue com",
+    "PASS-IS-REQUIRED": {
+      "TEXT": "A senha é obrigatória."
     },
-    "PRINT": {
-      "TEXT": "Imprimir"
+    "PASS-MESSAGE-ERROR": {
+      "TEXT": "A senha deve ter pelo menos 6 e no máximo 15 caracteres."
     },
-    "EXPORT": {
-      "TEXT": "Exportar"
+    "PASSWORD": {
+      "TEXT": "Senha"
     },
-    "CLEAR": {
-      "TEXT": "Limpar"
+    "PASSWORD_LABEL": "Senha",
+    "PASSWORD_PLACEHOLDER": "********",
+    "PHONE": {
+      "TEXT": "Número de Telefone"
     },
-    "REFRESH": {
-      "TEXT": "Atualizar"
+    "PHONE_LABEL": "Número de Telefone",
+    "PHONE_PLACEHOLDER": "+55 11 1234 5678",
+    "PHONE-IS-REQUIRED": {
+      "TEXT": "O número de telefone é obrigatório."
     },
-    "DATATABLE": {
-      "EMPTY": "Não há dados para mostrar",
-      "TOTAL": "total",
-      "SELECTED": "selecionado",
-      "SEARCH_PLACEHOLDER": "Pesquisar..."
+    "REGISTER_LINK": "Registre-se aqui",
+    "REMEMBER_ME": "Lembrar de mim",
+    "REMEMBER-ME": {
+      "TEXT": "Lembrar de mim"
+    },
+    "TITLE": {
+      "TEXT": "Entrar"
+    },
+    "USER-NAME": {
+      "TEXT": "Seu Usuário"
+    },
+    "USER-NAME-IS-REQUIRED": {
+      "TEXT": "O usuário é obrigatório."
+    },
+    "USER-NAME-MESSAGE-ERROR": {
+      "TEXT": "O usuário é inválido."
     }
+  },
+  "SIGNUP": {
+    "ADDRESS": "Endereço",
+    "ADDRESS_REQUIRED": "O endereço é obrigatório",
+    "ALREADY_HAVE_ACCOUNT": "Já tem uma conta?",
+    "BIRTH_DATE": "Data de nascimento",
+    "BIRTH_DATE_REQUIRED": "A data de nascimento é obrigatória",
+    "CITY": "Cidade",
+    "CITY_REQUIRED": "A cidade é obrigatória",
+    "COUNTRY": "País",
+    "COUNTRY_PLACEHOLDER": "Selecione seu país",
+    "COUNTRY_REQUIRED": "O país é obrigatório",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "O email é obrigatório",
+    "ERROR_FETCHING_USER": "Erro ao buscar o usuário",
+    "ERROR_LOADING_COUNTRIES": "Erro ao carregar os países",
+    "INVALID_FORM": "Formulário inválido.",
+    "LAST_NAME": "Sobrenome",
+    "LAST_NAME_REQUIRED": "O sobrenome é obrigatório",
+    "NAME": "Nome",
+    "NAME_REQUIRED": "O nome é obrigatório",
+    "PASSWORD": "Senha",
+    "PASSWORD_MINLENGTH": "A senha deve ter pelo menos 8 caracteres",
+    "PASSWORD_MISMATCH": "As senhas não correspondem",
+    "PASSWORD_PATTERN": "A senha deve conter maiúsculas, minúsculas, números e um caractere especial",
+    "PASSWORD_REQUIRED": "A senha é obrigatória",
+    "PHONE": "Número de telefone",
+    "PHONE_LABEL": "Tel:",
+    "PHONE_REQUIRED": "O número de telefone é obrigatório",
+    "REFERRED_BY": "Indicado por:",
+    "REPEAT_PASSWORD": "Confirmar senha",
+    "REPEAT_PASSWORD_REQUIRED": "A confirmação da senha é obrigatória",
+    "SIGN_IN": "Entrar",
+    "SPONSOR": "O nome do seu patrocinador é:",
+    "STATE": "Estado/Província",
+    "STATE_REQUIRED": "O estado/província é obrigatório",
+    "SUBMIT": "Registrar-se",
+    "SUBTITLE": "Junte-se ao sucesso",
+    "TERMS_ACCEPT": "Aceito os",
+    "TERMS_AND_CONDITIONS": "termos e condições",
+    "TERMS_POLICY": "de uso e a política de privacidade",
+    "TERMS_REQUIRED": "Você deve aceitar os termos e condições",
+    "TITLE": "REGISTRO",
+    "USER_NOT_FOUND": "Usuário não encontrado",
+    "USERNAME": "Nome de usuário",
+    "USERNAME_REQUIRED": "O nome de usuário é obrigatório",
+    "USERNAME_WHITESPACE": "O nome de usuário não pode conter espaços",
+    "WARNING_NO_COUNTRIES": "Não foi possível carregar os países"
   }
 }
