@@ -354,6 +354,12 @@
     },
     "REFRESH": {
       "TEXT": "Actualiser"
+    },
+    "DATATABLE": {
+      "EMPTY": "Aucune donnée à afficher",
+      "TOTAL": "total",
+      "SELECTED": "sélectionné",
+      "SEARCH_PLACEHOLDER": "Rechercher..."
     }
   }
 }

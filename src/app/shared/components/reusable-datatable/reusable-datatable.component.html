@@ -15,13 +15,8 @@
                   <i-feather name="search" style="color: #96a2b4;"></i-feather>
                 </div>
               </div>
-              <input
-                style="background-color: white;"
-                type="text"
-                class="form-control"
-                (keyup)='updateFilter($event)'
-                aria-label="Search box"
-                [placeholder]="mergedConfig.searchPlaceholder | translate">
+              <input style="background-color: white;" type="text" class="form-control" (keyup)='updateFilter($event)'
+                aria-label="Search box" [placeholder]="mergedConfig.searchPlaceholder">
             </div>
           </div>
         </div>
@@ -59,19 +54,12 @@
   </div>
 
   <!-- Tabla NGX Datatable -->
-  <ngx-datatable
-    #table
-    class="material"
-    [rows]="rows"
-    [loadingIndicator]="loadingIndicator"
-    [columnMode]="mergedConfig?.columnMode || 'force'"
-    [headerHeight]="mergedConfig?.headerHeight || 50"
+  <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+    [columnMode]="mergedConfig?.columnMode || 'force'" [headerHeight]="mergedConfig?.headerHeight || 50"
     [footerHeight]="mergedConfig?.footerHeight || 50"
     [rowHeight]="mergedConfig?.rowHeight === 'auto' ? 'auto' : +(mergedConfig?.rowHeight || 'auto')"
-    [limit]="mergedConfig?.limit || 10"
-    [scrollbarH]="scrollBarHorizontal"
-    [reorderable]="mergedConfig?.reorderable !== false"
-    [swapColumns]="mergedConfig?.swapColumns !== false"
+    [limit]="mergedConfig?.limit || 10" [scrollbarH]="scrollBarHorizontal"
+    [reorderable]="mergedConfig?.reorderable !== false" [swapColumns]="mergedConfig?.swapColumns !== false"
     [cssClasses]="{
       sortAscending: 'datatable-icon-up',
       sortDescending: 'datatable-icon-down',
@@ -80,31 +68,19 @@
       pagerRightArrow: 'datatable-icon-right',
       pagerPrevious: 'datatable-icon-prev',
       pagerNext: 'datatable-icon-skip'
-    }"
-    [messages]="{
-      emptyMessage: 'No hay datos para mostrar',
-      totalMessage: 'total',
-      selectedMessage: 'seleccionado'
-    }"
-    (activate)="onRowClick($event)"
-    (select)="onSelect($event)">
+    }" [messages]="mergedConfig.messages" (activate)="onRowClick($event)" (select)="onSelect($event)">
 
     <!-- Columnas dinámicas -->
-    <ngx-datatable-column
-      *ngFor="let column of columns"
-      [name]="column.name"
-      [prop]="column.prop"
-      [sortable]="column.sortable !== false"
-      [canAutoResize]="column.canAutoResize !== false"
-      [draggable]="column.draggable !== false"
-      [resizeable]="column.resizeable !== false"
-      [width]="column.width"
-      [minWidth]="column.minWidth"
-      [maxWidth]="column.maxWidth">
+    <ngx-datatable-column *ngFor="let column of columns" [name]="column.name" [prop]="column.prop"
+      [sortable]="column.sortable !== false" [canAutoResize]="column.canAutoResize !== false"
+      [draggable]="column.draggable !== false" [resizeable]="column.resizeable !== false" [width]="column.width"
+      [minWidth]="column.minWidth" [maxWidth]="column.maxWidth">
 
       <!-- Template personalizado para el header si existe -->
-      <ng-template *ngIf="column.headerTemplate" ngx-datatable-header-template let-column="column" let-sortDir="sortDir" let-sortFn="sortFn" let-selectFn="selectFn">
-        <ng-container *ngTemplateOutlet="column.headerTemplate; context: { column: column, sortDir: sortDir, sortFn: sortFn, selectFn: selectFn }"></ng-container>
+      <ng-template *ngIf="column.headerTemplate" ngx-datatable-header-template let-column="column" let-sortDir="sortDir"
+        let-sortFn="sortFn" let-selectFn="selectFn">
+        <ng-container
+          *ngTemplateOutlet="column.headerTemplate; context: { column: column, sortDir: sortDir, sortFn: sortFn, selectFn: selectFn }"></ng-container>
       </ng-template>
 
       <!-- Template para la celda -->
@@ -119,12 +95,8 @@
     </ngx-datatable-column>
 
     <!-- Columna de acciones si hay acciones definidas -->
-    <ngx-datatable-column
-      *ngIf="(actions && actions.length > 0) || actionsTemplate"
-      [name]="'COMMON.ACTIONS.TEXT' | translate"
-      [sortable]="false"
-      [canAutoResize]="true"
-      [draggable]="false"
+    <ngx-datatable-column *ngIf="(actions && actions.length > 0) || actionsTemplate"
+      [name]="'COMMON.ACTIONS.TEXT' | translate" [sortable]="false" [canAutoResize]="true" [draggable]="false"
       [resizeable]="false">
       <ng-template let-row="row" ngx-datatable-cell-template>
         <!-- Template de acciones personalizado -->
@@ -134,20 +106,13 @@
 
         <!-- Dropdown de acciones por defecto -->
         <div *ngIf="!actionsTemplate && actions && actions.length > 0" ngbDropdown container="body">
-          <button
-            type="button"
-            class="btn btn-outline-primary btn-sm"
-            ngbDropdownToggle>
+          <button type="button" class="btn btn-outline-primary btn-sm" ngbDropdownToggle>
             {{ 'COMMON.ACTIONS.TEXT' | translate }}
           </button>
           <div ngbDropdownMenu>
             <ng-container *ngFor="let action of actions">
-              <a
-                *ngIf="shouldShowAction(action, row)"
-                ngbDropdownItem
-                [ngClass]="action.class"
-                (click)="executeAction(action, row)"
-                style="cursor: pointer;">
+              <a *ngIf="shouldShowAction(action, row)" ngbDropdownItem [ngClass]="action.class"
+                (click)="executeAction(action, row)" style="cursor: pointer;">
                 <i *ngIf="action.icon" [class]="action.icon"></i>
                 <span [style.margin-left]="action.icon ? '8px' : '0'">{{ action.label }}</span>
               </a>
@@ -159,4 +124,3 @@
 
   </ngx-datatable>
 </div>
-

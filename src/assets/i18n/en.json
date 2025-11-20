@@ -3003,6 +3003,12 @@
     },
     "REFRESH": {
       "TEXT": "Refresh"
+    },
+    "DATATABLE": {
+      "EMPTY": "No data to display",
+      "TOTAL": "total",
+      "SELECTED": "selected",
+      "SEARCH_PLACEHOLDER": "Search..."
     }
   }
 }

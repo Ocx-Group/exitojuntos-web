@@ -3000,6 +3000,12 @@
     },
     "REFRESH": {
       "TEXT": "Actualizar"
+    },
+    "DATATABLE": {
+      "EMPTY": "No hay datos para mostrar",
+      "TOTAL": "total",
+      "SELECTED": "seleccionado",
+      "SEARCH_PLACEHOLDER": "Buscar..."
     }
   }
 }
