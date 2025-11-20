@@ -284,7 +284,7 @@ export class SigninComponent implements OnInit {
   private redirectByRole(roleName?: string | null): void {
     const normalizedRole = roleName?.toLowerCase();
     const targetRoute =
-      normalizedRole === 'admin' ? '/admin/home-admin' : '/app/home';
+      normalizedRole === 'admin' ? '/admin/home-admin' : '/app/my-network';
 
     this.router.navigate([targetRoute]).then();
   }
