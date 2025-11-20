@@ -85,20 +85,6 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  getUserInfo() {
-    const currentUser = this.authService.currentUserAffiliateValue;
-    if (!currentUser) return;
-
-    this.affiliateService
-      .getAffiliateById(currentUser.id)
-      .subscribe(response => {
-        if (response.success) {
-          this.user = response.data;
-          this.populateForm();
-        }
-      });
-  }
-
   populateForm() {
     this.profileForm.patchValue({
       name: this.user.name || '',
@@ -150,26 +136,42 @@ export class MyProfileComponent implements OnInit {
     this.user.address = formData.address;
     this.user.city = formData.city;
 
-    this.affiliateService.updateAffiliate(this.user).subscribe({
+    // Crear el DTO con los tipos correctos
+    const updateProfileDto = {
+      name: formData.name,
+      lastName: formData.lastName,
+      birtDate: formData.birthDate ? new Date(formData.birthDate) : undefined,
+      address: formData.address,
+      city: formData.city,
+    };
+
+    this.authService.updateProfile(updateProfileDto).subscribe({
       next: response => {
+        this.isLoading = false;
         if (response.success) {
+          console.log('Datos actualizados correctamente', response);
           this.toastr.success(
-            this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.SUCCESS'),
+            response.message ||
+              this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.SUCCESS'),
+            'Éxito',
           );
           this.isEditMode = false;
-          this.getUserInfo();
         } else {
           this.toastr.error(
-            this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR'),
+            response.message ||
+              this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR'),
+            'Error',
           );
         }
-        this.isLoading = false;
       },
       error: error => {
-        this.toastr.error(
-          this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR'),
-        );
         this.isLoading = false;
+        const errorMessage =
+          error.error?.message ||
+          error.message ||
+          this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR');
+        this.toastr.error(errorMessage, 'Error');
+        console.error('Error al actualizar perfil:', error);
       },
     });
   }

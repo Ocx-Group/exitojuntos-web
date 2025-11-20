@@ -9,6 +9,7 @@ import { environment } from '@environments/environment';
 import { Response } from '@app/core/models/response-model/response.model';
 import { ToastrService } from 'ngx-toastr';
 import { JwtHelperService } from '../jwt-helper/jwt-helper.service';
+import { UpdateProfileDto } from '@app/core/interfaces/update-profile';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -293,6 +294,39 @@ export class AuthService {
             error.error?.message || 'Error al obtener red personal',
             'Error',
           );
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  /**
+   * Actualiza el perfil del usuario autenticado
+   * @param updateProfileDto Datos del perfil a actualizar
+   * @returns Observable con los datos actualizados del usuario
+   */
+  updateProfile(updateProfileDto: UpdateProfileDto): Observable<any> {
+    const token = this.currentUserAffiliateValue?.access_token ?? '';
+    const headers = token
+      ? httpOptions.headers.set('Authorization', `Bearer ${token}`)
+      : httpOptions.headers;
+
+    return this.http
+      .patch<Response>(`${this.urlApi}/auth/profile`, updateProfileDto, {
+        headers,
+      })
+      .pipe(
+        map(response => {
+          // Actualizar el usuario en el localStorage y signals si es necesario
+          if (response.success && response.data) {
+            const currentUser = this.currentUserAffiliateValue;
+            if (currentUser) {
+              const updatedUser = { ...currentUser, ...response.data };
+              this.setUserAffiliateValue(updatedUser);
+            }
+          }
+          return response;
+        }),
+        catchError(error => {
           return throwError(() => error);
         }),
       );
