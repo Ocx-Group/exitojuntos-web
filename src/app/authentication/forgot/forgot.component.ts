@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -6,25 +7,30 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
 
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'app-forgot',
-    templateUrl: './forgot.component.html',
-    styleUrls: ['./forgot.component.scss'],
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule]
+  selector: 'app-forgot',
+  templateUrl: './forgot.component.html',
+  styleUrls: ['./forgot.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
 })
 export class ForgotComponent implements OnInit {
   forgotPassword: FormGroup;
   submitted = false;
+  loading = false;
+  readonly navbarIcon = 'assets/exito-logo.svg';
+
   constructor(
-    private affiliateService: AffiliateService,
-    private toastr: ToastrService,
+    private readonly affiliateService: AffiliateService,
+    private readonly toastr: ToastrService,
+    private readonly translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -46,41 +52,51 @@ export class ForgotComponent implements OnInit {
 
     if (this.forgotPassword.invalid) return;
 
-    let email = this.forgotPassword.value.email;
+    const email = this.forgotPassword.value.email;
+    this.loading = true;
 
     this.affiliateService.sendPasswordRecovery(email).subscribe({
       next: value => {
+        this.loading = false;
         if (value.success) {
           this.emailConfirmation();
         } else {
-          this.toastr.error(
-            'El usuario no se encuentra registrado en el sistema',
-          );
+          const errorMessage = this.translate.instant('FORGOT.USER_NOT_FOUND');
+          this.toastr.error(errorMessage);
         }
       },
       error: () => {
-        this.toastr.error('Error');
+        this.loading = false;
+        const errorMessage = this.translate.instant('FORGOT.ERROR');
+        this.toastr.error(errorMessage);
       },
     });
   }
 
   validateEmail() {
     const emailControl = this.forgotPassword.get('email');
-    if (emailControl.errors) {
+    if (emailControl?.errors) {
       return;
     }
 
-    if (emailControl.dirty) {
+    if (emailControl?.dirty) {
       emailControl.updateValueAndValidity();
     }
   }
 
   emailConfirmation() {
+    const title = this.translate.instant('FORGOT.SUCCESS_TITLE');
+    const text = this.translate.instant('FORGOT.SUCCESS_MESSAGE');
+    const confirmButtonText = this.translate.instant('FORGOT.SUCCESS_BUTTON');
+
     Swal.fire({
-      title: 'Restablecimiento de contraseña',
-      text: 'Se ha enviado un correo electrónico con un enlace para restablecer su contraseña. Por favor, revisa la bandeja de entrada o carpeta de spam.',
+      title: title,
+      text: text,
       icon: 'success',
-      confirmButtonText: 'Entendido',
+      confirmButtonText: confirmButtonText,
+      confirmButtonColor: '#FFB800',
+      background: '#1a1a1a',
+      color: '#ffffff',
     });
   }
 }

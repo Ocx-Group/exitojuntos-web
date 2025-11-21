@@ -2589,6 +2589,30 @@
       "TEXT": "El usuario es invalido."
     }
   },
+  "FORGOT": {
+    "BACK_TO_LOGIN": "Volver al inicio de sesión",
+    "BRAND_SUBTITLE": "Recupera el acceso a tu cuenta de forma segura",
+    "BRAND_TITLE": "ÉXITO JUNTOS",
+    "EMAIL_INVALID": "Por favor, ingresa un correo electrónico válido",
+    "EMAIL_LABEL": "Correo Electrónico",
+    "EMAIL_PLACEHOLDER": "tu@correo.com",
+    "EMAIL_REQUIRED": "El correo electrónico es requerido",
+    "ERROR": "Error al enviar el correo. Inténtalo nuevamente",
+    "FEATURE_1_DESC": "Proceso simple y rápido para recuperar tu acceso",
+    "FEATURE_1_TITLE": "Recuperación Rápida",
+    "FEATURE_2_DESC": "El enlace de recuperación expira en 24 horas",
+    "FEATURE_2_TITLE": "Enlace Temporal",
+    "FEATURE_3_DESC": "Tu información está protegida durante todo el proceso",
+    "FEATURE_3_TITLE": "Proceso Seguro",
+    "FOOTER_TEXT": "© 2025 Exito Juntos. Todos los derechos reservados.",
+    "SEND_BUTTON": "Enviar Enlace de Recuperación",
+    "SUBTITLE": "Te enviaremos un enlace para restablecer tu contraseña a tu correo electrónico",
+    "SUCCESS_BUTTON": "Entendido",
+    "SUCCESS_MESSAGE": "Se ha enviado un correo electrónico con un enlace para restablecer tu contraseña. Por favor, revisa la bandeja de entrada o carpeta de spam.",
+    "SUCCESS_TITLE": "Restablecimiento de contraseña",
+    "TITLE": "Recuperar Contraseña",
+    "USER_NOT_FOUND": "El usuario no se encuentra registrado en el sistema"
+  },
   "SIGNUP": {
     "ADDRESS": "Dirección",
     "ADDRESS_REQUIRED": "La dirección es requerida",

@@ -2589,6 +2589,34 @@
       "TEXT": "User name is required"
     },
     "USER-NAME-MESSAGE-ERROR": {
+      "TEXT": "The username is invalid."
+    }
+  },
+  "FORGOT": {
+    "BACK_TO_LOGIN": "Back to login",
+    "BRAND_SUBTITLE": "Recover access to your account securely",
+    "BRAND_TITLE": "SUCCESS TOGETHER",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "EMAIL_LABEL": "Email Address",
+    "EMAIL_PLACEHOLDER": "your@email.com",
+    "EMAIL_REQUIRED": "Email address is required",
+    "ERROR": "Error sending email. Please try again",
+    "FEATURE_1_DESC": "Simple and quick process to recover your access",
+    "FEATURE_1_TITLE": "Quick Recovery",
+    "FEATURE_2_DESC": "Recovery link expires in 24 hours",
+    "FEATURE_2_TITLE": "Temporary Link",
+    "FEATURE_3_DESC": "Your information is protected throughout the process",
+    "FEATURE_3_TITLE": "Secure Process",
+    "FOOTER_TEXT": "© 2025 Success Together. All rights reserved.",
+    "SEND_BUTTON": "Send Recovery Link",
+    "SUBTITLE": "We'll send you a link to reset your password to your email address",
+    "SUCCESS_BUTTON": "Got it",
+    "SUCCESS_MESSAGE": "An email has been sent with a link to reset your password. Please check your inbox or spam folder.",
+    "SUCCESS_TITLE": "Password Reset",
+    "TITLE": "Recover Password",
+    "USER_NOT_FOUND": "User is not registered in the system"
+  },
+    "USER-NAME-MESSAGE-ERROR": {
       "TEXT": "User name is invalid"
     }
   },

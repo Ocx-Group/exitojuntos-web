@@ -152,7 +152,7 @@
               <input type="checkbox" formControlName="remeber" class="checkbox-input">
               <span class="checkbox-text">{{ 'SIGNIN.REMEMBER_ME' | translate }}</span>
             </label>
-            <a [routerLink]="['/authentication/forgot']" class="forgot-link">{{ 'SIGNIN.FORGOT_PASSWORD' | translate
+            <a [routerLink]="['/forgot']" class="forgot-link">{{ 'SIGNIN.FORGOT_PASSWORD' | translate
               }}</a>
           </div>
 
@@ -171,7 +171,7 @@
           <!-- Sign up link -->
           <div class="signup-link">
             <span>{{ 'SIGNIN.NO_ACCOUNT' | translate }}</span>
-            <a [routerLink]="['/authentication/signup']" class="register-link">{{ 'SIGNIN.REGISTER_LINK' | translate
+            <a [routerLink]="['/signup']" class="register-link">{{ 'SIGNIN.REGISTER_LINK' | translate
               }}</a>
           </div>
         </form>

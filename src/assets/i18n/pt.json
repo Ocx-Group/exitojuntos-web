@@ -49,6 +49,30 @@
       "NAME-REQUIRED": "O nome é obrigatório (mínimo 2 caracteres)"
     }
   },
+  "FORGOT": {
+    "BACK_TO_LOGIN": "Voltar ao login",
+    "BRAND_SUBTITLE": "Recupere o acesso à sua conta com segurança",
+    "BRAND_TITLE": "SUCESSO JUNTOS",
+    "EMAIL_INVALID": "Por favor, insira um endereço de e-mail válido",
+    "EMAIL_LABEL": "Endereço de E-mail",
+    "EMAIL_PLACEHOLDER": "seu@email.com",
+    "EMAIL_REQUIRED": "O endereço de e-mail é obrigatório",
+    "ERROR": "Erro ao enviar e-mail. Por favor, tente novamente",
+    "FEATURE_1_DESC": "Processo simples e rápido para recuperar seu acesso",
+    "FEATURE_1_TITLE": "Recuperação Rápida",
+    "FEATURE_2_DESC": "O link de recuperação expira em 24 horas",
+    "FEATURE_2_TITLE": "Link Temporário",
+    "FEATURE_3_DESC": "Suas informações estão protegidas durante todo o processo",
+    "FEATURE_3_TITLE": "Processo Seguro",
+    "FOOTER_TEXT": "© 2025 Sucesso Juntos. Todos os direitos reservados.",
+    "SEND_BUTTON": "Enviar Link de Recuperação",
+    "SUBTITLE": "Enviaremos um link para redefinir sua senha para o seu endereço de e-mail",
+    "SUCCESS_BUTTON": "Entendi",
+    "SUCCESS_MESSAGE": "Um e-mail foi enviado com um link para redefinir sua senha. Por favor, verifique sua caixa de entrada ou pasta de spam.",
+    "SUCCESS_TITLE": "Redefinição de senha",
+    "TITLE": "Recuperar Senha",
+    "USER_NOT_FOUND": "O usuário não está registrado no sistema"
+  },
   "COMMON": {
     "ACTIONS": {
       "TEXT": "Ações"
