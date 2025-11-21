@@ -106,7 +106,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       description: '',
     },
   ];
-  readonly tradingImage = 'assets/images/TradingSection.png';
+  readonly tradingImage = 'assets/images/colaborate-section.png';
   tradingHighlights: string[] = [];
   readonly checkIcon = 'fa-check';
   processSteps = [
