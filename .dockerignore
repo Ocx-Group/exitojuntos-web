@@ -1,8 +1,50 @@
+# Dependencies
 node_modules
 npm-debug.log
+yarn-error.log
+
+# Build outputs
 dist
+.angular/cache
+*.log
+
+# Git
 .git
 .gitignore
-.env
+.github
+
+# Documentation
 *.md
-.angular/cache
+docs
+
+# CI/CD
+bitbucket-pipelines.yml
+.vscode
+.editorconfig
+
+# Testing
+*.spec.ts
+karma.conf.js
+src/tsconfig.spec.json
+e2e
+
+# Environment files
+.env
+.env.*
+
+# IDE
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Other
+*.zip
+*.tar
+*.gz
+src/assets/videos
+src/assets/pdf
