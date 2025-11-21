@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.changeFavicon('assets/images/favicon.ico');
+    this.changeFavicon('favicon.ico');
   }
 
   changeFavicon(url: string): void {
