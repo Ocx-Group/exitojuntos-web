@@ -1640,8 +1640,11 @@
       "CTA_SECONDARY": "Schedule Consultation",
       "METRICS": {
         "INVESTORS": "Active Members",
+        "INVESTORS_VALUE": "Verified users",
         "MANAGED": "Organized",
-        "PROFITABILITY": "Personal and Collaborative Growth"
+        "MANAGED_VALUE": "Clear management",
+        "PROFITABILITY": "Personal and Collaborative Growth",
+        "PROFITABILITY_VALUE": "No limits"
       },
       "SUBTITLE": "United on the path to personal growth. Collaboration, shared learning, and a future full of opportunities.",
       "TITLE": "SUCCESS TOGETHER"

@@ -70,9 +70,9 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   readonly heroBadgeIcon = 'fa-trophy';
   readonly primaryCtaArrow = 'fa-arrow-right';
   heroMetrics = [
-    { value: '98%', label: '' },
-    { value: '$500M+', label: '' },
-    { value: '10K+', label: '' },
+    { value: 'Sin límites', label: '' },
+    { value: 'Gestión clara', label: '' },
+    { value: 'Usuarios verificados', label: '' },
   ];
   featureCards = [
     {
@@ -334,9 +334,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
         !metrics.hasOwnProperty('LANDING_PAGE.HERO.METRICS')
       ) {
         this.heroMetrics = [
-          { value: '98%', label: metrics.PROFITABILITY || '' },
-          { value: '$500M+', label: metrics.MANAGED || '' },
-          { value: '10K+', label: metrics.INVESTORS || '' },
+          {
+            value: metrics.PROFITABILITY_VALUE || '',
+            label: metrics.PROFITABILITY || '',
+          },
+          { value: metrics.MANAGED_VALUE || '', label: metrics.MANAGED || '' },
+          {
+            value: metrics.INVESTORS_VALUE || '',
+            label: metrics.INVESTORS || '',
+          },
         ];
       }
     });

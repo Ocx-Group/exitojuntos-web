@@ -186,8 +186,11 @@
       "CTA_SECONDARY": "Planifier une Consultation",
       "METRICS": {
         "INVESTORS": "Membres Actifs",
+        "INVESTORS_VALUE": "Utilisateurs vérifiés",
         "MANAGED": "Organisés",
-        "PROFITABILITY": "Croissance Personnelle et Collaborative"
+        "MANAGED_VALUE": "Gestion claire",
+        "PROFITABILITY": "Croissance Personnelle et Collaborative",
+        "PROFITABILITY_VALUE": "Sans limites"
       },
       "SUBTITLE": "Unis sur le chemin de la croissance personnelle. Collaboration, apprentissage partagé et un avenir d'opportunités.",
       "TITLE": "SUCCÈS ENSEMBLE"

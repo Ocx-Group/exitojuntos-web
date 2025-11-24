@@ -186,8 +186,11 @@
       "CTA_SECONDARY": "Agendar Consulta",
       "METRICS": {
         "INVESTORS": "Membros Ativos",
+        "INVESTORS_VALUE": "Usuários verificados",
         "MANAGED": "Organizados",
-        "PROFITABILITY": "Crescimento Pessoal e Colaborativo"
+        "MANAGED_VALUE": "Gestão clara",
+        "PROFITABILITY": "Crescimento Pessoal e Colaborativo",
+        "PROFITABILITY_VALUE": "Sem limites"
       },
       "SUBTITLE": "Unidos no caminho do crescimento pessoal. Colaboração, aprendizado compartilhado e um futuro de oportunidades.",
       "TITLE": "SUCESSO JUNTOS"
