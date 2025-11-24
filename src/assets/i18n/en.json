@@ -2616,10 +2616,6 @@
     "TITLE": "Recover Password",
     "USER_NOT_FOUND": "User is not registered in the system"
   },
-    "USER-NAME-MESSAGE-ERROR": {
-      "TEXT": "User name is invalid"
-    }
-  },
   "SIGNUP": {
     "ADDRESS": "Address",
     "ADDRESS_REQUIRED": "Address is required",
