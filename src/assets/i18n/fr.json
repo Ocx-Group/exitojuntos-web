@@ -447,6 +447,7 @@
     "LAST_NAME_REQUIRED": "Le nom de famille est requis",
     "NAME": "Prénom",
     "NAME_REQUIRED": "Le prénom est requis",
+    "OPTIONAL": "Facultatif",
     "PASSWORD": "Mot de passe",
     "PASSWORD_MINLENGTH": "Le mot de passe doit contenir au moins 8 caractères",
     "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas",

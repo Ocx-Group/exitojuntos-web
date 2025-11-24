@@ -447,6 +447,7 @@
     "LAST_NAME_REQUIRED": "O sobrenome é obrigatório",
     "NAME": "Nome",
     "NAME_REQUIRED": "O nome é obrigatório",
+    "OPTIONAL": "Opcional",
     "PASSWORD": "Senha",
     "PASSWORD_MINLENGTH": "A senha deve ter pelo menos 8 caracteres",
     "PASSWORD_MISMATCH": "As senhas não correspondem",

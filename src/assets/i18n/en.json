@@ -2642,6 +2642,7 @@
     "LAST_NAME_REQUIRED": "Last name is required",
     "NAME": "Name",
     "NAME_REQUIRED": "Name is required",
+    "OPTIONAL": "Optional",
     "PASSWORD": "Password",
     "PASSWORD_MINLENGTH": "Password must be at least 8 characters",
     "PASSWORD_MISMATCH": "Passwords do not match",

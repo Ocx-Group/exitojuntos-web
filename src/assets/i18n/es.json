@@ -2639,6 +2639,7 @@
     "LAST_NAME_REQUIRED": "El apellido es requerido",
     "NAME": "Nombre",
     "NAME_REQUIRED": "El nombre es requerido",
+    "OPTIONAL": "Opcional",
     "PASSWORD": "Contraseña",
     "PASSWORD_MINLENGTH": "La contraseña debe tener al menos 8 caracteres",
     "PASSWORD_MISMATCH": "Las contraseñas no coinciden",
