@@ -125,22 +125,16 @@
 
         <!-- Dirección -->
         <div class="form-field">
-          <label for="address" class="form-label">{{ 'SIGNUP.ADDRESS' | translate }}</label>
-          <input id="address" type="text" formControlName="address" class="form-input"
-            [class.is-invalid]="submitted && f['address'].errors" />
-          <div *ngIf="submitted && f['address'].errors" class="error-message">
-            <span *ngIf="f['address'].errors['required']">{{ 'SIGNUP.ADDRESS_REQUIRED' | translate }}</span>
-          </div>
+          <label for="address" class="form-label">{{ 'SIGNUP.ADDRESS' | translate }} <span class="optional-label">({{
+              'SIGNUP.OPTIONAL' | translate }})</span></label>
+          <input id="address" type="text" formControlName="address" class="form-input" />
         </div>
 
         <!-- Fecha de nacimiento -->
         <div class="form-field">
-          <label for="birtDate" class="form-label">{{ 'SIGNUP.BIRTH_DATE' | translate }}</label>
-          <input id="birtDate" type="date" formControlName="birtDate" class="form-input"
-            [class.is-invalid]="submitted && f['birtDate'].errors" />
-          <div *ngIf="submitted && f['birtDate'].errors" class="error-message">
-            <span *ngIf="f['birtDate'].errors['required']">{{ 'SIGNUP.BIRTH_DATE_REQUIRED' | translate }}</span>
-          </div>
+          <label for="birtDate" class="form-label">{{ 'SIGNUP.BIRTH_DATE' | translate }} <span
+              class="optional-label">({{ 'SIGNUP.OPTIONAL' | translate }})</span></label>
+          <input id="birtDate" type="date" formControlName="birtDate" class="form-input" />
         </div>
 
         <!-- Contraseña -->

@@ -154,8 +154,8 @@ export class SignupComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         city: ['', Validators.required],
         state: ['', Validators.required],
-        address: ['', Validators.required],
-        birtDate: ['', Validators.required],
+        address: [''],
+        birtDate: [''],
         terms_conditions: [false, Validators.requiredTrue],
       },
       {
