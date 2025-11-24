@@ -269,6 +269,9 @@
     },
     "USERS-MANAGEMENT": {
       "TEXT": "Gestion des Utilisateurs"
+    },
+    "LOGS-MANAGEMENT": {
+      "TEXT": "Journaux du Système"
     }
   },
   "MY-NETWORK-PAGE": {

@@ -26,6 +26,14 @@ export const ADMIN_ROUTES: Routes = [
     canActivate: [AuthGuardAdmin, MaintenanceGuard],
   },
   {
+    path: 'logs-management',
+    loadComponent: () =>
+      import('./logs-management/logs-management.component').then(
+        m => m.LogsManagementComponent,
+      ),
+    canActivate: [AuthGuardAdmin, MaintenanceGuard],
+  },
+  {
     path: 'unilevel-tree',
     loadComponent: () =>
       import(

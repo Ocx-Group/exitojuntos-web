@@ -23,4 +23,15 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: '/admin/logs-management',
+    title: 'MENUITEMS.LOGS-MANAGEMENT.TEXT',
+    iconType: 'feather',
+    icon: 'clipboard',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];

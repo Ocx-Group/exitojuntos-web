@@ -269,6 +269,9 @@
     },
     "USERS-MANAGEMENT": {
       "TEXT": "Gestão de Usuários"
+    },
+    "LOGS-MANAGEMENT": {
+      "TEXT": "Logs do Sistema"
     }
   },
   "MY-NETWORK-PAGE": {

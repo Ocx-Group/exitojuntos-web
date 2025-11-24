@@ -1823,6 +1823,9 @@
     "USERS-MANAGEMENT": {
       "TEXT": "User Management"
     },
+    "LOGS-MANAGEMENT": {
+      "TEXT": "System Logs"
+    },
     "WALLET": {
       "TEXT": "My wallet"
     }

@@ -1,0 +1,249 @@
+<section class="section admin-dashboard">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Gestión de Logs del Sistema</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/admin/home-admin"><i class="fas fa-clipboard-list font-17"></i></a>
+    </li>
+  </ul>
+
+  <div class="section-body">
+    <!-- Stats Cards -->
+    <div class="row">
+      @for (card of statsCards; track card.title) {
+      <div class="col-xl-3 col-lg-6">
+        <app-stats-card [data]="card" />
+      </div>
+      }
+    </div>
+
+    <!-- Información adicional de estadísticas -->
+    @if (stats(); as statsData) {
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">
+              <i class="fas fa-chart-bar me-2"></i>Detalles de Estadísticas
+            </h5>
+            <div class="row">
+              <div class="col-md-3">
+                <p class="mb-1 text-muted">Debug:</p>
+                <h6>{{ statsData?.byLevel?.DEBUG ?? 0 }}</h6>
+              </div>
+              <div class="col-md-3">
+                <p class="mb-1 text-muted">Verbose:</p>
+                <h6>{{ statsData?.byLevel?.VERBOSE ?? 0 }}</h6>
+              </div>
+              <div class="col-md-3">
+                <p class="mb-1 text-muted">Log más antiguo:</p>
+                <h6>{{ statsData?.oldestLog ? (statsData.oldestLog | date: 'dd/MM/yyyy HH:mm') : 'N/A' }}</h6>
+              </div>
+              <div class="col-md-3">
+                <p class="mb-1 text-muted">Log más reciente:</p>
+                <h6>{{ statsData?.newestLog ? (statsData.newestLog | date: 'dd/MM/yyyy HH:mm') : 'N/A' }}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">
+              <i class="fas fa-filter me-2"></i>Filtros
+            </h5>
+            <div class="row g-3">
+              <!-- Nivel -->
+              <div class="col-md-3">
+                <label for="levelFilter" class="form-label">Nivel</label>
+                <select id="levelFilter" class="form-select" [(ngModel)]="filters.level" (change)="applyFilters()">
+                  <option [value]="undefined">Todos los niveles</option>
+                  <option value="ERROR">Error</option>
+                  <option value="WARN">Warning</option>
+                  <option value="LOG">Log</option>
+                  <option value="DEBUG">Debug</option>
+                  <option value="VERBOSE">Verbose</option>
+                </select>
+              </div>
+
+              <!-- Contexto -->
+              <div class="col-md-3">
+                <label for="contextFilter" class="form-label">Contexto</label>
+                <input type="text" id="contextFilter" class="form-control" placeholder="Ej: AuthService"
+                  [(ngModel)]="filters.context" (keyup.enter)="applyFilters()" />
+              </div>
+
+              <!-- Búsqueda -->
+              <div class="col-md-4">
+                <label for="searchFilter" class="form-label">Buscar en mensaje</label>
+                <input type="text" id="searchFilter" class="form-control" placeholder="Buscar texto en mensajes..."
+                  [(ngModel)]="filters.search" (keyup.enter)="applyFilters()" />
+              </div>
+
+              <!-- Botones -->
+              <div class="col-md-2 d-flex align-items-end">
+                <div class="d-flex gap-2 w-100">
+                  <button class="btn btn-primary flex-grow-1" (click)="applyFilters()" [disabled]="loading()">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <button class="btn btn-secondary flex-grow-1" (click)="clearFilters()" [disabled]="loading()">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Logs -->
+    <div class="row mt-4">
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0 text-white">
+                <i class="fas fa-list me-2 text-white"></i>Logs del Sistema
+                @if (meta().total > 0) {
+                <span class="badge bg-primary ms-2">{{ meta().total }}</span>
+                }
+              </h5>
+              <div>
+                <button class="btn btn-success btn-sm me-2" (click)="exportLogsToCSV()"
+                  [disabled]="loading() || logs().length === 0" title="Exportar a CSV">
+                  <i class="fas fa-file-csv"></i>
+                  Exportar CSV
+                </button>
+                <button class="btn btn-danger btn-sm me-2" (click)="clearAllLogs()" [disabled]="loading()"
+                  title="Limpiar todos los logs">
+                  <i class="fas fa-trash-alt"></i>
+                  Limpiar
+                </button>
+                <button class="btn btn-primary btn-sm" (click)="refreshLogs()" [disabled]="loading()">
+                  <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
+                  Actualizar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="admin-table-skin">
+              <div class="text-muted mb-3 text-end">
+                Página {{ meta().page }} de {{ meta().totalPages }}
+              </div>
+
+              @if (loading()) {
+              <div class="text-center py-5">
+                <output class="d-block">
+                  <div class="spinner-border text-primary">
+                    <span class="visually-hidden">Cargando...</span>
+                  </div>
+                </output>
+                <p class="mt-2 text-muted">Cargando logs...</p>
+              </div>
+              } @else if (logs().length === 0) {
+              <div class="text-center py-5">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <p class="text-muted">No se encontraron logs con los filtros aplicados</p>
+                <button class="btn btn-primary btn-sm" (click)="clearFilters()">
+                  <i class="fas fa-times me-1"></i>Limpiar filtros
+                </button>
+              </div>
+              } @else {
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="table-dark">
+                    <tr>
+                      <th style="width: 180px">Timestamp</th>
+                      <th style="width: 100px">Nivel</th>
+                      <th style="width: 150px">Contexto</th>
+                      <th>Mensaje</th>
+                      <th style="width: 80px">PID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (log of logs(); track log.timestamp) {
+                    <tr>
+                      <td>
+                        <small>{{ log.timestamp | date: 'dd/MM/yyyy HH:mm:ss' }}</small>
+                      </td>
+                      <td>
+                        <span [class]="getLogLevelClass(log.level)">
+                          {{ log.level }}
+                        </span>
+                      </td>
+                      <td>
+                        <span class="badge bg-secondary">{{ log.context }}</span>
+                      </td>
+                      <td>
+                        <div class="log-message" [title]="log.message">
+                          {{ log.message }}
+                        </div>
+                      </td>
+                      <td>
+                        <small class="text-muted">{{ log.pid }}</small>
+                      </td>
+                    </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Paginación -->
+              @if (meta().totalPages > 1) {
+              <nav aria-label="Paginación de logs">
+                <ul class="pagination justify-content-center mb-0 mt-3">
+                  <li class="page-item" [class.disabled]="meta().page === 1">
+                    <button class="page-link" (click)="filters.page = 1; loadLogs()" [disabled]="meta().page === 1">
+                      <i class="fas fa-angle-double-left"></i>
+                    </button>
+                  </li>
+                  <li class="page-item" [class.disabled]="meta().page === 1">
+                    <button class="page-link" (click)="filters.page = meta().page - 1; loadLogs()"
+                      [disabled]="meta().page === 1">
+                      <i class="fas fa-angle-left"></i>
+                    </button>
+                  </li>
+
+                  @for (page of [].constructor(Math.min(5, meta()?.totalPages ?? 1)); track $index; let i = $index)
+                  {
+                  @if (i + 1 <= (meta()?.totalPages ?? 1)) { <li class="page-item"
+                    [class.active]="meta().page === i + 1">
+                    <button class="page-link" (click)="filters.page = i + 1; loadLogs()">
+                      {{ i + 1 }}
+                    </button>
+                    </li>
+                    }
+                    }
+
+                    <li class="page-item" [class.disabled]="meta().page === meta().totalPages">
+                      <button class="page-link" (click)="filters.page = meta().page + 1; loadLogs()"
+                        [disabled]="meta().page === meta().totalPages">
+                        <i class="fas fa-angle-right"></i>
+                      </button>
+                    </li>
+                    <li class="page-item" [class.disabled]="meta().page === meta().totalPages">
+                      <button class="page-link" (click)="filters.page = meta().totalPages; loadLogs()"
+                        [disabled]="meta().page === meta().totalPages">
+                        <i class="fas fa-angle-double-right"></i>
+                      </button>
+                    </li>
+                </ul>
+              </nav>
+              }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
