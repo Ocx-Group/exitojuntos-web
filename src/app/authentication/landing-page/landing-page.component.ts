@@ -1,7 +1,6 @@
 import {
   Component,
   HostListener,
-  OnDestroy,
   OnInit,
   ViewEncapsulation,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -26,7 +25,7 @@ import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewe
   imports: [CommonModule, RouterLink, TranslateModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class LandingPageComponent implements OnInit, OnDestroy {
+export class LandingPageComponent implements OnInit {
   isNavbarVisible = false;
   documents = {
     whitePaper: {
@@ -228,15 +227,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.changeLanguage(savedLang || 'en');
   }
 
-  ngOnDestroy() {
-    this.closeVideo();
-  }
-
-  triggerAutomaticVideo(): void {
-    this.showPreview();
-    this.showVideo();
-  }
-
   getUserByUsername(key: string) {
     if (!key) return;
     this.affiliateService
@@ -284,32 +274,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   openNewTab(url: string) {
     window.open(url, '_blank');
-  }
-
-  showVideo(): void {
-    const selectedVideo = this.videos[this.currentLang] || this.videos['en'];
-    if (!selectedVideo) {
-      return;
-    }
-
-    const videoId = selectedVideo.url;
-    this.currentVideoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0`;
-    this.showVideoModal = true;
-  }
-
-  closeVideo(): void {
-    this.showVideoModal = false;
-    this.currentVideoUrl = '';
-    document.body.style.overflow = 'auto';
-    this.hidePreview();
-  }
-
-  showPreview(): void {
-    this.isPreviewHovered = true;
-  }
-
-  hidePreview(): void {
-    this.isPreviewHovered = false;
   }
 
   getCurrentFlagIcon(): string {

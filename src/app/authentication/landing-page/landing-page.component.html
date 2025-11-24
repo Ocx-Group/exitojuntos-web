@@ -39,7 +39,8 @@
         </div>
       </div>
 
-      <button class="btn-navbar-secondary" routerLink="/signin">{{ 'LANDING_PAGE.NAVBAR.LOGIN' | translate }}</button>
+      <button class="btn-navbar-secondary" (click)="openNewTab('/signin')">{{
+        'LANDING_PAGE.NAVBAR.LOGIN' | translate }}</button>
     </div>
   </div>
 </nav>
