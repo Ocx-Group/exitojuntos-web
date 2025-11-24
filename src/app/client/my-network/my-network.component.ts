@@ -414,6 +414,7 @@ export class MyNetworkComponent implements OnInit {
 
     const referralUrl = `exitojuntos.com/signup/${currentUser.phone}`;
     this.clipboardService.copyFromContent(referralUrl);
+    window.open(`/signup/${currentUser.phone}`);
     this.toastr.success(
       this.translate.instant('MY-NETWORK-PAGE.VIEW.SHARE.SUCCESS'),
     );
