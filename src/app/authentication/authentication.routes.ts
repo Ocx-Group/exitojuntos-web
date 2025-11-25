@@ -15,13 +15,6 @@ export const AUTHENTICATION_ROUTES: Routes = [
       ),
   },
   {
-    path: 'user_confirm/:userName',
-    loadComponent: () =>
-      import('./email-confirmation/email.confirmation.component').then(
-        m => m.EmailConfirmationComponent,
-      ),
-  },
-  {
     path: 'verify',
     loadComponent: () =>
       import('./email-verification/email-verification.component').then(
