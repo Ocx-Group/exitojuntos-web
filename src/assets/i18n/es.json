@@ -906,6 +906,7 @@
     },
     "MESSAGES": {
       "ERROR": "Error al actualizar el perfil",
+      "ERROR-UPLOAD-IMAGE": "Error al subir la imagen",
       "SUCCESS": "Perfil actualizado exitosamente"
     },
     "PERSONAL-INFO": {

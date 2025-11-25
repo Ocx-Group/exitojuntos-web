@@ -909,6 +909,7 @@
     },
     "MESSAGES": {
       "ERROR": "Error updating profile",
+      "ERROR-UPLOAD-IMAGE": "Error uploading image",
       "SUCCESS": "Profile updated successfully"
     },
     "PERSONAL-INFO": {

@@ -29,6 +29,7 @@
     },
     "MESSAGES": {
       "ERROR": "Erro ao atualizar o perfil",
+      "ERROR-UPLOAD-IMAGE": "Erro ao enviar a imagem",
       "SUCCESS": "Perfil atualizado com sucesso"
     },
     "PERSONAL-INFO": {
