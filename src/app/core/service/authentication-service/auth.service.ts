@@ -159,6 +159,24 @@ export class AuthService {
       );
   }
 
+  /**
+   * Verifica el email del usuario usando el código de verificación
+   * @param code Código de verificación enviado al email
+   * @returns Observable con la respuesta de la verificación
+   */
+  verifyEmail(code: string): Observable<any> {
+    return this.http
+      .get<Response>(`${this.urlApi}/auth/verify?code=${code}`, httpOptions)
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          return throwError(() => error);
+        }),
+      );
+  }
+
   logoutUser() {
     localStorage.removeItem('currentUserAffiliate');
 

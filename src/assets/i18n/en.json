@@ -2539,6 +2539,32 @@
       "INACTIVE": "Inactive"
     }
   },
+  "EMAIL_VERIFICATION": {
+    "ALREADY_VERIFIED": "Your account has already been verified.",
+    "ALREADY_VERIFIED_SUBTITLE": "Your account is already active. You can sign in at any time.",
+    "ALREADY_VERIFIED_TITLE": "Account Already Verified",
+    "BACK_TO_LOGIN": "Back to Sign In",
+    "BRAND_SUBTITLE": "Confirm your account to access all features",
+    "BRAND_TITLE": "SUCCESS TOGETHER",
+    "ERROR_TITLE": "Verification Error",
+    "FEATURE_1_DESC": "Your account will be activated immediately",
+    "FEATURE_1_TITLE": "Quick Verification",
+    "FEATURE_2_DESC": "Access all platform features",
+    "FEATURE_2_TITLE": "Full Access",
+    "FEATURE_3_DESC": "Your information is protected at all times",
+    "FEATURE_3_TITLE": "Guaranteed Security",
+    "FOOTER_TEXT": "© 2025 Success Together. All rights reserved.",
+    "GENERIC_ERROR": "An error occurred while verifying your account. Please try again.",
+    "GO_TO_LOGIN": "Go to Sign In",
+    "INVALID_CODE": "The verification code is invalid.",
+    "INVALID_OR_EXPIRED": "The verification code is invalid or has expired. Please request a new verification email.",
+    "LOADING_SUBTITLE": "Please wait while we verify your account...",
+    "LOADING_TITLE": "Verifying Your Account",
+    "SUCCESS_SUBTITLE": "Your account has been successfully activated. You can now sign in.",
+    "SUCCESS_TITLE": "Account Verified!",
+    "USER_EMAIL": "Email",
+    "USER_NAME": "Name"
+  },
   "SIGNIN": {
     "BRAND_SUBTITLE": "United on the road to success",
     "BRAND_TITLE": "SUCCESS TOGETHER",

@@ -22,6 +22,13 @@ export const AUTHENTICATION_ROUTES: Routes = [
       ),
   },
   {
+    path: 'verify',
+    loadComponent: () =>
+      import('./email-verification/email-verification.component').then(
+        m => m.EmailVerificationComponent,
+      ),
+  },
+  {
     path: 'signin',
     loadComponent: () =>
       import('./signin/signin.component').then(m => m.SigninComponent),

@@ -368,6 +368,32 @@
       "INACTIVE": "Inativo"
     }
   },
+  "EMAIL_VERIFICATION": {
+    "ALREADY_VERIFIED": "Sua conta já foi verificada.",
+    "ALREADY_VERIFIED_SUBTITLE": "Sua conta já está ativa. Você pode fazer login a qualquer momento.",
+    "ALREADY_VERIFIED_TITLE": "Conta Já Verificada",
+    "BACK_TO_LOGIN": "Voltar ao Login",
+    "BRAND_SUBTITLE": "Confirme sua conta para acessar todos os recursos",
+    "BRAND_TITLE": "SUCESSO JUNTOS",
+    "ERROR_TITLE": "Erro de Verificação",
+    "FEATURE_1_DESC": "Sua conta será ativada imediatamente",
+    "FEATURE_1_TITLE": "Verificação Rápida",
+    "FEATURE_2_DESC": "Acesse todos os recursos da plataforma",
+    "FEATURE_2_TITLE": "Acesso Completo",
+    "FEATURE_3_DESC": "Suas informações estão protegidas o tempo todo",
+    "FEATURE_3_TITLE": "Segurança Garantida",
+    "FOOTER_TEXT": "© 2025 Exito Juntos. Todos os direitos reservados.",
+    "GENERIC_ERROR": "Ocorreu um erro ao verificar sua conta. Por favor, tente novamente.",
+    "GO_TO_LOGIN": "Ir para o Login",
+    "INVALID_CODE": "O código de verificação é inválido.",
+    "INVALID_OR_EXPIRED": "O código de verificação é inválido ou expirou. Por favor, solicite um novo e-mail de verificação.",
+    "LOADING_SUBTITLE": "Por favor, aguarde enquanto verificamos sua conta...",
+    "LOADING_TITLE": "Verificando Sua Conta",
+    "SUCCESS_SUBTITLE": "Sua conta foi ativada com sucesso. Você já pode fazer login.",
+    "SUCCESS_TITLE": "Conta Verificada!",
+    "USER_EMAIL": "E-mail",
+    "USER_NAME": "Nome"
+  },
   "SIGNIN": {
     "BRAND_SUBTITLE": "Unidos no caminho do sucesso",
     "BRAND_TITLE": "SUCESSO JUNTOS",

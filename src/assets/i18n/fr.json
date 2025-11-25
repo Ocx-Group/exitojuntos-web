@@ -368,6 +368,32 @@
       "INACTIVE": "Inactif"
     }
   },
+  "EMAIL_VERIFICATION": {
+    "ALREADY_VERIFIED": "Votre compte a déjà été vérifié.",
+    "ALREADY_VERIFIED_SUBTITLE": "Votre compte est déjà actif. Vous pouvez vous connecter à tout moment.",
+    "ALREADY_VERIFIED_TITLE": "Compte Déjà Vérifié",
+    "BACK_TO_LOGIN": "Retour à la Connexion",
+    "BRAND_SUBTITLE": "Confirmez votre compte pour accéder à toutes les fonctionnalités",
+    "BRAND_TITLE": "SUCCÈS ENSEMBLE",
+    "ERROR_TITLE": "Erreur de Vérification",
+    "FEATURE_1_DESC": "Votre compte sera activé immédiatement",
+    "FEATURE_1_TITLE": "Vérification Rapide",
+    "FEATURE_2_DESC": "Accédez à toutes les fonctionnalités de la plateforme",
+    "FEATURE_2_TITLE": "Accès Complet",
+    "FEATURE_3_DESC": "Vos informations sont protégées en permanence",
+    "FEATURE_3_TITLE": "Sécurité Garantie",
+    "FOOTER_TEXT": "© 2025 Exito Juntos. Tous droits réservés.",
+    "GENERIC_ERROR": "Une erreur s'est produite lors de la vérification de votre compte. Veuillez réessayer.",
+    "GO_TO_LOGIN": "Aller à la Connexion",
+    "INVALID_CODE": "Le code de vérification est invalide.",
+    "INVALID_OR_EXPIRED": "Le code de vérification est invalide ou a expiré. Veuillez demander un nouvel email de vérification.",
+    "LOADING_SUBTITLE": "Veuillez patienter pendant que nous vérifions votre compte...",
+    "LOADING_TITLE": "Vérification de Votre Compte",
+    "SUCCESS_SUBTITLE": "Votre compte a été activé avec succès. Vous pouvez maintenant vous connecter.",
+    "SUCCESS_TITLE": "Compte Vérifié!",
+    "USER_EMAIL": "Email",
+    "USER_NAME": "Nom"
+  },
   "SIGNIN": {
     "BRAND_SUBTITLE": "Unis sur le chemin du succès",
     "BRAND_TITLE": "SUCCÈS ENSEMBLE",

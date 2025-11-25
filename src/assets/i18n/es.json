@@ -2536,6 +2536,32 @@
       "INACTIVE": "Inactivo"
     }
   },
+  "EMAIL_VERIFICATION": {
+    "ALREADY_VERIFIED": "Tu cuenta ya ha sido verificada anteriormente.",
+    "ALREADY_VERIFIED_SUBTITLE": "Tu cuenta ya está activa. Puedes iniciar sesión en cualquier momento.",
+    "ALREADY_VERIFIED_TITLE": "Cuenta Ya Verificada",
+    "BACK_TO_LOGIN": "Volver al Inicio de Sesión",
+    "BRAND_SUBTITLE": "Confirma tu cuenta para acceder a todas las funciones",
+    "BRAND_TITLE": "ÉXITO JUNTOS",
+    "ERROR_TITLE": "Error de Verificación",
+    "FEATURE_1_DESC": "Tu cuenta será activada inmediatamente",
+    "FEATURE_1_TITLE": "Verificación Rápida",
+    "FEATURE_2_DESC": "Accede a todas las funciones de la plataforma",
+    "FEATURE_2_TITLE": "Acceso Completo",
+    "FEATURE_3_DESC": "Tu información está protegida en todo momento",
+    "FEATURE_3_TITLE": "Seguridad Garantizada",
+    "FOOTER_TEXT": "© 2025 Exito Juntos. Todos los derechos reservados.",
+    "GENERIC_ERROR": "Ocurrió un error al verificar tu cuenta. Inténtalo nuevamente.",
+    "GO_TO_LOGIN": "Ir al Inicio de Sesión",
+    "INVALID_CODE": "El código de verificación es inválido.",
+    "INVALID_OR_EXPIRED": "El código de verificación es inválido o ha expirado. Por favor, solicita un nuevo correo de verificación.",
+    "LOADING_SUBTITLE": "Por favor, espera mientras verificamos tu cuenta...",
+    "LOADING_TITLE": "Verificando tu Cuenta",
+    "SUCCESS_SUBTITLE": "Tu cuenta ha sido activada exitosamente. Ya puedes iniciar sesión.",
+    "SUCCESS_TITLE": "¡Cuenta Verificada!",
+    "USER_EMAIL": "Correo Electrónico",
+    "USER_NAME": "Nombre"
+  },
   "SIGNIN": {
     "BRAND_SUBTITLE": "Unidos en el camino al éxito",
     "BRAND_TITLE": "ÉXITO JUNTOS",

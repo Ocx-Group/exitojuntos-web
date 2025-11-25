@@ -1,0 +1,498 @@
+// Variables
+$primary-orange: #ffb800;
+$dark-orange: #ff8c00;
+$bg-dark: #0a0a0a;
+$bg-dark-secondary: #1a1a1a;
+$bg-card: rgba(20, 20, 20, 0.95);
+$text-primary: #ffffff;
+$text-secondary: #999999;
+$text-muted: #666666;
+$border-color: rgba(255, 184, 0, 0.2);
+$success-color: #ffb800;
+$error-color: #ff4444;
+$info-color: #3b82f6;
+
+// Animations
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Main container
+.verification-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, $bg-dark 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+// Background blur effects
+.blur-effect {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+
+  &-1 {
+    width: 384px;
+    height: 384px;
+    background: rgba(255, 184, 0, 0.1);
+    top: 0;
+    left: 25%;
+  }
+
+  &-2 {
+    width: 384px;
+    height: 384px;
+    background: rgba(255, 140, 0, 0.1);
+    bottom: 20%;
+    right: 25%;
+  }
+}
+
+// Stars background
+.stars-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 20px 30px white, 80px 120px white, 150px 60px white,
+      250px 180px white, 320px 90px white, 420px 220px white, 520px 140px white,
+      620px 80px white, 720px 190px white, 820px 110px white, 920px 240px white,
+      1020px 160px white, 1120px 70px white, 1220px 210px white,
+      1320px 130px white;
+    animation: twinkle 3s infinite;
+  }
+
+  &::after {
+    animation-delay: 1.5s;
+  }
+}
+
+// Content wrapper
+.verification-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+// Left section - Branding
+.left-section {
+  flex: 1;
+  max-width: 500px;
+  color: $text-primary;
+}
+
+.branding-content {
+  padding: 20px;
+}
+
+.brand-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: $primary-orange;
+  margin: 0 0 10px 0;
+  letter-spacing: 2px;
+}
+
+.brand-underline {
+  width: 80px;
+  height: 4px;
+  background: $primary-orange;
+  margin-bottom: 20px;
+}
+
+.brand-subtitle {
+  font-size: 18px;
+  color: $text-secondary;
+  margin-bottom: 50px;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.feature-text {
+  flex: 1;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-muted;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.footer-branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .footer-text {
+    font-size: 14px;
+    color: $text-muted;
+    font-weight: 600;
+  }
+
+  .footer-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Right section - Verification Card
+.right-section {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verification-card {
+  width: 100%;
+  background: $bg-card;
+  backdrop-filter: blur(20px);
+  border: 1px solid $border-color;
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.verification-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+
+  .logo-svg {
+    height: 48px;
+    width: auto;
+  }
+}
+
+// Status Content
+.status-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.status-icon-wrapper {
+  margin-bottom: 24px;
+  animation: scaleIn 0.5s ease-out;
+
+  &.success svg circle {
+    stroke: $success-color;
+  }
+
+  &.success svg path {
+    stroke: $success-color;
+  }
+
+  &.error svg {
+    circle,
+    path {
+      stroke: $error-color;
+    }
+  }
+
+  &.info svg {
+    circle,
+    path {
+      stroke: $info-color;
+    }
+  }
+}
+
+.loading-spinner-large {
+  animation: rotate 1s linear infinite;
+
+  svg {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.status-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 12px 0;
+}
+
+.status-subtitle {
+  font-size: 16px;
+  color: $text-secondary;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+}
+
+// User Info
+.user-info {
+  width: 100%;
+  background: rgba(255, 184, 0, 0.05);
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.info-label {
+  font-size: 12px;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 16px;
+  color: $text-primary;
+  font-weight: 500;
+}
+
+// Buttons
+.action-button {
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+
+  &.primary {
+    background: linear-gradient(135deg, $primary-orange 0%, $dark-orange 100%);
+    color: $bg-dark;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 184, 0, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &.secondary {
+    background: transparent;
+    color: $text-primary;
+    border: 1px solid $border-color;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 184, 0, 0.1);
+      border-color: $primary-orange;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+// Footer
+.page-footer {
+  position: relative;
+  z-index: 2;
+  padding: 24px 20px;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: $text-muted;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .verification-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .left-section {
+    max-width: 600px;
+  }
+
+  .brand-title {
+    font-size: 36px;
+  }
+
+  .features-list {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .verification-content {
+    padding: 20px;
+  }
+
+  .verification-card {
+    padding: 32px 24px;
+  }
+
+  .brand-title {
+    font-size: 32px;
+  }
+
+  .brand-subtitle {
+    font-size: 16px;
+  }
+
+  .status-title {
+    font-size: 24px;
+  }
+
+  .status-subtitle {
+    font-size: 14px;
+  }
+
+  .left-section {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-card {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .status-icon-wrapper svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .loading-spinner-large svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .status-title {
+    font-size: 20px;
+  }
+
+  .action-button {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+}

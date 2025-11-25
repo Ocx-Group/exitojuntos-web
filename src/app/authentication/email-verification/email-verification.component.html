@@ -1,0 +1,171 @@
+<div class="verification-container">
+    <!-- Background blur effects -->
+    <div class="blur-effect blur-effect-1"></div>
+    <div class="blur-effect blur-effect-2"></div>
+
+    <!-- Stars background -->
+    <div class="stars-background"></div>
+
+    <div class="verification-content">
+        <!-- Left section - Branding -->
+        <div class="left-section">
+            <div class="branding-content">
+                <h1 class="brand-title">{{ 'EMAIL_VERIFICATION.BRAND_TITLE' | translate }}</h1>
+                <div class="brand-underline"></div>
+                <p class="brand-subtitle">{{ 'EMAIL_VERIFICATION.BRAND_SUBTITLE' | translate }}</p>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#FFB800" stroke-width="2" />
+                                <path d="M8 12L11 15L16 9" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>{{ 'EMAIL_VERIFICATION.FEATURE_1_TITLE' | translate }}</h3>
+                            <p>{{ 'EMAIL_VERIFICATION.FEATURE_1_DESC' | translate }}</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#FFB800" stroke-width="2" />
+                                <path d="M8 12L11 15L16 9" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>{{ 'EMAIL_VERIFICATION.FEATURE_2_TITLE' | translate }}</h3>
+                            <p>{{ 'EMAIL_VERIFICATION.FEATURE_2_DESC' | translate }}</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#FFB800" stroke-width="2" />
+                                <path d="M8 12L11 15L16 9" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>{{ 'EMAIL_VERIFICATION.FEATURE_3_TITLE' | translate }}</h3>
+                            <p>{{ 'EMAIL_VERIFICATION.FEATURE_3_DESC' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-branding">
+                    <span class="footer-text">{{ 'EMAIL_VERIFICATION.BRAND_TITLE' | translate }}</span>
+                    <div class="footer-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="24" height="24" rx="4" stroke="#FFB800" stroke-width="2" />
+                            <path d="M12 16L15 19L20 13" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right section - Verification Status -->
+        <div class="right-section">
+            <div class="verification-card">
+                <!-- Logo Icon -->
+                <div class="verification-logo">
+                    <img [src]="navbarIcon" alt="Éxito Juntos" class="logo-svg" />
+                </div>
+
+                <!-- Loading State -->
+                <div *ngIf="verificationStatus === 'loading'" class="status-content loading-state">
+                    <div class="status-icon-wrapper">
+                        <div class="loading-spinner-large">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="28" stroke="#333" stroke-width="4" stroke-opacity="0.2" />
+                                <path d="M32 4C32 4 32 4 32 4C46.3594 4 58 15.6406 58 30" stroke="#FFB800"
+                                    stroke-width="4" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="status-title">{{ 'EMAIL_VERIFICATION.LOADING_TITLE' | translate }}</h2>
+                    <p class="status-subtitle">{{ 'EMAIL_VERIFICATION.LOADING_SUBTITLE' | translate }}</p>
+                </div>
+
+                <!-- Success State -->
+                <div *ngIf="verificationStatus === 'success'" class="status-content success-state">
+                    <div class="status-icon-wrapper success">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" stroke="#FFB800" stroke-width="4" />
+                            <path d="M20 32L28 40L44 24" stroke="#FFB800" stroke-width="4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h2 class="status-title">{{ 'EMAIL_VERIFICATION.SUCCESS_TITLE' | translate }}</h2>
+                    <p class="status-subtitle">{{ 'EMAIL_VERIFICATION.SUCCESS_SUBTITLE' | translate }}</p>
+
+                    <div *ngIf="userData" class="user-info">
+                        <div class="info-item">
+                            <span class="info-label">{{ 'EMAIL_VERIFICATION.USER_NAME' | translate }}:</span>
+                            <span class="info-value">{{ userData.name }} {{ userData.lastName }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">{{ 'EMAIL_VERIFICATION.USER_EMAIL' | translate }}:</span>
+                            <span class="info-value">{{ userData.email }}</span>
+                        </div>
+                    </div>
+
+                    <button class="action-button primary" (click)="goToLogin()">
+                        {{ 'EMAIL_VERIFICATION.GO_TO_LOGIN' | translate }}
+                    </button>
+                </div>
+
+                <!-- Already Verified State -->
+                <div *ngIf="verificationStatus === 'already-verified'" class="status-content info-state">
+                    <div class="status-icon-wrapper info">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" stroke="#3b82f6" stroke-width="4" />
+                            <path d="M32 20V32M32 44V44.02" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h2 class="status-title">{{ 'EMAIL_VERIFICATION.ALREADY_VERIFIED_TITLE' | translate }}</h2>
+                    <p class="status-subtitle">{{ 'EMAIL_VERIFICATION.ALREADY_VERIFIED_SUBTITLE' | translate }}</p>
+
+                    <button class="action-button primary" (click)="goToLogin()">
+                        {{ 'EMAIL_VERIFICATION.GO_TO_LOGIN' | translate }}
+                    </button>
+                </div>
+
+                <!-- Error State -->
+                <div *ngIf="verificationStatus === 'error'" class="status-content error-state">
+                    <div class="status-icon-wrapper error">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="28" stroke="#ff4444" stroke-width="4" />
+                            <path d="M24 24L40 40M40 24L24 40" stroke="#ff4444" stroke-width="4"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h2 class="status-title">{{ 'EMAIL_VERIFICATION.ERROR_TITLE' | translate }}</h2>
+                    <p class="status-subtitle">{{ errorMessage }}</p>
+
+                    <div class="button-group">
+                        <button class="action-button secondary" (click)="goToLogin()">
+                            {{ 'EMAIL_VERIFICATION.BACK_TO_LOGIN' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+        <p>{{ 'EMAIL_VERIFICATION.FOOTER_TEXT' | translate }}</p>
+    </div>
+</div>
