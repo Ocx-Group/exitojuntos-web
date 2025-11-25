@@ -122,7 +122,10 @@ export class AuthService {
       .pipe(
         map((response: Response) => {
           if (response.success && response.data?.user) {
-            this.validateUserType(response);
+            // Solo guardar el usuario si está verificado (status === true)
+            if (response.data.user.status === true) {
+              this.validateUserType(response);
+            }
           }
           return response;
         }),
