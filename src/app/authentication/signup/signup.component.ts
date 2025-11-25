@@ -219,15 +219,22 @@ export class SignupComponent implements OnInit {
     user.termsConditions = this.registerForm.value.terms_conditions;
     user.roleId = 2;
 
-    this.affiliateService.createAffiliate(user).subscribe(response => {
-      if (response.success) {
-        this.showSuccess(response.message);
-        setTimeout(() => {
-          this.router.navigate(['/signin']).then();
-        }, 5000);
-      } else {
-        this.showError(response.message);
-      }
+    this.affiliateService.createAffiliate(user).subscribe({
+      next: response => {
+        if (response.success) {
+          this.showSuccess(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/signin']).then();
+          }, 5000);
+        } else {
+          const errorMessage = this.getErrorMessage(response);
+          this.showError(errorMessage);
+        }
+      },
+      error: error => {
+        const errorMessage = this.getErrorMessage(error);
+        this.showError(errorMessage);
+      },
     });
   }
 
@@ -237,6 +244,79 @@ export class SignupComponent implements OnInit {
 
   showError(message: string) {
     this.toastr.error(message);
+  }
+
+  private getErrorMessage(error: any): string {
+    const statusCode = error?.code || error?.status;
+    const message = error?.message || error?.error?.message || '';
+
+    // Normalizar el mensaje para comparación
+    const normalizedMessage = this.normalizeText(message);
+
+    // Mapeo de errores conocidos
+    const errorMap: { [key: string]: string } = {
+      'el numero de telefono ya esta registrado':
+        'SIGNUP.PHONE_ALREADY_REGISTERED',
+      'the phone number is already registered':
+        'SIGNUP.PHONE_ALREADY_REGISTERED',
+      'le numero de telephone est deja enregistre':
+        'SIGNUP.PHONE_ALREADY_REGISTERED',
+      'o numero de telefone ja esta registrado':
+        'SIGNUP.PHONE_ALREADY_REGISTERED',
+      'el correo electronico ya esta registrado':
+        'SIGNUP.EMAIL_ALREADY_REGISTERED',
+      'the email address is already registered':
+        'SIGNUP.EMAIL_ALREADY_REGISTERED',
+      'ladresse e-mail est deja enregistree': 'SIGNUP.EMAIL_ALREADY_REGISTERED',
+      'o endereco de e-mail ja esta registrado':
+        'SIGNUP.EMAIL_ALREADY_REGISTERED',
+    };
+
+    // Buscar coincidencia en el mapa de errores
+    const translationKey = errorMap[normalizedMessage];
+    if (translationKey) {
+      return this.translate.instant(translationKey);
+    }
+
+    // Si el código es 409, es un error de conflicto (duplicado)
+    if (statusCode === 409) {
+      // Intentar detectar si es teléfono o email
+      if (
+        normalizedMessage.includes('telefono') ||
+        normalizedMessage.includes('phone')
+      ) {
+        return this.translate.instant('SIGNUP.PHONE_ALREADY_REGISTERED');
+      }
+      if (
+        normalizedMessage.includes('correo') ||
+        normalizedMessage.includes('email') ||
+        normalizedMessage.includes('e-mail')
+      ) {
+        return this.translate.instant('SIGNUP.EMAIL_ALREADY_REGISTERED');
+      }
+    }
+
+    // Si hay un mensaje del backend, usarlo
+    if (message) {
+      return message;
+    }
+
+    // Mensaje genérico
+    return this.translate.instant('SIGNUP.REGISTRATION_ERROR');
+  }
+
+  private normalizeText(text: string): string {
+    if (!text) return '';
+    return (
+      text
+        .toLowerCase()
+        .normalize('NFD')
+        // eslint-disable-next-line unicorn/prefer-string-replace-all -- replaceAll not available on all targeted browsers
+        .replace(/[\u0300-\u036f]/g, '')
+        // eslint-disable-next-line unicorn/prefer-string-replace-all -- replaceAll not available on all targeted browsers
+        .replace(/[^a-z0-9\s]/g, '')
+        .trim()
+    );
   }
 
   showTermsAndConditions() {
