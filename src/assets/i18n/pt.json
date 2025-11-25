@@ -386,6 +386,7 @@
     "GITHUB_BUTTON": "GitHub",
     "GOOGLE_BUTTON": "Google",
     "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu telefone e senha.",
+    "ACCOUNT_NOT_VERIFIED": "Sua conta não está verificada. Por favor, verifique seu endereço de e-mail para ativar sua conta.",
     "LOGIN_BUTTON": "Entrar",
     "LOGIN_SUBTITLE": "Acesse sua conta de trading",
     "LOGIN_TITLE": "Entrar",

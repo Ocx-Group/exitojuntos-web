@@ -2554,6 +2554,7 @@
     "GITHUB_BUTTON": "GitHub",
     "GOOGLE_BUTTON": "Google",
     "INVALID_CREDENTIALS": "Credenciales inválidas. Verifica tu usuario y contraseña.",
+    "ACCOUNT_NOT_VERIFIED": "Tu cuenta no está verificada. Por favor, verifica tu correo electrónico para activar tu cuenta.",
     "LOGIN_BUTTON": "Iniciar Sesión",
     "LOGIN_SUBTITLE": "Accede a tu cuenta de trading",
     "LOGIN_TITLE": "Iniciar Sesión",

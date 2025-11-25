@@ -125,6 +125,16 @@ export class SigninComponent implements OnInit {
       .subscribe({
         next: (response: Response) => {
           if (response.success) {
+            // Verificar si el usuario está verificado (status === true)
+            if (response.data.user?.status !== true) {
+              const message = this.getLocalizedText(
+                'SIGNIN.ACCOUNT_NOT_VERIFIED',
+                'Tu cuenta no está verificada. Por favor, verifica tu correo electrónico para activar tu cuenta.',
+              );
+              this.displayLoginError(message);
+              return;
+            }
+
             const roleName = response.data.user?.role?.name?.toLowerCase();
             this.redirectByRole(roleName);
           } else {
@@ -251,6 +261,8 @@ export class SigninComponent implements OnInit {
         'Credenciales inválidas. Verifica tu usuario y contraseña.',
       'SIGNIN.GENERIC_ERROR':
         'Ocurrió un error al iniciar sesión. Inténtalo nuevamente.',
+      'SIGNIN.ACCOUNT_NOT_VERIFIED':
+        'Tu cuenta no está verificada. Por favor, verifica tu correo electrónico para activar tu cuenta.',
     };
 
     return fallbacks[key] || '';
