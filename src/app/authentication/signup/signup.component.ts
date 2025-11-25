@@ -248,55 +248,46 @@ export class SignupComponent implements OnInit {
 
   private getErrorMessage(error: any): string {
     const statusCode = error?.code || error?.status;
-    const message = error?.message || error?.error?.message || '';
 
-    // Normalizar el mensaje para comparación
-    const normalizedMessage = this.normalizeText(message);
-
-    // Mapeo de errores conocidos
-    const errorMap: { [key: string]: string } = {
-      'el numero de telefono ya esta registrado':
-        'SIGNUP.PHONE_ALREADY_REGISTERED',
-      'the phone number is already registered':
-        'SIGNUP.PHONE_ALREADY_REGISTERED',
-      'le numero de telephone est deja enregistre':
-        'SIGNUP.PHONE_ALREADY_REGISTERED',
-      'o numero de telefone ja esta registrado':
-        'SIGNUP.PHONE_ALREADY_REGISTERED',
-      'el correo electronico ya esta registrado':
-        'SIGNUP.EMAIL_ALREADY_REGISTERED',
-      'the email address is already registered':
-        'SIGNUP.EMAIL_ALREADY_REGISTERED',
-      'ladresse e-mail est deja enregistree': 'SIGNUP.EMAIL_ALREADY_REGISTERED',
-      'o endereco de e-mail ja esta registrado':
-        'SIGNUP.EMAIL_ALREADY_REGISTERED',
-    };
-
-    // Buscar coincidencia en el mapa de errores
-    const translationKey = errorMap[normalizedMessage];
-    if (translationKey) {
-      return this.translate.instant(translationKey);
+    // Intentar extraer el mensaje de diferentes ubicaciones posibles
+    let message = '';
+    if (error?.error?.message) {
+      message = error.error.message;
+    } else if (error?.message && !error.message.includes('Http failure')) {
+      message = error.message;
+    } else if (error?.error) {
+      // Si error.error es un string
+      if (typeof error.error === 'string') {
+        message = error.error;
+      }
     }
 
     // Si el código es 409, es un error de conflicto (duplicado)
+    // Detectar por palabras clave en el mensaje del backend
     if (statusCode === 409) {
-      // Intentar detectar si es teléfono o email
+      const normalizedMessage = this.normalizeText(message);
+
+      // Detectar si es teléfono
       if (
         normalizedMessage.includes('telefono') ||
-        normalizedMessage.includes('phone')
+        normalizedMessage.includes('phone') ||
+        normalizedMessage.includes('telephone')
       ) {
         return this.translate.instant('SIGNUP.PHONE_ALREADY_REGISTERED');
       }
+
+      // Detectar si es email
       if (
         normalizedMessage.includes('correo') ||
         normalizedMessage.includes('email') ||
-        normalizedMessage.includes('e-mail')
+        normalizedMessage.includes('e-mail') ||
+        normalizedMessage.includes('mail')
       ) {
         return this.translate.instant('SIGNUP.EMAIL_ALREADY_REGISTERED');
       }
     }
 
-    // Si hay un mensaje del backend, usarlo
+    // Si hay un mensaje del backend y no se pudo traducir, usarlo
     if (message) {
       return message;
     }
