@@ -1,4 +1,4 @@
-$connectorHeight: 1.2em;
+$connectorHeight: 0.8em;
 $boxColor: #1a1a1a;
 $connectorColor: #d4af37; // Dorado
 $hoverColor: #f0c14b; // Dorado claro
@@ -7,8 +7,8 @@ $blackPrimary: #0a0a0a;
 $blackSecondary: #1a1a1a;
 $goldAccent: #ffd700; // Oro brillante
 
-$minBoxSize: 110px;
-$maxBoxSize: 125px;
+$minBoxSize: 75px;
+$maxBoxSize: 90px;
 
 // Variable CSS para el fondo que cambia según el tema
 :root {
@@ -32,7 +32,7 @@ app-client-unilevel-tree-component {
 }
 
 .ng13-org-chart-entity {
-  margin: 0 0.8em;
+  margin: 0 0.3em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,13 +77,13 @@ app-client-unilevel-tree-component {
 
 .ng13-org-chart-entity-box {
   position: relative;
-  padding: 14px 8px;
+  padding: 8px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  border: 2px solid $connectorColor;
-  border-radius: 12px;
+  border: 1.5px solid $connectorColor;
+  border-radius: 8px;
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4),
     0 0 20px rgba(212, 175, 55, 0.15), inset 0 1px 0 rgba(255, 215, 0, 0.2);
   max-width: $maxBoxSize;
