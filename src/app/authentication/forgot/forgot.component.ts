@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
@@ -31,6 +31,7 @@ export class ForgotComponent implements OnInit {
     private readonly affiliateService: AffiliateService,
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +98,9 @@ export class ForgotComponent implements OnInit {
       confirmButtonColor: '#FFB800',
       background: '#1a1a1a',
       color: '#ffffff',
+    }).then(() => {
+      // Navegar al componente reset después de cerrar el modal
+      this.router.navigate(['/reset']);
     });
   }
 }

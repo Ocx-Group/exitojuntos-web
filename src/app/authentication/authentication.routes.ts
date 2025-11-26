@@ -38,7 +38,7 @@ export const AUTHENTICATION_ROUTES: Routes = [
       import('./forgot/forgot.component').then(m => m.ForgotComponent),
   },
   {
-    path: 'reset/:verificationCode',
+    path: 'reset',
     loadComponent: () =>
       import('./reset/reset.component').then(m => m.ResetComponent),
   },
