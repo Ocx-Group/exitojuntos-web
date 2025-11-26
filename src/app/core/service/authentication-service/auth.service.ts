@@ -362,14 +362,11 @@ export class AuthService {
    * @param password Nueva contraseña
    * @returns Observable con la respuesta del servidor
    */
-  resetPassword(
-    verificationCode: string,
-    password: string,
-  ): Observable<Response> {
+  resetPassword(code: string, newPassword: string): Observable<Response> {
     return this.http
       .post<Response>(
         `${this.urlApi}/auth/reset-password`,
-        { verificationCode, password },
+        { code, newPassword },
         httpOptions,
       )
       .pipe(
