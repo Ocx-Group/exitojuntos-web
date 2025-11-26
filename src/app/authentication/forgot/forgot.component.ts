@@ -8,11 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-
-import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 
 @Component({
   selector: 'app-forgot',
@@ -28,7 +27,7 @@ export class ForgotComponent implements OnInit {
   readonly navbarIcon = 'assets/exito-logo.svg';
 
   constructor(
-    private readonly affiliateService: AffiliateService,
+    private readonly authService: AuthService,
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
     private readonly router: Router,
@@ -56,10 +55,10 @@ export class ForgotComponent implements OnInit {
     const email = this.forgotPassword.value.email;
     this.loading = true;
 
-    this.affiliateService.sendPasswordRecovery(email).subscribe({
-      next: value => {
+    this.authService.requestPasswordReset(email).subscribe({
+      next: response => {
         this.loading = false;
-        if (value.success) {
+        if (response.success) {
           this.emailConfirmation();
         } else {
           const errorMessage = this.translate.instant('FORGOT.USER_NOT_FOUND');

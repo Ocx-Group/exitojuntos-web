@@ -15,12 +15,13 @@ import {
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Country } from '@app/core/models/country-model/country.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
+
 import { CountryService } from '@app/core/service/country-service/country.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TermsConditionsComponent } from '@app/shared/components/terms-conditions/terms-conditions.component';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -50,12 +51,11 @@ export class SignupComponent implements OnInit {
   showConfirmPassword = false;
   showTermsModal = false;
   private readonly countryService: CountryService = inject(CountryService);
-
+  private readonly authService = inject(AuthService);
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
-    private readonly affiliateService: AffiliateService,
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
   ) {
@@ -167,7 +167,7 @@ export class SignupComponent implements OnInit {
   getUserByPhone(phone: string) {
     if (!phone) return;
 
-    this.affiliateService.getAffiliateByPhone(phone).subscribe({
+    this.authService.getAffiliateByPhone(phone).subscribe({
       next: (user: UserAffiliate) => {
         console.log('getUserByPhone received user:', user);
         if (user?.id) {
@@ -219,7 +219,7 @@ export class SignupComponent implements OnInit {
     user.termsConditions = this.registerForm.value.terms_conditions;
     user.roleId = 2;
 
-    this.affiliateService.createAffiliate(user).subscribe({
+    this.authService.createAffiliate(user).subscribe({
       next: response => {
         if (response.success) {
           this.showSuccess(response.message);

@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
 
@@ -205,7 +204,6 @@ export class LandingPageComponent implements OnInit {
     private readonly pdfViewerService: PdfViewerService,
     private readonly translate: TranslateService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly affiliateService: AffiliateService,
     private readonly authService: AuthService,
   ) {
     translate.setFallbackLang('en');
@@ -218,24 +216,12 @@ export class LandingPageComponent implements OnInit {
       this.user = loggedUser;
     } else if (this.key) {
       // Si no hay usuario logueado pero hay key en la ruta, buscar por username
-      this.getUserByUsername(this.key);
     }
   }
 
   ngOnInit() {
     const savedLang = localStorage.getItem('lang');
     this.changeLanguage(savedLang || 'en');
-  }
-
-  getUserByUsername(key: string) {
-    if (!key) return;
-    this.affiliateService
-      .getAffiliateByUserName(key)
-      .subscribe((user: UserAffiliate) => {
-        if (user !== null) {
-          this.user = user;
-        }
-      });
   }
 
   changeLanguage(lang: string) {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { FirebaseStorageService } from '@app/core/service/firebase-storage-service/firebase-storage.service';
 
@@ -52,7 +51,6 @@ export class MyProfileComponent implements OnInit {
     private readonly clipboardService: ClipboardService,
     private readonly toastr: ToastrService,
     private readonly authService: AuthService,
-    private readonly affiliateService: AffiliateService,
     private readonly fb: FormBuilder,
     private readonly translate: TranslateService,
     private readonly firebaseStorage: FirebaseStorageService,

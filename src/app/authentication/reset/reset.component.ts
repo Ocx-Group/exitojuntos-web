@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
-import { RequestResetPassword } from '@app/core/models/user-affiliate-model/request-reset-password-model';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
 
 @Component({
   selector: 'app-reset',
@@ -30,7 +29,7 @@ export class ResetComponent implements OnInit {
   readonly navbarIcon = 'assets/exito-logo.svg';
 
   constructor(
-    private readonly affiliateService: AffiliateService,
+    private readonly authService: AuthService,
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
     private readonly router: Router,
@@ -95,11 +94,7 @@ export class ResetComponent implements OnInit {
     const { securityCode, newPassword } = this.resetPassword.value;
     this.loading = true;
 
-    const requestResetPassword = new RequestResetPassword();
-    requestResetPassword.verificationCode = securityCode;
-    requestResetPassword.password = newPassword;
-
-    this.affiliateService.resetPassword(requestResetPassword).subscribe({
+    this.authService.resetPassword(securityCode, newPassword).subscribe({
       next: response => {
         this.loading = false;
         if (response.success) {

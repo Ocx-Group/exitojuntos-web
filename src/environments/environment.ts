@@ -10,7 +10,7 @@ export const environment = {
     inventoryService: 'https://inventory.exitojuntos.net/api/v1',
     walletService: 'https://wallet.exitojuntos.net/api/v1',
     coinPayment: 'https://www.coinpayments.net/index.php',
-    exitojuntosService: 'https://server.exitojuntos.com/v1',
+    exitojuntosService: 'http://localhost:3000/v1',
   },
   openAI: {
     apiKey: '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',

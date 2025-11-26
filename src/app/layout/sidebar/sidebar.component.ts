@@ -19,7 +19,6 @@ import { ROUTES } from './sidebar-items';
 import { ROUTES_ADMIN } from './sidebar-admin-items';
 import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { ImgProfileComponent } from '../img-profile/img-profile.component';
 import { IconsModule } from '@app/shared';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -55,7 +54,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private readonly renderer: Renderer2,
     public elementRef: ElementRef,
     private readonly authService: AuthService,
-    private readonly affiliateService: AffiliateService,
     private readonly router: Router,
   ) {
     this.routerObj = this.router.events.subscribe(event => {

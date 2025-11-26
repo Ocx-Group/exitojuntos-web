@@ -198,25 +198,6 @@ export class AuthService {
     this.currentUserAffiliate.set(user);
   }
 
-  getLoginMovementsByAffiliatedId(affiliateId: number) {
-    return this.http
-      .get<Response>(
-        `${this.urlApi}/auth/login_movements/${affiliateId}`,
-        httpOptions,
-      )
-      .pipe(
-        map(response => {
-          return response.data;
-        }),
-      );
-  }
-
-  fetchIpAddress(): Observable<string> {
-    return this.http
-      .get<{ ip: string }>('https://api.ipify.org?format=json')
-      .pipe(map(data => data.ip));
-  }
-
   /**
    * Obtiene todos los usuarios con paginación
    * @param page Número de página (default: 1)
@@ -349,6 +330,92 @@ export class AuthService {
         }),
         catchError(error => {
           return throwError(() => error);
+        }),
+      );
+  }
+
+  /**
+   * Solicita un código para restablecer la contraseña
+   * @param email Email del usuario
+   * @returns Observable con la respuesta del servidor
+   */
+  requestPasswordReset(email: string): Observable<Response> {
+    return this.http
+      .post<Response>(
+        `${this.urlApi}/auth/request-password-reset`,
+        { email },
+        httpOptions,
+      )
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  /**
+   * Restablece la contraseña usando el código de verificación
+   * @param verificationCode Código de verificación recibido por email
+   * @param password Nueva contraseña
+   * @returns Observable con la respuesta del servidor
+   */
+  resetPassword(
+    verificationCode: string,
+    password: string,
+  ): Observable<Response> {
+    return this.http
+      .post<Response>(
+        `${this.urlApi}/auth/reset-password`,
+        { verificationCode, password },
+        httpOptions,
+      )
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  getAffiliateByPhone(phone: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      }),
+    };
+    return this.http
+      .get<Response>(
+        this.urlApi.concat('/auth/get_user_phone/' + phone),
+        options,
+      )
+      .pipe(
+        map(response => {
+          if (response.success) return response.data;
+          else {
+            console.error('ERROR: ', response);
+            return null;
+          }
+        }),
+        catchError(error => {
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  createAffiliate(user: UserAffiliate) {
+    return this.http
+      .post<Response>(this.urlApi.concat('/auth/register'), user, httpOptions)
+      .pipe(
+        map(data => {
+          return data;
         }),
       );
   }
