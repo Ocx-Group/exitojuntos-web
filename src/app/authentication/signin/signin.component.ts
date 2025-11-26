@@ -136,7 +136,12 @@ export class SigninComponent implements OnInit {
             }
 
             const roleName = response.data.user?.role?.name?.toLowerCase();
-            this.redirectByRole(roleName);
+            // En Angular 20, los signals y la detección de cambios están optimizados
+            // pero aún necesitamos asegurar que el estado se haya propagado antes de navegar
+            // Usar queueMicrotask es más eficiente que setTimeout en navegadores modernos
+            queueMicrotask(() => {
+              this.redirectByRole(roleName);
+            });
           } else {
             const message = this.resolveErrorMessage(response);
             this.displayLoginError(message);
@@ -298,6 +303,20 @@ export class SigninComponent implements OnInit {
     const targetRoute =
       normalizedRole === 'admin' ? '/admin/home-admin' : '/app/my-network';
 
-    this.router.navigate([targetRoute]).then();
+    // Navegar con replaceUrl para evitar que el usuario pueda volver al login con el botón atrás
+    this.router.navigate([targetRoute], { replaceUrl: true }).then(
+      success => {
+        if (!success) {
+          console.error('Navigation failed, retrying...');
+          // Si la navegación falla, intentar de nuevo
+          setTimeout(() => {
+            this.router.navigate([targetRoute], { replaceUrl: true });
+          }, 500);
+        }
+      },
+      error => {
+        console.error('Navigation error:', error);
+      },
+    );
   }
 }
