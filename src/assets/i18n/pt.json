@@ -269,10 +269,141 @@
       "TEXT": "Minha Rede"
     },
     "USERS-MANAGEMENT": {
-      "TEXT": "Gestão de Usuários"
+      "TEXT": "Gestão de Usuários",
+      "BREADCRUMB": {
+        "TITLE": "Gestão de Usuários"
+      },
+      "STATS": {
+        "TOTAL_USERS": {
+          "TITLE": "Total de Usuários",
+          "SUBTITLE": "Registrados na plataforma"
+        },
+        "ACTIVE_USERS": {
+          "TITLE": "Usuários Ativos",
+          "SUBTITLE": "Com sessão recente"
+        },
+        "PAGE": {
+          "TITLE": "Página",
+          "SUBTITLE": "Navegação"
+        },
+        "PER_PAGE": {
+          "TITLE": "Por Página",
+          "SUBTITLE": "Registros exibidos"
+        }
+      },
+      "TABLE": {
+        "TITLE": "Lista de Usuários",
+        "SEARCH_PLACEHOLDER": "Pesquisar usuários...",
+        "EMPTY_MESSAGE": "Não há usuários para exibir",
+        "TOTAL_MESSAGE": "total",
+        "SELECTED_MESSAGE": "selecionado",
+        "COLUMNS": {
+          "ID": "ID",
+          "NAME": "Nome",
+          "LASTNAME": "Sobrenome",
+          "EMAIL": "E-mail",
+          "PHONE": "Telefone",
+          "IDENTIFICATION": "Identificação",
+          "CITY": "Cidade",
+          "ROLE": "Função",
+          "CREATED_AT": "Data de Criação"
+        }
+      },
+      "ACTIONS": {
+        "VIEW_TREE": "Ver Árvore",
+        "VIEW_DETAILS": "Ver Detalhes",
+        "EDIT": "Editar",
+        "DELETE": "Excluir",
+        "REFRESH": "Atualizar",
+        "VIEW_COMPLETE_NETWORK": "Ver Rede Completa"
+      }
     },
     "LOGS-MANAGEMENT": {
-      "TEXT": "Logs do Sistema"
+      "TEXT": "Logs do Sistema",
+      "BREADCRUMB": {
+        "TITLE": "Gestão de Logs do Sistema"
+      },
+      "STATS": {
+        "TOTAL_LOGS": {
+          "TITLE": "Total de Logs",
+          "SUBTITLE": "Registros totais"
+        },
+        "ERRORS": {
+          "TITLE": "Erros",
+          "SUBTITLE": "Erros críticos"
+        },
+        "WARNINGS": {
+          "TITLE": "Avisos",
+          "SUBTITLE": "Avisos"
+        },
+        "INFO_LOGS": {
+          "TITLE": "Logs de Info",
+          "SUBTITLE": "Informações gerais"
+        }
+      },
+      "STATS_DETAILS": {
+        "TITLE": "Detalhes das Estatísticas",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose",
+        "OLDEST_LOG": "Log mais antigo",
+        "NEWEST_LOG": "Log mais recente",
+        "NO_DATA": "N/A"
+      },
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "LEVEL": {
+          "LABEL": "Nível",
+          "ALL": "Todos os níveis"
+        },
+        "CONTEXT": {
+          "LABEL": "Contexto",
+          "PLACEHOLDER": "Ex: AuthService"
+        },
+        "SEARCH": {
+          "LABEL": "Pesquisar na mensagem",
+          "PLACEHOLDER": "Pesquisar texto nas mensagens..."
+        },
+        "BTN_APPLY": "Pesquisar",
+        "BTN_CLEAR": "Limpar"
+      },
+      "LEVELS": {
+        "ERROR": "Erro",
+        "WARN": "Aviso",
+        "LOG": "Log",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose"
+      },
+      "TABLE": {
+        "TITLE": "Logs do Sistema",
+        "PAGINATION_INFO": "Página {{page}} de {{totalPages}}",
+        "COLUMNS": {
+          "TIMESTAMP": "Data/Hora",
+          "LEVEL": "Nível",
+          "CONTEXT": "Contexto",
+          "MESSAGE": "Mensagem",
+          "PID": "PID"
+        },
+        "EMPTY": "Nenhum log encontrado com os filtros aplicados",
+        "LOADING": "Carregando logs...",
+        "CLEAR_FILTERS": "Limpar filtros"
+      },
+      "ACTIONS": {
+        "EXPORT_CSV": "Exportar CSV",
+        "CLEAR_ALL": "Limpar",
+        "REFRESH": "Atualizar"
+      },
+      "MESSAGES": {
+        "REFRESH_SUCCESS": "Logs atualizados",
+        "CLEAR_CONFIRM": {
+          "TITLE": "Tem certeza?",
+          "TEXT": "Esta ação excluirá todos os logs do sistema. Não pode ser desfeita.",
+          "CONFIRM": "Sim, excluir",
+          "CANCEL": "Cancelar"
+        },
+        "CLEAR_SUCCESS": "Logs excluídos com sucesso",
+        "EXPORT_SUCCESS": "Logs exportados com sucesso",
+        "EXPORT_WARNING": "Não há logs para exportar"
+      }
     }
   },
   "MY-NETWORK-PAGE": {

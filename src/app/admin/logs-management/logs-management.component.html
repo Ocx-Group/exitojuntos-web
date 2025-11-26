@@ -1,7 +1,7 @@
 <section class="section admin-dashboard">
   <ul class="breadcrumb breadcrumb-style">
     <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">Gestión de Logs del Sistema</h5>
+      <h5 class="page-title m-b-0">{{ 'MENUITEMS.LOGS-MANAGEMENT.BREADCRUMB.TITLE' | translate }}</h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
       <a routerLink="/admin/home-admin"><i class="fas fa-clipboard-list font-17"></i></a>
@@ -25,24 +25,26 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title mb-3">
-              <i class="fas fa-chart-bar me-2"></i>Detalles de Estadísticas
+              <i class="fas fa-chart-bar me-2"></i>{{ 'MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.TITLE' | translate }}
             </h5>
             <div class="row">
               <div class="col-md-3">
-                <p class="mb-1 text-muted">Debug:</p>
+                <p class="mb-1 text-muted">{{ 'MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.DEBUG' | translate }}:</p>
                 <h6>{{ statsData?.byLevel?.DEBUG ?? 0 }}</h6>
               </div>
               <div class="col-md-3">
-                <p class="mb-1 text-muted">Verbose:</p>
+                <p class="mb-1 text-muted">{{ 'MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.VERBOSE' | translate }}:</p>
                 <h6>{{ statsData?.byLevel?.VERBOSE ?? 0 }}</h6>
               </div>
               <div class="col-md-3">
-                <p class="mb-1 text-muted">Log más antiguo:</p>
-                <h6>{{ statsData?.oldestLog ? (statsData.oldestLog | date: 'dd/MM/yyyy HH:mm') : 'N/A' }}</h6>
+                <p class="mb-1 text-muted">{{ 'MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.OLDEST_LOG' | translate }}:</p>
+                <h6>{{ statsData?.oldestLog ? (statsData.oldestLog | date: 'dd/MM/yyyy HH:mm') :
+                  ('MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.NO_DATA' | translate) }}</h6>
               </div>
               <div class="col-md-3">
-                <p class="mb-1 text-muted">Log más reciente:</p>
-                <h6>{{ statsData?.newestLog ? (statsData.newestLog | date: 'dd/MM/yyyy HH:mm') : 'N/A' }}</h6>
+                <p class="mb-1 text-muted">{{ 'MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.NEWEST_LOG' | translate }}:</p>
+                <h6>{{ statsData?.newestLog ? (statsData.newestLog | date: 'dd/MM/yyyy HH:mm') :
+                  ('MENUITEMS.LOGS-MANAGEMENT.STATS_DETAILS.NO_DATA' | translate) }}</h6>
               </div>
             </div>
           </div>
@@ -57,33 +59,38 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title mb-3">
-              <i class="fas fa-filter me-2"></i>Filtros
+              <i class="fas fa-filter me-2"></i>{{ 'MENUITEMS.LOGS-MANAGEMENT.FILTERS.TITLE' | translate }}
             </h5>
             <div class="row g-3">
               <!-- Nivel -->
               <div class="col-md-3">
-                <label for="levelFilter" class="form-label">Nivel</label>
+                <label for="levelFilter" class="form-label">{{ 'MENUITEMS.LOGS-MANAGEMENT.FILTERS.LEVEL.LABEL' |
+                  translate }}</label>
                 <select id="levelFilter" class="form-select" [(ngModel)]="filters.level" (change)="applyFilters()">
-                  <option [value]="undefined">Todos los niveles</option>
-                  <option value="ERROR">Error</option>
-                  <option value="WARN">Warning</option>
-                  <option value="LOG">Log</option>
-                  <option value="DEBUG">Debug</option>
-                  <option value="VERBOSE">Verbose</option>
+                  <option [value]="undefined">{{ 'MENUITEMS.LOGS-MANAGEMENT.FILTERS.LEVEL.ALL' | translate }}</option>
+                  <option value="ERROR">{{ 'MENUITEMS.LOGS-MANAGEMENT.LEVELS.ERROR' | translate }}</option>
+                  <option value="WARN">{{ 'MENUITEMS.LOGS-MANAGEMENT.LEVELS.WARN' | translate }}</option>
+                  <option value="LOG">{{ 'MENUITEMS.LOGS-MANAGEMENT.LEVELS.LOG' | translate }}</option>
+                  <option value="DEBUG">{{ 'MENUITEMS.LOGS-MANAGEMENT.LEVELS.DEBUG' | translate }}</option>
+                  <option value="VERBOSE">{{ 'MENUITEMS.LOGS-MANAGEMENT.LEVELS.VERBOSE' | translate }}</option>
                 </select>
               </div>
 
               <!-- Contexto -->
               <div class="col-md-3">
-                <label for="contextFilter" class="form-label">Contexto</label>
-                <input type="text" id="contextFilter" class="form-control" placeholder="Ej: AuthService"
+                <label for="contextFilter" class="form-label">{{ 'MENUITEMS.LOGS-MANAGEMENT.FILTERS.CONTEXT.LABEL' |
+                  translate }}</label>
+                <input type="text" id="contextFilter" class="form-control"
+                  [placeholder]="'MENUITEMS.LOGS-MANAGEMENT.FILTERS.CONTEXT.PLACEHOLDER' | translate"
                   [(ngModel)]="filters.context" (keyup.enter)="applyFilters()" />
               </div>
 
               <!-- Búsqueda -->
               <div class="col-md-4">
-                <label for="searchFilter" class="form-label">Buscar en mensaje</label>
-                <input type="text" id="searchFilter" class="form-control" placeholder="Buscar texto en mensajes..."
+                <label for="searchFilter" class="form-label">{{ 'MENUITEMS.LOGS-MANAGEMENT.FILTERS.SEARCH.LABEL' |
+                  translate }}</label>
+                <input type="text" id="searchFilter" class="form-control"
+                  [placeholder]="'MENUITEMS.LOGS-MANAGEMENT.FILTERS.SEARCH.PLACEHOLDER' | translate"
                   [(ngModel)]="filters.search" (keyup.enter)="applyFilters()" />
               </div>
 
@@ -111,25 +118,26 @@
           <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
               <h5 class="mb-0 text-white">
-                <i class="fas fa-list me-2 text-white"></i>Logs del Sistema
+                <i class="fas fa-list me-2 text-white"></i>{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.TITLE' | translate }}
                 @if (meta().total > 0) {
                 <span class="badge bg-primary ms-2">{{ meta().total }}</span>
                 }
               </h5>
               <div>
                 <button class="btn btn-success btn-sm me-2" (click)="exportLogsToCSV()"
-                  [disabled]="loading() || logs().length === 0" title="Exportar a CSV">
+                  [disabled]="loading() || logs().length === 0"
+                  [title]="'MENUITEMS.LOGS-MANAGEMENT.ACTIONS.EXPORT_CSV' | translate">
                   <i class="fas fa-file-csv"></i>
-                  Exportar CSV
+                  {{ 'MENUITEMS.LOGS-MANAGEMENT.ACTIONS.EXPORT_CSV' | translate }}
                 </button>
                 <button class="btn btn-danger btn-sm me-2" (click)="clearAllLogs()" [disabled]="loading()"
-                  title="Limpiar todos los logs">
+                  [title]="'MENUITEMS.LOGS-MANAGEMENT.ACTIONS.CLEAR_ALL' | translate">
                   <i class="fas fa-trash-alt"></i>
-                  Limpiar
+                  {{ 'MENUITEMS.LOGS-MANAGEMENT.ACTIONS.CLEAR_ALL' | translate }}
                 </button>
                 <button class="btn btn-primary btn-sm" (click)="refreshLogs()" [disabled]="loading()">
                   <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
-                  Actualizar
+                  {{ 'MENUITEMS.LOGS-MANAGEMENT.ACTIONS.REFRESH' | translate }}
                 </button>
               </div>
             </div>
@@ -137,24 +145,25 @@
           <div class="card-body">
             <div class="admin-table-skin">
               <div class="text-muted mb-3 text-end">
-                Página {{ meta().page }} de {{ meta().totalPages }}
+                {{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.PAGINATION_INFO' | translate: {page: meta().page, totalPages:
+                meta().totalPages} }}
               </div>
 
               @if (loading()) {
               <div class="text-center py-5">
                 <output class="d-block">
                   <div class="spinner-border text-primary">
-                    <span class="visually-hidden">Cargando...</span>
+                    <span class="visually-hidden">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.LOADING' | translate }}</span>
                   </div>
                 </output>
-                <p class="mt-2 text-muted">Cargando logs...</p>
+                <p class="mt-2 text-muted">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.LOADING' | translate }}</p>
               </div>
               } @else if (logs().length === 0) {
               <div class="text-center py-5">
                 <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-                <p class="text-muted">No se encontraron logs con los filtros aplicados</p>
+                <p class="text-muted">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.EMPTY' | translate }}</p>
                 <button class="btn btn-primary btn-sm" (click)="clearFilters()">
-                  <i class="fas fa-times me-1"></i>Limpiar filtros
+                  <i class="fas fa-times me-1"></i>{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.CLEAR_FILTERS' | translate }}
                 </button>
               </div>
               } @else {
@@ -162,11 +171,12 @@
                 <table class="table table-hover table-striped">
                   <thead class="table-dark">
                     <tr>
-                      <th style="width: 180px">Timestamp</th>
-                      <th style="width: 100px">Nivel</th>
-                      <th style="width: 150px">Contexto</th>
-                      <th>Mensaje</th>
-                      <th style="width: 80px">PID</th>
+                      <th style="width: 180px">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.TIMESTAMP' | translate }}
+                      </th>
+                      <th style="width: 100px">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.LEVEL' | translate }}</th>
+                      <th style="width: 150px">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.CONTEXT' | translate }}</th>
+                      <th>{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.MESSAGE' | translate }}</th>
+                      <th style="width: 80px">{{ 'MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.PID' | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>

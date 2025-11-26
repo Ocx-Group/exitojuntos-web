@@ -1822,10 +1822,141 @@
       "POST": "Desarrollador"
     },
     "USERS-MANAGEMENT": {
-      "TEXT": "Gestión de Usuarios"
+      "TEXT": "Gestión de Usuarios",
+      "BREADCRUMB": {
+        "TITLE": "Gestión de Usuarios"
+      },
+      "STATS": {
+        "TOTAL_USERS": {
+          "TITLE": "Total Usuarios",
+          "SUBTITLE": "Registrados en la plataforma"
+        },
+        "ACTIVE_USERS": {
+          "TITLE": "Usuarios Activos",
+          "SUBTITLE": "Con sesión reciente"
+        },
+        "PAGE": {
+          "TITLE": "Página",
+          "SUBTITLE": "Navegación"
+        },
+        "PER_PAGE": {
+          "TITLE": "Por Página",
+          "SUBTITLE": "Registros mostrados"
+        }
+      },
+      "TABLE": {
+        "TITLE": "Lista de Usuarios",
+        "SEARCH_PLACEHOLDER": "Buscar usuarios...",
+        "EMPTY_MESSAGE": "No hay usuarios para mostrar",
+        "TOTAL_MESSAGE": "total",
+        "SELECTED_MESSAGE": "seleccionado",
+        "COLUMNS": {
+          "ID": "ID",
+          "NAME": "Nombre",
+          "LASTNAME": "Apellido",
+          "EMAIL": "Email",
+          "PHONE": "Teléfono",
+          "IDENTIFICATION": "Identificación",
+          "CITY": "Ciudad",
+          "ROLE": "Rol",
+          "CREATED_AT": "Fecha Creación"
+        }
+      },
+      "ACTIONS": {
+        "VIEW_TREE": "Ver Árbol",
+        "VIEW_DETAILS": "Ver Detalles",
+        "EDIT": "Editar",
+        "DELETE": "Eliminar",
+        "REFRESH": "Actualizar",
+        "VIEW_COMPLETE_NETWORK": "Ver Red Completa"
+      }
     },
     "LOGS-MANAGEMENT": {
-      "TEXT": "Logs del Sistema"
+      "TEXT": "Logs del Sistema",
+      "BREADCRUMB": {
+        "TITLE": "Gestión de Logs del Sistema"
+      },
+      "STATS": {
+        "TOTAL_LOGS": {
+          "TITLE": "Total Logs",
+          "SUBTITLE": "Registros totales"
+        },
+        "ERRORS": {
+          "TITLE": "Errores",
+          "SUBTITLE": "Errores críticos"
+        },
+        "WARNINGS": {
+          "TITLE": "Warnings",
+          "SUBTITLE": "Advertencias"
+        },
+        "INFO_LOGS": {
+          "TITLE": "Info Logs",
+          "SUBTITLE": "Información general"
+        }
+      },
+      "STATS_DETAILS": {
+        "TITLE": "Detalles de Estadísticas",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose",
+        "OLDEST_LOG": "Log más antiguo",
+        "NEWEST_LOG": "Log más reciente",
+        "NO_DATA": "N/A"
+      },
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "LEVEL": {
+          "LABEL": "Nivel",
+          "ALL": "Todos los niveles"
+        },
+        "CONTEXT": {
+          "LABEL": "Contexto",
+          "PLACEHOLDER": "Ej: AuthService"
+        },
+        "SEARCH": {
+          "LABEL": "Buscar en mensaje",
+          "PLACEHOLDER": "Buscar texto en mensajes..."
+        },
+        "BTN_APPLY": "Buscar",
+        "BTN_CLEAR": "Limpiar"
+      },
+      "LEVELS": {
+        "ERROR": "Error",
+        "WARN": "Warning",
+        "LOG": "Log",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose"
+      },
+      "TABLE": {
+        "TITLE": "Logs del Sistema",
+        "PAGINATION_INFO": "Página {{page}} de {{totalPages}}",
+        "COLUMNS": {
+          "TIMESTAMP": "Timestamp",
+          "LEVEL": "Nivel",
+          "CONTEXT": "Contexto",
+          "MESSAGE": "Mensaje",
+          "PID": "PID"
+        },
+        "EMPTY": "No se encontraron logs con los filtros aplicados",
+        "LOADING": "Cargando logs...",
+        "CLEAR_FILTERS": "Limpiar filtros"
+      },
+      "ACTIONS": {
+        "EXPORT_CSV": "Exportar CSV",
+        "CLEAR_ALL": "Limpiar",
+        "REFRESH": "Actualizar"
+      },
+      "MESSAGES": {
+        "REFRESH_SUCCESS": "Logs actualizados",
+        "CLEAR_CONFIRM": {
+          "TITLE": "¿Estás seguro?",
+          "TEXT": "Esta acción eliminará todos los logs del sistema. No se puede deshacer.",
+          "CONFIRM": "Sí, eliminar",
+          "CANCEL": "Cancelar"
+        },
+        "CLEAR_SUCCESS": "Logs eliminados exitosamente",
+        "EXPORT_SUCCESS": "Logs exportados correctamente",
+        "EXPORT_WARNING": "No hay logs para exportar"
+      }
     },
     "WALLET": {
       "TEXT": "Mi Billetera"

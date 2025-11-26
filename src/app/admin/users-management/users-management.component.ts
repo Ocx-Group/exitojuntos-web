@@ -2,6 +2,7 @@ import { Component, OnInit, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 // Servicios
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
@@ -52,6 +53,7 @@ interface PaginationMeta {
     RouterLink,
     StatsCardComponent,
     ReusableDatatableComponent,
+    TranslateModule,
   ],
   templateUrl: './users-management.component.html',
   styleUrls: ['./users-management.component.scss'],
@@ -60,6 +62,7 @@ export class UsersManagementComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
   // Signals
   protected readonly users = signal<UserData[]>([]);
@@ -180,38 +183,202 @@ export class UsersManagementComponent implements OnInit {
   ngOnInit(): void {
     this.initializeStatsCards();
     this.loadUsers();
+    this.setupTranslations();
+
+    // Suscribirse a cambios de idioma
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.updateTranslations();
+      });
+  }
+
+  private setupTranslations(): void {
+    this.updateTranslations();
+  }
+
+  private updateTranslations(): void {
+    // Actualizar columnas
+    this.columns = [
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.ID',
+        ),
+        prop: 'id',
+        sortable: true,
+        width: 70,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.NAME',
+        ),
+        prop: 'name',
+        sortable: true,
+        minWidth: 150,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.LASTNAME',
+        ),
+        prop: 'lastName',
+        sortable: true,
+        minWidth: 150,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.EMAIL',
+        ),
+        prop: 'email',
+        sortable: true,
+        minWidth: 200,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.PHONE',
+        ),
+        prop: 'phone',
+        sortable: true,
+        width: 150,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.IDENTIFICATION',
+        ),
+        prop: 'identification',
+        sortable: true,
+        width: 150,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.CITY',
+        ),
+        prop: 'city',
+        sortable: true,
+        width: 150,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.ROLE',
+        ),
+        prop: 'role.name',
+        sortable: true,
+        width: 120,
+      },
+      {
+        name: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.COLUMNS.CREATED_AT',
+        ),
+        prop: 'createdAt',
+        sortable: true,
+        width: 150,
+      },
+    ];
+
+    // Actualizar acciones
+    this.actions = [
+      {
+        label: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.ACTIONS.VIEW_TREE',
+        ),
+        icon: 'fas fa-project-diagram',
+        class: 'btn-sm btn-success',
+        callback: (row: UserData) => this.viewUserTree(row),
+      },
+      {
+        label: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.ACTIONS.VIEW_DETAILS',
+        ),
+        icon: 'fas fa-eye',
+        class: 'btn-sm btn-info',
+        callback: (row: UserData) => this.viewUserDetails(row),
+      },
+      {
+        label: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.ACTIONS.EDIT',
+        ),
+        icon: 'fas fa-edit',
+        class: 'btn-sm btn-warning',
+        callback: (row: UserData) => this.editUser(row),
+      },
+      {
+        label: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.ACTIONS.DELETE',
+        ),
+        icon: 'fas fa-trash',
+        class: 'btn-sm btn-danger',
+        callback: (row: UserData) => this.deleteUser(row),
+      },
+    ];
+
+    // Actualizar configuración de tabla
+    this.tableConfig = {
+      ...this.tableConfig,
+      searchPlaceholder: this.translate.instant(
+        'MENUITEMS.USERS-MANAGEMENT.TABLE.SEARCH_PLACEHOLDER',
+      ),
+      messages: {
+        emptyMessage: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.EMPTY_MESSAGE',
+        ),
+        totalMessage: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.TOTAL_MESSAGE',
+        ),
+        selectedMessage: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.TABLE.SELECTED_MESSAGE',
+        ),
+      },
+    };
+
+    // Actualizar stats cards
+    this.initializeStatsCards();
   }
 
   private initializeStatsCards(): void {
     this.statsCards = [
       {
-        title: 'Total Usuarios',
+        title: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.TOTAL_USERS.TITLE',
+        ),
         value: '0',
-        subtitle: 'Registrados en la plataforma',
+        subtitle: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.TOTAL_USERS.SUBTITLE',
+        ),
         icon: 'users',
         iconColor: 'blue',
         valueColor: 'primary',
       },
       {
-        title: 'Usuarios Activos',
+        title: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.ACTIVE_USERS.TITLE',
+        ),
         value: '0',
-        subtitle: 'Con sesión reciente',
+        subtitle: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.ACTIVE_USERS.SUBTITLE',
+        ),
         icon: 'user-check',
         iconColor: 'green',
         valueColor: 'success',
       },
       {
-        title: 'Página',
+        title: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.PAGE.TITLE',
+        ),
         value: '1 / 0',
-        subtitle: 'Navegación',
+        subtitle: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.PAGE.SUBTITLE',
+        ),
         icon: 'file-text',
         iconColor: 'cyan',
         valueColor: 'info',
       },
       {
-        title: 'Por Página',
+        title: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.PER_PAGE.TITLE',
+        ),
         value: '10',
-        subtitle: 'Registros mostrados',
+        subtitle: this.translate.instant(
+          'MENUITEMS.USERS-MANAGEMENT.STATS.PER_PAGE.SUBTITLE',
+        ),
         icon: 'list',
         iconColor: 'orange',
         valueColor: 'warning',
@@ -272,17 +439,17 @@ export class UsersManagementComponent implements OnInit {
 
   private viewUserDetails(user: UserData): void {
     console.log('Ver detalles del usuario:', user);
-    // TODO: Implementar navegación o modal con detalles del usuario
+    // Implementar navegación o modal con detalles del usuario
   }
 
   private editUser(user: UserData): void {
     console.log('Editar usuario:', user);
-    // TODO: Implementar navegación o modal de edición
+    // Implementar navegación o modal de edición
   }
 
   private deleteUser(user: UserData): void {
     console.log('Eliminar usuario:', user);
-    // TODO: Implementar confirmación y eliminación
+    // Implementar confirmación y eliminación
   }
 
   protected refreshUsers(): void {

@@ -1822,10 +1822,141 @@
       "POST": "DEVELOPER"
     },
     "USERS-MANAGEMENT": {
-      "TEXT": "User Management"
+      "TEXT": "User Management",
+      "BREADCRUMB": {
+        "TITLE": "User Management"
+      },
+      "STATS": {
+        "TOTAL_USERS": {
+          "TITLE": "Total Users",
+          "SUBTITLE": "Registered on the platform"
+        },
+        "ACTIVE_USERS": {
+          "TITLE": "Active Users",
+          "SUBTITLE": "With recent session"
+        },
+        "PAGE": {
+          "TITLE": "Page",
+          "SUBTITLE": "Navigation"
+        },
+        "PER_PAGE": {
+          "TITLE": "Per Page",
+          "SUBTITLE": "Records displayed"
+        }
+      },
+      "TABLE": {
+        "TITLE": "User List",
+        "SEARCH_PLACEHOLDER": "Search users...",
+        "EMPTY_MESSAGE": "No users to display",
+        "TOTAL_MESSAGE": "total",
+        "SELECTED_MESSAGE": "selected",
+        "COLUMNS": {
+          "ID": "ID",
+          "NAME": "Name",
+          "LASTNAME": "Last Name",
+          "EMAIL": "Email",
+          "PHONE": "Phone",
+          "IDENTIFICATION": "Identification",
+          "CITY": "City",
+          "ROLE": "Role",
+          "CREATED_AT": "Creation Date"
+        }
+      },
+      "ACTIONS": {
+        "VIEW_TREE": "View Tree",
+        "VIEW_DETAILS": "View Details",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "REFRESH": "Refresh",
+        "VIEW_COMPLETE_NETWORK": "View Complete Network"
+      }
     },
     "LOGS-MANAGEMENT": {
-      "TEXT": "System Logs"
+      "TEXT": "System Logs",
+      "BREADCRUMB": {
+        "TITLE": "System Logs Management"
+      },
+      "STATS": {
+        "TOTAL_LOGS": {
+          "TITLE": "Total Logs",
+          "SUBTITLE": "Total records"
+        },
+        "ERRORS": {
+          "TITLE": "Errors",
+          "SUBTITLE": "Critical errors"
+        },
+        "WARNINGS": {
+          "TITLE": "Warnings",
+          "SUBTITLE": "Warnings"
+        },
+        "INFO_LOGS": {
+          "TITLE": "Info Logs",
+          "SUBTITLE": "General information"
+        }
+      },
+      "STATS_DETAILS": {
+        "TITLE": "Statistics Details",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose",
+        "OLDEST_LOG": "Oldest log",
+        "NEWEST_LOG": "Most recent log",
+        "NO_DATA": "N/A"
+      },
+      "FILTERS": {
+        "TITLE": "Filters",
+        "LEVEL": {
+          "LABEL": "Level",
+          "ALL": "All levels"
+        },
+        "CONTEXT": {
+          "LABEL": "Context",
+          "PLACEHOLDER": "E.g.: AuthService"
+        },
+        "SEARCH": {
+          "LABEL": "Search in message",
+          "PLACEHOLDER": "Search text in messages..."
+        },
+        "BTN_APPLY": "Search",
+        "BTN_CLEAR": "Clear"
+      },
+      "LEVELS": {
+        "ERROR": "Error",
+        "WARN": "Warning",
+        "LOG": "Log",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose"
+      },
+      "TABLE": {
+        "TITLE": "System Logs",
+        "PAGINATION_INFO": "Page {{page}} of {{totalPages}}",
+        "COLUMNS": {
+          "TIMESTAMP": "Timestamp",
+          "LEVEL": "Level",
+          "CONTEXT": "Context",
+          "MESSAGE": "Message",
+          "PID": "PID"
+        },
+        "EMPTY": "No logs found with the applied filters",
+        "LOADING": "Loading logs...",
+        "CLEAR_FILTERS": "Clear filters"
+      },
+      "ACTIONS": {
+        "EXPORT_CSV": "Export CSV",
+        "CLEAR_ALL": "Clear",
+        "REFRESH": "Refresh"
+      },
+      "MESSAGES": {
+        "REFRESH_SUCCESS": "Logs updated",
+        "CLEAR_CONFIRM": {
+          "TITLE": "Are you sure?",
+          "TEXT": "This action will delete all system logs. This cannot be undone.",
+          "CONFIRM": "Yes, delete",
+          "CANCEL": "Cancel"
+        },
+        "CLEAR_SUCCESS": "Logs successfully deleted",
+        "EXPORT_SUCCESS": "Logs exported successfully",
+        "EXPORT_WARNING": "No logs to export"
+      }
     },
     "WALLET": {
       "TEXT": "My wallet"

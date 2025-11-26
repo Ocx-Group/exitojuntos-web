@@ -269,10 +269,141 @@
       "TEXT": "Mon Réseau"
     },
     "USERS-MANAGEMENT": {
-      "TEXT": "Gestion des Utilisateurs"
+      "TEXT": "Gestion des Utilisateurs",
+      "BREADCRUMB": {
+        "TITLE": "Gestion des Utilisateurs"
+      },
+      "STATS": {
+        "TOTAL_USERS": {
+          "TITLE": "Total Utilisateurs",
+          "SUBTITLE": "Inscrits sur la plateforme"
+        },
+        "ACTIVE_USERS": {
+          "TITLE": "Utilisateurs Actifs",
+          "SUBTITLE": "Avec session récente"
+        },
+        "PAGE": {
+          "TITLE": "Page",
+          "SUBTITLE": "Navigation"
+        },
+        "PER_PAGE": {
+          "TITLE": "Par Page",
+          "SUBTITLE": "Enregistrements affichés"
+        }
+      },
+      "TABLE": {
+        "TITLE": "Liste des Utilisateurs",
+        "SEARCH_PLACEHOLDER": "Rechercher des utilisateurs...",
+        "EMPTY_MESSAGE": "Aucun utilisateur à afficher",
+        "TOTAL_MESSAGE": "total",
+        "SELECTED_MESSAGE": "sélectionné",
+        "COLUMNS": {
+          "ID": "ID",
+          "NAME": "Prénom",
+          "LASTNAME": "Nom",
+          "EMAIL": "Email",
+          "PHONE": "Téléphone",
+          "IDENTIFICATION": "Identification",
+          "CITY": "Ville",
+          "ROLE": "Rôle",
+          "CREATED_AT": "Date de Création"
+        }
+      },
+      "ACTIONS": {
+        "VIEW_TREE": "Voir l'Arbre",
+        "VIEW_DETAILS": "Voir les Détails",
+        "EDIT": "Modifier",
+        "DELETE": "Supprimer",
+        "REFRESH": "Actualiser",
+        "VIEW_COMPLETE_NETWORK": "Voir le Réseau Complet"
+      }
     },
     "LOGS-MANAGEMENT": {
-      "TEXT": "Journaux du Système"
+      "TEXT": "Journaux du Système",
+      "BREADCRUMB": {
+        "TITLE": "Gestion des Journaux du Système"
+      },
+      "STATS": {
+        "TOTAL_LOGS": {
+          "TITLE": "Total Journaux",
+          "SUBTITLE": "Enregistrements totaux"
+        },
+        "ERRORS": {
+          "TITLE": "Erreurs",
+          "SUBTITLE": "Erreurs critiques"
+        },
+        "WARNINGS": {
+          "TITLE": "Avertissements",
+          "SUBTITLE": "Avertissements"
+        },
+        "INFO_LOGS": {
+          "TITLE": "Journaux Info",
+          "SUBTITLE": "Informations générales"
+        }
+      },
+      "STATS_DETAILS": {
+        "TITLE": "Détails des Statistiques",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose",
+        "OLDEST_LOG": "Journal le plus ancien",
+        "NEWEST_LOG": "Journal le plus récent",
+        "NO_DATA": "N/A"
+      },
+      "FILTERS": {
+        "TITLE": "Filtres",
+        "LEVEL": {
+          "LABEL": "Niveau",
+          "ALL": "Tous les niveaux"
+        },
+        "CONTEXT": {
+          "LABEL": "Contexte",
+          "PLACEHOLDER": "Ex: AuthService"
+        },
+        "SEARCH": {
+          "LABEL": "Rechercher dans le message",
+          "PLACEHOLDER": "Rechercher du texte dans les messages..."
+        },
+        "BTN_APPLY": "Rechercher",
+        "BTN_CLEAR": "Effacer"
+      },
+      "LEVELS": {
+        "ERROR": "Erreur",
+        "WARN": "Avertissement",
+        "LOG": "Journal",
+        "DEBUG": "Debug",
+        "VERBOSE": "Verbose"
+      },
+      "TABLE": {
+        "TITLE": "Journaux du Système",
+        "PAGINATION_INFO": "Page {{page}} de {{totalPages}}",
+        "COLUMNS": {
+          "TIMESTAMP": "Horodatage",
+          "LEVEL": "Niveau",
+          "CONTEXT": "Contexte",
+          "MESSAGE": "Message",
+          "PID": "PID"
+        },
+        "EMPTY": "Aucun journal trouvé avec les filtres appliqués",
+        "LOADING": "Chargement des journaux...",
+        "CLEAR_FILTERS": "Effacer les filtres"
+      },
+      "ACTIONS": {
+        "EXPORT_CSV": "Exporter CSV",
+        "CLEAR_ALL": "Effacer",
+        "REFRESH": "Actualiser"
+      },
+      "MESSAGES": {
+        "REFRESH_SUCCESS": "Journaux mis à jour",
+        "CLEAR_CONFIRM": {
+          "TITLE": "Êtes-vous sûr?",
+          "TEXT": "Cette action supprimera tous les journaux du système. Cette action ne peut pas être annulée.",
+          "CONFIRM": "Oui, supprimer",
+          "CANCEL": "Annuler"
+        },
+        "CLEAR_SUCCESS": "Journaux supprimés avec succès",
+        "EXPORT_SUCCESS": "Journaux exportés avec succès",
+        "EXPORT_WARNING": "Aucun journal à exporter"
+      }
     }
   },
   "MY-NETWORK-PAGE": {

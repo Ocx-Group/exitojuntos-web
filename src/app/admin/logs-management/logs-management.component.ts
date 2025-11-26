@@ -2,6 +2,7 @@ import { Component, OnInit, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 // Servicios
 import { LogsService } from '@app/core/service/logs-service/logs.service';
@@ -29,7 +30,7 @@ interface PaginationMeta {
 @Component({
   selector: 'app-logs-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, StatsCardComponent],
+  imports: [CommonModule, FormsModule, StatsCardComponent, TranslateModule],
   templateUrl: './logs-management.component.html',
   styleUrls: ['./logs-management.component.scss'],
 })
@@ -37,6 +38,7 @@ export class LogsManagementComponent implements OnInit {
   private readonly logsService = inject(LogsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly toastr = inject(ToastrService);
+  private readonly translate = inject(TranslateService);
 
   // Signals
   protected readonly logs = signal<LogEntry[]>([]);
@@ -122,6 +124,26 @@ export class LogsManagementComponent implements OnInit {
   ngOnInit(): void {
     this.loadStats();
     this.loadLogs();
+    this.setupTranslations();
+
+    // Suscribirse a cambios de idioma
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.updateTranslations();
+      });
+  }
+
+  private setupTranslations(): void {
+    this.updateTranslations();
+  }
+
+  private updateTranslations(): void {
+    // Actualizar stats cards
+    const statsData = this.stats();
+    if (statsData) {
+      this.updateStatsCards(statsData);
+    }
   }
 
   /**
@@ -152,34 +174,50 @@ export class LogsManagementComponent implements OnInit {
   private updateStatsCards(stats: LogStats): void {
     this.statsCards = [
       {
-        title: 'Total Logs',
+        title: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.TOTAL_LOGS.TITLE',
+        ),
         value: (stats?.total ?? 0).toString(),
         icon: 'fas fa-list',
-        subtitle: 'Registros totales',
+        subtitle: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.TOTAL_LOGS.SUBTITLE',
+        ),
         iconColor: 'blue',
         valueColor: 'primary',
       },
       {
-        title: 'Errores',
+        title: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.ERRORS.TITLE',
+        ),
         value: (stats?.byLevel?.ERROR ?? 0).toString(),
         icon: 'fas fa-exclamation-circle',
-        subtitle: 'Errores críticos',
+        subtitle: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.ERRORS.SUBTITLE',
+        ),
         iconColor: 'purple',
         valueColor: 'danger',
       },
       {
-        title: 'Warnings',
+        title: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.WARNINGS.TITLE',
+        ),
         value: (stats?.byLevel?.WARN ?? 0).toString(),
         icon: 'fas fa-exclamation-triangle',
-        subtitle: 'Advertencias',
+        subtitle: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.WARNINGS.SUBTITLE',
+        ),
         iconColor: 'orange',
         valueColor: 'warning',
       },
       {
-        title: 'Info Logs',
+        title: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.INFO_LOGS.TITLE',
+        ),
         value: (stats?.byLevel?.LOG ?? 0).toString(),
         icon: 'fas fa-info-circle',
-        subtitle: 'Información general',
+        subtitle: this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.STATS.INFO_LOGS.SUBTITLE',
+        ),
         iconColor: 'cyan',
         valueColor: 'info',
       },
@@ -252,7 +290,12 @@ export class LogsManagementComponent implements OnInit {
   protected refreshLogs(): void {
     this.loadStats();
     this.loadLogs();
-    this.toastr.success('Logs actualizados', 'Éxito');
+    this.toastr.success(
+      this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.REFRESH_SUCCESS',
+      ),
+      this.translate.instant('COMMON.REFRESH.TEXT'),
+    );
   }
 
   /**
@@ -260,14 +303,22 @@ export class LogsManagementComponent implements OnInit {
    */
   protected clearAllLogs(): void {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción eliminará todos los logs del sistema. No se puede deshacer.',
+      title: this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.CLEAR_CONFIRM.TITLE',
+      ),
+      text: this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.CLEAR_CONFIRM.TEXT',
+      ),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.CLEAR_CONFIRM.CONFIRM',
+      ),
+      cancelButtonText: this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.CLEAR_CONFIRM.CANCEL',
+      ),
     }).then(result => {
       if (result.isConfirmed) {
         this.loading.set(true);
@@ -277,7 +328,12 @@ export class LogsManagementComponent implements OnInit {
           .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe({
             next: response => {
-              this.toastr.success(response.message, 'Éxito');
+              this.toastr.success(
+                response.message,
+                this.translate.instant(
+                  'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.CLEAR_SUCCESS',
+                ),
+              );
               this.loadStats();
               this.loadLogs();
             },
@@ -323,11 +379,24 @@ export class LogsManagementComponent implements OnInit {
    */
   protected exportLogsToCSV(): void {
     if (this.logs().length === 0) {
-      this.toastr.warning('No hay logs para exportar', 'Advertencia');
+      this.toastr.warning(
+        this.translate.instant(
+          'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.EXPORT_WARNING',
+        ),
+        this.translate.instant('COMMON.EXPORT.TEXT'),
+      );
       return;
     }
 
-    const headers = ['Timestamp', 'Nivel', 'Contexto', 'Mensaje', 'PID'];
+    const headers = [
+      this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.TIMESTAMP',
+      ),
+      this.translate.instant('MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.LEVEL'),
+      this.translate.instant('MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.CONTEXT'),
+      this.translate.instant('MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.MESSAGE'),
+      this.translate.instant('MENUITEMS.LOGS-MANAGEMENT.TABLE.COLUMNS.PID'),
+    ];
     const csvContent = [
       headers.join(','),
       ...this.logs().map(log =>
@@ -356,6 +425,11 @@ export class LogsManagementComponent implements OnInit {
     link.click();
     link.remove();
 
-    this.toastr.success('Logs exportados correctamente', 'Éxito');
+    this.toastr.success(
+      this.translate.instant(
+        'MENUITEMS.LOGS-MANAGEMENT.MESSAGES.EXPORT_SUCCESS',
+      ),
+      this.translate.instant('COMMON.EXPORT.TEXT'),
+    );
   }
 }
