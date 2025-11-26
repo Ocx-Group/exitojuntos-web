@@ -234,6 +234,7 @@ export class MyProfileComponent implements OnInit {
       return;
     }
 
+    window.open(`/signup/${this.user.phone}`);
     const referralUrl = `exitojuntos.com/signup/${this.user.phone}`;
     this.clipboardService.copyFromContent(referralUrl);
     this.toastr.success(
