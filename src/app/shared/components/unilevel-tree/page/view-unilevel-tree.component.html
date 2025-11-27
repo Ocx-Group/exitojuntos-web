@@ -49,17 +49,22 @@
               </app-client-unilevel-tree-component>
 
               <ng-template #nodeTemplate let-node>
-                <div class="chart-node">
+                <div class="chart-node" style="position: relative;">
+                  <button class="node-click-area" (click)="onNodeClick(node, $event)" type="button"
+                    title="Cargar árbol desde este nodo"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; border: none; cursor: pointer; z-index: 1;">
+                    <span class="visually-hidden">Cargar árbol de {{ node.phone || 'Usuario ' + node.id }}</span>
+                  </button>
                   <img title="Usuario" alt="node" [src]="node.imageProfileUrl || 'assets/images/user.png'"
-                    class="node-image" />
-                  <div class="name">
+                    class="node-image" style="position: relative; z-index: 2; pointer-events: none;" />
+                  <div class="name" style="position: relative; z-index: 2; pointer-events: none;">
                     <span class="user-name">
                       {{ node.phone || 'Usuario ' + node.id }}
                     </span>
                   </div>
-                  <button *ngIf="node.children && node.children.length" (click)="node.hideChildren = !node.hideChildren"
+                  <button *ngIf="node.children && node.children.length" (click)="toggleChildren(node, $event)"
                     (keypress)="node.hideChildren = !node.hideChildren" class="tree-fold-btn" type="button"
-                    title="Expandir/Contraer">
+                    title="Expandir/Contraer" style="position: relative; z-index: 3;">
                     {{ node.hideChildren ? '+' : '-' }}
                   </button>
                 </div>

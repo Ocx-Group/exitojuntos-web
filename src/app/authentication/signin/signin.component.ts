@@ -136,9 +136,7 @@ export class SigninComponent implements OnInit {
             }
 
             const roleName = response.data.user?.role?.name?.toLowerCase();
-            // En Angular 20, los signals y la detección de cambios están optimizados
-            // pero aún necesitamos asegurar que el estado se haya propagado antes de navegar
-            // Usar queueMicrotask es más eficiente que setTimeout en navegadores modernos
+
             queueMicrotask(() => {
               this.redirectByRole(roleName);
             });
@@ -301,7 +299,9 @@ export class SigninComponent implements OnInit {
   private redirectByRole(roleName?: string | null): void {
     const normalizedRole = roleName?.toLowerCase();
     const targetRoute =
-      normalizedRole === 'admin' ? '/admin/home-admin' : '/app/my-network';
+      normalizedRole === 'admin'
+        ? '/admin/users-management'
+        : '/app/my-network';
 
     // Navegar con replaceUrl para evitar que el usuario pueda volver al login con el botón atrás
     this.router.navigate([targetRoute], { replaceUrl: true }).then(

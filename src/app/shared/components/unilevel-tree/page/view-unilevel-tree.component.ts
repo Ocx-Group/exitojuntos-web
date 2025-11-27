@@ -168,4 +168,25 @@ export class ViewUnilevelTreeComponent implements OnInit {
     this.maxLevel = 20; // Cargar todos los niveles
     this.loadUnilevelTree(20);
   }
+
+  onNodeClick(node: MyTreeNodeClient, event: Event): void {
+    // Prevenir que el click se propague al botón de expandir/contraer
+    const target = event.target as HTMLElement;
+    if (
+      target.classList.contains('tree-fold-btn') ||
+      target.closest('.tree-fold-btn')
+    ) {
+      return;
+    }
+
+    // Cargar el árbol desde este nodo
+    this.userId = node.id;
+    this.loadUnilevelTree();
+  }
+
+  toggleChildren(node: MyTreeNodeClient, event: Event): void {
+    // Detener la propagación para que no se active el click del nodo
+    event.stopPropagation();
+    node.hideChildren = !node.hideChildren;
+  }
 }
