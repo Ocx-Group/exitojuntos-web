@@ -10,33 +10,72 @@
 }
 
 .client-dashboard {
-  .breadcrumb-style {
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    backdrop-filter: blur(10px);
-    background: rgba(20, 20, 20, 0.6);
-    margin-bottom: 2rem;
-
+  .page-header {
     .page-title {
       color: #d4af37;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1.75rem;
       margin: 0;
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+
+      i {
+        font-size: 1rem;
+        color: #d4af37;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .referral-card {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+
+    .card-body {
+      background: transparent;
     }
 
-    .breadcrumb-item {
-      a {
-        color: rgba(255, 255, 255, 0.7);
-        transition: color 0.3s ease;
+    .referral-link-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
 
-        &:hover {
-          color: #d4af37;
-          opacity: 1;
-        }
+      .referral-label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .referral-link-display {
+        display: flex;
+        align-items: center;
 
         i {
-          color: rgba(255, 255, 255, 0.7);
+          color: #d4af37;
+          font-size: 0.9rem;
+        }
+
+        .referral-url {
+          color: #d4af37;
+          font-weight: 500;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .referral-actions {
+      .btn-icon-only {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          margin: 0;
         }
       }
     }
@@ -203,61 +242,95 @@
         }
       }
     }
+  }
 
-    &.btn-dark-gold {
-      background: rgba(0, 0, 0, 0.8);
-      border: 2px solid #ffd700;
-      color: #ffd700;
-
-      i {
+  .referral-link-container {
+    .input-group {
+      .input-group-text {
+        background: rgba(255, 215, 0, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        border-right: none;
         color: #ffd700;
-      }
-
-      &:hover:not(:disabled) {
-        background: rgba(255, 215, 0, 0.15);
-        border-color: #ffed4e;
-        color: #ffed4e;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
 
         i {
-          color: #ffed4e;
+          color: #ffd700;
         }
       }
+
+      .referral-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        color: #ffffff;
+        min-width: 220px;
+        font-size: 0.85rem;
+
+        &:focus {
+          border-color: #ffd700;
+          background: rgba(255, 255, 255, 0.08);
+          box-shadow: none;
+        }
+      }
+
+      .btn-gold {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  .btn.btn-dark-gold {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+
+    i {
+      color: #ffd700;
     }
 
-    &.btn-success {
-      background: linear-gradient(135deg, #00ff88 0%, #00cc6f 100%);
-      color: #000000;
+    &:hover:not(:disabled) {
+      background: rgba(255, 215, 0, 0.15);
+      border-color: #ffed4e;
+      color: #ffed4e;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
 
       i {
-        color: #000000;
-      }
-
-      &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #33ffaa 0%, #00ff88 100%);
+        color: #ffed4e;
       }
     }
+  }
 
-    &.btn-primary {
-      background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+  .btn.btn-success {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6f 100%);
+    color: #000000;
+
+    i {
       color: #000000;
-
-      i {
-        color: #000000;
-      }
-
-      &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
-      }
     }
 
-    &.btn-secondary {
-      background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
-      color: #ffffff;
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #33ffaa 0%, #00ff88 100%);
+    }
+  }
 
-      &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #7d8690 0%, #6c757d 100%);
-      }
+  .btn.btn-primary {
+    background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+    color: #000000;
+
+    i {
+      color: #000000;
+    }
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+    }
+  }
+
+  .btn.btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
+    color: #ffffff;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #7d8690 0%, #6c757d 100%);
     }
   }
 
@@ -301,6 +374,54 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
         background: rgba(20, 20, 20, 0.95);
       }
+
+      // Mensaje de tabla vacía
+      .empty-row {
+        color: rgba(255, 255, 255, 0.7) !important;
+        background: transparent !important;
+        text-align: center;
+        padding: 2rem !important;
+        font-size: 1rem;
+      }
+
+      // Footer de paginación
+      .datatable-footer {
+        background: rgba(20, 20, 20, 0.95) !important;
+        border-top: 1px solid rgba(255, 215, 0, 0.2);
+        color: rgba(255, 255, 255, 0.8) !important;
+
+        .datatable-footer-inner {
+          color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .page-count {
+          color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .datatable-pager {
+          .pager {
+            li {
+              a {
+                color: #ffd700 !important;
+                background: transparent;
+
+                &:hover {
+                  background: rgba(255, 215, 0, 0.1);
+                }
+              }
+
+              &.active a {
+                background: #ffd700 !important;
+                color: #000000 !important;
+              }
+
+              &.disabled a {
+                color: rgba(255, 255, 255, 0.3) !important;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -308,6 +429,77 @@
 // Responsive
 @media (max-width: 768px) {
   .client-dashboard {
+    padding: 0 !important;
+
+    .page-header {
+      padding: 0 0.5rem;
+      margin-bottom: 1rem !important;
+
+      .page-title {
+        font-size: 1.25rem;
+      }
+    }
+
+    .section-body {
+      padding: 0;
+    }
+
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+
+      > [class*='col-'] {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+    }
+
+    .referral-card {
+      border-radius: 8px;
+
+      .card-body {
+        padding: 1rem !important;
+      }
+
+      .referral-link-section {
+        width: 100%;
+        margin-bottom: 1rem;
+
+        .referral-link-display {
+          .referral-url {
+            font-size: 0.85rem;
+            word-break: break-all;
+          }
+        }
+      }
+
+      .referral-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        .btn {
+          font-size: 0.8rem;
+          padding: 0.4rem 0.75rem;
+        }
+
+        .btn-icon-only {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    .card {
+      border-radius: 8px;
+      margin-left: 0;
+      margin-right: 0;
+
+      .card-body {
+        padding: 1rem;
+      }
+    }
+
     .card-header {
       .d-flex {
         flex-direction: column;
@@ -336,6 +528,55 @@
       .gap-2 {
         flex-wrap: wrap;
       }
+    }
+
+    .alert {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .client-dashboard {
+    .page-header {
+      .page-title {
+        font-size: 1.1rem;
+      }
+    }
+
+    .referral-card {
+      .referral-link-section {
+        .referral-label {
+          font-size: 0.7rem;
+        }
+
+        .referral-link-display {
+          .referral-url {
+            font-size: 0.8rem;
+          }
+
+          i {
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .referral-actions {
+        .btn {
+          font-size: 0.75rem;
+          padding: 0.35rem 0.6rem;
+        }
+      }
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+    }
+
+    .form-control {
+      font-size: 0.85rem;
+      padding: 0.5rem 0.75rem;
     }
   }
 }

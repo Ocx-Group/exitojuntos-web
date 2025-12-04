@@ -1,42 +1,50 @@
 <section class="section client-dashboard">
-  <ul class="breadcrumb breadcrumb-style">
-    <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">
-        {{ 'MY-NETWORK-PAGE.VIEW.TITLE.TEXT' | translate }}
-      </h5>
-    </li>
-    <li class="breadcrumb-item bcrumb-1">
-      <a routerLink="/client/my-network"><i class="fas fa-network-wired font-17"></i></a>
-    </li>
-  </ul>
+  <!-- Título de la página -->
+  <div class="page-header mb-4">
+    <h2 class="page-title">
+      {{ 'MY-NETWORK-PAGE.VIEW.TITLE.TEXT' | translate }}
+      <i class="fas fa-lock ms-2"></i>
+    </h2>
+  </div>
 
   <div class="section-body">
-    <!-- Tabla de Clientes -->
-    <div class="row">
-      <div class="col-12 mb-4">
-        <div class="card">
-          <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0">
-                <i class="fas fa-users me-2"></i>
-                {{ 'MY-NETWORK-PAGE.VIEW.CARD-TITLE.TEXT' | translate }}
-              </h5>
-              <div>
-                <button class="btn btn-gold btn-sm me-2 ms-2" (click)="shareReferralLink()">
-                  <i class="bi bi-share-fill me-1"></i>
-                  {{ 'MY-NETWORK-PAGE.VIEW.BUTTONS.SHARE-NETWORK.TEXT' | translate }}
+    <!-- Card de Referral Link -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card referral-card">
+          <div class="card-body py-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+              <div class="referral-link-section">
+                <span class="referral-label">{{ 'MY-NETWORK-PAGE.VIEW.REFERRAL.LABEL' | translate }}</span>
+                <div class="referral-link-display">
+                  <i class="fas fa-link me-2"></i>
+                  <span class="referral-url">{{ getReferralLink() }}</span>
+                </div>
+              </div>
+              <div class="referral-actions d-flex gap-2">
+                <button class="btn btn-gold btn-sm" (click)="copyReferralLink()">
+                  <i class="bi bi-clipboard me-1"></i>
+                  {{ 'COMMON.COPY.TEXT' | translate }}
                 </button>
-                <button class="btn btn-gold btn-sm me-2" (click)="viewCompleteNetwork()">
+                <button class="btn btn-gold-outline btn-sm" (click)="viewCompleteNetwork()">
                   <i class="fas fa-project-diagram me-1"></i>
                   {{ 'MY-NETWORK-PAGE.VIEW.BUTTONS.VIEW-COMPLETE.TEXT' | translate }}
                 </button>
-                <button class="btn btn-gold-outline btn-sm" (click)="refreshClients()" [disabled]="loading()">
-                  <i class="fas fa-sync-alt me-1" [class.fa-spin]="loading()"></i>
-                  {{ 'COMMON.REFRESH.TEXT' | translate }}
+                <button class="btn btn-icon-only btn-gold-outline btn-sm" (click)="refreshClients()"
+                  [disabled]="loading()">
+                  <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
                 </button>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Clientes -->
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card">
           <div class="card-body">
             <!-- Filtros de Búsqueda y Botones -->
             <div class="row mb-4 align-items-end">

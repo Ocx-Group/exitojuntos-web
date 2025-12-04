@@ -2036,6 +2036,9 @@
         "ERROR": "Error copying referral link",
         "SUCCESS": "Referral link copied!"
       },
+      "REFERRAL": {
+        "LABEL": "Your Referral Link"
+      },
       "STATS": {
         "DIRECT": {
           "TEXT": "Direct Clients"

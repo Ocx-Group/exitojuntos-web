@@ -480,6 +480,9 @@
         "ERROR": "Erro ao copiar o link de indicação",
         "SUCCESS": "Link de indicação copiado!"
       },
+      "REFERRAL": {
+        "LABEL": "Seu Link de Indicação"
+      },
       "STATS": {
         "DIRECT": {
           "TEXT": "Clientes Diretos"

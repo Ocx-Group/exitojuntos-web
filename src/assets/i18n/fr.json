@@ -480,6 +480,9 @@
         "ERROR": "Erreur lors de la copie du lien de parrainage",
         "SUCCESS": "Lien de parrainage copié!"
       },
+      "REFERRAL": {
+        "LABEL": "Votre Lien de Parrainage"
+      },
       "STATS": {
         "DIRECT": {
           "TEXT": "Clients directs"

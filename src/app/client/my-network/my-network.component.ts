@@ -400,21 +400,30 @@ export class MyNetworkComponent implements OnInit {
   }
 
   /**
-   * Comparte el enlace de referido del usuario
+   * Obtiene el enlace de referido del usuario
    */
-  protected shareReferralLink(): void {
+  protected getReferralLink(): string {
     const currentUser = this.authService.currentUserAffiliateValue;
-
     if (!currentUser?.phone) {
+      return '';
+    }
+    return `exitojuntos.com/signup/${currentUser.phone}`;
+  }
+
+  /**
+   * Copia el enlace de referido al portapapeles
+   */
+  protected copyReferralLink(): void {
+    const referralUrl = this.getReferralLink();
+
+    if (!referralUrl) {
       this.toastr.error(
         this.translate.instant('MY-NETWORK-PAGE.VIEW.SHARE.ERROR'),
       );
       return;
     }
 
-    const referralUrl = `exitojuntos.com/signup/${currentUser.phone}`;
     this.clipboardService.copyFromContent(referralUrl);
-    window.open(`/signup/${currentUser.phone}`);
     this.toastr.success(
       this.translate.instant('MY-NETWORK-PAGE.VIEW.SHARE.SUCCESS'),
     );

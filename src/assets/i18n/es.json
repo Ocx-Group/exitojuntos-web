@@ -2036,6 +2036,9 @@
         "ERROR": "Error al copiar el enlace de referido",
         "SUCCESS": "¡Enlace de referido copiado!"
       },
+      "REFERRAL": {
+        "LABEL": "Tu Enlace de Referido"
+      },
       "STATS": {
         "DIRECT": {
           "TEXT": "Clientes Directos"
