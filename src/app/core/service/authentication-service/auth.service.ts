@@ -1,5 +1,5 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Signin } from '@app/core/models/signin-model/signin.model';
@@ -234,13 +234,19 @@ export class AuthService {
       ? httpOptions.headers.set('Authorization', `Bearer ${token}`)
       : httpOptions.headers;
 
-    let params: any = {};
+    let params = new HttpParams();
     if (userId !== undefined && userId !== null) {
-      params.userId = userId.toString();
+      params = params.set('userId', userId.toString());
     }
     if (maxLevel !== undefined && maxLevel !== null) {
-      params.maxLevel = maxLevel.toString();
+      params = params.set('maxLevel', maxLevel.toString());
     }
+
+    console.log('Llamando árbol con:', {
+      userId,
+      maxLevel,
+      params: params.toString(),
+    }); // Para debug
 
     return this.http
       .get<Response>(`${this.urlApi}/auth/unilevel-tree`, { params, headers })

@@ -45,14 +45,15 @@ export class ViewUnilevelTreeComponent implements OnInit {
   showDiv = false;
 
   ngOnInit() {
-    // Obtener userId de los query params si existe
     this.route.queryParams
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(params => {
         if (params['userId']) {
           this.userId = +params['userId'];
+          this.loadUnilevelTree(this.userId);
+        } else {
+          this.loadUnilevelTree(undefined, this.maxLevel);
         }
-        this.loadUnilevelTree();
       });
   }
 
@@ -77,14 +78,14 @@ export class ViewUnilevelTreeComponent implements OnInit {
     return node;
   }
 
-  loadUnilevelTree(maxLevel?: number): void {
+  loadUnilevelTree(userId?: number, maxLevel?: number): void {
     this.loading.set(true);
     this.showDiv = false;
 
     const levelToLoad = maxLevel || this.maxLevel;
 
     this.authService
-      .getUnilevelTree(this.userId, levelToLoad)
+      .getUnilevelTree(userId, levelToLoad)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: response => {
@@ -112,8 +113,6 @@ export class ViewUnilevelTreeComponent implements OnInit {
       };
     }
 
-    console.log('Tree data from backend:', treeArray);
-
     // Crear un mapa de nodos por ID
     const nodesMap = new Map<number, MyTreeNodeClient>();
 
@@ -121,14 +120,6 @@ export class ViewUnilevelTreeComponent implements OnInit {
     for (const node of treeArray) {
       const phoneValue = node.phone || '';
       const emailValue = node.email || '';
-      const displayText = phoneValue || emailValue || `Usuario ${node.id}`;
-
-      console.log(`Nodo ${node.id}:`, {
-        phone: phoneValue,
-        email: emailValue,
-        display: displayText,
-        imageProfileUrl: node.imageProfileUrl,
-      });
 
       nodesMap.set(node.id, {
         id: node.id,
@@ -161,16 +152,17 @@ export class ViewUnilevelTreeComponent implements OnInit {
 
   onloadFamilyTree(userId: number): void {
     this.userId = userId;
-    this.loadUnilevelTree();
+    this.loadUnilevelTree(this.userId);
   }
 
   loadCompleteTree(): void {
-    this.maxLevel = 20; // Cargar todos los niveles
-    this.loadUnilevelTree(20);
+    this.loadUnilevelTree(this.userId, this.maxLevel);
   }
 
   onNodeClick(node: MyTreeNodeClient, event: Event): void {
     // Prevenir que el click se propague al botón de expandir/contraer
+
+    console.log('Acabo de dar click aqui', node, event);
     const target = event.target as HTMLElement;
     if (
       target.classList.contains('tree-fold-btn') ||
@@ -181,7 +173,7 @@ export class ViewUnilevelTreeComponent implements OnInit {
 
     // Cargar el árbol desde este nodo
     this.userId = node.id;
-    this.loadUnilevelTree();
+    this.loadUnilevelTree(this.userId, this.maxLevel);
   }
 
   toggleChildren(node: MyTreeNodeClient, event: Event): void {
