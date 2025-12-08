@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   headerHeight = 60;
   routerObj = null;
   readonly navbarIcon = 'assets/exito-logo.svg';
-  homeLink = '/app/home';
+  homeLink = '/app/my-network';
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -110,7 +110,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         ? ROUTES_ADMIN.filter(Boolean)
         : ROUTES.filter(Boolean);
 
-      this.homeLink = isAdmin ? '/admin/home-admin' : '/app/home';
+      this.homeLink = isAdmin ? '/admin/users-management' : '/app/my-network';
     }
 
     this.initLeftSidebar();
