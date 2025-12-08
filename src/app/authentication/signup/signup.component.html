@@ -82,7 +82,7 @@
         <div class="form-field">
           <label for="country" class="form-label">{{ 'SIGNUP.COUNTRY' | translate }}</label>
           <select id="country" formControlName="country" class="form-select"
-            [class.is-invalid]="submitted && f['country'].errors" (change)="onCountrySelected($event.target.value)">
+            [class.is-invalid]="submitted && f['country'].errors">
             <option value="" disabled selected>{{ 'SIGNUP.COUNTRY_PLACEHOLDER' | translate }}</option>
             <option *ngFor="let country of listcountry" [value]="country.id">
               {{ country.name }}

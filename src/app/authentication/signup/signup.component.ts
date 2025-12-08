@@ -98,24 +98,24 @@ export class SignupComponent implements OnInit {
     this.loadValidations();
   }
 
-  onCountrySelected(countryIso: string) {
-    const countryId = Number.parseInt(countryIso, 10);
-    if (Number.isNaN(countryId)) {
-      return;
-    }
-    const country = this.listcountry.find(c => c.id === countryId);
-    if (!country) {
-      return;
-    }
-    if (country.phoneCode === '1') {
-      return;
-    }
-    // Remove + symbol from phone code
-    const phoneCode = country.phoneCode.split('+').join('');
-    this.registerForm.patchValue({
-      phone: phoneCode,
-    });
-  }
+  // onCountrySelected(countryIso: string) {
+  //   const countryId = Number.parseInt(countryIso, 10);
+  //   if (Number.isNaN(countryId)) {
+  //     return;
+  //   }
+  //   const country = this.listcountry.find(c => c.id === countryId);
+  //   if (!country) {
+  //     return;
+  //   }
+  //   if (country.phoneCode === '1') {
+  //     return;
+  //   }
+  //   // Remove + symbol from phone code
+  //   const phoneCode = country.phoneCode.split('+').join('');
+  //   this.registerForm.patchValue({
+  //     phone: phoneCode,
+  //   });
+  // }
 
   // Helper function to clean phone number
   private cleanPhoneNumber(phone: string): string {
