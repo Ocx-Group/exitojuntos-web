@@ -93,56 +93,160 @@
   }
 }
 
-:host ::ng-deep .admin-table-skin app-reusable-datatable {
-  .table-search-area {
-    .input-group-text {
-      background: rgba(0, 0, 0, 0.65);
-      border: 1px solid rgba(255, 215, 0, 0.4);
-      color: #ffd700;
-    }
+// Estilos sincronizados con el cliente (admin-table-skin)
+.admin-table-skin {
+  margin-top: 1rem;
 
-    .form-control {
-      background: rgba(255, 255, 255, 0.05) !important;
-      border: 1px solid rgba(255, 215, 0, 0.4);
-      color: #ffffff;
-      box-shadow: none;
-
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.6);
+  ::ng-deep {
+    .table-search-area {
+      .input-group-text {
+        background: rgba(0, 0, 0, 0.65);
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        color: #ffd700;
       }
 
-      &:focus {
-        border-color: #ffd700;
-      }
-    }
-  }
+      .form-control {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        color: #ffffff;
+        box-shadow: none;
 
-  .btn {
-    &.btn-primary {
-      background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
-      border: none;
-      color: #000000;
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.6);
+        }
 
-      &:hover {
-        background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+        &:focus {
+          border-color: #ffd700;
+        }
       }
     }
 
-    &.btn-outline-primary {
-      border-color: rgba(255, 215, 0, 0.6);
-      color: #ffd700;
+    .datatable-header {
+      background-color: rgba(20, 20, 20, 0.95) !important;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
 
-      &:hover {
-        background: rgba(255, 215, 0, 0.2);
-        color: #000;
+      .datatable-header-cell {
+        color: #ffd700;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        background-color: rgba(20, 20, 20, 0.95) !important;
       }
     }
-  }
 
-  .admin-table-skin {
+    .datatable-body {
+      background: rgba(20, 20, 20, 0.95) !important;
+
+      .datatable-scroll {
+        background: rgba(20, 20, 20, 0.95) !important;
+      }
+
+      .datatable-row-wrapper {
+        background: rgba(20, 20, 20, 0.95) !important;
+      }
+
+      .datatable-body-row {
+        background: rgba(20, 20, 20, 0.95) !important;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+
+        &:hover {
+          background-color: rgba(255, 215, 0, 0.08) !important;
+        }
+
+        .datatable-row-group {
+          background: rgba(20, 20, 20, 0.95) !important;
+        }
+
+        .datatable-body-cell {
+          color: rgba(255, 255, 255, 0.9) !important;
+          background: transparent !important;
+
+          .datatable-body-cell-label {
+            color: rgba(255, 255, 255, 0.9) !important;
+          }
+        }
+      }
+    }
+
     .ngx-datatable.material {
       border: 1px solid rgba(255, 215, 0, 0.2);
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      background: rgba(20, 20, 20, 0.95) !important;
+
+      .datatable-body {
+        background: rgba(20, 20, 20, 0.95) !important;
+      }
+    }
+
+    // Mensaje de tabla vacía
+    .empty-row {
+      color: rgba(255, 255, 255, 0.7) !important;
+      background: transparent !important;
+      text-align: center;
+      padding: 2rem !important;
+      font-size: 1rem;
+    }
+
+    // Footer de paginación
+    .datatable-footer {
+      background: rgba(20, 20, 20, 0.95) !important;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      color: rgba(255, 255, 255, 0.8) !important;
+
+      .datatable-footer-inner {
+        color: rgba(255, 255, 255, 0.8) !important;
+      }
+
+      .page-count {
+        color: rgba(255, 255, 255, 0.8) !important;
+      }
+
+      .datatable-pager {
+        .pager {
+          li {
+            a {
+              color: #ffd700 !important;
+              background: transparent;
+
+              &:hover {
+                background: rgba(255, 215, 0, 0.1);
+              }
+            }
+
+            &.active a {
+              background: #ffd700 !important;
+              color: #000000 !important;
+            }
+
+            &.disabled a {
+              color: rgba(255, 255, 255, 0.3) !important;
+            }
+          }
+        }
+      }
+    }
+
+    .btn {
+      &.btn-primary {
+        background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+        border: none;
+        color: #000000;
+
+        &:hover {
+          background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+        }
+      }
+
+      &.btn-outline-primary {
+        border-color: rgba(255, 215, 0, 0.6);
+        color: #ffd700;
+
+        &:hover {
+          background: rgba(255, 215, 0, 0.2);
+          color: #000;
+        }
+      }
     }
   }
 }

@@ -233,14 +233,14 @@ $color-font: #96a2b4;
   // Admin-specific datatable styling (golden theme)
   .admin-dashboard {
     .ngx-datatable.material {
-      background: #000000 !important;
+      background: rgba(20, 20, 20, 0.95) !important;
 
       .datatable-header {
-        background: #000000 !important;
+        background: rgba(20, 20, 20, 0.95) !important;
         border-bottom: 2px solid rgba(255, 215, 0, 0.3) !important;
 
         .datatable-header-cell {
-          background: #000000 !important;
+          background: rgba(20, 20, 20, 0.95) !important;
           color: #ffd700 !important;
           font-weight: 600 !important;
           text-transform: uppercase !important;
@@ -249,24 +249,41 @@ $color-font: #96a2b4;
       }
 
       .datatable-body {
-        background: #000000 !important;
+        background: rgba(20, 20, 20, 0.95) !important;
+
+        .datatable-scroll {
+          background: rgba(20, 20, 20, 0.95) !important;
+        }
+
+        .datatable-row-wrapper {
+          background: rgba(20, 20, 20, 0.95) !important;
+        }
 
         .datatable-body-row {
-          background: #000000 !important;
+          background: rgba(20, 20, 20, 0.95) !important;
 
           &:hover {
             background: rgba(255, 215, 0, 0.08) !important;
           }
 
+          .datatable-row-group {
+            background: rgba(20, 20, 20, 0.95) !important;
+          }
+
           .datatable-body-cell {
-            background: #000000 !important;
-            color: #ffd700 !important;
+            background: rgba(20, 20, 20, 0.95) !important;
+            color: rgba(255, 255, 255, 0.9) !important;
             border-bottom: 1px solid rgba(255, 215, 0, 0.1) !important;
+
+            .datatable-body-cell-label {
+              color: rgba(255, 255, 255, 0.9) !important;
+            }
           }
         }
       }
 
       .datatable-footer {
+        background: rgba(20, 20, 20, 0.95) !important;
         border-top: 1px solid rgba(255, 215, 0, 0.3) !important;
 
         .datatable-pager {
