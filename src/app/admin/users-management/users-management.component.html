@@ -24,7 +24,8 @@
         <div class="card">
           <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 text-white"><i class="fas fa-users me-2 text-white"></i>{{ 'MENUITEMS.USERS-MANAGEMENT.TABLE.TITLE' | translate }}</h5>
+              <h5 class="mb-0 text-white"><i class="fas fa-users me-2 text-white"></i>{{
+                'MENUITEMS.USERS-MANAGEMENT.TABLE.TITLE' | translate }}</h5>
               <div>
                 <button class="btn btn-success btn-sm me-2 ms-2" (click)="viewCompleteNetworkTree()">
                   <i class="fas fa-project-diagram"></i>
@@ -40,7 +41,8 @@
           <div class="card-body">
             <div class="admin-table-skin">
               <app-reusable-datatable [rows]="users()" [columns]="columns" [actions]="actions" [config]="tableConfig"
-                [loadingIndicator]="loading()" (rowClicked)="onRowClicked($event)" />
+                [loadingIndicator]="loading()" [externalPaging]="true" [count]="meta().total" [offset]="meta().page - 1"
+                (rowClicked)="onRowClicked($event)" (pageChange)="onPageChange($event)" />
             </div>
           </div>
         </div>

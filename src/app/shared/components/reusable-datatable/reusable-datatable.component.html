@@ -60,6 +60,7 @@
     [rowHeight]="mergedConfig?.rowHeight === 'auto' ? 'auto' : +(mergedConfig?.rowHeight || 'auto')"
     [limit]="mergedConfig?.limit || 10" [scrollbarH]="scrollBarHorizontal"
     [reorderable]="mergedConfig?.reorderable !== false" [swapColumns]="mergedConfig?.swapColumns !== false"
+    [externalPaging]="externalPaging || mergedConfig?.externalPaging || false" [count]="count" [offset]="offset"
     [cssClasses]="{
       sortAscending: 'datatable-icon-up',
       sortDescending: 'datatable-icon-down',
@@ -68,7 +69,8 @@
       pagerRightArrow: 'datatable-icon-right',
       pagerPrevious: 'datatable-icon-prev',
       pagerNext: 'datatable-icon-skip'
-    }" [messages]="mergedConfig.messages" (activate)="onRowClick($event)" (select)="onSelect($event)">
+    }" [messages]="mergedConfig.messages" (activate)="onRowClick($event)" (select)="onSelect($event)"
+    (page)="onPage($event)">
 
     <!-- Columnas dinámicas -->
     <ngx-datatable-column *ngFor="let column of columns" [name]="column.name" [prop]="column.prop"

@@ -55,6 +55,7 @@ export interface TableConfig {
   showSearch?: boolean;
   showActions?: boolean;
   showPagination?: boolean;
+  externalPaging?: boolean;
   searchPlaceholder?: string;
   headerHeight?: number;
   footerHeight?: number;
@@ -111,10 +112,14 @@ export class ReusableDatatableComponent implements OnInit, OnChanges {
   @Input() loadingIndicator: boolean = false;
   @Input() customButtons: TemplateRef<any>;
   @Input() customSearch: TemplateRef<any>;
+  @Input() externalPaging: boolean = false;
+  @Input() count: number = 0;
+  @Input() offset: number = 0;
 
   @Output() rowClicked = new EventEmitter<any>();
   @Output() rowSelected = new EventEmitter<any[]>();
   @Output() filterChanged = new EventEmitter<string>();
+  @Output() pageChange = new EventEmitter<{ offset: number; limit: number }>();
 
   @ViewChild('table') table: DatatableComponent;
   @ContentChild('actionsTemplate') actionsTemplate: TemplateRef<any>;
@@ -189,6 +194,15 @@ export class ReusableDatatableComponent implements OnInit, OnChanges {
 
   onSelect(event: any) {
     this.rowSelected.emit(event.selected);
+  }
+
+  onPage(event: any) {
+    if (this.externalPaging || this.mergedConfig.externalPaging) {
+      this.pageChange.emit({
+        offset: event.offset,
+        limit: event.limit || this.mergedConfig.limit || 10,
+      });
+    }
   }
 
   executeAction(action: TableAction, row: any) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
@@ -43,7 +43,6 @@ interface ClientData {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     FormsModule,
     TranslateModule,
     ReusableDatatableComponent,

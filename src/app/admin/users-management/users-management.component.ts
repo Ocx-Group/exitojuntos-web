@@ -136,30 +136,30 @@ export class UsersManagementComponent implements OnInit {
   ];
 
   protected actions: TableAction[] = [
-    {
-      label: 'Ver Árbol',
-      icon: 'fas fa-project-diagram',
-      class: 'btn-sm btn-success',
-      callback: (row: UserData) => this.viewUserTree(row),
-    },
-    {
-      label: 'Ver Detalles',
-      icon: 'fas fa-eye',
-      class: 'btn-sm btn-info',
-      callback: (row: UserData) => this.viewUserDetails(row),
-    },
-    {
-      label: 'Editar',
-      icon: 'fas fa-edit',
-      class: 'btn-sm btn-warning',
-      callback: (row: UserData) => this.editUser(row),
-    },
-    {
-      label: 'Eliminar',
-      icon: 'fas fa-trash',
-      class: 'btn-sm btn-danger',
-      callback: (row: UserData) => this.deleteUser(row),
-    },
+    // {
+    //   label: 'Ver Árbol',
+    //   icon: 'fas fa-project-diagram',
+    //   class: 'btn-sm btn-success',
+    //   callback: (row: UserData) => this.viewUserTree(row),
+    // },
+    // {
+    //   label: 'Ver Detalles',
+    //   icon: 'fas fa-eye',
+    //   class: 'btn-sm btn-info',
+    //   callback: (row: UserData) => this.viewUserDetails(row),
+    // },
+    // {
+    //   label: 'Editar',
+    //   icon: 'fas fa-edit',
+    //   class: 'btn-sm btn-warning',
+    //   callback: (row: UserData) => this.editUser(row),
+    // },
+    // {
+    //   label: 'Eliminar',
+    //   icon: 'fas fa-trash',
+    //   class: 'btn-sm btn-danger',
+    //   callback: (row: UserData) => this.deleteUser(row),
+    // },
   ];
 
   protected tableConfig: TableConfig = {
@@ -415,8 +415,10 @@ export class UsersManagementComponent implements OnInit {
       });
   }
 
-  protected onPageChange(page: number): void {
-    this.loadUsers(page, this.meta().limit);
+  protected onPageChange(event: { offset: number; limit: number }): void {
+    // offset es 0-based, pero el API espera page 1-based
+    const page = event.offset + 1;
+    this.loadUsers(page, event.limit);
   }
 
   protected onRowClicked(row: UserData): void {
