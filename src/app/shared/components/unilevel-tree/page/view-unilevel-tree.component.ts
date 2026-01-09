@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyTreeNodeClient } from '@app/core/models/tree-model/tree-node';
@@ -30,10 +30,13 @@ import { AuthService } from '@app/core/service/authentication-service/auth.servi
 export class ViewUnilevelTreeComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
   userId: number;
   maxLevel: number = 10; // Nivel máximo por defecto
+  isAdmin: boolean = false;
+  backRoute: string = '/app/my-network';
   loading = signal<boolean>(false);
   tree: MyTreeNodeClient = {
     id: 0,
@@ -45,6 +48,13 @@ export class ViewUnilevelTreeComponent implements OnInit {
   showDiv = false;
 
   ngOnInit() {
+    // Detectar si estamos en el contexto de admin basado en la URL actual
+    const currentUrl = this.router.url;
+    this.isAdmin = currentUrl.startsWith('/admin');
+    this.backRoute = this.isAdmin
+      ? '/admin/users-management'
+      : '/app/my-network';
+
     this.route.queryParams
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(params => {
