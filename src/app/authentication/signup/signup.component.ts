@@ -200,13 +200,10 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     this.authService.getAffiliateByPhone(phone).subscribe({
       next: (user: UserAffiliate) => {
-        console.log('getUserByPhone received user:', user);
         if (user?.id) {
           this.sponsor = user.phone;
           this.user = user;
-          console.log('User loaded successfully:', this.user);
         } else {
-          console.error('User not found or invalid data for phone:', phone);
           this.toastr.error(this.translate.instant('SIGNUP.USER_NOT_FOUND'));
           this.router.navigate(['/signin']).then();
         }
