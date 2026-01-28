@@ -105,6 +105,103 @@
   color: #8b7e3f;
 }
 
+// Sponsor search section
+.sponsor-search {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sponsor-search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sponsor-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .sponsor-input {
+    flex: 1;
+    height: 40px;
+
+    &.is-valid {
+      border-color: #28a745;
+    }
+  }
+}
+
+.search-sponsor-btn {
+  height: 40px;
+  width: 48px;
+  min-width: 48px;
+  background: linear-gradient(135deg, #d4af37 0%, #ffb800 100%);
+  border: none;
+  border-radius: 8px;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+
+  i {
+    font-size: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ffb800 0%, #d4af37 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+
+  &:disabled {
+    background: #6b5f1f;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.found-sponsor {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-color: rgba(40, 167, 69, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.sponsor-check {
+  color: #28a745;
+  margin-right: 8px;
+}
+
+.sponsor-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #d4af37;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Error message styles
+.error-message {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #dc3545;
+  margin-top: 4px;
+}
+
 // Form container
 .signup-form-container {
   background-color: #0a0a0a;
@@ -112,7 +209,9 @@
   border-radius: 10px;
   padding: 33px;
   box-sizing: border-box;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.05);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(212, 175, 55, 0.05);
 }
 
 // Form

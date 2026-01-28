@@ -2865,7 +2865,13 @@
     "USERNAME": "Username",
     "USERNAME_REQUIRED": "Username is required",
     "USERNAME_WHITESPACE": "Username cannot contain spaces",
-    "WARNING_NO_COUNTRIES": "Could not load countries"
+    "WARNING_NO_COUNTRIES": "Could not load countries",
+    "SPONSOR_PHONE": "Your sponsor's phone number",
+    "SPONSOR_PHONE_PLACEHOLDER": "Enter your sponsor's phone number",
+    "SPONSOR_PHONE_REQUIRED": "You must enter your sponsor's phone number",
+    "SPONSOR_NOT_FOUND": "No sponsor found with that number",
+    "SPONSOR_FOUND": "Sponsor found",
+    "SPONSOR_REQUIRED": "You must have a sponsor to register"
   },
   "THIRD_PARTY_PURCHASE": {
     "AMOUNT_TO_PAY": "Amount to pay",

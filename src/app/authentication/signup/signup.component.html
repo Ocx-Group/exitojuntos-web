@@ -35,13 +35,43 @@
       <h1 class="signup-title">{{ 'SIGNUP.TITLE' | translate }}</h1>
       <p class="signup-subtitle">{{ 'SIGNUP.SUBTITLE' | translate }}</p>
 
-      <!-- Referrer info -->
-      <div class="referrer-info" *ngIf="sponsor">
+      <!-- Referrer info (cuando viene por link) -->
+      <div class="referrer-info" *ngIf="sponsor && !isManualSponsor">
         <p class="referrer-text">
-          <strong>{{ 'SIGNUP.REFERRED_BY' | translate }}</strong> {{ user.name }} {{ user.last_name }}
+          <strong>{{ 'SIGNUP.REFERRED_BY' | translate }}</strong> {{ user.name }} {{ user.lastName }}
           <br>
           <span class="referrer-phone">{{ 'SIGNUP.PHONE_LABEL' | translate }} {{ sponsor }}</span>
         </p>
+      </div>
+
+      <!-- Campo para buscar patrocinador manualmente -->
+      <div class="sponsor-search" *ngIf="!key">
+        <div class="sponsor-search-field">
+          <label for="sponsorPhone" class="form-label">{{ 'SIGNUP.SPONSOR_PHONE' | translate }}</label>
+          <div class="sponsor-input-group">
+            <input id="sponsorPhone" type="tel" [ngModel]="sponsorPhoneInput"
+              (ngModelChange)="onSponsorPhoneChange($event)" class="form-input sponsor-input"
+              [class.is-invalid]="sponsorSearchError" [class.is-valid]="sponsorFound"
+              [placeholder]="'SIGNUP.SPONSOR_PHONE_PLACEHOLDER' | translate" (keyup.enter)="searchSponsor()" />
+            <button type="button" class="search-sponsor-btn" (click)="searchSponsor()" [disabled]="isSearchingSponsor">
+              <i *ngIf="!isSearchingSponsor" class="fas fa-search"></i>
+              <i *ngIf="isSearchingSponsor" class="fas fa-spinner fa-spin"></i>
+            </button>
+          </div>
+          <div *ngIf="sponsorSearchError" class="error-message">
+            <span>{{ sponsorSearchError }}</span>
+          </div>
+        </div>
+
+        <!-- Mostrar información del patrocinador encontrado -->
+        <div class="referrer-info found-sponsor" *ngIf="sponsorFound">
+          <p class="referrer-text">
+            <i class="fas fa-check-circle sponsor-check"></i>
+            <strong>{{ 'SIGNUP.SPONSOR_FOUND' | translate }}</strong>
+            <br>
+            <span class="sponsor-name">{{ user.name }} {{ user.lastName }}</span>
+          </p>
+        </div>
       </div>
     </div>
 

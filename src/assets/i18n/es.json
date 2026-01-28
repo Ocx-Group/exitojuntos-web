@@ -2862,7 +2862,13 @@
     "USERNAME": "Nombre de usuario",
     "USERNAME_REQUIRED": "El nombre de usuario es requerido",
     "USERNAME_WHITESPACE": "El nombre de usuario no puede contener espacios",
-    "WARNING_NO_COUNTRIES": "No se pudieron cargar los países"
+    "WARNING_NO_COUNTRIES": "No se pudieron cargar los países",
+    "SPONSOR_PHONE": "Teléfono de tu patrocinador",
+    "SPONSOR_PHONE_PLACEHOLDER": "Ingresa el número de teléfono de tu patrocinador",
+    "SPONSOR_PHONE_REQUIRED": "Debes ingresar el teléfono de tu patrocinador",
+    "SPONSOR_NOT_FOUND": "No se encontró ningún patrocinador con ese número",
+    "SPONSOR_FOUND": "Patrocinador encontrado",
+    "SPONSOR_REQUIRED": "Debes tener un patrocinador para registrarte"
   },
   "THIRD_PARTY_PURCHASE": {
     "AMOUNT_TO_PAY": "Monto a pagar",

@@ -641,7 +641,13 @@
     "USERNAME": "Nom d'utilisateur",
     "USERNAME_REQUIRED": "Le nom d'utilisateur est requis",
     "USERNAME_WHITESPACE": "Le nom d'utilisateur ne peut pas contenir d'espaces",
-    "WARNING_NO_COUNTRIES": "Impossible de charger les pays"
+    "WARNING_NO_COUNTRIES": "Impossible de charger les pays",
+    "SPONSOR_PHONE": "Téléphone de votre parrain",
+    "SPONSOR_PHONE_PLACEHOLDER": "Entrez le numéro de téléphone de votre parrain",
+    "SPONSOR_PHONE_REQUIRED": "Vous devez entrer le téléphone de votre parrain",
+    "SPONSOR_NOT_FOUND": "Aucun parrain trouvé avec ce numéro",
+    "SPONSOR_FOUND": "Parrain trouvé",
+    "SPONSOR_REQUIRED": "Vous devez avoir un parrain pour vous inscrire"
   },
   "RESET": {
     "BRAND_SUBTITLE": "Créez un nouveau mot de passe sécurisé pour votre compte",

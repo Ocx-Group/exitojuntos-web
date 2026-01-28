@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   CUSTOM_ELEMENTS_SCHEMA,
   inject,
 } from '@angular/core';
@@ -8,6 +9,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
   Validators,
@@ -22,6 +24,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TermsConditionsComponent } from '@app/shared/components/terms-conditions/terms-conditions.component';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -30,6 +34,7 @@ import { AuthService } from '@app/core/service/authentication-service/auth.servi
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterLink,
     TranslateModule,
@@ -37,7 +42,7 @@ import { AuthService } from '@app/core/service/authentication-service/auth.servi
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   key = '';
   side = '';
@@ -50,6 +55,17 @@ export class SignupComponent implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
   showTermsModal = false;
+
+  // Propiedades para búsqueda manual de patrocinador
+  sponsorPhoneInput = '';
+  isSearchingSponsor = false;
+  sponsorFound = false;
+  sponsorSearchError = '';
+  isManualSponsor = false;
+
+  // Subject para debounce de búsqueda de patrocinador
+  private readonly sponsorPhoneSubject = new Subject<string>();
+  private sponsorSearchSubscription: Subscription;
   private readonly countryService: CountryService = inject(CountryService);
   private readonly authService = inject(AuthService);
   constructor(
@@ -73,7 +89,6 @@ export class SignupComponent implements OnInit {
   private fetchCountry() {
     this.countryService.getCountries().subscribe({
       next: data => {
-        console.log('Countries loaded:', data);
         if (data && Array.isArray(data)) {
           this.listcountry = data;
         } else {
@@ -96,26 +111,42 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadValidations();
+    this.setupSponsorSearchDebounce();
   }
 
-  // onCountrySelected(countryIso: string) {
-  //   const countryId = Number.parseInt(countryIso, 10);
-  //   if (Number.isNaN(countryId)) {
-  //     return;
-  //   }
-  //   const country = this.listcountry.find(c => c.id === countryId);
-  //   if (!country) {
-  //     return;
-  //   }
-  //   if (country.phoneCode === '1') {
-  //     return;
-  //   }
-  //   // Remove + symbol from phone code
-  //   const phoneCode = country.phoneCode.split('+').join('');
-  //   this.registerForm.patchValue({
-  //     phone: phoneCode,
-  //   });
-  // }
+  ngOnDestroy(): void {
+    if (this.sponsorSearchSubscription) {
+      this.sponsorSearchSubscription.unsubscribe();
+    }
+  }
+
+  private setupSponsorSearchDebounce(): void {
+    this.sponsorSearchSubscription = this.sponsorPhoneSubject
+      .pipe(
+        debounceTime(1500), // Esperar 1.5 segundos después de que el usuario deje de escribir
+        distinctUntilChanged(), // Solo buscar si el valor cambió
+        filter(phone => phone.length >= 6), // Solo buscar si tiene al menos 6 dígitos
+      )
+      .subscribe(phone => {
+        this.searchSponsorByPhone(phone);
+      });
+  }
+
+  onSponsorPhoneChange(value: string): void {
+    this.sponsorPhoneInput = value;
+    const cleanPhone = this.cleanPhoneNumber(value);
+
+    // Resetear estado si el campo está vacío o muy corto
+    if (cleanPhone.length < 6) {
+      this.sponsorFound = false;
+      this.sponsorSearchError = '';
+      this.user = new UserAffiliate();
+      return;
+    }
+
+    // Emitir el valor para el debounce
+    this.sponsorPhoneSubject.next(cleanPhone);
+  }
 
   // Helper function to clean phone number
   private cleanPhoneNumber(phone: string): string {
@@ -198,6 +229,12 @@ export class SignupComponent implements OnInit {
 
     if (this.registerForm.invalid) {
       this.showError(this.translate.instant('SIGNUP.INVALID_FORM'));
+      return;
+    }
+
+    // Validar que haya un patrocinador seleccionado
+    if (!this.user?.id) {
+      this.showError(this.translate.instant('SIGNUP.SPONSOR_REQUIRED'));
       return;
     }
 
@@ -325,6 +362,53 @@ export class SignupComponent implements OnInit {
 
   toggleConfirmPasswordVisibility() {
     this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  searchSponsor() {
+    const phone = this.cleanPhoneNumber(this.sponsorPhoneInput);
+
+    if (!phone) {
+      this.sponsorSearchError = this.translate.instant(
+        'SIGNUP.SPONSOR_PHONE_REQUIRED',
+      );
+      this.sponsorFound = false;
+      return;
+    }
+
+    this.searchSponsorByPhone(phone);
+  }
+
+  private searchSponsorByPhone(phone: string): void {
+    this.isSearchingSponsor = true;
+    this.sponsorSearchError = '';
+    this.sponsorFound = false;
+
+    this.authService.getAffiliateByPhone(phone).subscribe({
+      next: (user: UserAffiliate) => {
+        this.isSearchingSponsor = false;
+        if (user?.id) {
+          this.sponsor = user.phone;
+          this.user = user;
+          this.sponsorFound = true;
+          this.isManualSponsor = true;
+          this.sponsorSearchError = '';
+        } else {
+          this.sponsorSearchError = this.translate.instant(
+            'SIGNUP.SPONSOR_NOT_FOUND',
+          );
+          this.sponsorFound = false;
+          this.user = new UserAffiliate();
+        }
+      },
+      error: () => {
+        this.isSearchingSponsor = false;
+        this.sponsorSearchError = this.translate.instant(
+          'SIGNUP.SPONSOR_NOT_FOUND',
+        );
+        this.sponsorFound = false;
+        this.user = new UserAffiliate();
+      },
+    });
   }
 }
 

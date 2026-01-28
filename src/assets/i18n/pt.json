@@ -641,7 +641,13 @@
     "USERNAME": "Nome de usuário",
     "USERNAME_REQUIRED": "O nome de usuário é obrigatório",
     "USERNAME_WHITESPACE": "O nome de usuário não pode conter espaços",
-    "WARNING_NO_COUNTRIES": "Não foi possível carregar os países"
+    "WARNING_NO_COUNTRIES": "Não foi possível carregar os países",
+    "SPONSOR_PHONE": "Telefone do seu patrocinador",
+    "SPONSOR_PHONE_PLACEHOLDER": "Digite o número de telefone do seu patrocinador",
+    "SPONSOR_PHONE_REQUIRED": "Você deve inserir o telefone do seu patrocinador",
+    "SPONSOR_NOT_FOUND": "Nenhum patrocinador encontrado com esse número",
+    "SPONSOR_FOUND": "Patrocinador encontrado",
+    "SPONSOR_REQUIRED": "Você precisa de um patrocinador para se registrar"
   },
   "RESET": {
     "BRAND_SUBTITLE": "Crie uma nova senha segura para sua conta",
