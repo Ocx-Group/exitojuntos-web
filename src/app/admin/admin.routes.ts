@@ -34,6 +34,14 @@ export const ADMIN_ROUTES: Routes = [
     canActivate: [AuthGuardAdmin, MaintenanceGuard],
   },
   {
+    path: 'testimonials-management',
+    loadComponent: () =>
+      import('./testimonials-management/testimonials-management.component').then(
+        m => m.TestimonialsManagementComponent,
+      ),
+    canActivate: [AuthGuardAdmin, MaintenanceGuard],
+  },
+  {
     path: 'unilevel-tree',
     loadComponent: () =>
       import(

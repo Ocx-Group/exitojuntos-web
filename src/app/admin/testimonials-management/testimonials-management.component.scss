@@ -1,0 +1,107 @@
+:host {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.card {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.card-body,
+.form-label,
+.form-check-label,
+.table {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.page-title {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffffff;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #ffd700;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.12);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+.form-check-input:checked {
+  background-color: #d4af37;
+  border-color: #d4af37;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+  border: none;
+  color: #000000;
+
+  &:hover {
+    background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+  }
+}
+
+.testimonials-table {
+  color: rgba(255, 255, 255, 0.9);
+
+  thead th {
+    color: #ffd700;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+  }
+
+  tbody td {
+    border-bottom: 1px solid rgba(255, 215, 0, 0.12);
+    color: rgba(255, 255, 255, 0.88);
+  }
+}
+
+.author-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 190px;
+
+  img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+  }
+
+  strong,
+  small {
+    display: block;
+  }
+
+  small {
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+.quote-preview {
+  max-width: 360px;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.stars {
+  color: #ffd700;
+}
+
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65);
+}

@@ -404,6 +404,9 @@
         "EXPORT_SUCCESS": "Logs exportados com sucesso",
         "EXPORT_WARNING": "Não há logs para exportar"
       }
+    },
+    "TESTIMONIALS-MANAGEMENT": {
+      "TEXT": "Depoimentos"
     }
   },
   "MY-NETWORK-PAGE": {

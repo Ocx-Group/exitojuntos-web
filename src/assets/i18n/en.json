@@ -1958,6 +1958,9 @@
         "EXPORT_WARNING": "No logs to export"
       }
     },
+    "TESTIMONIALS-MANAGEMENT": {
+      "TEXT": "Testimonials"
+    },
     "WALLET": {
       "TEXT": "My wallet"
     }

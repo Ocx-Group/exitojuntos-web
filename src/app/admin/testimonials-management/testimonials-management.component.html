@@ -1,0 +1,189 @@
+<section class="section admin-dashboard">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Gestión de Testimonios</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/admin/testimonials-management"><i class="fas fa-comment-dots font-17"></i></a>
+    </li>
+  </ul>
+
+  <div class="section-body">
+    <div class="row">
+      <div class="col-xl-4 col-lg-5 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0 text-white">
+              <i class="fas fa-pen me-2"></i>
+              {{ editingId() ? 'Editar testimonio' : 'Nuevo testimonio' }}
+            </h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="saveTestimonial()" class="testimonial-form">
+              <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input id="name" type="text" class="form-control" formControlName="name" />
+                @if (form.controls.name.invalid && form.controls.name.touched) {
+                  <small class="text-danger">El nombre es obligatorio.</small>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="role" class="form-label">Cargo o descripción</label>
+                <input id="role" type="text" class="form-control" formControlName="role" />
+                @if (form.controls.role.invalid && form.controls.role.touched) {
+                  <small class="text-danger">El cargo es obligatorio.</small>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="quote" class="form-label">Testimonio</label>
+                <textarea id="quote" class="form-control" rows="5" formControlName="quote"></textarea>
+                <div class="d-flex justify-content-between">
+                  @if (form.controls.quote.invalid && form.controls.quote.touched) {
+                    <small class="text-danger">El testimonio es obligatorio.</small>
+                  } @else {
+                    <small></small>
+                  }
+                  <small class="text-muted">{{ form.controls.quote.value.length }}/1200</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="avatar" class="form-label">URL de imagen</label>
+                <input id="avatar" type="text" class="form-control" formControlName="avatar" placeholder="assets/images/user.png" />
+              </div>
+
+              <div class="mb-3">
+                <label for="videoUrl" class="form-label">URL de video asociado</label>
+                <input id="videoUrl" type="url" class="form-control" formControlName="videoUrl" placeholder="https://..." />
+                <small class="text-muted">Se guarda para usarlo cuando la vista pública muestre videos.</small>
+              </div>
+
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label for="stars" class="form-label">Estrellas</label>
+                  <input id="stars" type="number" min="1" max="5" class="form-control" formControlName="stars" />
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="displayOrder" class="form-label">Orden</label>
+                  <input id="displayOrder" type="number" min="0" class="form-control" formControlName="displayOrder" />
+                </div>
+              </div>
+
+              <div class="form-check form-switch mb-4">
+                <input id="isActive" class="form-check-input" type="checkbox" formControlName="isActive" />
+                <label for="isActive" class="form-check-label">Visible en el front</label>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary flex-grow-1" [disabled]="form.invalid || saving()">
+                  <i class="fas fa-save me-1" [class.fa-spin]="saving()"></i>
+                  {{ editingId() ? 'Actualizar' : 'Guardar' }}
+                </button>
+                @if (editingId()) {
+                  <button type="button" class="btn btn-secondary" (click)="resetForm()" [disabled]="saving()">
+                    Cancelar
+                  </button>
+                }
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-8 col-lg-7 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0 text-white">
+                <i class="fas fa-comments me-2"></i>Testimonios
+                @if (testimonials().length > 0) {
+                  <span class="badge bg-primary ms-2">{{ testimonials().length }}</span>
+                }
+              </h5>
+              <button class="btn btn-primary btn-sm" (click)="loadTestimonials()" [disabled]="loading()">
+                <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            @if (loading()) {
+              <div class="text-center py-5">
+                <div class="spinner-border text-primary"></div>
+                <p class="mt-2 text-muted">Cargando testimonios...</p>
+              </div>
+            } @else if (testimonials().length === 0) {
+              <div class="empty-state">
+                <i class="fas fa-inbox fa-3x mb-3"></i>
+                <p>No hay testimonios registrados.</p>
+              </div>
+            } @else {
+              <div class="table-responsive">
+                <table class="table table-hover align-middle testimonials-table">
+                  <thead>
+                    <tr>
+                      <th>Orden</th>
+                      <th>Autor</th>
+                      <th>Testimonio</th>
+                      <th>Video</th>
+                      <th>Estado</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (testimonial of testimonials(); track trackById($index, testimonial)) {
+                      <tr>
+                        <td>{{ testimonial.displayOrder ?? 0 }}</td>
+                        <td>
+                          <div class="author-cell">
+                            <img [src]="testimonial.avatar || 'assets/images/user.png'" [alt]="testimonial.name" />
+                            <div>
+                              <strong>{{ testimonial.name }}</strong>
+                              <small>{{ testimonial.role }}</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="quote-preview mb-1">{{ testimonial.quote }}</p>
+                          <small class="stars">
+                            @for (_ of [].constructor(testimonial.stars || 5); track $index) {
+                              <i class="fas fa-star"></i>
+                            }
+                          </small>
+                        </td>
+                        <td>
+                          @if (testimonial.videoUrl) {
+                            <a [href]="testimonial.videoUrl" target="_blank" rel="noopener noreferrer" class="badge bg-info text-dark">
+                              Asociado
+                            </a>
+                          } @else {
+                            <span class="badge bg-secondary">Sin video</span>
+                          }
+                        </td>
+                        <td>
+                          <span class="badge" [class.bg-success]="testimonial.isActive" [class.bg-secondary]="!testimonial.isActive">
+                            {{ testimonial.isActive ? 'Visible' : 'Oculto' }}
+                          </span>
+                        </td>
+                        <td class="text-end">
+                          <button type="button" class="btn btn-sm btn-warning me-2" (click)="editTestimonial(testimonial)">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button type="button" class="btn btn-sm btn-danger" (click)="deleteTestimonial(testimonial)">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

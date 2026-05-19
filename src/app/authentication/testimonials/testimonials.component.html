@@ -1,41 +1,48 @@
-<section class="testimonials-section py-5">
-  <div class="container">
-    <h2 class="text-center mb-5 section-title">Lo que dicen nuestros clientes</h2>
+<section class="testimonials-page">
 
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
+  <div class="page-glow page-glow--left"></div>
+  <div class="page-glow page-glow--right"></div>
 
-        <div class="video-container mb-4">
-          <div class="video-wrapper position-relative">
-            <video
-              #videoPlayer
-              [ngClass]="{'video-playing': isPlaying}"
-              [src]="testimonials[currentIndex].videoUrl"
-              class="w-100 rounded-lg shadow-lg">
-            </video>
+  <div class="page-container">
 
-            <div class="video-controls">
-              <button class="control-btn prev-btn" (click)="prevTestimonial()">
-                <i class="bi bi-chevron-left"></i>
-              </button>
+    <!-- Header -->
+    <div class="page-header">
+      <p class="section-tag">Casos de Éxito</p>
+      <h1 class="page-title">Lo que dicen<br><span class="text-gradient">nuestros miembros</span></h1>
+      <p class="page-description">
+        Historias reales de personas que transformaron su vida financiera con Éxito Juntos
+      </p>
+    </div>
 
-              <button class="control-btn play-btn" (click)="togglePlay()">
-                <i class="bi" [ngClass]="isPlaying ? 'bi-pause-fill' : 'bi-play-fill'"></i>
-              </button>
+    <!-- Cards grid -->
+    <div class="testimonials-grid">
+      @for (t of testimonials; track t.id) {
+        <div class="testimonial-card">
 
-              <button class="control-btn next-btn" (click)="nextTestimonial()">
-                <i class="bi bi-chevron-right"></i>
-              </button>
+          <div class="card-top">
+            <div class="quote-icon">
+              <i class="bi bi-chat-quote-fill"></i>
+            </div>
+            <div class="card-stars">
+              @for (s of getStars(t.stars); track s) {
+                <i class="bi bi-star-fill star"></i>
+              }
             </div>
           </div>
-        </div>
 
-        <div class="testimonial-content text-center">
-          <p class="quote mb-4">{{ testimonials[currentIndex].quote }}</p>
-          <h4 class="name mb-2">{{ testimonials[currentIndex].name }}</h4>
-          <p class="role">{{ testimonials[currentIndex].role }}</p>
+          <p class="card-quote">"{{ t.quote }}"</p>
+
+          <div class="card-author">
+            <img [src]="t.avatar || 'assets/images/user.png'" [alt]="t.name" class="author-avatar" />
+            <div class="author-info">
+              <p class="author-name">{{ t.name }}</p>
+              <p class="author-role">{{ t.role }}</p>
+            </div>
+          </div>
+
         </div>
-      </div>
+      }
     </div>
+
   </div>
 </section>

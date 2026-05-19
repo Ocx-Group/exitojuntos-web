@@ -404,6 +404,9 @@
         "EXPORT_SUCCESS": "Journaux exportés avec succès",
         "EXPORT_WARNING": "Aucun journal à exporter"
       }
+    },
+    "TESTIMONIALS-MANAGEMENT": {
+      "TEXT": "Témoignages"
     }
   },
   "MY-NETWORK-PAGE": {

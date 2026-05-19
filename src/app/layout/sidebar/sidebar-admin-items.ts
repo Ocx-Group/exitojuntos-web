@@ -34,4 +34,15 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: '/admin/testimonials-management',
+    title: 'MENUITEMS.TESTIMONIALS-MANAGEMENT.TEXT',
+    iconType: 'feather',
+    icon: 'message-square',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];

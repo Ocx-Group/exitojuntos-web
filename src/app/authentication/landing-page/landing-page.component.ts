@@ -13,6 +13,7 @@ import { RouterLink, ActivatedRoute } from '@angular/router';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
+import { TestimonialsService } from '@app/core/service/testimonials-service';
 
 @Component({
   selector: 'app-home',
@@ -199,12 +200,14 @@ export class LandingPageComponent implements OnInit {
     fr: 'assets/images/flags/france.png',
     pt: 'assets/images/flags/brazil.png',
   };
+  private testimonialsFromApi = false;
 
   constructor(
     private readonly pdfViewerService: PdfViewerService,
     private readonly translate: TranslateService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
+    private readonly testimonialsService: TestimonialsService,
   ) {
     translate.setFallbackLang('en');
     this.currentLang = translate.getCurrentLang() || 'en';
@@ -222,6 +225,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {
     const savedLang = localStorage.getItem('lang');
     this.changeLanguage(savedLang || 'en');
+    this.loadDynamicTestimonials();
   }
 
   changeLanguage(lang: string) {
@@ -418,19 +422,44 @@ export class LandingPageComponent implements OnInit {
       }
     });
 
-    // Update testimonials
-    this.translate
-      .get('LANDING_PAGE.TESTIMONIALS_SECTION.TESTIMONIALS')
-      .subscribe((testimonials: any) => {
-        if (testimonials && Array.isArray(testimonials)) {
-          for (let index = 0; index < testimonials.length; index++) {
-            if (this.testimonials[index] && testimonials[index]) {
-              this.testimonials[index].quote = testimonials[index].QUOTE || '';
-              this.testimonials[index].name = testimonials[index].NAME || '';
-              this.testimonials[index].role = testimonials[index].ROLE || '';
+    if (!this.testimonialsFromApi) {
+      // Update testimonials
+      this.translate
+        .get('LANDING_PAGE.TESTIMONIALS_SECTION.TESTIMONIALS')
+        .subscribe((testimonials: any) => {
+          if (testimonials && Array.isArray(testimonials)) {
+            for (let index = 0; index < testimonials.length; index++) {
+              if (this.testimonials[index] && testimonials[index]) {
+                this.testimonials[index].quote =
+                  testimonials[index].QUOTE || '';
+                this.testimonials[index].name = testimonials[index].NAME || '';
+                this.testimonials[index].role = testimonials[index].ROLE || '';
+              }
             }
           }
+        });
+    }
+  }
+
+  private loadDynamicTestimonials(): void {
+    this.testimonialsService.getActive().subscribe({
+      next: testimonials => {
+        if (!testimonials.length) {
+          return;
         }
-      });
+
+        this.testimonialsFromApi = true;
+        this.testimonials = testimonials.slice(0, 3).map(testimonial => ({
+          quote: testimonial.quote,
+          avatar: testimonial.avatar || 'assets/images/user.png',
+          name: testimonial.name,
+          role: testimonial.role,
+          rating: testimonial.stars || 5,
+        }));
+      },
+      error: error => {
+        console.error('Error al cargar testimonios dinámicos:', error);
+      },
+    });
   }
 }
