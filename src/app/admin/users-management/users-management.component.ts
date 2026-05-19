@@ -7,6 +7,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 // Servicios
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 
+// Interfaces
+import { UserData } from '@app/core/interfaces/user';
+import { PaginationMeta } from '@app/core/interfaces/pagination-request';
+
 // Componentes reutilizables
 import { StatsCardComponent, StatsCardData } from '@app/shared/components';
 import {
@@ -16,34 +20,8 @@ import {
   TableConfig,
 } from '@app/shared/components/reusable-datatable/reusable-datatable.component';
 
-interface UserData {
-  id: number;
-  name: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  identification: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  imageProfileUrl: string;
-  birtDate: string;
-  father: any;
-  createdAt: string;
-  updatedAt: string;
-  role: {
-    id: number;
-    name: string;
-  };
-}
-
-interface PaginationMeta {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
+// Data
+import { USERS_TABLE_CONFIG } from './users-management.data';
 
 @Component({
   selector: 'app-users-management',
@@ -162,23 +140,7 @@ export class UsersManagementComponent implements OnInit {
     // },
   ];
 
-  protected tableConfig: TableConfig = {
-    showSearch: true,
-    showActions: true,
-    showPagination: true,
-    searchPlaceholder: 'Buscar usuarios...',
-    headerHeight: 50,
-    footerHeight: 50,
-    rowHeight: 'auto',
-    limit: 10,
-    columnMode: 'force',
-    reorderable: true,
-    messages: {
-      emptyMessage: 'No hay usuarios para mostrar',
-      totalMessage: 'total',
-      selectedMessage: 'seleccionado',
-    },
-  };
+  protected tableConfig: TableConfig = { ...USERS_TABLE_CONFIG };
 
   ngOnInit(): void {
     this.initializeStatsCards();

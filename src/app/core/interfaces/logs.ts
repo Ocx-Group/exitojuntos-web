@@ -1,4 +1,11 @@
 // Interfaces
+export interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 export interface LogEntry {
   timestamp: Date;
   level: string;
@@ -17,12 +24,7 @@ export interface GetLogsDto {
 
 export interface LogsResponse {
   data: LogEntry[];
-  meta: {
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-  };
+  meta: PaginationMeta;
 }
 
 export interface LogStats {

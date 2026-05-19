@@ -15,9 +15,10 @@ import {
   OnDestroy,
 } from '@angular/core';
 
+import { Subscription } from 'rxjs';
 import { ROUTES } from './sidebar-items';
 import { ROUTES_ADMIN } from './sidebar-admin-items';
-import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { ImgProfileComponent } from '../img-profile/img-profile.component';
 import { IconsModule } from '@app/shared';
@@ -39,13 +40,13 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   public user: UserAffiliate = new UserAffiliate();
-  public sidebarItems: any[];
+  public sidebarItems!: any[];
   public innerHeight: any;
   public bodyTag: any;
-  listMaxHeight: string;
-  listMaxWidth: string;
+  listMaxHeight!: string;
+  listMaxWidth!: string;
   headerHeight = 60;
-  routerObj = null;
+  routerObj!: Subscription;
   readonly navbarIcon = 'assets/exito-logo.svg';
   homeLink = '/app/my-network';
 

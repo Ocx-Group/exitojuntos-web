@@ -1,5 +1,5 @@
-import { RightSidebarService } from 'src/app/core/service/rightsidebar-service/rightsidebar.service';
-import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
+import { RightSidebarService } from '@app/core/service/rightsidebar-service/rightsidebar.service';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import {
   Component,
@@ -12,8 +12,8 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { LanguageService } from 'src/app/core/service/language-service/language.service';
-import { map, Observable, Subscription } from 'rxjs';
+import { LanguageService } from '@app/core/service/language-service/language.service';
+import { Observable, Subscription } from 'rxjs';
 
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { IconsModule } from '@app/shared';
@@ -34,13 +34,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly subscriptions: Subscription[] = [];
   public config: any = {};
   isNavbarCollapsed = true;
-  flagvalue;
-  countryName;
-  langStoreValue: string;
-  defaultFlag: string;
-  isOpenSidebar: boolean;
+  flagvalue!: string;
+  countryName!: string;
+  langStoreValue!: string;
+  defaultFlag!: string;
+  isOpenSidebar!: boolean;
   totalItem: number = 0;
-  public unreadCount$: Observable<number>;
+  public unreadCount$!: Observable<number>;
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -64,15 +64,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.config = this.configService.configData;
     this.user = this.authService.currentUserAffiliateValue;
 
-    this.langStoreValue = localStorage.getItem('lang');
+    this.langStoreValue = localStorage.getItem('lang') ?? '';
     const val = this.listLang.filter(x => x.lang === this.langStoreValue);
-    this.countryName = val.map(element => element.text);
+    this.countryName = val[0]?.text ?? '';
     if (val.length === 0) {
-      if (this.flagvalue === undefined) {
-        this.defaultFlag = 'assets/images/flags/us.jpg';
-      }
+      this.defaultFlag = 'assets/images/flags/us.jpg';
     } else {
-      this.flagvalue = val.map(element => element.flag);
+      this.flagvalue = val[0]?.flag ?? '';
     }
   }
 
@@ -84,18 +82,17 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     // set theme on startup
-    if (localStorage.getItem('theme')) {
+    const theme = localStorage.getItem('theme');
+    if (theme) {
       this.renderer.removeClass(this.document.body, this.config.layout.variant);
-      this.renderer.addClass(this.document.body, localStorage.getItem('theme'));
+      this.renderer.addClass(this.document.body, theme);
     } else {
       this.renderer.addClass(this.document.body, this.config.layout.variant);
     }
 
-    if (localStorage.getItem('menuOption')) {
-      this.renderer.addClass(
-        this.document.body,
-        localStorage.getItem('menuOption'),
-      );
+    const menuOption = localStorage.getItem('menuOption');
+    if (menuOption) {
+      this.renderer.addClass(this.document.body, menuOption);
     } else {
       this.renderer.addClass(
         this.document.body,

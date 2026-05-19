@@ -1,11 +1,5 @@
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
-import {
-  Event,
-  Router,
-  NavigationStart,
-  NavigationEnd,
-  RouterOutlet,
-} from '@angular/router';
+import { Event, Router, NavigationStart, RouterOutlet } from '@angular/router';
 import { DOCUMENT, PlatformLocation } from '@angular/common';
 
 import { SessionService } from './core/service/session-service/session.service';
@@ -20,22 +14,20 @@ import { PdfViewerComponent } from './shared/components/pdf-viewer/pdf-viewer.co
   imports: [RouterOutlet, PageLoaderComponent, PdfViewerComponent],
 })
 export class AppComponent implements OnInit {
-  currentUrl: string;
+  currentUrl!: string;
 
   constructor(
     public _router: Router,
     location: PlatformLocation,
-    private sessionService: SessionService,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
+    private readonly sessionService: SessionService,
+    private readonly renderer: Renderer2,
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {
     this._router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         this.currentUrl = routerEvent.url.substring(
           routerEvent.url.lastIndexOf('/') + 1,
         );
-      }
-      if (routerEvent instanceof NavigationEnd) {
       }
       window.scrollTo(0, 0);
     });
@@ -46,7 +38,9 @@ export class AppComponent implements OnInit {
   }
 
   changeFavicon(url: string): void {
-    const link: HTMLLinkElement = this.document.querySelector('#favicon');
+    const link: HTMLLinkElement =
+      this.document.querySelector('#favicon') ??
+      this.document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
     link.href = url;

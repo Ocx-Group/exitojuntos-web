@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-auth-layout',
-    templateUrl: './auth-layout.component.html',
-    styleUrls: [],
-    standalone: true,
-    imports: [RouterOutlet]
+  selector: 'app-auth-layout',
+  templateUrl: './auth-layout.component.html',
+  styleUrls: [],
+  standalone: true,
+  imports: [RouterOutlet],
 })
-export class AuthLayoutComponent implements OnInit {
+export class AuthLayoutComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

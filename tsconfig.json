@@ -1,12 +1,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
@@ -15,18 +14,14 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["./node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@environments/*": ["src/environments/*"],
-      "ckeditor5": ["node_modules/ckeditor5/src/index.d.ts"],
-      "ckeditor5/*": ["node_modules/ckeditor5/src/*"]
+      "@app/*": ["./src/app/*"],
+      "@environments/*": ["./src/environments/*"],
+      "ckeditor5": ["./node_modules/ckeditor5/src/index.d.ts"],
+      "ckeditor5/*": ["./node_modules/ckeditor5/src/*"]
     }
   },
-  "exclude": ["node_modules/@types/webgl2", "test.ts", "**/*.spec.ts"],
-  "angularCompilerOptions": {
-    "enableIvy": true,
-    "allowEmptyCodegenFiles": true
-  }
+  "exclude": ["node_modules/@types/webgl2", "test.ts", "**/*.spec.ts"]
 }

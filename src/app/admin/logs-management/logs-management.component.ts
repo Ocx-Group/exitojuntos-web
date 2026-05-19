@@ -6,7 +6,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 // Servicios
 import { LogsService } from '@app/core/service/logs-service/logs.service';
-import { LogEntry, LogStats, GetLogsDto } from '@app/core/interfaces/logs';
+import { LogEntry, LogStats, GetLogsDto, PaginationMeta } from '@app/core/interfaces/logs';
 
 // Componentes reutilizables
 import { StatsCardComponent, StatsCardData } from '@app/shared/components';
@@ -19,13 +19,6 @@ import {
 // Servicios externos
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-
-interface PaginationMeta {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
 
 @Component({
   selector: 'app-logs-management',

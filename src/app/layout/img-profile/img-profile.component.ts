@@ -18,7 +18,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 })
 export class ImgProfileComponent implements OnInit {
   @ViewChild('profileImgModal', { static: true })
-  private readonly modalContent: TemplateRef<any>;
+  private readonly modalContent!: TemplateRef<any>;
   file: File | null = null;
   fileRef: any;
   user: UserAffiliate = new UserAffiliate();
