@@ -1,17 +1,13 @@
 # Stage 1: Build
 FROM node:22-alpine AS build
 
-# Instalar dependencias del sistema necesarias para compilación
-RUN apk add --no-cache python3 make g++
-
 WORKDIR /app
 
-# Copia archivos de dependencias primero (mejor caché)
+# Copia archivos de dependencias primero (mejor caché de capas)
 COPY package*.json ./
 
-# Instala dependencias con caché de npm montado
-RUN --mount=type=cache,target=/root/.npm \
-  npm ci --legacy-peer-deps --prefer-offline
+# Kaniko no soporta BuildKit mounts — capa normal para que Kaniko la cachee correctamente
+RUN npm ci --legacy-peer-deps
 
 # Copia archivos de configuración
 COPY tsconfig*.json angular.json vite.config.ts ./
