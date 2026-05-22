@@ -7,7 +7,6 @@
 
 - **Angular**: v20.3.9 (Standalone Architecture)
 - **TypeScript**: 5.x
-- **Firebase**: v9.22.0
 - **Bootstrap**: v5.2.3
 - **RxJS**: v7.8.2
 

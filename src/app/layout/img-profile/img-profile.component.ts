@@ -1,7 +1,6 @@
 import { ImageProfileService } from '@app/core/service/image-profile-service/image-profile.service';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Storage } from '@angular/fire/storage';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 
@@ -25,7 +24,6 @@ export class ImgProfileComponent implements OnInit {
 
   constructor(
     private readonly modalService: NgbModal,
-    private readonly storage: Storage,
     private readonly authService: AuthService,
     private readonly toastr: ToastrService,
     private readonly imageProfileService: ImageProfileService,

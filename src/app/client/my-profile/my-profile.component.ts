@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
-import { FirebaseStorageService } from '@app/core/service/firebase-storage-service/firebase-storage.service';
 
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
@@ -39,8 +38,6 @@ export class MyProfileComponent implements OnInit {
   public profileForm: FormGroup;
   public isEditMode = false;
   public isLoading = false;
-  public selectedFile: File | null = null;
-  public previewUrl: string | null = null;
 
   rows = [];
   temp = [];
@@ -53,7 +50,6 @@ export class MyProfileComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly fb: FormBuilder,
     private readonly translate: TranslateService,
-    private readonly firebaseStorage: FirebaseStorageService,
   ) {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -88,22 +84,6 @@ export class MyProfileComponent implements OnInit {
     this.isEditMode = !this.isEditMode;
     if (!this.isEditMode) {
       this.populateForm();
-      this.selectedFile = null;
-      this.previewUrl = null;
-    }
-  }
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-
-      // Create preview
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
     }
   }
 
@@ -116,45 +96,10 @@ export class MyProfileComponent implements OnInit {
     }
 
     this.isLoading = true;
-
-    // Si hay un archivo seleccionado, primero subirlo a Firebase
-    if (this.selectedFile) {
-      this.uploadImageAndSaveProfile();
-    } else {
-      // Si no hay archivo, solo actualizar el perfil
-      this.updateProfileData();
-    }
+    this.updateProfileData();
   }
 
-  private uploadImageAndSaveProfile() {
-    if (!this.selectedFile) {
-      return;
-    }
-
-    const phone = this.user.phone;
-
-    this.firebaseStorage
-      .uploadAffiliateProfileImage(this.selectedFile, phone)
-      .subscribe({
-        next: (imageUrl: string) => {
-          console.log('Imagen subida exitosamente:', imageUrl);
-          // Una vez subida la imagen, actualizar el perfil con la URL
-          this.updateProfileData(imageUrl);
-        },
-        error: error => {
-          this.isLoading = false;
-          console.error('Error al subir imagen:', error);
-          this.toastr.error(
-            this.translate.instant(
-              'CLIENT-MY-PROFILE.MESSAGES.ERROR-UPLOAD-IMAGE',
-            ) || 'Error al subir la imagen',
-            'Error',
-          );
-        },
-      });
-  }
-
-  private updateProfileData(imageUrl?: string) {
+  private updateProfileData() {
     const formData = this.profileForm.value;
 
     // Actualizar el objeto user con los datos del formulario
@@ -171,7 +116,6 @@ export class MyProfileComponent implements OnInit {
       birtDate: formData.birthDate ? new Date(formData.birthDate) : undefined,
       address: formData.address,
       city: formData.city,
-      imageProfileUrl: imageUrl, // Incluir la URL de la imagen si existe
     };
 
     this.authService.updateProfile(updateProfileDto).subscribe({
@@ -180,19 +124,12 @@ export class MyProfileComponent implements OnInit {
         if (response.success) {
           console.log('Datos actualizados correctamente', response);
 
-          // Actualizar la URL de la imagen en el objeto user local
-          if (imageUrl) {
-            this.user.imageProfileUrl = imageUrl;
-          }
-
           this.toastr.success(
             response.message ||
               this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.SUCCESS'),
             'Éxito',
           );
           this.isEditMode = false;
-          this.selectedFile = null;
-          this.previewUrl = null;
         } else {
           this.toastr.error(
             response.message ||

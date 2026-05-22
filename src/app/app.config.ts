@@ -12,11 +12,6 @@ import {
 } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
-// Firebase
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { firebaseConfig } from '@environments/environment';
-
 // Translate
 import {
   TranslateLoader,
@@ -54,10 +49,6 @@ export const appConfig: ApplicationConfig = {
       progressBar: true,
     }),
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-
-    // Firebase
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideStorage(() => getStorage()),
 
     // Translate
     importProvidersFrom(

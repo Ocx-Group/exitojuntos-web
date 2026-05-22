@@ -548,7 +548,7 @@
     "GENERIC_ERROR": "Não foi possível fazer login. Por favor, tente novamente.",
     "GITHUB_BUTTON": "GitHub",
     "GOOGLE_BUTTON": "Google",
-    "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu telefone e senha.",
+    "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu usuário e senha.",
     "ACCOUNT_NOT_VERIFIED": "Sua conta não está verificada. Por favor, verifique seu endereço de e-mail para ativar sua conta.",
     "LOGIN_BUTTON": "Entrar",
     "LOGIN_SUBTITLE": "Acesse sua conta de trading",
@@ -642,6 +642,8 @@
     "TITLE": "REGISTRO",
     "USER_NOT_FOUND": "Usuário não encontrado",
     "USERNAME": "Nome de usuário",
+    "USERNAME_ALREADY_REGISTERED": "O nome de usuário já está registrado",
+    "USERNAME_PATTERN": "O usuário deve ter entre 3 e 50 caracteres e só pode conter letras, números, ponto, hífen e sublinhado",
     "USERNAME_REQUIRED": "O nome de usuário é obrigatório",
     "USERNAME_WHITESPACE": "O nome de usuário não pode conter espaços",
     "WARNING_NO_COUNTRIES": "Não foi possível carregar os países",
@@ -650,6 +652,9 @@
     "SPONSOR_PHONE_REQUIRED": "Você deve inserir o telefone do seu patrocinador",
     "SPONSOR_NOT_FOUND": "Nenhum patrocinador encontrado com esse número",
     "SPONSOR_FOUND": "Patrocinador encontrado",
+    "GOOGLE_REGISTER": "Registrar com Google",
+    "GOOGLE_CONNECTED": "Conta Google conectada. Complete os dados restantes.",
+    "GOOGLE_REGISTRATION_ERROR": "Não foi possível iniciar o registro com Google",
     "SPONSOR_REQUIRED": "Você precisa de um patrocinador para se registrar"
   },
   "RESET": {

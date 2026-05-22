@@ -2863,6 +2863,8 @@
     "TITLE": "REGISTRO",
     "USER_NOT_FOUND": "Usuario no encontrado",
     "USERNAME": "Nombre de usuario",
+    "USERNAME_ALREADY_REGISTERED": "El nombre de usuario ya está registrado",
+    "USERNAME_PATTERN": "El usuario debe tener entre 3 y 50 caracteres y solo puede contener letras, números, punto, guion y guion bajo",
     "USERNAME_REQUIRED": "El nombre de usuario es requerido",
     "USERNAME_WHITESPACE": "El nombre de usuario no puede contener espacios",
     "WARNING_NO_COUNTRIES": "No se pudieron cargar los países",
@@ -2871,6 +2873,9 @@
     "SPONSOR_PHONE_REQUIRED": "Debes ingresar el teléfono de tu patrocinador",
     "SPONSOR_NOT_FOUND": "No se encontró ningún patrocinador con ese número",
     "SPONSOR_FOUND": "Patrocinador encontrado",
+    "GOOGLE_REGISTER": "Registrarse con Google",
+    "GOOGLE_CONNECTED": "Cuenta de Google conectada. Completa los datos restantes.",
+    "GOOGLE_REGISTRATION_ERROR": "No se pudo iniciar el registro con Google",
     "SPONSOR_REQUIRED": "Debes tener un patrocinador para registrarte"
   },
   "THIRD_PARTY_PURCHASE": {

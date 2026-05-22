@@ -14,7 +14,10 @@ export class UserAffiliate {
   lastName: string = '';
   password?: string;
   email: string = '';
+  username: string = '';
   phone: string = '';
+  googleId?: string;
+  authProvider?: string;
   identification: string = '';
   address: string = '';
   city: string = '';

@@ -26,6 +26,47 @@ import { TermsConditionsComponent } from '@app/shared/components/terms-condition
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { environment } from '@environments/environment';
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (config: GoogleIdentityConfig) => void;
+          prompt: (callback?: (notification: GooglePromptNotification) => void) => void;
+          cancel: () => void;
+        };
+      };
+    };
+  }
+}
+
+interface GoogleCredentialResponse {
+  credential: string;
+}
+
+interface GoogleIdentityConfig {
+  client_id: string;
+  callback: (response: GoogleCredentialResponse) => void;
+  auto_select?: boolean;
+  cancel_on_tap_outside?: boolean;
+}
+
+interface GooglePromptNotification {
+  isNotDisplayed: () => boolean;
+  isSkippedMoment: () => boolean;
+  getNotDisplayedReason: () => string;
+  getSkippedReason: () => string;
+}
+
+interface GoogleProfilePayload {
+  email?: string;
+  name?: string;
+  given_name?: string;
+  family_name?: string;
+  picture?: string;
+}
 
 @Component({
   selector: 'app-signup',
@@ -55,6 +96,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   showPassword = false;
   showConfirmPassword = false;
   showTermsModal = false;
+  loading = false;
+  googleRegistrationActive = false;
+  private googleRegistrationToken = '';
+  private googleProfilePicture = '';
 
   // Propiedades para búsqueda manual de patrocinador
   sponsorPhoneInput = '';
@@ -180,6 +225,14 @@ export class SignupComponent implements OnInit, OnDestroy {
         ],
         name: ['', Validators.required],
         last_name: ['', Validators.required],
+        username: [
+          '',
+          [
+            Validators.required,
+            NoWhitespaceValidator,
+            Validators.pattern(/^[A-Za-z0-9._-]{3,50}$/),
+          ],
+        ],
         phone: ['', Validators.required],
         country: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
@@ -237,9 +290,12 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     const user = new UserAffiliate();
     const cleanPhone = this.cleanPhoneNumber(this.registerForm.value.phone);
-    user.password = this.registerForm.value.password;
+    if (!this.googleRegistrationActive) {
+      user.password = this.registerForm.value.password;
+    }
     user.name = this.registerForm.value.name;
     user.lastName = this.registerForm.value.last_name;
+    user.username = this.registerForm.value.username.trim().toLowerCase();
     user.phone = cleanPhone;
     user.countryId = Number(this.registerForm.value.country);
     user.city = this.registerForm.value.city;
@@ -252,11 +308,21 @@ export class SignupComponent implements OnInit, OnDestroy {
     user.status = true;
     user.termsConditions = this.registerForm.value.terms_conditions;
     user.roleId = 2;
+    user.imageProfileUrl = this.googleProfilePicture;
 
-    this.authService.createAffiliate(user).subscribe({
+    const registerRequest = this.googleRegistrationActive
+      ? this.authService.registerWithGoogle(this.googleRegistrationToken, user)
+      : this.authService.createAffiliate(user);
+
+    registerRequest.subscribe({
       next: response => {
         if (response.success) {
           this.showSuccess(response.message);
+          if (this.googleRegistrationActive) {
+            this.router.navigate(['/app/my-network'], { replaceUrl: true }).then();
+            return;
+          }
+
           setTimeout(() => {
             this.router.navigate(['/signin']).then();
           }, 5000);
@@ -272,6 +338,142 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
   }
 
+  async startGoogleRegistration(): Promise<void> {
+    this.submitted = false;
+    this.error = '';
+    this.loading = true;
+
+    try {
+      const idToken = await this.getGoogleIdentityToken();
+      const googleProfile = this.decodeGoogleProfile(idToken);
+
+      this.googleRegistrationToken = idToken;
+      this.googleRegistrationActive = true;
+      this.googleProfilePicture = googleProfile.picture ?? '';
+      this.applyGoogleRegistrationMode();
+
+      this.registerForm.patchValue({
+        email: googleProfile.email ?? '',
+        name: googleProfile.given_name ?? googleProfile.name ?? '',
+        last_name: googleProfile.family_name ?? '',
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : this.translate.instant('SIGNUP.GOOGLE_REGISTRATION_ERROR');
+      this.showError(message);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  private applyGoogleRegistrationMode(): void {
+    const passwordControl = this.registerForm.get('password');
+    const repeatPasswordControl = this.registerForm.get('repitpassword');
+
+    passwordControl?.clearValidators();
+    repeatPasswordControl?.clearValidators();
+    passwordControl?.setValue('');
+    repeatPasswordControl?.setValue('');
+    passwordControl?.updateValueAndValidity();
+    repeatPasswordControl?.updateValueAndValidity();
+    this.registerForm.updateValueAndValidity();
+  }
+
+  private async getGoogleIdentityToken(): Promise<string> {
+    const clientId = environment.google?.clientId;
+
+    if (!clientId) {
+      throw new Error('Google Client ID no está configurado');
+    }
+
+    await this.loadGoogleIdentityScript();
+
+    return new Promise<string>((resolve, reject) => {
+      window.google?.accounts.id.initialize({
+        client_id: clientId,
+        auto_select: false,
+        cancel_on_tap_outside: true,
+        callback: response => {
+          if (response.credential) {
+            resolve(response.credential);
+            return;
+          }
+
+          reject(new Error('No se recibió credencial de Google'));
+        },
+      });
+
+      window.google?.accounts.id.prompt(notification => {
+        if (notification.isNotDisplayed()) {
+          reject(
+            new Error(
+              `Google Sign-In no se pudo mostrar: ${notification.getNotDisplayedReason()}`,
+            ),
+          );
+        }
+
+        if (notification.isSkippedMoment()) {
+          reject(
+            new Error(
+              `Google Sign-In fue cancelado: ${notification.getSkippedReason()}`,
+            ),
+          );
+        }
+      });
+    });
+  }
+
+  private loadGoogleIdentityScript(): Promise<void> {
+    if (window.google?.accounts?.id) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const existingScript = document.querySelector<HTMLScriptElement>(
+        'script[src="https://accounts.google.com/gsi/client"]',
+      );
+
+      if (existingScript) {
+        existingScript.addEventListener('load', () => resolve());
+        existingScript.addEventListener('error', () =>
+          reject(new Error('No se pudo cargar Google Sign-In')),
+        );
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve();
+      script.onerror = () =>
+        reject(new Error('No se pudo cargar Google Sign-In'));
+
+      document.head.appendChild(script);
+    });
+  }
+
+  private decodeGoogleProfile(idToken: string): GoogleProfilePayload {
+    const [, encodedPayload] = idToken.split('.');
+    if (!encodedPayload) {
+      return {};
+    }
+
+    try {
+      const base64 = encodedPayload.replace(/-/g, '+').replace(/_/g, '/');
+      const padded = base64.padEnd(
+        base64.length + ((4 - (base64.length % 4)) % 4),
+        '=',
+      );
+      const decodedProfile: unknown = JSON.parse(atob(padded));
+      return decodedProfile as GoogleProfilePayload;
+    } catch {
+      return {};
+    }
+  }
+
   showSuccess(message: string) {
     this.toastr.success(message);
   }
@@ -280,26 +482,40 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.toastr.error(message);
   }
 
-  private getErrorMessage(error: any): string {
-    const statusCode = error?.code || error?.status;
+  private getErrorMessage(error: unknown): string {
+    const parsedError = this.parseError(error);
+    const statusCode = parsedError.code ?? parsedError.status;
 
     // Intentar extraer el mensaje de diferentes ubicaciones posibles
     let message = '';
-    if (error?.error?.message) {
-      message = error.error.message;
-    } else if (error?.message && !error.message.includes('Http failure')) {
-      message = error.message;
-    } else if (error?.error) {
-      // Si error.error es un string
-      if (typeof error.error === 'string') {
-        message = error.error;
-      }
+    if (
+      parsedError.error &&
+      typeof parsedError.error === 'object' &&
+      parsedError.error.message
+    ) {
+      message = parsedError.error.message;
+    } else if (
+      parsedError.message &&
+      !parsedError.message.includes('Http failure')
+    ) {
+      message = parsedError.message;
+    } else if (typeof parsedError.error === 'string') {
+      message = parsedError.error;
     }
 
     // Si el código es 409, es un error de conflicto (duplicado)
     // Detectar por palabras clave en el mensaje del backend
     if (statusCode === 409) {
       const normalizedMessage = this.normalizeText(message);
+
+      if (
+        normalizedMessage.includes('usuario') ||
+        normalizedMessage.includes('username') ||
+        normalizedMessage.includes('user name') ||
+        normalizedMessage.includes('nombre de usuario')
+      ) {
+        return this.translate.instant('SIGNUP.USERNAME_ALREADY_REGISTERED');
+      }
 
       // Detectar si es teléfono
       if (
@@ -328,6 +544,24 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     // Mensaje genérico
     return this.translate.instant('SIGNUP.REGISTRATION_ERROR');
+  }
+
+  private parseError(error: unknown): {
+    code?: number;
+    status?: number;
+    message?: string;
+    error?: string | { message?: string };
+  } {
+    if (!error || typeof error !== 'object') {
+      return {};
+    }
+
+    return error as {
+      code?: number;
+      status?: number;
+      message?: string;
+      error?: string | { message?: string };
+    };
   }
 
   private normalizeText(text: string): string {
@@ -413,6 +647,9 @@ export class SignupComponent implements OnInit, OnDestroy {
 export function passwordMatchValidator(formGroup: FormGroup) {
   const password = formGroup.get('password').value;
   const confirmPassword = formGroup.get('repitpassword').value;
+  if (!password && !confirmPassword) {
+    return null;
+  }
   return password === confirmPassword ? null : { passwordMismatch: true };
 }
 
@@ -420,7 +657,7 @@ export function passwordMatchValidator(formGroup: FormGroup) {
 export function NoWhitespaceValidator(
   control: AbstractControl,
 ): ValidationErrors | null {
-  if (control.value.includes(' ')) {
+  if (String(control.value ?? '').includes(' ')) {
     return { whitespace: true };
   } else {
     return null;

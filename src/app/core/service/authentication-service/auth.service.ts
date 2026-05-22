@@ -16,6 +16,12 @@ const httpOptions = {
     'Content-Type': 'application/json',
   }),
 };
+
+interface AuthResponseData {
+  access_token: string;
+  user: UserAffiliate;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -66,10 +72,15 @@ export class AuthService {
     return this.currentUserAffiliate();
   }
 
-  private getFromLocalStorage(key: string): any {
+  private getFromLocalStorage(key: string): UserAffiliate | null {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : null;
+      if (!item) {
+        return null;
+      }
+
+      const parsedItem: unknown = JSON.parse(item);
+      return parsedItem as UserAffiliate;
     } catch (error) {
       console.error(`Error parsing localStorage key "${key}":`, error);
       return null;
@@ -80,10 +91,19 @@ export class AuthService {
     // Escuchar cambios en localStorage desde otras pestañas
     globalThis.addEventListener('storage', (event: StorageEvent) => {
       if (event.key === 'currentUserAffiliate') {
-        const newValue = event.newValue ? JSON.parse(event.newValue) : null;
+        const newValue = this.parseStoredUser(event.newValue);
         this.currentUserAffiliate.set(newValue);
       }
     });
+  }
+
+  private parseStoredUser(value: string | null): UserAffiliate | null {
+    if (!value) {
+      return null;
+    }
+
+    const parsedValue: unknown = JSON.parse(value);
+    return parsedValue as UserAffiliate;
   }
 
   /**
@@ -114,13 +134,13 @@ export class AuthService {
 
   loginUser(userCredentials: Signin) {
     return this.http
-      .post<Response>(
+      .post<Response<AuthResponseData>>(
         this.urlApi.concat('/auth/login'),
         userCredentials,
         httpOptions,
       )
       .pipe(
-        map((response: Response) => {
+        map((response: Response<AuthResponseData>) => {
           if (response.success && response.data?.user) {
             // Solo guardar el usuario si está verificado (status === true)
             if (response.data.user.status === true) {
@@ -132,7 +152,45 @@ export class AuthService {
       );
   }
 
-  validateUserType(response: Response) {
+  loginWithGoogle(idToken: string) {
+    return this.http
+      .post<Response<AuthResponseData>>(
+        this.urlApi.concat('/auth/google'),
+        { idToken },
+        httpOptions,
+      )
+      .pipe(
+        map((response: Response<AuthResponseData>) => {
+          if (response.success && response.data?.user) {
+            if (response.data.user.status === true) {
+              this.validateUserType(response);
+            }
+          }
+          return response;
+        }),
+      );
+  }
+
+  registerWithGoogle(idToken: string, user: UserAffiliate) {
+    return this.http
+      .post<Response<AuthResponseData>>(
+        this.urlApi.concat('/auth/google/register'),
+        { ...user, idToken },
+        httpOptions,
+      )
+      .pipe(
+        map((response: Response<AuthResponseData>) => {
+          if (response.success && response.data?.user) {
+            if (response.data.user.status === true) {
+              this.validateUserType(response);
+            }
+          }
+          return response;
+        }),
+      );
+  }
+
+  validateUserType(response: Response<AuthResponseData>) {
     const userData = response.data.user;
     const accessToken = response.data.access_token;
 
@@ -312,16 +370,22 @@ export class AuthService {
    * @param updateProfileDto Datos del perfil a actualizar
    * @returns Observable con los datos actualizados del usuario
    */
-  updateProfile(updateProfileDto: UpdateProfileDto): Observable<any> {
+  updateProfile(
+    updateProfileDto: UpdateProfileDto,
+  ): Observable<Response<Partial<UserAffiliate>>> {
     const token = this.currentUserAffiliateValue?.access_token ?? '';
     const headers = token
       ? httpOptions.headers.set('Authorization', `Bearer ${token}`)
       : httpOptions.headers;
 
     return this.http
-      .patch<Response>(`${this.urlApi}/auth/profile`, updateProfileDto, {
-        headers,
-      })
+      .patch<Response<Partial<UserAffiliate>>>(
+        `${this.urlApi}/auth/profile`,
+        updateProfileDto,
+        {
+          headers,
+        },
+      )
       .pipe(
         map(response => {
           // Actualizar el usuario en el localStorage y signals si es necesario

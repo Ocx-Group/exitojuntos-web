@@ -548,7 +548,7 @@
     "GENERIC_ERROR": "Impossible de vous connecter. Veuillez réessayer.",
     "GITHUB_BUTTON": "GitHub",
     "GOOGLE_BUTTON": "Google",
-    "INVALID_CREDENTIALS": "Identifiants invalides. Vérifiez votre téléphone et votre mot de passe.",
+    "INVALID_CREDENTIALS": "Identifiants invalides. Vérifiez votre nom d'utilisateur et votre mot de passe.",
     "ACCOUNT_NOT_VERIFIED": "Votre compte n'est pas vérifié. Veuillez vérifier votre adresse e-mail pour activer votre compte.",
     "LOGIN_BUTTON": "Se Connecter",
     "LOGIN_SUBTITLE": "Accédez à votre compte de trading",
@@ -642,6 +642,8 @@
     "TITLE": "INSCRIPTION",
     "USER_NOT_FOUND": "Utilisateur non trouvé",
     "USERNAME": "Nom d'utilisateur",
+    "USERNAME_ALREADY_REGISTERED": "Le nom d'utilisateur est déjà enregistré",
+    "USERNAME_PATTERN": "Le nom d'utilisateur doit contenir entre 3 et 50 caractères et uniquement des lettres, chiffres, points, tirets et traits de soulignement",
     "USERNAME_REQUIRED": "Le nom d'utilisateur est requis",
     "USERNAME_WHITESPACE": "Le nom d'utilisateur ne peut pas contenir d'espaces",
     "WARNING_NO_COUNTRIES": "Impossible de charger les pays",
@@ -650,6 +652,9 @@
     "SPONSOR_PHONE_REQUIRED": "Vous devez entrer le téléphone de votre parrain",
     "SPONSOR_NOT_FOUND": "Aucun parrain trouvé avec ce numéro",
     "SPONSOR_FOUND": "Parrain trouvé",
+    "GOOGLE_REGISTER": "S'inscrire avec Google",
+    "GOOGLE_CONNECTED": "Compte Google connecté. Complétez les champs restants.",
+    "GOOGLE_REGISTRATION_ERROR": "Impossible de démarrer l'inscription avec Google",
     "SPONSOR_REQUIRED": "Vous devez avoir un parrain pour vous inscrire"
   },
   "RESET": {

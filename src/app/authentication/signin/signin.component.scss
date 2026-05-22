@@ -491,6 +491,12 @@ $error-color: #ff4444;
     transform: translateY(0);
   }
 
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
   svg {
     width: 20px;
     height: 20px;

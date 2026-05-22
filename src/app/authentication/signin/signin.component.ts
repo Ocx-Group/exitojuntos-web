@@ -12,9 +12,49 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { CommonModule } from '@angular/common';
 import { Signin } from '@app/core/models/signin-model/signin.model';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { LogoService } from '@app/core/service/logo-service/logo.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { environment } from '@environments/environment';
+import { firstValueFrom } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (config: GoogleIdentityConfig) => void;
+          prompt: (callback?: (notification: GooglePromptNotification) => void) => void;
+          cancel: () => void;
+        };
+      };
+    };
+  }
+}
+
+interface GoogleCredentialResponse {
+  credential: string;
+}
+
+interface GoogleIdentityConfig {
+  client_id: string;
+  callback: (response: GoogleCredentialResponse) => void;
+  auto_select?: boolean;
+  cancel_on_tap_outside?: boolean;
+}
+
+interface GooglePromptNotification {
+  isNotDisplayed: () => boolean;
+  isSkippedMoment: () => boolean;
+  getNotDisplayedReason: () => string;
+  getSkippedReason: () => string;
+}
+
+interface AuthResponseData {
+  access_token: string;
+  user: UserAffiliate;
+}
 
 @Component({
   selector: 'app-signin',
@@ -29,7 +69,7 @@ export class SigninComponent implements OnInit {
   loading = false;
   hide = true;
   logoUrl: string;
-  phone: string = 'Teléfono';
+  username: string = 'Usuario';
   password: string = 'Contraseña';
   remember: string = 'Recordar';
   forgot: string = 'Cambiar contraseña';
@@ -71,7 +111,7 @@ export class SigninComponent implements OnInit {
 
   authLogin = new FormGroup({
     remeber: new FormControl('', []),
-    phone: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
     pwd: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
@@ -81,7 +121,7 @@ export class SigninComponent implements OnInit {
 
   setLabels() {
     if (this.translate.getCurrentLang() != undefined) {
-      this.phone = this.translate.instant('SIGNIN.PHONE.TEXT');
+      this.username = this.translate.instant('SIGNIN.USER-NAME.TEXT');
       this.password = this.translate.instant('SIGNIN.PASSWORD.TEXT');
       this.remember = this.translate.instant('SIGNIN.REMEMBER-ME.TEXT');
       this.forgot = this.translate.instant('SIGNIN.FORGOT-PASS.TEXT');
@@ -115,7 +155,7 @@ export class SigninComponent implements OnInit {
       return;
     }
 
-    signin.phone = this.authLogin.value.phone ?? '';
+    signin.username = this.authLogin.value.username ?? '';
     signin.password = this.authLogin.value.pwd ?? '';
     this.loading = true;
 
@@ -123,7 +163,7 @@ export class SigninComponent implements OnInit {
       .loginUser(signin)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
-        next: (response: Response) => {
+        next: (response: Response<AuthResponseData>) => {
           if (response.success) {
             // Verificar si el usuario está verificado (status === true)
             if (response.data.user?.status !== true) {
@@ -150,6 +190,124 @@ export class SigninComponent implements OnInit {
           this.displayLoginError(message);
         },
       });
+  }
+
+  async googleLoginSubmitted(): Promise<void> {
+    this.submitted = false;
+    this.error = '';
+    this.loading = true;
+
+    try {
+      const idToken = await this.getGoogleIdentityToken();
+      const response = await firstValueFrom(
+        this.authService.loginWithGoogle(idToken),
+      );
+
+      this.handleLoginResponse(response);
+    } catch (error) {
+      const message = this.resolveErrorMessage(error);
+      this.displayLoginError(message);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  private async getGoogleIdentityToken(): Promise<string> {
+    const clientId = environment.google?.clientId;
+
+    if (!clientId) {
+      throw new Error('Google Client ID no está configurado');
+    }
+
+    await this.loadGoogleIdentityScript();
+
+    return new Promise<string>((resolve, reject) => {
+      window.google?.accounts.id.initialize({
+        client_id: clientId,
+        auto_select: false,
+        cancel_on_tap_outside: true,
+        callback: response => {
+          if (response.credential) {
+            resolve(response.credential);
+            return;
+          }
+
+          reject(new Error('No se recibió credencial de Google'));
+        },
+      });
+
+      window.google?.accounts.id.prompt(notification => {
+        if (notification.isNotDisplayed()) {
+          reject(
+            new Error(
+              `Google Sign-In no se pudo mostrar: ${notification.getNotDisplayedReason()}`,
+            ),
+          );
+        }
+
+        if (notification.isSkippedMoment()) {
+          reject(
+            new Error(
+              `Google Sign-In fue cancelado: ${notification.getSkippedReason()}`,
+            ),
+          );
+        }
+      });
+    });
+  }
+
+  private loadGoogleIdentityScript(): Promise<void> {
+    if (window.google?.accounts?.id) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const existingScript = document.querySelector<HTMLScriptElement>(
+        'script[src="https://accounts.google.com/gsi/client"]',
+      );
+
+      if (existingScript) {
+        existingScript.addEventListener('load', () => resolve());
+        existingScript.addEventListener('error', () =>
+          reject(new Error('No se pudo cargar Google Sign-In')),
+        );
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve();
+      script.onerror = () =>
+        reject(new Error('No se pudo cargar Google Sign-In'));
+
+      document.head.appendChild(script);
+    });
+  }
+
+  private handleLoginResponse(response: Response<AuthResponseData>): void {
+    if (response.success) {
+      // Verificar si el usuario está verificado (status === true)
+      if (response.data.user?.status !== true) {
+        const message = this.getLocalizedText(
+          'SIGNIN.ACCOUNT_NOT_VERIFIED',
+          'Tu cuenta no está verificada. Por favor, verifica tu correo electrónico para activar tu cuenta.',
+        );
+        this.displayLoginError(message);
+        return;
+      }
+
+      const roleName = response.data.user?.role?.name?.toLowerCase();
+
+      queueMicrotask(() => {
+        this.redirectByRole(roleName);
+      });
+      return;
+    }
+
+    const message = this.resolveErrorMessage(response);
+    this.displayLoginError(message);
   }
 
   showSuccess(message: string) {
@@ -280,8 +438,8 @@ export class SigninComponent implements OnInit {
     return this.authLogin.controls;
   }
 
-  get Phone(): FormControl {
-    return this.authLogin.get('phone') as FormControl;
+  get Username(): FormControl {
+    return this.authLogin.get('username') as FormControl;
   }
 
   get Pwd(): FormControl {

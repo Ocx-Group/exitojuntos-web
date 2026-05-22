@@ -20,17 +20,12 @@
               <!-- Profile Picture -->
               <div class="profile-picture-container">
                 <div class="profile-picture-wrapper">
-                  <img [src]="previewUrl || user.imageProfileUrl || 'assets/images/user.png'" alt="Foto de perfil"
+                  <img [src]="user.imageProfileUrl || 'assets/images/user.png'" alt="Foto de perfil"
                     class="profile-picture" />
                   <div class="profile-picture-badge" *ngIf="user.status">
                     <i class="bi bi-check-circle-fill"></i>
                   </div>
                 </div>
-                <button *ngIf="isEditMode" class="btn-change-picture" (click)="fileInput.click()" type="button">
-                  <i class="bi bi-camera-fill"></i>
-                </button>
-                <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)"
-                  style="display: none" />
               </div>
 
               <!-- User Info -->

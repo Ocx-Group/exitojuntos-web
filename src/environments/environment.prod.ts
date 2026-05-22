@@ -1,5 +1,3 @@
-import { FirebaseOptions } from '@firebase/app-types';
-
 export const environment = {
   production: true,
   apis: {
@@ -14,6 +12,9 @@ export const environment = {
   },
   openAI: {
     apiKey: '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',
+  },
+  google: {
+    clientId: '',
   },
   tokens: {
     coinPayment: 'bfd40db8f711397a6c5b7653175afc38',
@@ -38,14 +39,4 @@ export const environment = {
     success_url: 'https://ecosystemfx.net/#/conpayment-confirmation',
     format: 'json',
   },
-};
-
-export const firebaseConfig: FirebaseOptions = {
-  apiKey: 'AIzaSyBVM9OkEJa_rdAID5ydC8gGKjNaU6fFzQI',
-  authDomain: 'ecosystem-6b056.firebaseapp.com',
-  projectId: 'ecosystem-6b056',
-  storageBucket: 'ecosystem-6b056.appspot.com',
-  messagingSenderId: '1077107109427',
-  appId: '1:1077107109427:web:bbe6268a7b4f1831717d46',
-  measurementId: 'G-64EF1WMHB8',
 };

@@ -1,4 +1,4 @@
 export class Signin {
-  phone: string = '';
+  username: string = '';
   password: string = '';
 }
