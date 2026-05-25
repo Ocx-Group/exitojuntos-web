@@ -2,7 +2,9 @@ import {
   Component,
   OnInit,
   OnDestroy,
+  AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
+  NgZone,
   inject,
 } from '@angular/core';
 import {
@@ -34,7 +36,10 @@ declare global {
       accounts: {
         id: {
           initialize: (config: GoogleIdentityConfig) => void;
-          prompt: (callback?: (notification: GooglePromptNotification) => void) => void;
+          renderButton: (
+            parent: HTMLElement,
+            options: GoogleButtonConfig,
+          ) => void;
           cancel: () => void;
         };
       };
@@ -53,11 +58,14 @@ interface GoogleIdentityConfig {
   cancel_on_tap_outside?: boolean;
 }
 
-interface GooglePromptNotification {
-  isNotDisplayed: () => boolean;
-  isSkippedMoment: () => boolean;
-  getNotDisplayedReason: () => string;
-  getSkippedReason: () => string;
+interface GoogleButtonConfig {
+  theme?: 'outline' | 'filled_blue' | 'filled_black';
+  size?: 'large' | 'medium' | 'small';
+  type?: 'standard' | 'icon';
+  text?: 'signin_with' | 'signup_with' | 'continue_with' | 'signin';
+  shape?: 'rectangular' | 'pill' | 'circle' | 'square';
+  width?: number;
+  locale?: string;
 }
 
 interface GoogleProfilePayload {
@@ -83,7 +91,7 @@ interface GoogleProfilePayload {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
   registerForm: FormGroup;
   key = '';
   side = '';
@@ -113,6 +121,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   private sponsorSearchSubscription: Subscription;
   private readonly countryService: CountryService = inject(CountryService);
   private readonly authService = inject(AuthService);
+  private readonly ngZone = inject(NgZone);
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -157,6 +166,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadValidations();
     this.setupSponsorSearchDebounce();
+  }
+
+  ngAfterViewInit(): void {
+    void this.initializeGoogleRegisterButton();
   }
 
   ngOnDestroy(): void {
@@ -338,16 +351,23 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
   }
 
-  async startGoogleRegistration(): Promise<void> {
+  private async handleGoogleCredential(
+    credentialResponse: GoogleCredentialResponse,
+  ): Promise<void> {
     this.submitted = false;
     this.error = '';
     this.loading = true;
 
     try {
-      const idToken = await this.getGoogleIdentityToken();
-      const googleProfile = this.decodeGoogleProfile(idToken);
+      if (!credentialResponse.credential) {
+        throw new Error('No se recibió credencial de Google');
+      }
 
-      this.googleRegistrationToken = idToken;
+      const googleProfile = this.decodeGoogleProfile(
+        credentialResponse.credential,
+      );
+
+      this.googleRegistrationToken = credentialResponse.credential;
       this.googleRegistrationActive = true;
       this.googleProfilePicture = googleProfile.picture ?? '';
       this.applyGoogleRegistrationMode();
@@ -381,47 +401,34 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.registerForm.updateValueAndValidity();
   }
 
-  private async getGoogleIdentityToken(): Promise<string> {
+  private async initializeGoogleRegisterButton(): Promise<void> {
     const clientId = environment.google?.clientId;
+    const container = document.getElementById('google-register-button');
 
-    if (!clientId) {
-      throw new Error('Google Client ID no está configurado');
+    if (!clientId || !container) {
+      return;
     }
 
     await this.loadGoogleIdentityScript();
 
-    return new Promise<string>((resolve, reject) => {
-      window.google?.accounts.id.initialize({
-        client_id: clientId,
-        auto_select: false,
-        cancel_on_tap_outside: true,
-        callback: response => {
-          if (response.credential) {
-            resolve(response.credential);
-            return;
-          }
+    window.google?.accounts.id.initialize({
+      client_id: clientId,
+      auto_select: false,
+      cancel_on_tap_outside: true,
+      callback: response => {
+        void this.ngZone.run(() => this.handleGoogleCredential(response));
+      },
+    });
 
-          reject(new Error('No se recibió credencial de Google'));
-        },
-      });
-
-      window.google?.accounts.id.prompt(notification => {
-        if (notification.isNotDisplayed()) {
-          reject(
-            new Error(
-              `Google Sign-In no se pudo mostrar: ${notification.getNotDisplayedReason()}`,
-            ),
-          );
-        }
-
-        if (notification.isSkippedMoment()) {
-          reject(
-            new Error(
-              `Google Sign-In fue cancelado: ${notification.getSkippedReason()}`,
-            ),
-          );
-        }
-      });
+    container.innerHTML = '';
+    window.google?.accounts.id.renderButton(container, {
+      theme: 'outline',
+      size: 'large',
+      type: 'standard',
+      text: 'signup_with',
+      shape: 'rectangular',
+      width: Math.min(container.clientWidth || 382, 382),
+      locale: this.translate.getCurrentLang(),
     });
   }
 

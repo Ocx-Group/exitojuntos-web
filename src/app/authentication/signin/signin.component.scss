@@ -465,6 +465,13 @@ $error-color: #ff4444;
   gap: 12px;
 }
 
+.google-button-container {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+}
+
 .social-button {
   flex: 1;
   display: flex;

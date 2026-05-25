@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -25,7 +25,10 @@ declare global {
       accounts: {
         id: {
           initialize: (config: GoogleIdentityConfig) => void;
-          prompt: (callback?: (notification: GooglePromptNotification) => void) => void;
+          renderButton: (
+            parent: HTMLElement,
+            options: GoogleButtonConfig,
+          ) => void;
           cancel: () => void;
         };
       };
@@ -44,11 +47,14 @@ interface GoogleIdentityConfig {
   cancel_on_tap_outside?: boolean;
 }
 
-interface GooglePromptNotification {
-  isNotDisplayed: () => boolean;
-  isSkippedMoment: () => boolean;
-  getNotDisplayedReason: () => string;
-  getSkippedReason: () => string;
+interface GoogleButtonConfig {
+  theme?: 'outline' | 'filled_blue' | 'filled_black';
+  size?: 'large' | 'medium' | 'small';
+  type?: 'standard' | 'icon';
+  text?: 'signin_with' | 'signup_with' | 'continue_with' | 'signin';
+  shape?: 'rectangular' | 'pill' | 'circle' | 'square';
+  width?: number;
+  locale?: string;
 }
 
 interface AuthResponseData {
@@ -63,7 +69,7 @@ interface AuthResponseData {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, AfterViewInit {
   submitted = false;
   error = '';
   loading = false;
@@ -89,6 +95,7 @@ export class SigninComponent implements OnInit {
     private readonly logoService: LogoService,
     private readonly translate: TranslateService,
     private readonly deviceService: DeviceDetectorService,
+    private readonly ngZone: NgZone,
   ) {}
 
   ngOnInit() {
@@ -192,15 +199,20 @@ export class SigninComponent implements OnInit {
       });
   }
 
-  async googleLoginSubmitted(): Promise<void> {
+  private async handleGoogleCredential(
+    credentialResponse: GoogleCredentialResponse,
+  ): Promise<void> {
     this.submitted = false;
     this.error = '';
     this.loading = true;
 
     try {
-      const idToken = await this.getGoogleIdentityToken();
+      if (!credentialResponse.credential) {
+        throw new Error('No se recibió credencial de Google');
+      }
+
       const response = await firstValueFrom(
-        this.authService.loginWithGoogle(idToken),
+        this.authService.loginWithGoogle(credentialResponse.credential),
       );
 
       this.handleLoginResponse(response);
@@ -212,48 +224,39 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  private async getGoogleIdentityToken(): Promise<string> {
+  private async initializeGoogleSignInButton(): Promise<void> {
     const clientId = environment.google?.clientId;
+    const container = document.getElementById('google-signin-button');
 
-    if (!clientId) {
-      throw new Error('Google Client ID no está configurado');
+    if (!clientId || !container) {
+      return;
     }
 
     await this.loadGoogleIdentityScript();
 
-    return new Promise<string>((resolve, reject) => {
-      window.google?.accounts.id.initialize({
-        client_id: clientId,
-        auto_select: false,
-        cancel_on_tap_outside: true,
-        callback: response => {
-          if (response.credential) {
-            resolve(response.credential);
-            return;
-          }
-
-          reject(new Error('No se recibió credencial de Google'));
-        },
-      });
-
-      window.google?.accounts.id.prompt(notification => {
-        if (notification.isNotDisplayed()) {
-          reject(
-            new Error(
-              `Google Sign-In no se pudo mostrar: ${notification.getNotDisplayedReason()}`,
-            ),
-          );
-        }
-
-        if (notification.isSkippedMoment()) {
-          reject(
-            new Error(
-              `Google Sign-In fue cancelado: ${notification.getSkippedReason()}`,
-            ),
-          );
-        }
-      });
+    window.google?.accounts.id.initialize({
+      client_id: clientId,
+      auto_select: false,
+      cancel_on_tap_outside: true,
+      callback: response => {
+        void this.ngZone.run(() => this.handleGoogleCredential(response));
+      },
     });
+
+    container.innerHTML = '';
+    window.google?.accounts.id.renderButton(container, {
+      theme: 'outline',
+      size: 'large',
+      type: 'standard',
+      text: 'signin_with',
+      shape: 'rectangular',
+      width: Math.min(container.clientWidth || 400, 400),
+      locale: this.translate.getCurrentLang(),
+    });
+  }
+
+  ngAfterViewInit(): void {
+    void this.initializeGoogleSignInButton();
   }
 
   private loadGoogleIdentityScript(): Promise<void> {
