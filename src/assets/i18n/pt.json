@@ -117,54 +117,54 @@
   },
   "LANDING_PAGE": {
     "CTA_SECTION": {
-      "CTA_PRIMARY": "Abrir Conta Grátis",
-      "CTA_SECONDARY": "Falar com um Especialista",
-      "DESCRIPTION": "Junte-se a milhares de membros que já participam desta comunidade informativa e colaborativa. A oportunidade é agora.",
+      "CTA_PRIMARY": "Inicie Seu Bem-estar",
+      "CTA_SECONDARY": "Conheça Nossos Produtos",
+      "DESCRIPTION": "Junte-se a milhares de pessoas que já transformaram suas vidas com nossos suplementos e comunidade de bem-estar. O momento é agora.",
       "STATS": {
         "RATING": "Classificação",
-        "SECURE": "Seguro",
+        "SECURE": "Natural",
         "SUPPORT": "Suporte"
       },
-      "TITLE": "Comece Seu",
-      "TITLE_HIGHLIGHT": "Caminho para o Crescimento"
+      "TITLE": "Comece Sua",
+      "TITLE_HIGHLIGHT": "Transformação Saudável"
     },
     "FEATURES": {
       "CARDS": {
         "ADVISORY": {
-          "DESCRIPTION": "Especialistas dedicados a ajudá-lo a alcançar seus objetivos financeiros.",
-          "TITLE": "Consultoria Personalizada"
+          "DESCRIPTION": "Especialistas em nutrição dedicados a guiá-lo em direção às suas metas de saúde e bem-estar pessoal.",
+          "TITLE": "Assessoria Nutricional"
         },
         "ANALYSIS": {
-          "DESCRIPTION": "Relatórios detalhados e análise de mercado para decisões informadas.",
-          "TITLE": "Análise Profunda"
+          "DESCRIPTION": "Informações nutricionais detalhadas e planos de saúde personalizados para o seu bem-estar.",
+          "TITLE": "Nutrição & Saúde"
         },
         "SECURITY": {
-          "DESCRIPTION": "Seus ativos protegidos com a mais alta tecnologia de segurança bancária.",
-          "TITLE": "Segurança Total"
+          "DESCRIPTION": "Produtos certificados e respaldados pelos mais altos padrões de qualidade, segurança e pureza.",
+          "TITLE": "Qualidade Certificada"
         },
         "SUPPORT": {
-          "DESCRIPTION": "Atendimento contínuo para que você nunca perca uma oportunidade.",
+          "DESCRIPTION": "Atendimento contínuo para acompanhá-lo em cada passo do seu caminho rumo à saúde.",
           "TITLE": "Suporte 24/7"
         },
         "TRADING": {
-          "DESCRIPTION": "Ferramentas digitais para nos manter informados e conectados em tempo real.",
-          "TITLE": "Organização Colaborativa"
+          "DESCRIPTION": "Ampla gama de suplementos alimentares da mais alta qualidade e eficácia comprovada.",
+          "TITLE": "Suplementos Premium"
         },
         "TRANSPARENCY": {
-          "DESCRIPTION": "Comunicação aberta e clareza em todas as informações compartilhadas entre os membros.",
-          "TITLE": "Transparência"
+          "DESCRIPTION": "Ingredientes claros, processos verificáveis e honestidade em cada produto que oferecemos.",
+          "TITLE": "Transparência Total"
         }
       },
-      "DESCRIPTION": "Oferecemos espaços colaborativos projetados para pessoas que buscam crescimento e excelência pessoal",
+      "DESCRIPTION": "Oferecemos suplementos alimentares de qualidade e conhecimento nutricional para pessoas que buscam uma vida mais saudável",
       "TAG": "NOSSOS SERVIÇOS",
-      "TITLE": "Comunidade de Excelência"
+      "TITLE": "Seu Bem-estar, Nossa Missão"
     },
     "FOOTER": {
       "CONTACT": {
         "HEADING": "Contato"
       },
       "COPYRIGHT": "© 2025 Éxito Juntos. Todos os direitos reservados.",
-      "DISCLAIMER": "Este grupo é exclusivamente informativo e social. Não realizamos, promovemos ou facilitamos atividades financeiras de qualquer tipo.",
+      "DISCLAIMER": "Éxito Juntos é uma comunidade de saúde e bem-estar. Os suplementos não substituem uma alimentação equilibrada nem tratamento médico.",
       "LEGAL": {
         "HEADING": "Legal",
         "PRIVACY": "Privacidade",
@@ -176,92 +176,92 @@
         "ABOUT_US": "Sobre Nós",
         "CONTACT": "Contato",
         "HEADING": "Links",
-        "SERVICES": "Serviços",
+        "SERVICES": "Produtos",
         "TESTIMONIALS": "Depoimentos"
       },
-      "TAGLINE": "Colaboração inteligente para um futuro compartilhado."
+      "TAGLINE": "Suplementos naturais para uma vida mais saudável."
     },
     "HERO": {
-      "BADGE": "Organização Colaborativa",
-      "CTA_PRIMARY": "Solicite Sua Admissão",
-      "CTA_SECONDARY": "Agendar Consulta",
+      "BADGE": "Comunidade de Saúde e Bem-estar",
+      "CTA_PRIMARY": "Junte-se à comunidade",
+      "CTA_SECONDARY": "Saiba mais",
       "METRICS": {
-        "INVESTORS": "Membros Ativos",
-        "INVESTORS_VALUE": "Usuários verificados",
-        "MANAGED": "Organizados",
-        "MANAGED_VALUE": "Gestão clara",
-        "PROFITABILITY": "Crescimento Pessoal e Colaborativo",
-        "PROFITABILITY_VALUE": "Sem limites"
+        "INVESTORS": "Comunidade saudável",
+        "INVESTORS_VALUE": "Membros ativos",
+        "MANAGED": "Qualidade garantida",
+        "MANAGED_VALUE": "Produtos certificados",
+        "PROFITABILITY": "Saúde e Qualidade de Vida",
+        "PROFITABILITY_VALUE": "Bem-estar total"
       },
-      "SUBTITLE": "Unidos no caminho do crescimento pessoal. Colaboração, aprendizado compartilhado e um futuro de oportunidades.",
+      "SUBTITLE": "Descubra o poder dos suplementos naturais. Comunidade, conhecimento e bem-estar para transformar sua vida.",
       "TITLE": "SUCESSO JUNTOS"
     },
     "HOW_IT_WORKS": {
-      "DESCRIPTION": "Em apenas 4 passos simples, você estará no caminho para o sucesso financeiro",
+      "DESCRIPTION": "Em apenas 4 passos simples, você estará no caminho para uma vida mais saudável",
       "STEPS": {
         "STEP1": {
-          "DESCRIPTION": "Junte-se em poucos minutos e confirme suas informações básicas com segurança.",
+          "DESCRIPTION": "Junte-se em poucos minutos e crie seu perfil de saúde personalizado com segurança.",
           "TITLE": "Registro"
         },
         "STEP2": {
-          "DESCRIPTION": "Nossa equipe facilita espaços informativos e apoio colaborativo para todos os membros.",
-          "TITLE": "Organização"
+          "DESCRIPTION": "Nossos especialistas em nutrição ajudam você a escolher os suplementos ideais para suas metas de saúde.",
+          "TITLE": "Assessoria"
         },
         "STEP3": {
-          "DESCRIPTION": "Faça parte da nossa comunidade informativa com ferramentas modernas de comunicação.",
-          "TITLE": "Participação"
+          "DESCRIPTION": "Receba seus suplementos certificados diretamente em casa com entrega segura e confiável.",
+          "TITLE": "Produtos"
         },
         "STEP4": {
-          "DESCRIPTION": "Participe de um ambiente onde compartilhamos experiências, aprendizados e novidades.",
-          "TITLE": "Crescimento"
+          "DESCRIPTION": "Acompanhe seu progresso e transforme seu bem-estar com o apoio da nossa comunidade saudável.",
+          "TITLE": "Resultados"
         }
       },
       "TAG": "PROCESSO SIMPLES",
-      "TITLE": "Como Funciona"
+      "TITLE": "Como Começar"
     },
     "NAVBAR": {
       "ABOUT_US": "Sobre Nós",
       "CONTACT": "Contato",
       "LOGIN": "Entrar",
-      "SERVICES": "Serviços",
+      "SERVICES": "Produtos",
       "START": "Começar",
       "TESTIMONIALS": "Depoimentos"
     },
     "TESTIMONIALS_SECTION": {
-      "DESCRIPTION": "Milhares de membros compartilham como a comunidade os ajudou a se manterem informados e organizados.",
+      "DESCRIPTION": "Milhares de pessoas compartilham como os suplementos e nossa comunidade melhoraram sua qualidade de vida.",
       "TAG": "DEPOIMENTOS",
       "TESTIMONIALS": [
         {
-          "NAME": "Carlos Mendoza",
-          "QUOTE": "A melhor decisão foi me juntar a uma comunidade organizada e transparente. A informação compartilhada tem sido de grande valor. A equipe humana é excepcional.",
-          "ROLE": "CEO, TechVentures"
+          "NAME": "Ana Torres",
+          "QUOTE": "Incrível a qualidade dos suplementos. Em 3 meses notei mudanças reais na minha energia e vitalidade. A equipe de assessoria nutricional é excepcional.",
+          "ROLE": "Nutricionista"
         },
         {
-          "NAME": "María González",
-          "QUOTE": "Profissionalismo e apoio genuíno. A comunicação clara e o ambiente colaborativo fazem a diferença. Altamente recomendado.",
-          "ROLE": "Empreendedora"
+          "NAME": "Miguel Romero",
+          "QUOTE": "Os suplementos da Éxito Juntos são parte essencial da minha rotina. Desempenho ótimo e recuperação mais rápida. Totalmente recomendados.",
+          "ROLE": "Atleta"
         },
         {
-          "NAME": "Roberto Silva",
-          "QUOTE": "Transparência total e comunicação confiável. Finalmente encontrei uma comunidade na qual posso confiar.",
-          "ROLE": "Investidor"
+          "NAME": "Laura Vásquez",
+          "QUOTE": "Encontrei o equilíbrio perfeito para minha família. Produtos naturais, seguros e com resultados comprovados. Comunidade maravilhosa.",
+          "ROLE": "Mãe de família"
         }
       ],
-      "TITLE": "Histórias de Colaboração"
+      "TITLE": "Vidas Transformadas"
     },
     "TRADING_SECTION": {
-      "DESCRIPTION": "Nossa plataforma utiliza ferramentas digitais e comunicação eficiente para manter todos os membros informados.",
+      "DESCRIPTION": "Nossa linha de suplementos alimentares combina ingredientes naturais e tecnologia avançada para potencializar o seu bem-estar.",
       "HIGHLIGHTS": {
-        "ITEM1": "Aprendizado compartilhado",
-        "ITEM2": "Comunicação transparente",
-        "ITEM3": "Organização efetiva",
-        "ITEM4": "Acesso a informações atualizadas"
+        "ITEM1": "Ingredientes 100% naturais",
+        "ITEM2": "Fórmulas cientificamente comprovadas",
+        "ITEM3": "Sem aditivos artificiais",
+        "ITEM4": "Resultados visíveis e comprovados"
       },
-      "STAT_LABEL": "Colaboração",
-      "STAT_VALUE": "100%",
-      "TAG": "COLABORAÇÃO INTELIGENTE",
-      "TITLE": "Tecnologia que",
-      "TITLE_HIGHLIGHT": "Potencializa a Organização"
+      "STAT_LABEL": "Satisfação",
+      "STAT_VALUE": "98%",
+      "TAG": "NOSSOS PRODUTOS",
+      "TITLE": "Suplementos que",
+      "TITLE_HIGHLIGHT": "Transformam Sua Vida"
     }
   },
   "MENUITEMS": {
@@ -532,12 +532,12 @@
     "USER_NAME": "Nome"
   },
   "SIGNIN": {
-    "BRAND_SUBTITLE": "Unidos no caminho do sucesso",
+    "BRAND_SUBTITLE": "Suplementos naturais para uma vida mais saudável",
     "BRAND_TITLE": "SUCESSO JUNTOS",
-    "FEATURE_1_DESC": "Conecte-se e cresça com uma comunidade de profissionais com os mesmos objetivos",
-    "FEATURE_1_TITLE": "Rede Colaborativa",
-    "FEATURE_2_DESC": "Acesse recursos e ferramentas para alcançar seus objetivos juntos",
-    "FEATURE_2_TITLE": "Recursos Compartilhados",
+    "FEATURE_1_DESC": "Conecte-se com milhares de pessoas comprometidas com sua saúde e bem-estar",
+    "FEATURE_1_TITLE": "Comunidade Saudável",
+    "FEATURE_2_DESC": "Acesse nossa linha completa de suplementos alimentares certificados e de alta qualidade",
+    "FEATURE_2_TITLE": "Produtos Certificados",
     "FEATURE_3_DESC": "Suas informações protegidas com os mais altos padrões de segurança",
     "FEATURE_3_TITLE": "Privacidade e Segurança",
     "FOOTER_TEXT": "© 2025 Exito Juntos. Todos os direitos reservados.",
@@ -551,7 +551,7 @@
     "INVALID_CREDENTIALS": "Credenciais inválidas. Verifique seu usuário e senha.",
     "ACCOUNT_NOT_VERIFIED": "Sua conta não está verificada. Por favor, verifique seu endereço de e-mail para ativar sua conta.",
     "LOGIN_BUTTON": "Entrar",
-    "LOGIN_SUBTITLE": "Acesse sua conta de trading",
+    "LOGIN_SUBTITLE": "Acesse sua conta de saúde e bem-estar",
     "LOGIN_TITLE": "Entrar",
     "NO_ACCOUNT": "Não tem uma conta?",
     "OR_CONTINUE": "Ou continue com",

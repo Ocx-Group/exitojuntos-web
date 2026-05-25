@@ -66,16 +66,16 @@ export class LandingPageComponent implements OnInit {
   };
   isPreviewHovered: boolean = false;
   user: UserAffiliate | null = null;
-  readonly heroBadgeIcon = 'fa-trophy';
+  readonly heroBadgeIcon = 'fa-leaf';
   readonly primaryCtaArrow = 'fa-arrow-right';
   heroMetrics = [
-    { value: 'Sin límites', label: '' },
-    { value: 'Gestión clara', label: '' },
-    { value: 'Usuarios verificados', label: '' },
+    { value: 'Bienestar total', label: '' },
+    { value: 'Productos certificados', label: '' },
+    { value: 'Miembros activos', label: '' },
   ];
   featureCards = [
     {
-      icon: 'fa-chart-line',
+      icon: 'fa-capsules',
       title: '',
       description: '',
     },
@@ -85,12 +85,12 @@ export class LandingPageComponent implements OnInit {
       description: '',
     },
     {
-      icon: 'fa-chart-pie',
+      icon: 'fa-apple-alt',
       title: '',
       description: '',
     },
     {
-      icon: 'fa-user-tie',
+      icon: 'fa-user-md',
       title: '',
       description: '',
     },
@@ -117,19 +117,19 @@ export class LandingPageComponent implements OnInit {
     },
     {
       number: '02',
-      icon: 'fa-clipboard-list',
+      icon: 'fa-stethoscope',
       title: '',
       description: '',
     },
     {
       number: '03',
-      icon: 'fa-coins',
+      icon: 'fa-shopping-bag',
       title: '',
       description: '',
     },
     {
       number: '04',
-      icon: 'fa-chart-area',
+      icon: 'fa-heartbeat',
       title: '',
       description: '',
     },
