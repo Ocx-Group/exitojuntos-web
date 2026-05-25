@@ -28,9 +28,9 @@ export class LogsService {
     private readonly http: HttpClient,
     private readonly toastr: ToastrService,
   ) {
-    this.urlApi = environment.apis.exitojuntosService;
+    this.urlApi = environment.apiUrl;
     // Remover /v1 de la URL para usar VERSION_NEUTRAL del backend
-    this.baseUrl = this.urlApi.replace('/v1', '');
+    this.baseUrl = this.urlApi.replace(/\/v1\/?$/, '');
   }
 
   /**

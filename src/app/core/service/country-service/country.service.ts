@@ -18,7 +18,7 @@ export class CountryService {
   public readonly http: HttpClient = inject(HttpClient);
 
   constructor() {
-    this.urlApi = environment.apis.exitojuntosService;
+    this.urlApi = environment.apiUrl;
   }
 
   getCountries() {

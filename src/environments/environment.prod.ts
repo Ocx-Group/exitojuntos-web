@@ -1,42 +1,13 @@
+import { RuntimeEnvironment } from '@app/core/interfaces/runtime-environment';
+
+const runtimeEnv =
+  (globalThis as typeof globalThis & { __env?: RuntimeEnvironment }).__env ??
+  {};
+
 export const environment = {
   production: true,
-  apis: {
-    apiUrl: 'https://ecosystemfx.net/',
-    accountService: 'https://account.exitojuntos.net/api/v1',
-    accountServiceSignalR: 'https://account.exitojuntos.net/ticketHub',
-    systemConfigurationService: 'https://configuration.exitojuntos.net/api/v1',
-    inventoryService: 'https://inventory.exitojuntos.net/api/v1',
-    walletService: 'https://wallet.exitojuntos.net/api/v1',
-    coinPayment: 'https://www.coinpayments.net/index.php',
-    exitojuntosService: 'https://server.exitojuntos.com/v1',
-  },
-  openAI: {
-    apiKey: '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',
-  },
+  apiUrl: runtimeEnv.EXITOJUNTOS_API_URL || '',
   google: {
-    clientId: '',
-  },
-  tokens: {
-    coinPayment: 'bfd40db8f711397a6c5b7653175afc38',
-    accountService:
-      'eco-keygJ-MrM8y9jUD/b1dN24=neYjxeUA=N-f?9sHuDCcJ0JWfx-ajo7yjVn441',
-    systemConfigurationService:
-      'eco-key8ZgMhRytu-Jrv1FU1rZSw2jM-FaBP!ou!sJNBITT3tA63GBrrQiVe3zvS',
-    inventoryService:
-      'eco-keyLd5DU5faBWLfLrE1ATUK0c1qpvSci1x5TvFkDVw3FEM7JO30Jm!zXyB4w',
-    walletService:
-      'eco-keypFvQnUOko=r4/G!chia5Fe2-6OU?2YNYqAPWlaiN!uYrZIdwoUNv9P4d7',
-    clientID: 'eco-keyhFvQoUOk=r6/F!chia2Fe1-8OU?4YNWqAVWlaiN!tYrWIdvoUMv8Q6d6',
-  },
-  coinPaymentConfiguration: {
-    publicApiKey:
-      '2a4ae9a2a58b59f4cf3cecf76e89f04155ccdcca4dc0c76b8665cf852cc127c2',
-    privateApiKey:
-      '36b880a10b1c6e87443132B57eE715e8511730D6aCbc47188d0dcff521D3eEc9',
-    currency: 'USDC.TRC20',
-    reset: '1',
-    cmd: '_pay_simple',
-    success_url: 'https://ecosystemfx.net/#/conpayment-confirmation',
-    format: 'json',
+    clientId: runtimeEnv.GOOGLE_CLIENT_ID || '',
   },
 };

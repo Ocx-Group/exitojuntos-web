@@ -14,7 +14,7 @@ export type TestimonialPayload = Omit<
   providedIn: 'root',
 })
 export class TestimonialsService {
-  private readonly baseUrl = `${environment.apis.exitojuntosService}/testimonials`;
+  private readonly baseUrl = `${environment.apiUrl}/testimonials`;
 
   constructor(private readonly http: HttpClient) {}
 

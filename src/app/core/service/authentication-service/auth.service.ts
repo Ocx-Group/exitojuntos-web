@@ -56,7 +56,7 @@ export class AuthService {
     );
     this.currentUserAffiliateObs =
       this.currentUserAffiliateSubject.asObservable();
-    this.urlApi = environment.apis.exitojuntosService;
+    this.urlApi = environment.apiUrl;
 
     // Escuchar cambios en localStorage desde otras pestañas
     this.setupStorageListener();

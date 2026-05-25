@@ -28,4 +28,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/sh", "-c", "cat > /usr/share/nginx/html/assets/env.js <<EOF\nwindow.__env = {\n  EXITOJUNTOS_API_URL: \"${EXITOJUNTOS_API_URL}\",\n  GOOGLE_CLIENT_ID: \"${GOOGLE_CLIENT_ID}\"\n};\nEOF\nnginx -g 'daemon off;'"]
