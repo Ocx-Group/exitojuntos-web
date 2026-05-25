@@ -65,7 +65,7 @@
     "FEATURE_2_TITLE": "Lien Temporaire",
     "FEATURE_3_DESC": "Vos informations sont protégées tout au long du processus",
     "FEATURE_3_TITLE": "Processus Sécurisé",
-    "FOOTER_TEXT": "© 2025 Succès Ensemble. Tous droits réservés.",
+    "FOOTER_TEXT": "© 2026 Succès Ensemble. Tous droits réservés.",
     "SEND_BUTTON": "Envoyer le lien de récupération",
     "SUBTITLE": "Nous vous enverrons un lien pour réinitialiser votre mot de passe à votre adresse e-mail",
     "SUCCESS_BUTTON": "Compris",
@@ -163,7 +163,7 @@
       "CONTACT": {
         "HEADING": "Contact"
       },
-      "COPYRIGHT": "© 2025 Éxito Juntos. Tous droits réservés.",
+      "COPYRIGHT": "© 2026 Éxito Juntos. Tous droits réservés.",
       "DISCLAIMER": "Éxito Juntos est une communauté de santé et de bien-être. Les compléments ne remplacent pas une alimentation équilibrée ni un traitement médical.",
       "LEGAL": {
         "HEADING": "Légal",
@@ -519,7 +519,7 @@
     "FEATURE_2_TITLE": "Accès Complet",
     "FEATURE_3_DESC": "Vos informations sont protégées en permanence",
     "FEATURE_3_TITLE": "Sécurité Garantie",
-    "FOOTER_TEXT": "© 2025 Exito Juntos. Tous droits réservés.",
+    "FOOTER_TEXT": "© 2026 Exito Juntos. Tous droits réservés.",
     "GENERIC_ERROR": "Une erreur s'est produite lors de la vérification de votre compte. Veuillez réessayer.",
     "GO_TO_LOGIN": "Aller à la Connexion",
     "INVALID_CODE": "Le code de vérification est invalide.",
@@ -540,7 +540,7 @@
     "FEATURE_2_TITLE": "Produits Certifiés",
     "FEATURE_3_DESC": "Vos informations protégées avec les plus hauts standards de sécurité",
     "FEATURE_3_TITLE": "Confidentialité et Sécurité",
-    "FOOTER_TEXT": "© 2025 Exito Juntos. Tous droits réservés.",
+    "FOOTER_TEXT": "© 2026 Exito Juntos. Tous droits réservés.",
     "FORGOT_PASSWORD": "Mot de passe oublié?",
     "FORGOT-PASS": {
       "TEXT": "Mot de passe oublié?"
@@ -674,7 +674,7 @@
     "FEATURE_2_TITLE": "Mot de Passe Protégé",
     "FEATURE_3_DESC": "Réinitialisez votre mot de passe rapidement et en toute sécurité",
     "FEATURE_3_TITLE": "Processus Rapide",
-    "FOOTER_TEXT": "© 2025 Succès Ensemble. Tous droits réservés.",
+    "FOOTER_TEXT": "© 2026 Succès Ensemble. Tous droits réservés.",
     "INVALID_CODE": "Le code de sécurité est invalide",
     "PASSWORD_LABEL": "Nouveau Mot de Passe",
     "PASSWORD_LENGTH": "Le mot de passe doit contenir entre 8 et 16 caractères",
