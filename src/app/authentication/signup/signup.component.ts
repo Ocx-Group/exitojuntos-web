@@ -358,6 +358,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
     user.termsConditions = true;
     user.roleId = 2;
     user.imageProfileUrl = googleProfile.picture ?? '';
+    delete (user as Partial<UserAffiliate>).birtDate;
 
     try {
       const response = await firstValueFrom(
