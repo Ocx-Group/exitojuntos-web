@@ -180,14 +180,14 @@ export class SignupComponent implements OnInit, AfterViewInit {
     registerRequest.subscribe({
       next: response => {
         if (response.success) {
-          this.showSuccess(response.message);
           if (this.googleRegistrationActive) {
-            this.router
-              .navigate(['/app/my-network'], { replaceUrl: true })
-              .then();
+            this.authService.logoutUser();
+            this.showSuccess(response.message);
+            this.router.navigate(['/signin'], { replaceUrl: true }).then();
             return;
           }
 
+          this.showSuccess(response.message);
           setTimeout(() => {
             this.router.navigate(['/signin']).then();
           }, SIGNIN_REDIRECT_DELAY_MS);
@@ -366,8 +366,9 @@ export class SignupComponent implements OnInit, AfterViewInit {
       );
 
       if (response?.success) {
+        this.authService.logoutUser();
         this.showSuccess(response.message);
-        await this.router.navigate(['/app/my-network'], { replaceUrl: true });
+        await this.router.navigate(['/signin'], { replaceUrl: true });
         return;
       }
 
