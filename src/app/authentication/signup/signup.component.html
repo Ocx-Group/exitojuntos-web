@@ -36,43 +36,15 @@
       <p class="signup-subtitle">{{ 'SIGNUP.SUBTITLE' | translate }}</p>
 
       <!-- Referrer info (cuando viene por link) -->
-      <div class="referrer-info" *ngIf="sponsor && !isManualSponsor">
-        <p class="referrer-text">
-          <strong>{{ 'SIGNUP.REFERRED_BY' | translate }}</strong> {{ user.name }} {{ user.lastName }}
-          <br>
-          <span class="referrer-phone">{{ 'SIGNUP.PHONE_LABEL' | translate }} {{ sponsor }}</span>
-        </p>
-      </div>
-
-      <!-- Campo para buscar patrocinador manualmente -->
-      <div class="sponsor-search" *ngIf="!key">
-        <div class="sponsor-search-field">
-          <label for="sponsorPhone" class="form-label">{{ 'SIGNUP.SPONSOR_PHONE' | translate }}</label>
-          <div class="sponsor-input-group">
-            <input id="sponsorPhone" type="tel" [ngModel]="sponsorPhoneInput"
-              (ngModelChange)="onSponsorPhoneChange($event)" class="form-input sponsor-input"
-              [class.is-invalid]="sponsorSearchError" [class.is-valid]="sponsorFound"
-              [placeholder]="'SIGNUP.SPONSOR_PHONE_PLACEHOLDER' | translate" (keyup.enter)="searchSponsor()" />
-            <button type="button" class="search-sponsor-btn" (click)="searchSponsor()" [disabled]="isSearchingSponsor">
-              <i *ngIf="!isSearchingSponsor" class="fas fa-search"></i>
-              <i *ngIf="isSearchingSponsor" class="fas fa-spinner fa-spin"></i>
-            </button>
-          </div>
-          <div *ngIf="sponsorSearchError" class="error-message">
-            <span>{{ sponsorSearchError }}</span>
-          </div>
-        </div>
-
-        <!-- Mostrar información del patrocinador encontrado -->
-        <div class="referrer-info found-sponsor" *ngIf="sponsorFound">
+      @if (sponsor) {
+        <div class="referrer-info">
           <p class="referrer-text">
-            <i class="fas fa-check-circle sponsor-check"></i>
-            <strong>{{ 'SIGNUP.SPONSOR_FOUND' | translate }}</strong>
+            <strong>{{ 'SIGNUP.REFERRED_BY' | translate }}</strong> {{ user.name }} {{ user.lastName }}
             <br>
-            <span class="sponsor-name">{{ user.name }} {{ user.lastName }}</span>
+            <span class="referrer-phone">{{ 'SIGNUP.USERNAME_LABEL' | translate }} {{ sponsor }}</span>
           </p>
         </div>
-      </div>
+      }
     </div>
 
     <!-- Form container -->
@@ -80,9 +52,11 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="signup-form">
         <div class="google-registration">
           <div id="google-register-button" class="google-button-container"></div>
-          <div *ngIf="googleRegistrationActive" class="google-registration-status">
-            {{ 'SIGNUP.GOOGLE_CONNECTED' | translate }}
-          </div>
+          @if (googleRegistrationActive) {
+            <div class="google-registration-status">
+              {{ 'SIGNUP.GOOGLE_CONNECTED' | translate }}
+            </div>
+          }
         </div>
 
         <!-- Nombre -->
@@ -90,9 +64,13 @@
           <label for="name" class="form-label">{{ 'SIGNUP.NAME' | translate }}</label>
           <input id="name" type="text" formControlName="name" class="form-input"
             [class.is-invalid]="submitted && f['name'].errors" />
-          <div *ngIf="submitted && f['name'].errors" class="error-message">
-            <span *ngIf="f['name'].errors['required']">{{ 'SIGNUP.NAME_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['name'].errors) {
+            <div class="error-message">
+              @if (f['name'].errors['required']) {
+                <span>{{ 'SIGNUP.NAME_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Apellidos -->
@@ -100,9 +78,13 @@
           <label for="last_name" class="form-label">{{ 'SIGNUP.LAST_NAME' | translate }}</label>
           <input id="last_name" type="text" formControlName="last_name" class="form-input"
             [class.is-invalid]="submitted && f['last_name'].errors" />
-          <div *ngIf="submitted && f['last_name'].errors" class="error-message">
-            <span *ngIf="f['last_name'].errors['required']">{{ 'SIGNUP.LAST_NAME_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['last_name'].errors) {
+            <div class="error-message">
+              @if (f['last_name'].errors['required']) {
+                <span>{{ 'SIGNUP.LAST_NAME_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Email -->
@@ -110,46 +92,72 @@
           <label for="email" class="form-label">{{ 'SIGNUP.EMAIL' | translate }}</label>
           <input id="email" type="email" formControlName="email" class="form-input" [readonly]="googleRegistrationActive"
             [class.is-invalid]="submitted && f['email'].errors" />
-          <div *ngIf="submitted && f['email'].errors" class="error-message">
-            <span *ngIf="f['email'].errors['required']">{{ 'SIGNUP.EMAIL_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['email'].errors) {
+            <div class="error-message">
+              @if (f['email'].errors['required']) {
+                <span>{{ 'SIGNUP.EMAIL_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Usuario -->
-        <div class="form-field" *ngIf="!googleRegistrationActive">
-          <label for="username" class="form-label">{{ 'SIGNUP.USERNAME' | translate }}</label>
-          <input id="username" type="text" formControlName="username" class="form-input"
-            [class.is-invalid]="submitted && f['username'].errors" />
-          <div *ngIf="submitted && f['username'].errors" class="error-message">
-            <span *ngIf="f['username'].errors['required']">{{ 'SIGNUP.USERNAME_REQUIRED' | translate }}</span>
-            <span *ngIf="f['username'].errors['whitespace']">{{ 'SIGNUP.USERNAME_WHITESPACE' | translate }}</span>
-            <span *ngIf="f['username'].errors['pattern']">{{ 'SIGNUP.USERNAME_PATTERN' | translate }}</span>
+        @if (!googleRegistrationActive) {
+          <div class="form-field">
+            <label for="username" class="form-label">{{ 'SIGNUP.USERNAME' | translate }}</label>
+            <input id="username" type="text" formControlName="username" class="form-input"
+              [class.is-invalid]="submitted && f['username'].errors" />
+            @if (submitted && f['username'].errors) {
+              <div class="error-message">
+                @if (f['username'].errors['required']) {
+                  <span>{{ 'SIGNUP.USERNAME_REQUIRED' | translate }}</span>
+                }
+                @if (f['username'].errors['whitespace']) {
+                  <span>{{ 'SIGNUP.USERNAME_WHITESPACE' | translate }}</span>
+                }
+                @if (f['username'].errors['pattern']) {
+                  <span>{{ 'SIGNUP.USERNAME_PATTERN' | translate }}</span>
+                }
+              </div>
+            }
           </div>
-        </div>
+        }
 
         <!-- País -->
-        <div class="form-field" *ngIf="!googleRegistrationActive">
-          <label for="country" class="form-label">{{ 'SIGNUP.COUNTRY' | translate }}</label>
-          <select id="country" formControlName="country" class="form-select"
-            [class.is-invalid]="submitted && f['country'].errors">
-            <option value="" disabled selected>{{ 'SIGNUP.COUNTRY_PLACEHOLDER' | translate }}</option>
-            <option *ngFor="let country of listcountry" [value]="country.id">
-              {{ country.name }}
-            </option>
-          </select>
-          <div *ngIf="submitted && f['country'].errors" class="error-message">
-            <span *ngIf="f['country'].errors['required']">{{ 'SIGNUP.COUNTRY_REQUIRED' | translate }}</span>
+        @if (!googleRegistrationActive) {
+          <div class="form-field">
+            <label for="country" class="form-label">{{ 'SIGNUP.COUNTRY' | translate }}</label>
+            <select id="country" formControlName="country" class="form-select"
+              [class.is-invalid]="submitted && f['country'].errors">
+              <option value="" disabled selected>{{ 'SIGNUP.COUNTRY_PLACEHOLDER' | translate }}</option>
+              @for (country of listcountry; track country.id) {
+                <option [value]="country.id">
+                  {{ country.name }}
+                </option>
+              }
+            </select>
+            @if (submitted && f['country'].errors) {
+              <div class="error-message">
+                @if (f['country'].errors['required']) {
+                  <span>{{ 'SIGNUP.COUNTRY_REQUIRED' | translate }}</span>
+                }
+              </div>
+            }
           </div>
-        </div>
+        }
 
         <!-- Número de teléfono -->
         <div class="form-field">
           <label for="phone" class="form-label">{{ 'SIGNUP.PHONE' | translate }}</label>
           <input id="phone" type="tel" formControlName="phone" class="form-input"
             [class.is-invalid]="submitted && f['phone'].errors" />
-          <div *ngIf="submitted && f['phone'].errors" class="error-message">
-            <span *ngIf="f['phone'].errors['required']">{{ 'SIGNUP.PHONE_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['phone'].errors) {
+            <div class="error-message">
+              @if (f['phone'].errors['required']) {
+                <span>{{ 'SIGNUP.PHONE_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Ciudad -->
@@ -157,9 +165,13 @@
           <label for="city" class="form-label">{{ 'SIGNUP.CITY' | translate }}</label>
           <input id="city" type="text" formControlName="city" class="form-input"
             [class.is-invalid]="submitted && f['city'].errors" />
-          <div *ngIf="submitted && f['city'].errors" class="error-message">
-            <span *ngIf="f['city'].errors['required']">{{ 'SIGNUP.CITY_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['city'].errors) {
+            <div class="error-message">
+              @if (f['city'].errors['required']) {
+                <span>{{ 'SIGNUP.CITY_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Estado -->
@@ -167,9 +179,13 @@
           <label for="state" class="form-label">{{ 'SIGNUP.STATE' | translate }}</label>
           <input id="state" type="text" formControlName="state" class="form-input"
             [class.is-invalid]="submitted && f['state'].errors" />
-          <div *ngIf="submitted && f['state'].errors" class="error-message">
-            <span *ngIf="f['state'].errors['required']">{{ 'SIGNUP.STATE_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['state'].errors) {
+            <div class="error-message">
+              @if (f['state'].errors['required']) {
+                <span>{{ 'SIGNUP.STATE_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Dirección -->
@@ -196,11 +212,19 @@
               <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
             </button>
           </div>
-          <div *ngIf="submitted && f['password'].errors" class="error-message">
-            <span *ngIf="f['password'].errors['required']">{{ 'SIGNUP.PASSWORD_REQUIRED' | translate }}</span>
-            <span *ngIf="f['password'].errors['minlength']">{{ 'SIGNUP.PASSWORD_MINLENGTH' | translate }}</span>
-            <span *ngIf="f['password'].errors['pattern']">{{ 'SIGNUP.PASSWORD_PATTERN' | translate }}</span>
-          </div>
+          @if (submitted && f['password'].errors) {
+            <div class="error-message">
+              @if (f['password'].errors['required']) {
+                <span>{{ 'SIGNUP.PASSWORD_REQUIRED' | translate }}</span>
+              }
+              @if (f['password'].errors['minlength']) {
+                <span>{{ 'SIGNUP.PASSWORD_MINLENGTH' | translate }}</span>
+              }
+              @if (f['password'].errors['pattern']) {
+                <span>{{ 'SIGNUP.PASSWORD_PATTERN' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Confirmar contraseña -->
@@ -213,16 +237,24 @@
               <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
             </button>
           </div>
-          <div *ngIf="submitted && f['repitpassword'].errors" class="error-message">
-            <span *ngIf="f['repitpassword'].errors['required']">{{ 'SIGNUP.REPEAT_PASSWORD_REQUIRED' | translate
-              }}</span>
-            <span *ngIf="f['repitpassword'].errors['minlength']">{{ 'SIGNUP.PASSWORD_MINLENGTH' | translate }}</span>
-            <span *ngIf="f['repitpassword'].errors['pattern']">{{ 'SIGNUP.PASSWORD_PATTERN' | translate }}</span>
-          </div>
-          <div *ngIf="submitted && registerForm.errors?.['passwordMismatch'] && !f['repitpassword'].errors"
-            class="error-message">
-            <span>{{ 'SIGNUP.PASSWORD_MISMATCH' | translate }}</span>
-          </div>
+          @if (submitted && f['repitpassword'].errors) {
+            <div class="error-message">
+              @if (f['repitpassword'].errors['required']) {
+                <span>{{ 'SIGNUP.REPEAT_PASSWORD_REQUIRED' | translate }}</span>
+              }
+              @if (f['repitpassword'].errors['minlength']) {
+                <span>{{ 'SIGNUP.PASSWORD_MINLENGTH' | translate }}</span>
+              }
+              @if (f['repitpassword'].errors['pattern']) {
+                <span>{{ 'SIGNUP.PASSWORD_PATTERN' | translate }}</span>
+              }
+            </div>
+          }
+          @if (submitted && registerForm.errors?.['passwordMismatch'] && !f['repitpassword'].errors) {
+            <div class="error-message">
+              <span>{{ 'SIGNUP.PASSWORD_MISMATCH' | translate }}</span>
+            </div>
+          }
         </div>
 
         <!-- Términos y condiciones -->
@@ -233,9 +265,13 @@
             {{ 'SIGNUP.TERMS_ACCEPT' | translate }} <a (click)="showTermsAndConditions()" class="terms-link">{{
               'SIGNUP.TERMS_AND_CONDITIONS' | translate }}</a> {{ 'SIGNUP.TERMS_POLICY' | translate }}
           </label>
-          <div *ngIf="submitted && f['terms_conditions'].errors" class="error-message">
-            <span *ngIf="f['terms_conditions'].errors['required']">{{ 'SIGNUP.TERMS_REQUIRED' | translate }}</span>
-          </div>
+          @if (submitted && f['terms_conditions'].errors) {
+            <div class="error-message">
+              @if (f['terms_conditions'].errors['required']) {
+                <span>{{ 'SIGNUP.TERMS_REQUIRED' | translate }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Submit button -->

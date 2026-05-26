@@ -162,15 +162,15 @@ export class MyProfileComponent implements OnInit {
   }
 
   shareReferralLink() {
-    if (!this.user.phone) {
+    if (!this.user.username) {
       this.toastr.error(
         this.translate.instant('CLIENT-MY-PROFILE.HEADER.REFERRAL-LINK-ERROR'),
       );
       return;
     }
 
-    window.open(`/signup/${this.user.phone}`);
-    const referralUrl = `exitojuntos.com/signup/${this.user.phone}`;
+    window.open(`/signup/${this.user.username}`);
+    const referralUrl = `exitojuntos.com/signup/${this.user.username}`;
     this.clipboardService.copyFromContent(referralUrl);
     this.toastr.success(
       this.translate.instant('CLIENT-MY-PROFILE.HEADER.REFERRAL-LINK-COPIED'),

@@ -233,9 +233,9 @@ export class HomeComponent implements OnInit {
   }
 
   get registerUrl() {
-    const phone = this.user?.phone;
-    return phone
-      ? `https://www.exitojuntos.net/welcome/${phone.toString()}`
+    const username = this.user?.username;
+    return username
+      ? `https://www.exitojuntos.net/welcome/${username}`
       : '';
   }
 

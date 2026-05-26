@@ -403,10 +403,10 @@ export class MyNetworkComponent implements OnInit {
    */
   protected getReferralLink(): string {
     const currentUser = this.authService.currentUserAffiliateValue;
-    if (!currentUser?.phone) {
+    if (!currentUser?.username) {
       return '';
     }
-    return `exitojuntos.com/signup/${currentUser.phone}`;
+    return `exitojuntos.com/signup/${currentUser.username}`;
   }
 
   /**

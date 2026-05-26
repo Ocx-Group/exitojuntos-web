@@ -449,7 +449,7 @@ export class AuthService {
       );
   }
 
-  getAffiliateByPhone(phone: string) {
+  getAffiliateByPhone(phone: string): Observable<UserAffiliate | null> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -459,8 +459,38 @@ export class AuthService {
       }),
     };
     return this.http
-      .get<Response>(
+      .get<Response<UserAffiliate>>(
         this.urlApi.concat('/auth/get_user_phone/' + phone),
+        options,
+      )
+      .pipe(
+        map(response => {
+          if (response.success) return response.data;
+          else {
+            console.error('ERROR: ', response);
+            return null;
+          }
+        }),
+        catchError(error => {
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  getAffiliateByUsername(username: string): Observable<UserAffiliate | null> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      }),
+    };
+    return this.http
+      .get<Response<UserAffiliate>>(
+        this.urlApi.concat(
+          '/auth/get_user_username/' + encodeURIComponent(username),
+        ),
         options,
       )
       .pipe(
@@ -479,7 +509,11 @@ export class AuthService {
 
   createAffiliate(user: UserAffiliate) {
     return this.http
-      .post<Response>(this.urlApi.concat('/auth/register'), user, httpOptions)
+      .post<Response<AuthResponseData>>(
+        this.urlApi.concat('/auth/register'),
+        user,
+        httpOptions,
+      )
       .pipe(
         map(data => {
           return data;
