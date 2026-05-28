@@ -90,10 +90,51 @@
                   placeholder="Descripción del producto..."></textarea>
               </div>
 
+              <!-- Image upload -->
               <div class="mb-3">
-                <label class="form-label" for="imageUrl">URL de imagen</label>
-                <input id="imageUrl" type="text" class="form-control" formControlName="image"
-                  placeholder="https://..." />
+                <label for="productImageFile" class="form-label">Imagen del producto</label>
+
+                <!-- Preview -->
+                @if (imagePreview()) {
+                <div class="image-preview-wrapper mb-2">
+                  <img [src]="imagePreview()!" alt="Preview" class="image-preview" />
+                  <button type="button" class="btn-remove-image" (click)="clearImage()" title="Quitar imagen"
+                    [disabled]="uploadingImage()">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  @if (uploadingImage()) {
+                  <div class="image-uploading-overlay">
+                    <div class="spinner-border spinner-border-sm text-white"></div>
+                    <small class="text-white ms-2">Subiendo...</small>
+                  </div>
+                  }
+                </div>
+                }
+
+                <!-- Drop zone / selector -->
+                @if (!imagePreview()) {
+                <label class="image-dropzone" [class.uploading]="uploadingImage()" for="productImageFile">
+                  @if (uploadingImage()) {
+                  <div class="spinner-border spinner-border-sm text-primary me-2"></div>
+                  <span class="text-muted">Subiendo imagen...</span>
+                  } @else {
+                  <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
+                  <span class="text-muted">Haz clic o arrastra una imagen</span>
+                  <small class="text-muted">JPEG, PNG, WebP, GIF · máx. 5 MB</small>
+                  }
+                </label>
+                }
+
+                <input #fileInput id="productImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif"
+                  class="d-none" (change)="onFileSelected($event)" [disabled]="uploadingImage()" />
+
+                <!-- Botón cambiar si ya hay imagen -->
+                @if (imagePreview() && !uploadingImage()) {
+                <label for="productImageFile" class="btn btn-outline-secondary btn-sm mt-1 w-100"
+                  style="cursor:pointer">
+                  <i class="fas fa-exchange-alt me-1"></i>Cambiar imagen
+                </label>
+                }
               </div>
 
               <div class="row">

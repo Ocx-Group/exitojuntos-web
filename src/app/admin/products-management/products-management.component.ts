@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Product, ProductCategory } from '@app/core/interfaces/product';
 import { PaginationMeta } from '@app/core/interfaces/pagination-request';
 import { ProductsService } from '@app/core/service/products-service';
+import { StorageService } from '@app/core/service/storage-service/storage.service';
 import { StatsCardComponent, StatsCardData } from '@app/shared/components';
 
 @Component({
@@ -22,7 +23,10 @@ export class ProductsManagementComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly productsService = inject(ProductsService);
+  private readonly storageService = inject(StorageService);
   private readonly toastr = inject(ToastrService);
+
+  @ViewChild('fileInput') fileInputRef!: ElementRef<HTMLInputElement>;
 
   protected readonly activeTab = signal<'products' | 'categories'>('products');
 
@@ -30,6 +34,8 @@ export class ProductsManagementComponent implements OnInit {
   protected readonly products = signal<Product[]>([]);
   protected readonly loadingProducts = signal(false);
   protected readonly savingProduct = signal(false);
+  protected readonly uploadingImage = signal(false);
+  protected readonly imagePreview = signal<string | null>(null);
   protected readonly editingProductId = signal<number | null>(null);
   protected readonly productsMeta = signal<PaginationMeta>({
     total: 0,
@@ -192,6 +198,7 @@ export class ProductsManagementComponent implements OnInit {
 
   protected editProduct(product: Product): void {
     this.editingProductId.set(product.id);
+    this.imagePreview.set(product.image ?? null);
     this.productForm.patchValue({
       name: product.name,
       price: product.price,
@@ -205,6 +212,56 @@ export class ProductsManagementComponent implements OnInit {
       productCategoryId: product.productCategoryId,
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  protected onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    const ALLOWED = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!ALLOWED.includes(file.type)) {
+      this.toastr.error('Solo se permiten imágenes JPEG, PNG, WebP o GIF', 'Formato inválido');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      this.toastr.error('La imagen no debe superar 5 MB', 'Archivo muy grande');
+      return;
+    }
+
+    // Mostrar preview local inmediatamente
+    const reader = new FileReader();
+    reader.onload = e => this.imagePreview.set(e.target?.result as string);
+    reader.readAsDataURL(file);
+
+    // Subir al bucket
+    this.uploadingImage.set(true);
+    this.storageService
+      .uploadImage(file)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: url => {
+          this.productForm.patchValue({ image: url });
+          this.uploadingImage.set(false);
+          this.toastr.success('Imagen subida correctamente');
+        },
+        error: () => {
+          this.imagePreview.set(this.productForm.value.image ?? null);
+          this.toastr.error('No se pudo subir la imagen', 'Error');
+          this.uploadingImage.set(false);
+        },
+      });
+
+    // Limpiar el input para permitir volver a seleccionar el mismo archivo
+    input.value = '';
+  }
+
+  protected clearImage(): void {
+    this.imagePreview.set(null);
+    this.productForm.patchValue({ image: '' });
+    if (this.fileInputRef?.nativeElement) {
+      this.fileInputRef.nativeElement.value = '';
+    }
   }
 
   protected deleteProduct(product: Product): void {
@@ -241,6 +298,10 @@ export class ProductsManagementComponent implements OnInit {
 
   protected resetProductForm(): void {
     this.editingProductId.set(null);
+    this.imagePreview.set(null);
+    if (this.fileInputRef?.nativeElement) {
+      this.fileInputRef.nativeElement.value = '';
+    }
     this.productForm.reset({
       name: '',
       price: 0,
