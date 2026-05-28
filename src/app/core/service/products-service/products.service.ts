@@ -37,6 +37,13 @@ export class ProductsService {
     return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
   }
 
+  getActive(page = 1, limit = 100): Observable<PaginatedProductsResponse> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<PaginatedProductsResponse>(this.baseUrl, { params });
+  }
+
   getAllAdmin(page = 1, limit = 10): Observable<PaginatedProductsResponse> {
     const params = new HttpParams()
       .set('page', page.toString())

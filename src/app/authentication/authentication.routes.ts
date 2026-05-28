@@ -84,6 +84,13 @@ export const AUTHENTICATION_ROUTES: Routes = [
       ),
   },
   {
+    path: 'products',
+    loadComponent: () =>
+      import('./products-page/products-page.component').then(
+        m => m.ProductsPageComponent,
+      ),
+  },
+  {
     path: 'terms-conditions',
     loadComponent: () =>
       import('../shared/components/terms-conditions/terms-conditions.component').then(

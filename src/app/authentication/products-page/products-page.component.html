@@ -1,0 +1,226 @@
+<!-- ═══════════════════════════════════════ NAVBAR ══════════════════════════════════════ -->
+<nav class="lp-navbar" [class.scrolled]="isScrolled">
+  <div class="lp-navbar__inner">
+    <a routerLink="/welcome" class="lp-navbar__logo">
+      <img [src]="navbarIcon" alt="Éxito Juntos" />
+    </a>
+
+    <div class="lp-navbar__links">
+      <a routerLink="/welcome" class="lp-nav-link">Inicio</a>
+      <a routerLink="/welcome" fragment="servicios" class="lp-nav-link">Servicios</a>
+      <a routerLink="/products" class="lp-nav-link active">Productos</a>
+      <a routerLink="/testimonials" class="lp-nav-link">Testimonios</a>
+    </div>
+
+    <button class="lp-navbar__cta" (click)="openSignin()">
+      <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO ════════════════════════════════════════ -->
+<section class="products-hero">
+  <div class="hero-particles">
+    @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+      <span class="particle" [attr.data-i]="i"></span>
+    }
+  </div>
+  <div class="hero-glow hero-glow--left"></div>
+  <div class="hero-glow hero-glow--right"></div>
+
+  <div class="hero-content">
+    <p class="hero-tag">
+      <i class="fas fa-gem me-2"></i>Catálogo Premium
+    </p>
+    <h1 class="hero-title">
+      Nuestros <span class="gold-text">Productos</span>
+    </h1>
+    <p class="hero-subtitle">
+      Descubre nuestra selección exclusiva de productos de alta calidad,<br class="d-none d-md-block" />
+      pensados para potenciar tu bienestar y éxito.
+    </p>
+
+    <!-- Search bar -->
+    <div class="hero-search">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Buscar producto..."
+        [value]="searchTerm()"
+        (input)="onSearch($any($event.target).value)"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FILTER BAR ═════════════════════════════════ -->
+<div class="filter-bar" [class.stuck]="isScrolled">
+  <div class="filter-inner">
+    <div class="filter-pills">
+      <button
+        class="filter-pill"
+        [class.active]="activeCategoryId() === null"
+        (click)="setCategory(null)"
+      >
+        <i class="fas fa-th-large me-1"></i>Todos
+        <span class="pill-count">{{ allProducts().length }}</span>
+      </button>
+
+      @for (cat of categories(); track cat.id) {
+        <button
+          class="filter-pill"
+          [class.active]="activeCategoryId() === cat.id"
+          (click)="setCategory(cat.id)"
+        >
+          {{ cat.name }}
+          <span class="pill-count">
+            {{ getCategoryCount(cat.id) }}
+          </span>
+        </button>
+      }
+    </div>
+
+    <div class="filter-results">
+      @if (!loading()) {
+        <span class="results-label">
+          <strong class="gold-text">{{ filteredProducts().length }}</strong>
+          resultado{{ filteredProducts().length !== 1 ? 's' : '' }}
+        </span>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PRODUCTS GRID ═══════════════════════════════ -->
+<section class="products-section">
+  <div class="products-container">
+
+    <!-- Loading skeletons -->
+    @if (loading()) {
+      <div class="products-grid">
+        @for (s of skeletons; track $index) {
+          <div class="product-skeleton">
+            <div class="skeleton-img shimmer"></div>
+            <div class="skeleton-body">
+              <div class="skeleton-tag shimmer"></div>
+              <div class="skeleton-title shimmer"></div>
+              <div class="skeleton-price shimmer"></div>
+              <div class="skeleton-btn shimmer"></div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Empty state -->
+    @if (!loading() && filteredProducts().length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">
+          <i class="fas fa-box-open"></i>
+        </div>
+        <h3 class="empty-title">
+          @if (searchTerm()) {
+            Sin resultados para "{{ searchTerm() }}"
+          } @else {
+            No hay productos en esta categoría
+          }
+        </h3>
+        <p class="empty-subtitle">Intenta con otra búsqueda o categoría.</p>
+        <button class="btn-gold-outline" (click)="setCategory(null); onSearch('')">
+          Ver todos los productos
+        </button>
+      </div>
+    }
+
+    <!-- Products -->
+    @if (!loading() && filteredProducts().length > 0) {
+      <div class="products-grid">
+        @for (product of filteredProducts(); track trackById($index, product)) {
+          <article class="product-card">
+
+            <!-- Image -->
+            <div class="card-image">
+              @if (product.image) {
+                <img [src]="product.image" [alt]="product.name" class="card-img" loading="lazy" />
+              } @else {
+                <div class="card-img-placeholder">
+                  <i class="fas fa-image"></i>
+                </div>
+              }
+
+              <!-- Badges -->
+              <div class="card-badges">
+                @if (product.offers) {
+                  <span class="badge-offer">
+                    <i class="fas fa-bolt me-1"></i>Oferta
+                  </span>
+                }
+                @if (product.discountPercent > 0) {
+                  <span class="badge-discount">-{{ product.discountPercent | number:'1.0-0' }}%</span>
+                }
+              </div>
+
+              <!-- Hover overlay -->
+              <div class="card-overlay">
+                <button class="btn-overlay" (click)="openSignin()">
+                  <i class="fas fa-shopping-cart me-2"></i>Adquirir
+                </button>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body">
+              <span class="card-category">
+                <i class="fas fa-tag me-1"></i>{{ getCategoryName(product.productCategoryId) }}
+              </span>
+
+              <h3 class="card-name">{{ product.name }}</h3>
+
+              @if (product.description) {
+                <p class="card-desc">{{ product.description }}</p>
+              }
+
+              <!-- Price -->
+              <div class="card-price-row">
+                @if (product.discountPercent > 0) {
+                  <span class="price-original">${{ product.price | number:'1.2-2' }}</span>
+                }
+                <span class="price-main">
+                  ${{ getDiscountedPrice(product) | number:'1.2-2' }}
+                </span>
+              </div>
+
+              @if (product.valuePoints > 0) {
+                <div class="card-points">
+                  <i class="fas fa-star me-1"></i>
+                  {{ product.valuePoints }} puntos
+                </div>
+              }
+
+              <button class="btn-card-buy" (click)="openSignin()">
+                <i class="fas fa-shopping-cart me-2"></i>Comprar ahora
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ══════════════════════════════════════ -->
+<footer class="products-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img [src]="navbarIcon" alt="Éxito Juntos" class="footer-logo" />
+      <p>© {{ 2025 }} Éxito Juntos. Todos los derechos reservados.</p>
+    </div>
+    <div class="footer-links">
+      <a routerLink="/welcome">Inicio</a>
+      <a routerLink="/testimonials">Testimonios</a>
+      <a routerLink="/terms-conditions">Términos</a>
+      <a routerLink="/signin">Ingresar</a>
+    </div>
+  </div>
+</footer>

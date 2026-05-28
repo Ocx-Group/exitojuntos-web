@@ -1677,7 +1677,8 @@
       "ABOUT_US": "Nosotros",
       "CONTACT": "Contacto",
       "LOGIN": "Iniciar Sesión",
-      "SERVICES": "Productos",
+      "PRODUCTS": "Productos",
+      "SERVICES": "Servicios",
       "START": "Comenzar",
       "TESTIMONIALS": "Testimonios"
     },
