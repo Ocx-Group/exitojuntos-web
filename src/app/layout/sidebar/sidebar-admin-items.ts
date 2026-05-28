@@ -1,17 +1,6 @@
 import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES_ADMIN: RouteInfo[] = [
-  // {
-  //   path: '/admin/home-admin',
-  //   title: 'MENUITEMS.HOME.TEXT',
-  //   iconType: 'feather',
-  //   icon: 'home',
-  //   class: '',
-  //   groupTitle: false,
-  //   badge: '',
-  //   badgeClass: '',
-  //   submenu: [],
-  // },
   {
     path: '/admin/users-management',
     title: 'MENUITEMS.USERS-MANAGEMENT.TEXT',
@@ -24,10 +13,10 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: '/admin/logs-management',
-    title: 'MENUITEMS.LOGS-MANAGEMENT.TEXT',
+    path: '/admin/products-management',
+    title: 'MENUITEMS.PRODUCTS-MANAGEMENT.TEXT',
     iconType: 'feather',
-    icon: 'clipboard',
+    icon: 'package',
     class: '',
     groupTitle: false,
     badge: '',
@@ -46,10 +35,10 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: '/admin/products-management',
-    title: 'MENUITEMS.PRODUCTS-MANAGEMENT.TEXT',
+    path: '/admin/logs-management',
+    title: 'MENUITEMS.LOGS-MANAGEMENT.TEXT',
     iconType: 'feather',
-    icon: 'package',
+    icon: 'clipboard',
     class: '',
     groupTitle: false,
     badge: '',

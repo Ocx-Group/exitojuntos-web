@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
@@ -14,6 +10,7 @@ import {
   TestimonialPayload,
   TestimonialsService,
 } from '@app/core/service/testimonials-service';
+import { StorageService } from '@app/core/service/storage-service/storage.service';
 
 @Component({
   selector: 'app-testimonials-management',
@@ -26,18 +23,21 @@ export class TestimonialsManagementComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly testimonialsService = inject(TestimonialsService);
+  private readonly storageService = inject(StorageService);
   private readonly toastr = inject(ToastrService);
 
   protected readonly testimonials = signal<Testimonial[]>([]);
   protected readonly loading = signal<boolean>(false);
   protected readonly saving = signal<boolean>(false);
   protected readonly editingId = signal<number | null>(null);
+  protected readonly uploadingAvatar = signal(false);
+  protected readonly avatarPreview = signal<string | null>(null);
 
   protected readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.maxLength(120)]],
     role: ['', [Validators.required, Validators.maxLength(160)]],
     quote: ['', [Validators.required, Validators.maxLength(1200)]],
-    avatar: ['', [Validators.maxLength(500)]],
+    avatar: [''],
     videoUrl: ['', [Validators.maxLength(500)]],
     stars: [5, [Validators.required, Validators.min(1), Validators.max(5)]],
     displayOrder: [0, [Validators.required, Validators.min(0)]],
@@ -101,6 +101,7 @@ export class TestimonialsManagementComponent implements OnInit {
 
   protected editTestimonial(testimonial: Testimonial): void {
     this.editingId.set(testimonial.id);
+    this.avatarPreview.set(testimonial.avatar || null);
     this.form.patchValue({
       name: testimonial.name,
       role: testimonial.role,
@@ -146,8 +147,40 @@ export class TestimonialsManagementComponent implements OnInit {
     });
   }
 
+  protected onAvatarFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => this.avatarPreview.set(reader.result as string);
+    reader.readAsDataURL(file);
+
+    this.uploadingAvatar.set(true);
+    this.storageService
+      .uploadImage(file, 'testimonials')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: url => {
+          this.form.controls.avatar.setValue(url);
+          this.avatarPreview.set(url);
+          this.uploadingAvatar.set(false);
+        },
+        error: () => {
+          this.toastr.error('No se pudo subir la imagen', 'Error');
+          this.avatarPreview.set(null);
+          this.uploadingAvatar.set(false);
+        },
+      });
+  }
+
+  protected clearAvatar(): void {
+    this.avatarPreview.set(null);
+    this.form.controls.avatar.setValue('');
+  }
+
   protected resetForm(): void {
     this.editingId.set(null);
+    this.avatarPreview.set(null);
     this.form.reset({
       name: '',
       role: '',

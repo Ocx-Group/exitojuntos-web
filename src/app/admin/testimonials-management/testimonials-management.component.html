@@ -50,8 +50,37 @@
               </div>
 
               <div class="mb-3">
-                <label for="avatar" class="form-label">URL de imagen</label>
-                <input id="avatar" type="text" class="form-control" formControlName="avatar" placeholder="assets/images/user.png" />
+                <label class="form-label">Foto del autor</label>
+                <div class="image-dropzone" (click)="fileInput.click()">
+                  @if (avatarPreview()) {
+                    <div class="image-preview-wrapper">
+                      <img [src]="avatarPreview()!" alt="Vista previa" class="image-preview image-preview--round" />
+                      @if (uploadingAvatar()) {
+                        <div class="image-uploading-overlay">
+                          <div class="spinner-border spinner-border-sm text-warning"></div>
+                        </div>
+                      }
+                    </div>
+                  } @else {
+                    <div class="dropzone-placeholder">
+                      <i class="fas fa-user-circle fa-2x mb-2"></i>
+                      <span class="small">Subir foto del autor</span>
+                    </div>
+                  }
+                </div>
+                <input #fileInput type="file" accept="image/*" class="d-none" (change)="onAvatarFileSelected($event)" />
+                @if (avatarPreview()) {
+                  <div class="d-flex gap-2 mt-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary flex-grow-1"
+                      (click)="fileInput.click()" [disabled]="uploadingAvatar()">
+                      <i class="fas fa-exchange-alt me-1"></i>Cambiar foto
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger"
+                      (click)="clearAvatar()" [disabled]="uploadingAvatar()">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                }
               </div>
 
               <div class="mb-3">
