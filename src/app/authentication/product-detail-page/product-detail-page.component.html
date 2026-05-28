@@ -1,0 +1,148 @@
+<!-- NAVBAR -->
+<nav class="lp-navbar" [class.scrolled]="isScrolled">
+  <div class="lp-navbar__inner">
+    <a routerLink="/welcome" class="lp-navbar__logo">
+      <img [src]="navbarIcon" alt="Éxito Juntos" />
+    </a>
+    <div class="lp-navbar__links">
+      <a routerLink="/welcome" class="lp-nav-link">Inicio</a>
+      <a routerLink="/welcome" fragment="servicios" class="lp-nav-link">Servicios</a>
+      <a routerLink="/products" class="lp-nav-link active">Productos</a>
+      <a routerLink="/testimonials" class="lp-nav-link">Testimonios</a>
+    </div>
+    <button class="lp-navbar__cta" (click)="openSignin()">
+      <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+    </button>
+  </div>
+</nav>
+
+<!-- LOADING -->
+@if (loading()) {
+  <div class="pd-loading">
+    <div class="pd-spinner"></div>
+  </div>
+}
+
+<!-- NOT FOUND -->
+@if (!loading() && notFound()) {
+  <div class="pd-notfound">
+    <div class="pd-notfound__icon"><i class="fas fa-box-open"></i></div>
+    <h2>Producto no encontrado</h2>
+    <p>Es posible que haya sido removido o el enlace sea incorrecto.</p>
+    <a routerLink="/products" class="pd-back-btn">
+      <i class="fas fa-arrow-left me-2"></i>Volver al catálogo
+    </a>
+  </div>
+}
+
+<!-- DETAIL -->
+@if (!loading() && product()) {
+  <main class="pd-main">
+    <div class="pd-container">
+
+      <!-- Breadcrumb -->
+      <a routerLink="/products" class="pd-breadcrumb">
+        <i class="fas fa-arrow-left me-2"></i>Catálogo de productos
+      </a>
+
+      <article class="pd-card">
+
+        <!-- Image -->
+        <aside class="pd-img-aside">
+          <div class="pd-img-frame">
+            @if (product()!.image) {
+              <img [src]="product()!.image" [alt]="product()!.name" class="pd-img" />
+            } @else {
+              <div class="pd-img-placeholder"><i class="fas fa-image"></i></div>
+            }
+            @if (product()!.offers || product()!.discountPercent > 0) {
+              <div class="pd-badges">
+                @if (product()!.offers) {
+                  <span class="badge-offer"><i class="fas fa-bolt me-1"></i>Oferta</span>
+                }
+                @if (product()!.discountPercent > 0) {
+                  <span class="badge-discount">-{{ product()!.discountPercent | number:'1.0-0' }}%</span>
+                }
+              </div>
+            }
+          </div>
+        </aside>
+
+        <!-- Info -->
+        <div class="pd-info">
+
+          <header class="pd-header">
+            @if (categoryName()) {
+              <span class="pd-cat-tag">
+                <i class="fas fa-tag me-1"></i>{{ categoryName() }}
+              </span>
+            }
+            <h1 class="pd-title">{{ product()!.name }}</h1>
+          </header>
+
+          <div class="pd-price-row">
+            @if (product()!.discountPercent > 0) {
+              <span class="pd-price-was">${{ product()!.price | number:'1.2-2' }}</span>
+            }
+            <span class="pd-price-now">${{ getDiscountedPrice(product()!) | number:'1.2-2' }}</span>
+            <span class="pd-currency">USD</span>
+            @if (product()!.discountPercent > 0) {
+              <span class="pd-saving">
+                <i class="fas fa-tag me-1"></i>Ahorras ${{ (product()!.price - getDiscountedPrice(product()!)) | number:'1.2-2' }}
+              </span>
+            }
+          </div>
+
+          <div class="pd-pills">
+            <span class="pd-pill" [class.pd-pill--on]="product()!.state" [class.pd-pill--off]="!product()!.state">
+              <i class="fas fa-circle"></i>{{ product()!.state ? 'Disponible' : 'No disponible' }}
+            </span>
+            @if (product()!.valuePoints > 0) {
+              <span class="pd-pill pd-pill--gold">
+                <i class="fas fa-star"></i>{{ product()!.valuePoints }} puntos
+              </span>
+            }
+            @if (product()!.taxPercent > 0) {
+              <span class="pd-pill">
+                <i class="fas fa-receipt"></i>+{{ product()!.taxPercent }}% impuesto
+              </span>
+            }
+          </div>
+
+          <div class="pd-desc-area">
+            @if (product()!.description) {
+              <p class="pd-desc-text">{{ product()!.description }}</p>
+            } @else {
+              <p class="pd-desc-empty">Este producto no tiene descripción disponible.</p>
+            }
+          </div>
+
+          <div class="pd-purchase">
+            <button class="pd-cta" (click)="openSignin()">
+              <i class="fas fa-shopping-cart me-2"></i>Ingresar para comprar
+            </button>
+            <p class="pd-cta-note">Crea tu cuenta gratis y accede a todos los beneficios</p>
+          </div>
+
+        </div>
+      </article>
+
+    </div>
+  </main>
+}
+
+<!-- FOOTER -->
+<footer class="pd-footer">
+  <div class="pd-footer__inner">
+    <div class="pd-footer__brand">
+      <img [src]="navbarIcon" alt="Éxito Juntos" class="pd-footer__logo" />
+      <p>© {{ 2025 }} Éxito Juntos. Todos los derechos reservados.</p>
+    </div>
+    <div class="pd-footer__links">
+      <a routerLink="/welcome">Inicio</a>
+      <a routerLink="/products">Productos</a>
+      <a routerLink="/testimonials">Testimonios</a>
+      <a routerLink="/terms-conditions">Términos</a>
+    </div>
+  </div>
+</footer>

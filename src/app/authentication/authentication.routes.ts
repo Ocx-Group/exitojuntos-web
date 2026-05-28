@@ -91,6 +91,13 @@ export const AUTHENTICATION_ROUTES: Routes = [
       ),
   },
   {
+    path: 'products/:id',
+    loadComponent: () =>
+      import('./product-detail-page/product-detail-page.component').then(
+        m => m.ProductDetailPageComponent,
+      ),
+  },
+  {
     path: 'terms-conditions',
     loadComponent: () =>
       import('../shared/components/terms-conditions/terms-conditions.component').then(

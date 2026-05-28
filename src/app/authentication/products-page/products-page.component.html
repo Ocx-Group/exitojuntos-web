@@ -163,8 +163,8 @@
 
               <!-- Hover overlay -->
               <div class="card-overlay">
-                <button class="btn-overlay" (click)="openSignin()">
-                  <i class="fas fa-shopping-cart me-2"></i>Adquirir
+                <button class="btn-overlay btn-overlay--detail" (click)="goToProduct(product.id)">
+                  <i class="fas fa-expand-alt me-2"></i>Ver detalles
                 </button>
               </div>
             </div>
@@ -177,30 +177,28 @@
 
               <h3 class="card-name">{{ product.name }}</h3>
 
-              @if (product.description) {
-                <p class="card-desc">{{ product.description }}</p>
-              }
-
               <!-- Price -->
               <div class="card-price-row">
                 @if (product.discountPercent > 0) {
                   <span class="price-original">${{ product.price | number:'1.2-2' }}</span>
                 }
-                <span class="price-main">
-                  ${{ getDiscountedPrice(product) | number:'1.2-2' }}
-                </span>
+                <span class="price-main">${{ getDiscountedPrice(product) | number:'1.2-2' }}</span>
               </div>
 
               @if (product.valuePoints > 0) {
                 <div class="card-points">
-                  <i class="fas fa-star me-1"></i>
-                  {{ product.valuePoints }} puntos
+                  <i class="fas fa-star me-1"></i>{{ product.valuePoints }} puntos
                 </div>
               }
 
-              <button class="btn-card-buy" (click)="openSignin()">
-                <i class="fas fa-shopping-cart me-2"></i>Comprar ahora
-              </button>
+              <div class="card-actions">
+                <button class="btn-card-detail" (click)="goToProduct(product.id)">
+                  <i class="fas fa-eye me-1"></i>Ver más
+                </button>
+                <button class="btn-card-buy" (click)="openSignin()">
+                  <i class="fas fa-shopping-cart me-1"></i>Comprar
+                </button>
+              </div>
             </div>
           </article>
         }
@@ -208,6 +206,7 @@
     }
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════ FOOTER ══════════════════════════════════════ -->
 <footer class="products-footer">

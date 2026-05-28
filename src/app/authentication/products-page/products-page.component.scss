@@ -492,16 +492,6 @@ $text-soft:   rgba(255,255,255,0.75);
   margin: 0;
 }
 
-.card-desc {
-  font-size: 0.78rem;
-  color: $text-muted;
-  line-height: 1.45;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin: 0;
-}
 
 .card-price-row {
   display: flex;
@@ -532,15 +522,39 @@ $text-soft:   rgba(255,255,255,0.75);
   i { color: $gold; font-size: 0.65rem; }
 }
 
-.btn-card-buy {
+.card-actions {
   margin-top: 0.6rem;
-  width: 100%;
-  padding: 0.65rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-card-detail {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid $gold-border;
+  border-radius: 8px;
+  background: transparent;
+  color: $text-soft;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: rgba(212,175,55,0.5);
+    color: $text;
+    background: rgba(255,255,255,0.04);
+  }
+}
+
+.btn-card-buy {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
   border: 1px solid $gold-border;
   border-radius: 8px;
   background: transparent;
   color: $gold;
-  font-size: 0.83rem;
+  font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;

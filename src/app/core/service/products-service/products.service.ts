@@ -37,6 +37,12 @@ export class ProductsService {
     return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
   }
 
+  getById(id: number): Observable<Product> {
+    return this.http
+      .get<{ success: boolean; data: Product }>(`${this.baseUrl}/${id}`)
+      .pipe(map(r => r.data));
+  }
+
   getActive(page = 1, limit = 100): Observable<PaginatedProductsResponse> {
     const params = new HttpParams()
       .set('page', page.toString())

@@ -42,7 +42,27 @@
 
       <button class="btn-navbar-secondary" (click)="openNewTab('/signin')">{{
         'LANDING_PAGE.NAVBAR.LOGIN' | translate }}</button>
+
+      <!-- Mobile hamburger -->
+      <button class="navbar-toggle" type="button" [class.active]="isNavbarVisible" (click)="toggleNavbar()"
+        [attr.aria-expanded]="isNavbarVisible" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="navbar-mobile-menu" [class.open]="isNavbarVisible">
+    <a href="#servicios" class="mobile-nav-link" (click)="isNavbarVisible = false">{{
+      'LANDING_PAGE.NAVBAR.SERVICES' | translate }}</a>
+    <a href="#nosotros" class="mobile-nav-link" (click)="isNavbarVisible = false">{{
+      'LANDING_PAGE.NAVBAR.ABOUT_US' | translate }}</a>
+    <a routerLink="/products" class="mobile-nav-link" (click)="isNavbarVisible = false">{{
+      'LANDING_PAGE.NAVBAR.PRODUCTS' | translate }}</a>
+    <a routerLink="/testimonials" class="mobile-nav-link" (click)="isNavbarVisible = false">{{
+      'LANDING_PAGE.NAVBAR.TESTIMONIALS' | translate }}</a>
+    <a href="#contacto" class="mobile-nav-link" (click)="isNavbarVisible = false">{{
+      'LANDING_PAGE.NAVBAR.CONTACT' | translate }}</a>
   </div>
 </nav>
 
