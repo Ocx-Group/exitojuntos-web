@@ -360,14 +360,27 @@ export class SigninComponent implements OnInit, AfterViewInit {
     }
 
     if (typeof error === 'string') {
-      return error;
+      return this.isRawHttpMessage(error) ? '' : error;
     }
 
     const anyError = error as {
       message?: string;
-      error?: { message?: string };
+      error?: { message?: string } | string;
     };
-    return anyError?.message || anyError?.error?.message || '';
+
+    // Priorizar el body del backend (error.error.message) sobre el mensaje de Angular (error.message)
+    const bodyMessage =
+      typeof anyError?.error === 'object'
+        ? anyError.error?.message
+        : undefined;
+    if (bodyMessage) return bodyMessage;
+
+    const topMessage = anyError?.message ?? '';
+    return this.isRawHttpMessage(topMessage) ? '' : topMessage;
+  }
+
+  private isRawHttpMessage(msg: string): boolean {
+    return msg.startsWith('Http failure response');
   }
 
   private extractStatusCode(error: unknown): number | undefined {
@@ -384,8 +397,12 @@ export class SigninComponent implements OnInit, AfterViewInit {
       return null;
     }
 
-    if (code === 401) {
+    if (code === 400 || code === 401 || code === 403) {
       return 'SIGNIN.INVALID_CREDENTIALS';
+    }
+
+    if (code === 0 || code >= 500) {
+      return 'SIGNIN.GENERIC_ERROR';
     }
 
     return null;

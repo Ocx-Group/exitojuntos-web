@@ -1,0 +1,110 @@
+// Labels visibles sobre fondo oscuro de las cards
+.card-body {
+  .form-label {
+    color: #d0d4dc;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.02em;
+  }
+
+  .form-check-label {
+    color: #c4c8d0;
+    font-size: 0.85rem;
+  }
+
+  .text-danger {
+    color: #ff6b6b !important;
+  }
+
+  small.text-danger {
+    font-size: 0.75rem;
+  }
+
+  .input-group-text {
+    color: #d0d4dc;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.products-tabs {
+  .nav-link {
+    color: #adb5bd;
+    border-color: transparent;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover {
+      color: #fff;
+      border-color: transparent;
+    }
+
+    &.active {
+      color: #fff;
+      background-color: transparent;
+      border-bottom-color: #ffc107;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      vertical-align: middle;
+    }
+  }
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.product-thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-thumb-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 220px;
+}
+
+.products-table {
+  th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  td {
+    vertical-align: middle;
+    font-size: 0.88rem;
+  }
+}
+
+.empty-state {
+  i {
+    opacity: 0.4;
+  }
+}

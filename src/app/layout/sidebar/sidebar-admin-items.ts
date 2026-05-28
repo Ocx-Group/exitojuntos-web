@@ -45,4 +45,15 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: '/admin/products-management',
+    title: 'MENUITEMS.PRODUCTS-MANAGEMENT.TEXT',
+    iconType: 'feather',
+    icon: 'package',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];

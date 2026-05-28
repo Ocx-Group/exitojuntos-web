@@ -1961,6 +1961,9 @@
     "TESTIMONIALS-MANAGEMENT": {
       "TEXT": "Testimonios"
     },
+    "PRODUCTS-MANAGEMENT": {
+      "TEXT": "Productos"
+    },
     "WALLET": {
       "TEXT": "Mi Billetera"
     }

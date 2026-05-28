@@ -6,7 +6,9 @@ const runtimeEnv =
 
 export const environment = {
   production: false,
-  apiUrl: runtimeEnv.EXITOJUNTOS_API_URL || 'http://localhost:3000/v1',
+  apiUrl:
+    runtimeEnv.EXITOJUNTOS_API_URL ||
+    'https://exitojuntos-server-lmowi.ondigitalocean.app/v1',
   google: {
     clientId: runtimeEnv.GOOGLE_CLIENT_ID || '',
   },

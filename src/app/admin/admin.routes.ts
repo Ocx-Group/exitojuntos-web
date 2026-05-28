@@ -42,6 +42,14 @@ export const ADMIN_ROUTES: Routes = [
     canActivate: [AuthGuardAdmin, MaintenanceGuard],
   },
   {
+    path: 'products-management',
+    loadComponent: () =>
+      import('./products-management/products-management.component').then(
+        m => m.ProductsManagementComponent,
+      ),
+    canActivate: [AuthGuardAdmin, MaintenanceGuard],
+  },
+  {
     path: 'unilevel-tree',
     loadComponent: () =>
       import(
