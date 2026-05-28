@@ -8,13 +8,14 @@ import {
 import { CommonModule } from '@angular/common';
 
 import { ToastrService } from 'ngx-toastr';
+import { PublicNavbarComponent } from '@app/shared/components/public-navbar/public-navbar.component';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PublicNavbarComponent],
 })
 export class ContactComponent {
   contactForm: FormGroup;

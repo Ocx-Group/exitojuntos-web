@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Testimonial } from '@app/core/interfaces/testimonial';
 import { TestimonialsService } from '@app/core/service/testimonials-service';
+import { PublicNavbarComponent } from '@app/shared/components/public-navbar/public-navbar.component';
 
 @Component({
   selector: 'app-testimonials',
   templateUrl: './testimonials.component.html',
   styleUrls: ['./testimonials.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PublicNavbarComponent],
 })
 export class TestimonialsComponent implements OnInit {
   private readonly testimonialsService = inject(TestimonialsService);

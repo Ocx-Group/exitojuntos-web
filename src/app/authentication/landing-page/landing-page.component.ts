@@ -1,10 +1,12 @@
 import {
   Component,
-  HostListener,
+  DestroyRef,
   OnInit,
   ViewEncapsulation,
   CUSTOM_ELEMENTS_SCHEMA,
+  inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
@@ -14,6 +16,7 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
 import { TestimonialsService } from '@app/core/service/testimonials-service';
+import { PublicNavbarComponent } from '@app/shared/components/public-navbar/public-navbar.component';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +25,12 @@ import { TestimonialsService } from '@app/core/service/testimonials-service';
   encapsulation: ViewEncapsulation.None,
   providers: [ToastrService],
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, RouterLink, TranslateModule, PublicNavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LandingPageComponent implements OnInit {
-  isNavbarVisible = false;
+  private readonly destroyRef = inject(DestroyRef);
+
   documents = {
     whitePaper: {
       url: 'assets/pdf/WhitePaper-2025.pdf',
@@ -43,8 +47,6 @@ export class LandingPageComponent implements OnInit {
   };
   showVideoModal: boolean = false;
   currentVideoUrl: string = '';
-  currentLang: string = 'en';
-  isLanguageDropdownOpen: boolean = false;
   key: string = '';
   videos = {
     es: {
@@ -194,12 +196,6 @@ export class LandingPageComponent implements OnInit {
     },
   ];
 
-  readonly languageFlags: { [key: string]: string } = {
-    es: 'assets/images/flags/spain.jpg',
-    en: 'assets/images/flags/us.jpg',
-    fr: 'assets/images/flags/france.png',
-    pt: 'assets/images/flags/brazil.png',
-  };
   private testimonialsFromApi = false;
 
   constructor(
@@ -210,7 +206,6 @@ export class LandingPageComponent implements OnInit {
     private readonly testimonialsService: TestimonialsService,
   ) {
     translate.setFallbackLang('en');
-    this.currentLang = translate.getCurrentLang() || 'en';
     this.key = this.activatedRoute.snapshot.params.key;
 
     // Si hay un usuario logueado, usar sus datos
@@ -223,32 +218,12 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const savedLang = localStorage.getItem('lang');
-    this.changeLanguage(savedLang || 'en');
-    this.loadDynamicTestimonials();
-  }
-
-  changeLanguage(lang: string) {
-    const normalizedLang = this.normalizeLanguage(lang);
-    this.currentLang = normalizedLang;
-    this.translate.use(normalizedLang);
-    localStorage.setItem('lang', normalizedLang);
-    this.isLanguageDropdownOpen = false;
     this.updateTranslations();
-  }
+    this.loadDynamicTestimonials();
 
-  toggleLanguageDropdown(event: Event) {
-    event.stopPropagation();
-    this.isLanguageDropdownOpen = !this.isLanguageDropdownOpen;
-  }
-
-  @HostListener('document:click', ['$event'])
-  clickOut(event: any) {
-    const clickedElement = event.target as HTMLElement;
-    const isLanguageSelector = clickedElement.closest('.language-selector');
-    if (!isLanguageSelector) {
-      this.isLanguageDropdownOpen = false;
-    }
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.updateTranslations());
   }
 
   showDocument(
@@ -256,27 +231,6 @@ export class LandingPageComponent implements OnInit {
   ): void {
     const document = this.documents[docType];
     this.pdfViewerService.showPdf(document);
-  }
-
-  toggleNavbar() {
-    this.isNavbarVisible = !this.isNavbarVisible;
-  }
-
-  openNewTab(url: string) {
-    window.open(url, '_blank');
-  }
-
-  getCurrentFlagIcon(): string {
-    return this.languageFlags[this.currentLang] || this.languageFlags['en'];
-  }
-
-  private normalizeLanguage(lang?: string | null): string {
-    if (!lang) {
-      return 'en';
-    }
-
-    const normalizedLang = lang.toLowerCase().split('-')[0];
-    return this.languageFlags[normalizedLang] ? normalizedLang : 'en';
   }
 
   updateTranslations(): void {

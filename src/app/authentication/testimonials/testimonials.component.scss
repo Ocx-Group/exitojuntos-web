@@ -21,10 +21,10 @@ $bg-card: rgba(255, 255, 255, 0.03);
 
 .testimonials-page {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   background: $black;
   overflow: hidden;
-  padding: 80px 24px;
+  padding: 32px 24px 80px;
 }
 
 .page-glow {

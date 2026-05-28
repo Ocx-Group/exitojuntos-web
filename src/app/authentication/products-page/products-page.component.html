@@ -1,22 +1,4 @@
-<!-- ═══════════════════════════════════════ NAVBAR ══════════════════════════════════════ -->
-<nav class="lp-navbar" [class.scrolled]="isScrolled">
-  <div class="lp-navbar__inner">
-    <a routerLink="/welcome" class="lp-navbar__logo">
-      <img [src]="navbarIcon" alt="Éxito Juntos" />
-    </a>
-
-    <div class="lp-navbar__links">
-      <a routerLink="/welcome" class="lp-nav-link">Inicio</a>
-      <a routerLink="/welcome" fragment="servicios" class="lp-nav-link">Servicios</a>
-      <a routerLink="/products" class="lp-nav-link active">Productos</a>
-      <a routerLink="/testimonials" class="lp-nav-link">Testimonios</a>
-    </div>
-
-    <button class="lp-navbar__cta" (click)="openSignin()">
-      <i class="fas fa-sign-in-alt me-2"></i>Ingresar
-    </button>
-  </div>
-</nav>
+<app-public-navbar></app-public-navbar>
 
 <!-- ═══════════════════════════════════════ HERO ════════════════════════════════════════ -->
 <section class="products-hero">
@@ -195,9 +177,19 @@
                 <button class="btn-card-detail" (click)="goToProduct(product.id)">
                   <i class="fas fa-eye me-1"></i>Ver más
                 </button>
-                <button class="btn-card-buy" (click)="openSignin()">
-                  <i class="fas fa-shopping-cart me-1"></i>Comprar
-                </button>
+                @if (!isAdmin()) {
+                  <button class="btn-card-buy"
+                    [disabled]="addingToCart() === product.id"
+                    (click)="addToCart(product, $event)">
+                    @if (addingToCart() === product.id) {
+                      <i class="fas fa-spinner fa-spin me-1"></i>Añadiendo
+                    } @else if (authService.isLoggedIn()) {
+                      <i class="fas fa-cart-plus me-1"></i>Añadir
+                    } @else {
+                      <i class="fas fa-shopping-cart me-1"></i>Comprar
+                    }
+                  </button>
+                }
               </div>
             </div>
           </article>

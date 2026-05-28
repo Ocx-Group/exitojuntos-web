@@ -1,21 +1,25 @@
 import {
   Component,
   DestroyRef,
-  HostListener,
   OnInit,
+  computed,
   inject,
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ToastrService } from 'ngx-toastr';
 import { Product } from '@app/core/interfaces/product';
 import { ProductsService } from '@app/core/service/products-service';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { CartService } from '@app/core/service/cart-service';
+import { PublicNavbarComponent } from '@app/shared/components/public-navbar/public-navbar.component';
 
 @Component({
   selector: 'app-product-detail-page',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PublicNavbarComponent],
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.scss'],
 })
@@ -23,13 +27,21 @@ export class ProductDetailPageComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly productsService = inject(ProductsService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly toastr = inject(ToastrService);
+  protected readonly authService = inject(AuthService);
+  protected readonly cartService = inject(CartService);
 
   protected readonly navbarIcon = 'assets/exito-logo.svg';
   protected readonly product = signal<Product | null>(null);
   protected readonly categoryName = signal('');
   protected readonly loading = signal(true);
   protected readonly notFound = signal(false);
-  protected isScrolled = false;
+  protected readonly addingToCart = signal(false);
+
+  protected readonly isAdmin = computed(
+    () => this.authService.userAffiliate()?.role?.name?.toLowerCase() === 'admin',
+  );
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -45,6 +57,7 @@ export class ProductDetailPageComponent implements OnInit {
         },
         error: () => { this.notFound.set(true); this.loading.set(false); },
       });
+
   }
 
   private loadCategory(categoryId: number): void {
@@ -58,13 +71,37 @@ export class ProductDetailPageComponent implements OnInit {
       });
   }
 
-  @HostListener('window:scroll')
-  onScroll(): void { this.isScrolled = window.scrollY > 60; }
-
   protected getDiscountedPrice(product: Product): number {
     if (!product.discountPercent) return product.price;
     return product.price * (1 - product.discountPercent / 100);
   }
 
-  protected openSignin(): void { window.open('/signin', '_blank'); }
+  protected addToCart(): void {
+    const p = this.product();
+    if (!p) return;
+
+    if (!this.authService.isLoggedIn()) {
+      this.openSignin();
+      return;
+    }
+    if (this.isAdmin()) return;
+    if (this.addingToCart()) return;
+
+    this.addingToCart.set(true);
+    this.cartService
+      .addItem(p.id, 1)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.toastr.success(`${p.name} añadido al carrito`);
+          this.addingToCart.set(false);
+        },
+        error: () => {
+          this.toastr.error('No se pudo añadir al carrito', 'Error');
+          this.addingToCart.set(false);
+        },
+      });
+  }
+
+  protected openSignin(): void { this.router.navigate(['/signin']); }
 }

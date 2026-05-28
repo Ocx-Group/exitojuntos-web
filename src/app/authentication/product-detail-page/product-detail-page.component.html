@@ -1,20 +1,5 @@
 <!-- NAVBAR -->
-<nav class="lp-navbar" [class.scrolled]="isScrolled">
-  <div class="lp-navbar__inner">
-    <a routerLink="/welcome" class="lp-navbar__logo">
-      <img [src]="navbarIcon" alt="Éxito Juntos" />
-    </a>
-    <div class="lp-navbar__links">
-      <a routerLink="/welcome" class="lp-nav-link">Inicio</a>
-      <a routerLink="/welcome" fragment="servicios" class="lp-nav-link">Servicios</a>
-      <a routerLink="/products" class="lp-nav-link active">Productos</a>
-      <a routerLink="/testimonials" class="lp-nav-link">Testimonios</a>
-    </div>
-    <button class="lp-navbar__cta" (click)="openSignin()">
-      <i class="fas fa-sign-in-alt me-2"></i>Ingresar
-    </button>
-  </div>
-</nav>
+<app-public-navbar></app-public-navbar>
 
 <!-- LOADING -->
 @if (loading()) {
@@ -117,12 +102,22 @@
             }
           </div>
 
-          <div class="pd-purchase">
-            <button class="pd-cta" (click)="openSignin()">
-              <i class="fas fa-shopping-cart me-2"></i>Ingresar para comprar
-            </button>
-            <p class="pd-cta-note">Crea tu cuenta gratis y accede a todos los beneficios</p>
-          </div>
+          @if (!isAdmin()) {
+            <div class="pd-purchase">
+              <button class="pd-cta" [disabled]="addingToCart()" (click)="addToCart()">
+                @if (addingToCart()) {
+                  <i class="fas fa-spinner fa-spin me-2"></i>Añadiendo al carrito...
+                } @else if (authService.isLoggedIn()) {
+                  <i class="fas fa-cart-plus me-2"></i>Agregar al carrito
+                } @else {
+                  <i class="fas fa-shopping-cart me-2"></i>Ingresar para comprar
+                }
+              </button>
+              @if (!authService.isLoggedIn()) {
+                <p class="pd-cta-note">Crea tu cuenta gratis y accede a todos los beneficios</p>
+              }
+            </div>
+          }
 
         </div>
       </article>

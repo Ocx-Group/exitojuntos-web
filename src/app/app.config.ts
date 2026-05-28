@@ -4,7 +4,11 @@ import {
   provideAppInitializer,
   inject,
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+} from '@angular/router';
 import {
   provideHttpClient,
   HttpClient,
@@ -38,7 +42,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withComponentInputBinding()),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      }),
+    ),
     // Note: Animations are now handled through animate.enter/animate.leave APIs in components
     // No global provider needed in Angular 20+
     provideHttpClient(withInterceptors([authInterceptor])),

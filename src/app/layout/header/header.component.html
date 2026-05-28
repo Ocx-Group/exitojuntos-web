@@ -1,78 +1,26 @@
-<nav class="navbar navbar-expand-lg main-navbar sticky" style="top: 0px;">
-  <div class="form-inline me-auto">
-    <ul class="navbar-nav">
-      <li>
-        <a data-toggle="sidebar" class="nav-link nav-link-lg collapse-btn"
-          (click)="mobileMenuSidebarOpen($event, 'overlay-open')">
-          <i-feather name="menu"></i-feather>
-        </a>
-      </li>
+<app-public-navbar>
+  <button navbar-left type="button" class="dash-sidebar-toggle"
+    (click)="mobileMenuSidebarOpen($event, 'overlay-open')"
+    aria-label="Abrir menú">
+    <i-feather name="menu"></i-feather>
+  </button>
 
-    </ul>
-  </div>
-  <ul class="navbar-nav navbar-right">
-
-    <div class="d-flex align-items-center">
-      <a *ngIf="totalItem > 0" routerLink="/app/cart">
-        <i style="font-size: 15px" class="fas fa-cart-plus"></i>
-        <div style="font-size: 10px" class="badge bg-danger">{{totalItem}}</div>
-      </a>
+  <div navbar-actions ngbDropdown class="dash-bell" placement="bottom-end">
+    <button ngbDropdownToggle type="button" class="dash-bell__trigger" aria-label="Notificaciones">
+      <i-feather name="bell"></i-feather>
+      <span *ngIf="(unreadCount$ | async) as unreadCount"
+        class="dash-bell__badge"
+        [class.d-none]="unreadCount === 0">
+        {{ unreadCount }}
+      </span>
+    </button>
+    <div ngbDropdownMenu class="dash-bell__menu">
+      <div class="dash-bell__menu-header">
+        {{ 'HEADER.MESSAGES.TEXT' | translate }}
+      </div>
+      <div class="dash-bell__menu-body"></div>
     </div>
+  </div>
+</app-public-navbar>
 
-    <li class="dropdown dropdown-list-toggle" ngbDropdown>
-      <a data-toggle="dropdown" class="nav-link nav-link-lg lang-toggle remove-caret" ngbDropdownToggle>
-        <img *ngIf="flagvalue !== undefined" src="{{ flagvalue }}" alt="Header Language" height="16" />
-        <img *ngIf="flagvalue === undefined" src="{{ defaultFlag }}" alt="Header Language" height="16" />
-      </a>
-      <div class="dropdown-menu header-dropdown dropdown-menu-right lang-dropdown-list pullDown" ngbDropdownMenu>
-        <a href="javascript:void(0);" class="dropdown-item lang-item-list" *ngFor="let item of listLang"
-          (click)="setLanguage(item.text, item.lang, item.flag)" [ngClass]="{ active: langStoreValue === item.lang }">
-          <img src="{{ item.flag }}" alt="user" class="msr-1" height="12" />
-          <span class="align-middle">{{ item.text }}</span>
-        </a>
-      </div>
-    </li>
-
-
-    <li ngbDropdown class="dropdown dropdown-list-toggle">
-      <a ngbDropdownToggle data-toggle="dropdown" class="nav-link nav-link-lg message-toggle remove-caret">
-        <i-feather name="bell" class="bell collapse-btn"></i-feather>
-
-        <span *ngIf="(unreadCount$ | async) as unreadCount" class="badge badge-danger"
-          [class.d-none]="unreadCount === 0">
-          {{ unreadCount }}
-        </span>
-      </a>
-      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right dropdown-list header-dropdown pullDown">
-        <div class="dropdown-header">
-          {{ 'HEADER.MESSAGES.TEXT' | translate }}
-        </div>
-        <div class="dropdown-list-content dropdown-list-icons"
-          style="position: relative; max-width: 600px; max-height: 250px; overflow-y: auto;">
-        </div>
-      </div>
-    </li>
-
-    <li ngbDropdown>
-      <a ngbDropdownToggle data-toggle="dropdown"
-        class="nav-link dropdown-toggle nav-link-lg nav-link-user d-flex align-items-center">
-        <img alt="User profile" [src]="user.imageProfileUrl ? user.imageProfileUrl : 'assets/images/user.png'"
-          class="rounded flex-shrink-0 me-2" width="32" height="32" />
-        <span class="d-sm-none d-lg-inline-block"></span>
-      </a>
-      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
-        <div class="dropdown-title">{{ 'HEADER.WELCOME.TEXT' | translate }} {{ user?.name }}</div>
-        <a [routerLink]="['/app/my-profile']" class="dropdown-item has-icon">
-          <i class="far fa-user"></i>
-          {{ 'HEADER.PROFILE.TEXT' | translate }}
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="javascript:void(0);" class="dropdown-item has-icon text-danger" (click)="logout()">
-          <i class="fas fa-sign-out-alt"></i>
-          {{ 'HEADER.LOGOUT.TEXT' | translate }}
-        </a>
-      </div>
-    </li>
-  </ul>
-  <app-configure-wallet></app-configure-wallet>
-</nav>
+<app-configure-wallet></app-configure-wallet>

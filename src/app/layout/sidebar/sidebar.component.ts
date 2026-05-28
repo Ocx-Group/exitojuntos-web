@@ -47,7 +47,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   listMaxWidth!: string;
   headerHeight = 60;
   routerObj!: Subscription;
-  readonly navbarIcon = 'assets/exito-logo.svg';
   homeLink = '/app/my-network';
 
   constructor(

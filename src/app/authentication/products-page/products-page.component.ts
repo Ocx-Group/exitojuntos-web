@@ -9,15 +9,19 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterLink, Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Product, ProductCategory } from '@app/core/interfaces/product';
 import { ProductsService } from '@app/core/service/products-service';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { CartService } from '@app/core/service/cart-service';
+import { PublicNavbarComponent } from '@app/shared/components/public-navbar/public-navbar.component';
 
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, PublicNavbarComponent],
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.scss'],
 })
@@ -25,6 +29,9 @@ export class ProductsPageComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly productsService = inject(ProductsService);
   private readonly router = inject(Router);
+  private readonly toastr = inject(ToastrService);
+  protected readonly authService = inject(AuthService);
+  protected readonly cartService = inject(CartService);
 
   protected readonly navbarIcon = 'assets/exito-logo.svg';
   protected readonly allProducts = signal<Product[]>([]);
@@ -32,7 +39,12 @@ export class ProductsPageComponent implements OnInit {
   protected readonly loading = signal(true);
   protected readonly activeCategoryId = signal<number | null>(null);
   protected readonly searchTerm = signal('');
+  protected readonly addingToCart = signal<number | null>(null);
   protected isScrolled = false;
+
+  protected readonly isAdmin = computed(
+    () => this.authService.userAffiliate()?.role?.name?.toLowerCase() === 'admin',
+  );
 
   protected readonly filteredProducts = computed(() => {
     let list = this.allProducts();
@@ -93,7 +105,32 @@ export class ProductsPageComponent implements OnInit {
     return this.allProducts().filter(p => p.productCategoryId === categoryId).length;
   }
 
+  protected addToCart(product: Product, event?: Event): void {
+    event?.stopPropagation();
+    if (!this.authService.isLoggedIn()) {
+      this.openSignin();
+      return;
+    }
+    if (this.isAdmin()) return;
+    if (this.addingToCart() === product.id) return;
+
+    this.addingToCart.set(product.id);
+    this.cartService
+      .addItem(product.id, 1)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.toastr.success(`${product.name} añadido al carrito`);
+          this.addingToCart.set(null);
+        },
+        error: () => {
+          this.toastr.error('No se pudo añadir al carrito', 'Error');
+          this.addingToCart.set(null);
+        },
+      });
+  }
+
   protected trackById(_i: number, item: { id: number }): number { return item.id; }
-  protected openSignin(): void { window.open('/signin', '_blank'); }
+  protected openSignin(): void { this.router.navigate(['/signin']); }
   protected readonly skeletons = Array.from({ length: 8 });
 }
