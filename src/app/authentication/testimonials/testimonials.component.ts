@@ -1,6 +1,8 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Testimonial } from '@app/core/interfaces/testimonial';
 import { TestimonialsService } from '@app/core/service/testimonials-service';
 import { PublicNavbarComponent } from '@app/shared/components/public-navbar/public-navbar.component';
@@ -10,72 +12,16 @@ import { PublicNavbarComponent } from '@app/shared/components/public-navbar/publ
   templateUrl: './testimonials.component.html',
   styleUrls: ['./testimonials.component.scss'],
   standalone: true,
-  imports: [CommonModule, PublicNavbarComponent],
+  imports: [CommonModule, RouterLink, TranslateModule, PublicNavbarComponent],
 })
 export class TestimonialsComponent implements OnInit {
   private readonly testimonialsService = inject(TestimonialsService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly translate = inject(TranslateService);
 
-  starsArray = [1, 2, 3, 4, 5];
-
+  protected readonly navbarIcon = 'assets/exito-logo.svg';
+  readonly starsArray = [1, 2, 3, 4, 5];
   testimonials: Testimonial[] = [];
-
-  private readonly fallbackTestimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: 'Adolfo Moreno',
-      role: 'Licenciado en Finanzas',
-      quote:
-        'Éxito Juntos cambió completamente mi perspectiva sobre las inversiones. En menos de 6 meses logré resultados que no habría imaginado por mi cuenta.',
-      avatar: 'assets/images/user.png',
-      stars: 5,
-    },
-    {
-      id: 2,
-      name: 'María González',
-      role: 'Emprendedora',
-      quote:
-        'La comunidad es increíble. Aprendí estrategias reales de trading y hoy puedo decir que tengo una fuente de ingreso pasivo estable.',
-      avatar: 'assets/images/user.png',
-      stars: 5,
-    },
-    {
-      id: 3,
-      name: 'Carlos Ramírez',
-      role: 'Ingeniero de Sistemas',
-      quote:
-        'Llevaba años buscando algo confiable. La transparencia y el acompañamiento del equipo me dieron la seguridad que necesitaba para dar el primer paso.',
-      avatar: 'assets/images/user.png',
-      stars: 5,
-    },
-    {
-      id: 4,
-      name: 'Daniela Fuentes',
-      role: 'Diseñadora Freelance',
-      quote:
-        'Empecé con poca experiencia y la plataforma me guió en cada etapa. Hoy soy parte activa de la red y mis ingresos han crecido mes a mes.',
-      avatar: 'assets/images/user.png',
-      stars: 5,
-    },
-    {
-      id: 5,
-      name: 'Jorge Peña',
-      role: 'Contador Público',
-      quote:
-        'Como contador siempre fui escéptico, pero los números no mienten. Éxito Juntos tiene un modelo sólido y resultados verificables.',
-      avatar: 'assets/images/user.png',
-      stars: 5,
-    },
-    {
-      id: 6,
-      name: 'Valentina Cruz',
-      role: 'Directora Comercial',
-      quote:
-        'La red de apoyo y las herramientas de análisis son de primer nivel. Es la mejor decisión financiera que he tomado en los últimos años.',
-      avatar: 'assets/images/user.png',
-      stars: 5,
-    },
-  ];
 
   ngOnInit(): void {
     this.testimonialsService
@@ -84,17 +30,33 @@ export class TestimonialsComponent implements OnInit {
       .subscribe({
         next: testimonials => {
           this.testimonials =
-            testimonials.length > 0 ? testimonials : this.fallbackTestimonials;
+            testimonials.length > 0 ? testimonials : this.getFallback();
         },
-        error: error => {
-          console.error('Error al cargar testimonios:', error);
-          this.testimonials = this.fallbackTestimonials;
+        error: () => {
+          this.testimonials = this.getFallback();
         },
       });
   }
 
+  private getFallback(): Testimonial[] {
+    const items = this.translate.instant('TESTIMONIALS_PAGE.FALLBACK') as Array<{
+      NAME: string;
+      ROLE: string;
+      QUOTE: string;
+    }>;
+    if (!Array.isArray(items)) return [];
+    return items.map((t, i) => ({
+      id: i + 1,
+      name: t.NAME,
+      role: t.ROLE,
+      quote: t.QUOTE,
+      avatar: 'assets/images/user.png',
+      stars: 5,
+    }));
+  }
+
   getStars(stars?: number): number[] {
-    const totalStars = Math.min(Math.max(stars ?? 5, 1), 5);
-    return this.starsArray.slice(0, totalStars);
+    const total = Math.min(Math.max(stars ?? 5, 1), 5);
+    return this.starsArray.slice(0, total);
   }
 }

@@ -1,0 +1,438 @@
+<section class="section dashboard-page">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'CLIENT-DASHBOARD.BREADCRUMB.TITLE' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/app/home"><i class="fas fa-home font-17"></i></a>
+    </li>
+  </ul>
+
+  <div class="section-body">
+    <!-- Welcome Card -->
+    <div class="dashboard-card welcome-card mb-4">
+      <div class="welcome-content">
+        <div class="welcome-avatar">
+          <img
+            [src]="user.imageProfileUrl || 'assets/images/user.png'"
+            [alt]="user.name"
+          />
+          <span
+            class="status-dot"
+            [class.active]="user.status"
+            [class.inactive]="!user.status"
+          ></span>
+        </div>
+        <div class="welcome-text">
+          <span class="welcome-greeting">
+            {{ 'CLIENT-DASHBOARD.WELCOME.GREETING' | translate }}
+          </span>
+          <h1 class="welcome-name">
+            {{ user.name }} {{ user.lastName }}
+          </h1>
+          <div class="welcome-meta">
+            <span class="meta-item">
+              <i class="bi bi-at"></i>
+              {{ user.username || '—' }}
+            </span>
+            <span class="meta-item">
+              <i class="bi bi-envelope"></i>
+              {{ user.email }}
+            </span>
+            <span
+              class="meta-badge"
+              [class.active]="user.status"
+              [class.inactive]="!user.status"
+            >
+              <i
+                class="bi"
+                [class.bi-check-circle-fill]="user.status"
+                [class.bi-x-circle-fill]="!user.status"
+              ></i>
+              {{
+                (user.status
+                  ? 'CLIENT-DASHBOARD.WELCOME.ACCOUNT-ACTIVE'
+                  : 'CLIENT-DASHBOARD.WELCOME.ACCOUNT-INACTIVE'
+                ) | translate
+              }}
+            </span>
+          </div>
+        </div>
+        <div class="welcome-actions">
+          <button
+            type="button"
+            class="btn-golden btn-share"
+            (click)="shareReferralLink()"
+          >
+            <i class="bi bi-share-fill"></i>
+            {{ 'CLIENT-DASHBOARD.WELCOME.BTN-SHARE' | translate }}
+          </button>
+          <a routerLink="/app/my-network" class="btn-golden-outline">
+            <i class="bi bi-people-fill"></i>
+            {{ 'CLIENT-DASHBOARD.WELCOME.BTN-MY-NETWORK' | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Info / Referral -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-6">
+        <div class="dashboard-card stat-card">
+          <div class="stat-icon"><i class="bi bi-link-45deg"></i></div>
+          <div class="stat-body">
+            <span class="stat-label">
+              {{ 'CLIENT-DASHBOARD.REFERRAL.TITLE' | translate }}
+            </span>
+            <span class="stat-value referral-url">{{ referralLink || '—' }}</span>
+            <button
+              type="button"
+              class="btn-link-gold"
+              (click)="shareReferralLink()"
+              [disabled]="!referralLink"
+            >
+              <i class="bi bi-clipboard"></i>
+              {{ 'CLIENT-DASHBOARD.REFERRAL.COPY' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="dashboard-card stat-card">
+          <div class="stat-icon"><i class="bi bi-calendar-check"></i></div>
+          <div class="stat-body">
+            <span class="stat-label">
+              {{ 'CLIENT-DASHBOARD.STATS.MEMBER-SINCE' | translate }}
+            </span>
+            <span class="stat-value">
+              {{ (user.createdAt | date: 'dd/MM/yyyy') || '—' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="dashboard-card stat-card">
+          <div class="stat-icon"><i class="bi bi-shield-check"></i></div>
+          <div class="stat-body">
+            <span class="stat-label">
+              {{ 'CLIENT-DASHBOARD.STATS.AUTH-PROVIDER' | translate }}
+            </span>
+            <span class="stat-value text-capitalize">
+              {{ user.authProvider || 'local' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Info Card -->
+    <div class="dashboard-card profile-edit-card">
+      <div class="card-header-flex">
+        <div>
+          <h3 class="card-title">
+            <i class="bi bi-person-vcard"></i>
+            {{ 'CLIENT-DASHBOARD.PERSONAL-INFO.TITLE' | translate }}
+          </h3>
+          <p class="card-subtitle">
+            {{ 'CLIENT-DASHBOARD.PERSONAL-INFO.SUBTITLE' | translate }}
+          </p>
+        </div>
+
+        <div class="card-actions">
+          <button
+            *ngIf="!isEditMode()"
+            type="button"
+            class="btn-golden"
+            (click)="toggleEditMode()"
+          >
+            <i class="bi bi-pencil-fill"></i>
+            {{ 'CLIENT-DASHBOARD.ACTIONS.EDIT' | translate }}
+          </button>
+          <button
+            *ngIf="isEditMode()"
+            type="button"
+            class="btn-golden btn-save"
+            (click)="saveProfile()"
+            [disabled]="isLoading() || profileForm.invalid"
+          >
+            <i class="bi bi-check-lg" *ngIf="!isLoading()"></i>
+            <span
+              class="spinner-border spinner-border-sm"
+              *ngIf="isLoading()"
+            ></span>
+            {{
+              (isLoading()
+                ? 'CLIENT-DASHBOARD.ACTIONS.SAVING'
+                : 'CLIENT-DASHBOARD.ACTIONS.SAVE'
+              ) | translate
+            }}
+          </button>
+          <button
+            *ngIf="isEditMode()"
+            type="button"
+            class="btn-golden-outline"
+            (click)="toggleEditMode()"
+            [disabled]="isLoading()"
+          >
+            <i class="bi bi-x-lg"></i>
+            {{ 'CLIENT-DASHBOARD.ACTIONS.CANCEL' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <form [formGroup]="profileForm" class="profile-form">
+        <div class="row g-3">
+          <!-- Username -->
+          <div class="col-md-6">
+            <div class="form-group-golden">
+              <label class="form-label" for="username">
+                <i class="bi bi-at"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.USERNAME' | translate }}
+              </label>
+              <input
+                *ngIf="!isEditMode()"
+                type="text"
+                class="form-control-static"
+                [value]="user.username"
+                readonly
+              />
+              <input
+                *ngIf="isEditMode()"
+                id="username"
+                type="text"
+                class="form-control-golden"
+                formControlName="username"
+                [class.is-invalid]="
+                  usernameControl?.invalid && usernameControl?.touched
+                "
+                [placeholder]="
+                  'CLIENT-DASHBOARD.FIELDS.USERNAME-PLACEHOLDER' | translate
+                "
+              />
+              <small class="form-hint" *ngIf="isEditMode()">
+                {{ 'CLIENT-DASHBOARD.FIELDS.USERNAME-HINT' | translate }}
+              </small>
+              <div
+                class="invalid-feedback-msg"
+                *ngIf="
+                  isEditMode() &&
+                  usernameControl?.invalid &&
+                  usernameControl?.touched
+                "
+              >
+                <ng-container *ngIf="usernameControl?.errors?.['required']">
+                  {{ 'CLIENT-DASHBOARD.VALIDATIONS.USERNAME-REQUIRED' | translate }}
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    usernameControl?.errors?.['minlength'] ||
+                    usernameControl?.errors?.['maxlength']
+                  "
+                >
+                  {{ 'CLIENT-DASHBOARD.VALIDATIONS.USERNAME-LENGTH' | translate }}
+                </ng-container>
+                <ng-container *ngIf="usernameControl?.errors?.['pattern']">
+                  {{ 'CLIENT-DASHBOARD.VALIDATIONS.USERNAME-PATTERN' | translate }}
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email (read only) -->
+          <div class="col-md-6">
+            <div class="form-group-golden">
+              <label class="form-label" for="email">
+                <i class="bi bi-envelope"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.EMAIL' | translate }}
+              </label>
+              <input
+                id="email"
+                type="email"
+                class="form-control-static"
+                [value]="user.email"
+                readonly
+              />
+            </div>
+          </div>
+
+          <!-- Name -->
+          <div class="col-md-6">
+            <div class="form-group-golden">
+              <label class="form-label" for="name">
+                <i class="bi bi-person"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.NAME' | translate }}
+              </label>
+              <input
+                *ngIf="!isEditMode()"
+                type="text"
+                class="form-control-static"
+                [value]="user.name"
+                readonly
+              />
+              <input
+                *ngIf="isEditMode()"
+                id="name"
+                type="text"
+                class="form-control-golden"
+                formControlName="name"
+                [class.is-invalid]="nameControl?.invalid && nameControl?.touched"
+              />
+              <div
+                class="invalid-feedback-msg"
+                *ngIf="isEditMode() && nameControl?.invalid && nameControl?.touched"
+              >
+                {{ 'CLIENT-DASHBOARD.VALIDATIONS.NAME-REQUIRED' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="col-md-6">
+            <div class="form-group-golden">
+              <label class="form-label" for="lastName">
+                <i class="bi bi-person"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.LASTNAME' | translate }}
+              </label>
+              <input
+                *ngIf="!isEditMode()"
+                type="text"
+                class="form-control-static"
+                [value]="user.lastName"
+                readonly
+              />
+              <input
+                *ngIf="isEditMode()"
+                id="lastName"
+                type="text"
+                class="form-control-golden"
+                formControlName="lastName"
+                [class.is-invalid]="
+                  lastNameControl?.invalid && lastNameControl?.touched
+                "
+              />
+              <div
+                class="invalid-feedback-msg"
+                *ngIf="
+                  isEditMode() &&
+                  lastNameControl?.invalid &&
+                  lastNameControl?.touched
+                "
+              >
+                {{ 'CLIENT-DASHBOARD.VALIDATIONS.LASTNAME-REQUIRED' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone (read only) -->
+          <div class="col-md-6">
+            <div class="form-group-golden">
+              <label class="form-label" for="phone">
+                <i class="bi bi-telephone"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.PHONE' | translate }}
+              </label>
+              <input
+                id="phone"
+                type="text"
+                class="form-control-static"
+                [value]="
+                  user.phone ||
+                  ('CLIENT-DASHBOARD.FIELDS.NO-SPECIFIED' | translate)
+                "
+                readonly
+              />
+            </div>
+          </div>
+
+          <!-- Birth Date -->
+          <div class="col-md-6">
+            <div class="form-group-golden">
+              <label class="form-label" for="birthDate">
+                <i class="bi bi-calendar-heart"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.BIRTHDATE' | translate }}
+              </label>
+              <input
+                *ngIf="!isEditMode()"
+                type="text"
+                class="form-control-static"
+                [value]="
+                  (user.birtDate | date: 'dd/MM/yyyy') ||
+                  ('CLIENT-DASHBOARD.FIELDS.NO-SPECIFIED' | translate)
+                "
+                readonly
+              />
+              <input
+                *ngIf="isEditMode()"
+                id="birthDate"
+                type="date"
+                class="form-control-golden"
+                formControlName="birthDate"
+              />
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="col-md-8">
+            <div class="form-group-golden">
+              <label class="form-label" for="address">
+                <i class="bi bi-house"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.ADDRESS' | translate }}
+              </label>
+              <input
+                *ngIf="!isEditMode()"
+                type="text"
+                class="form-control-static"
+                [value]="
+                  user.address ||
+                  ('CLIENT-DASHBOARD.FIELDS.NO-SPECIFIED' | translate)
+                "
+                readonly
+              />
+              <input
+                *ngIf="isEditMode()"
+                id="address"
+                type="text"
+                class="form-control-golden"
+                formControlName="address"
+                [placeholder]="
+                  'CLIENT-DASHBOARD.FIELDS.ADDRESS-PLACEHOLDER' | translate
+                "
+              />
+            </div>
+          </div>
+
+          <!-- City -->
+          <div class="col-md-4">
+            <div class="form-group-golden">
+              <label class="form-label" for="city">
+                <i class="bi bi-building"></i>
+                {{ 'CLIENT-DASHBOARD.FIELDS.CITY' | translate }}
+              </label>
+              <input
+                *ngIf="!isEditMode()"
+                type="text"
+                class="form-control-static"
+                [value]="
+                  user.city ||
+                  ('CLIENT-DASHBOARD.FIELDS.NO-SPECIFIED' | translate)
+                "
+                readonly
+              />
+              <input
+                *ngIf="isEditMode()"
+                id="city"
+                type="text"
+                class="form-control-golden"
+                formControlName="city"
+                [placeholder]="
+                  'CLIENT-DASHBOARD.FIELDS.CITY-PLACEHOLDER' | translate
+                "
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

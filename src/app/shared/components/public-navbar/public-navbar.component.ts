@@ -156,7 +156,7 @@ export class PublicNavbarComponent implements OnInit {
   protected goToDashboard(): void {
     const route = this.isAdmin()
       ? '/admin/users-management'
-      : '/app/my-network';
+      : '/app/dashboard';
     this.router.navigate([route]);
     this.userMenuOpen.set(false);
     this.mobileOpen.set(false);

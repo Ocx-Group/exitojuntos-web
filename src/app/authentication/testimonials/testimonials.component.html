@@ -9,10 +9,13 @@
 
     <!-- Header -->
     <div class="page-header">
-      <p class="section-tag">Casos de Éxito</p>
-      <h1 class="page-title">Lo que dicen<br><span class="text-gradient">nuestros miembros</span></h1>
+      <p class="section-tag">{{ 'TESTIMONIALS_PAGE.HEADER.TAG' | translate }}</p>
+      <h1 class="page-title">
+        {{ 'TESTIMONIALS_PAGE.HEADER.TITLE_START' | translate }}<br>
+        <span class="text-gradient">{{ 'TESTIMONIALS_PAGE.HEADER.TITLE_HIGHLIGHT' | translate }}</span>
+      </h1>
       <p class="page-description">
-        Historias reales de personas que transformaron su vida financiera con Éxito Juntos
+        {{ 'TESTIMONIALS_PAGE.HEADER.DESCRIPTION' | translate }}
       </p>
     </div>
 
@@ -48,3 +51,19 @@
 
   </div>
 </section>
+
+<!-- FOOTER -->
+<footer class="t-footer">
+  <div class="t-footer__inner">
+    <div class="t-footer__brand">
+      <img [src]="navbarIcon" alt="Éxito Juntos" class="t-footer__logo" />
+      <p>{{ 'LANDING_PAGE.FOOTER.COPYRIGHT' | translate }}</p>
+    </div>
+    <div class="t-footer__links">
+      <a routerLink="/welcome">{{ 'TESTIMONIALS_PAGE.FOOTER.HOME' | translate }}</a>
+      <a routerLink="/products">{{ 'TESTIMONIALS_PAGE.FOOTER.PRODUCTS' | translate }}</a>
+      <a routerLink="/terms-conditions">{{ 'TESTIMONIALS_PAGE.FOOTER.TERMS' | translate }}</a>
+      <a routerLink="/signin">{{ 'TESTIMONIALS_PAGE.FOOTER.SIGNIN' | translate }}</a>
+    </div>
+  </div>
+</footer>

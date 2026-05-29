@@ -12,14 +12,13 @@
 
   <div class="hero-content">
     <p class="hero-tag">
-      <i class="fas fa-gem me-2"></i>Catálogo Premium
+      <i class="fas fa-gem me-2"></i>{{ 'PRODUCTS_PAGE.HERO.TAG' | translate }}
     </p>
     <h1 class="hero-title">
-      Nuestros <span class="gold-text">Productos</span>
+      {{ 'PRODUCTS_PAGE.HERO.TITLE_START' | translate }} <span class="gold-text">{{ 'PRODUCTS_PAGE.HERO.TITLE_HIGHLIGHT' | translate }}</span>
     </h1>
     <p class="hero-subtitle">
-      Descubre nuestra selección exclusiva de productos de alta calidad,<br class="d-none d-md-block" />
-      pensados para potenciar tu bienestar y éxito.
+      {{ 'PRODUCTS_PAGE.HERO.SUBTITLE' | translate }}
     </p>
 
     <!-- Search bar -->
@@ -28,7 +27,7 @@
       <input
         type="text"
         class="search-input"
-        placeholder="Buscar producto..."
+        [placeholder]="'PRODUCTS_PAGE.HERO.SEARCH_PLACEHOLDER' | translate"
         [value]="searchTerm()"
         (input)="onSearch($any($event.target).value)"
       />
@@ -45,7 +44,7 @@
         [class.active]="activeCategoryId() === null"
         (click)="setCategory(null)"
       >
-        <i class="fas fa-th-large me-1"></i>Todos
+        <i class="fas fa-th-large me-1"></i>{{ 'PRODUCTS_PAGE.FILTER.ALL' | translate }}
         <span class="pill-count">{{ allProducts().length }}</span>
       </button>
 
@@ -67,7 +66,9 @@
       @if (!loading()) {
         <span class="results-label">
           <strong class="gold-text">{{ filteredProducts().length }}</strong>
-          resultado{{ filteredProducts().length !== 1 ? 's' : '' }}
+          {{ filteredProducts().length === 1
+            ? ('PRODUCTS_PAGE.FILTER.RESULT_ONE' | translate)
+            : ('PRODUCTS_PAGE.FILTER.RESULT_MANY' | translate) }}
         </span>
       }
     </div>
@@ -103,14 +104,14 @@
         </div>
         <h3 class="empty-title">
           @if (searchTerm()) {
-            Sin resultados para "{{ searchTerm() }}"
+            {{ 'PRODUCTS_PAGE.EMPTY.NO_RESULTS' | translate:{ term: searchTerm() } }}
           } @else {
-            No hay productos en esta categoría
+            {{ 'PRODUCTS_PAGE.EMPTY.NO_CATEGORY' | translate }}
           }
         </h3>
-        <p class="empty-subtitle">Intenta con otra búsqueda o categoría.</p>
+        <p class="empty-subtitle">{{ 'PRODUCTS_PAGE.EMPTY.SUBTITLE' | translate }}</p>
         <button class="btn-gold-outline" (click)="setCategory(null); onSearch('')">
-          Ver todos los productos
+          {{ 'PRODUCTS_PAGE.EMPTY.RESET_BTN' | translate }}
         </button>
       </div>
     }
@@ -135,7 +136,7 @@
               <div class="card-badges">
                 @if (product.offers) {
                   <span class="badge-offer">
-                    <i class="fas fa-bolt me-1"></i>Oferta
+                    <i class="fas fa-bolt me-1"></i>{{ 'PRODUCTS_PAGE.BADGE.OFFER' | translate }}
                   </span>
                 }
                 @if (product.discountPercent > 0) {
@@ -146,7 +147,7 @@
               <!-- Hover overlay -->
               <div class="card-overlay">
                 <button class="btn-overlay btn-overlay--detail" (click)="goToProduct(product.id)">
-                  <i class="fas fa-expand-alt me-2"></i>Ver detalles
+                  <i class="fas fa-expand-alt me-2"></i>{{ 'PRODUCTS_PAGE.CARD.VIEW_DETAILS' | translate }}
                 </button>
               </div>
             </div>
@@ -169,24 +170,24 @@
 
               @if (product.valuePoints > 0) {
                 <div class="card-points">
-                  <i class="fas fa-star me-1"></i>{{ product.valuePoints }} puntos
+                  <i class="fas fa-star me-1"></i>{{ product.valuePoints }} {{ 'PRODUCTS_PAGE.CARD.POINTS' | translate }}
                 </div>
               }
 
               <div class="card-actions">
                 <button class="btn-card-detail" (click)="goToProduct(product.id)">
-                  <i class="fas fa-eye me-1"></i>Ver más
+                  <i class="fas fa-eye me-1"></i>{{ 'PRODUCTS_PAGE.CARD.VIEW_MORE' | translate }}
                 </button>
                 @if (!isAdmin()) {
                   <button class="btn-card-buy"
                     [disabled]="addingToCart() === product.id"
                     (click)="addToCart(product, $event)">
                     @if (addingToCart() === product.id) {
-                      <i class="fas fa-spinner fa-spin me-1"></i>Añadiendo
+                      <i class="fas fa-spinner fa-spin me-1"></i>{{ 'PRODUCTS_PAGE.CARD.ADDING' | translate }}
                     } @else if (authService.isLoggedIn()) {
-                      <i class="fas fa-cart-plus me-1"></i>Añadir
+                      <i class="fas fa-cart-plus me-1"></i>{{ 'PRODUCTS_PAGE.CARD.ADD' | translate }}
                     } @else {
-                      <i class="fas fa-shopping-cart me-1"></i>Comprar
+                      <i class="fas fa-shopping-cart me-1"></i>{{ 'PRODUCTS_PAGE.CARD.BUY' | translate }}
                     }
                   </button>
                 }
@@ -205,13 +206,13 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <img [src]="navbarIcon" alt="Éxito Juntos" class="footer-logo" />
-      <p>© {{ 2025 }} Éxito Juntos. Todos los derechos reservados.</p>
+      <p>{{ 'LANDING_PAGE.FOOTER.COPYRIGHT' | translate }}</p>
     </div>
     <div class="footer-links">
-      <a routerLink="/welcome">Inicio</a>
-      <a routerLink="/testimonials">Testimonios</a>
-      <a routerLink="/terms-conditions">Términos</a>
-      <a routerLink="/signin">Ingresar</a>
+      <a routerLink="/welcome">{{ 'PRODUCTS_PAGE.FOOTER.HOME' | translate }}</a>
+      <a routerLink="/testimonials">{{ 'PRODUCTS_PAGE.FOOTER.TESTIMONIALS' | translate }}</a>
+      <a routerLink="/terms-conditions">{{ 'PRODUCTS_PAGE.FOOTER.TERMS' | translate }}</a>
+      <a routerLink="/signin">{{ 'PRODUCTS_PAGE.FOOTER.SIGNIN' | translate }}</a>
     </div>
   </div>
 </footer>

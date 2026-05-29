@@ -876,6 +876,66 @@
       "TEXT": "Categorías"
     }
   },
+  "CLIENT-DASHBOARD": {
+    "BREADCRUMB": {
+      "TITLE": "Mi Panel"
+    },
+    "WELCOME": {
+      "GREETING": "Bienvenido de nuevo",
+      "ACCOUNT-ACTIVE": "Cuenta Activa",
+      "ACCOUNT-INACTIVE": "Cuenta Inactiva",
+      "BTN-SHARE": "Compartir Mi Red",
+      "BTN-MY-NETWORK": "Ver Mi Red"
+    },
+    "STATS": {
+      "MEMBER-SINCE": "Miembro desde",
+      "AUTH-PROVIDER": "Método de Acceso"
+    },
+    "REFERRAL": {
+      "TITLE": "Tu enlace de referido",
+      "COPY": "Copiar enlace",
+      "LINK-COPIED": "¡Enlace de referido copiado!",
+      "LINK-ERROR": "No se pudo copiar el enlace"
+    },
+    "PERSONAL-INFO": {
+      "TITLE": "Información Personal",
+      "SUBTITLE": "Edita tus datos y tu nombre de usuario"
+    },
+    "FIELDS": {
+      "USERNAME": "Nombre de usuario",
+      "USERNAME-PLACEHOLDER": "ej. juan.perez",
+      "USERNAME-HINT": "Sólo letras, números, puntos, guiones y guiones bajos.",
+      "NAME": "Nombre",
+      "LASTNAME": "Apellido",
+      "EMAIL": "Correo Electrónico",
+      "PHONE": "Teléfono",
+      "BIRTHDATE": "Fecha de Nacimiento",
+      "ADDRESS": "Dirección",
+      "ADDRESS-PLACEHOLDER": "Calle, número, apartamento",
+      "CITY": "Ciudad",
+      "CITY-PLACEHOLDER": "Ciudad",
+      "NO-SPECIFIED": "No especificado"
+    },
+    "ACTIONS": {
+      "EDIT": "Editar",
+      "SAVE": "Guardar Cambios",
+      "SAVING": "Guardando...",
+      "CANCEL": "Cancelar"
+    },
+    "VALIDATIONS": {
+      "FIELDS-REQUIRED": "Por favor completa los campos requeridos",
+      "NAME-REQUIRED": "El nombre es requerido (mínimo 2 caracteres)",
+      "LASTNAME-REQUIRED": "El apellido es requerido (mínimo 2 caracteres)",
+      "USERNAME-REQUIRED": "El nombre de usuario es requerido",
+      "USERNAME-LENGTH": "El nombre de usuario debe tener entre 3 y 30 caracteres",
+      "USERNAME-PATTERN": "Sólo letras, números, puntos, guiones y guiones bajos"
+    },
+    "MESSAGES": {
+      "SUCCESS-TITLE": "Éxito",
+      "SUCCESS": "Perfil actualizado exitosamente",
+      "ERROR": "Error al actualizar el perfil"
+    }
+  },
   "CLIENT-MY-PROFILE": {
     "ACCOUNT-INFO": {
       "LAST-UPDATE": "Última actualización",
@@ -1771,6 +1831,9 @@
     "COMMISSIONS-BALANCE": {
       "TEXT": "Balance"
     },
+    "DASHBOARD": {
+      "TEXT": "Mi Panel"
+    },
     "EDUCATIONAL-COURSES": {
       "TEXT": "Cursos Educativos"
     },
@@ -2224,6 +2287,43 @@
     },
     "TITLE": {
       "TEXT": "Productos"
+    }
+  },
+  "PRODUCTS_PAGE": {
+    "HERO": {
+      "TAG": "Catálogo Premium",
+      "TITLE_START": "Nuestros",
+      "TITLE_HIGHLIGHT": "Productos",
+      "SUBTITLE": "Descubre nuestra selección exclusiva de productos de alta calidad, pensados para potenciar tu bienestar y éxito.",
+      "SEARCH_PLACEHOLDER": "Buscar producto..."
+    },
+    "FILTER": {
+      "ALL": "Todos",
+      "RESULT_ONE": "resultado",
+      "RESULT_MANY": "resultados"
+    },
+    "EMPTY": {
+      "NO_RESULTS": "Sin resultados para \"{{term}}\"",
+      "NO_CATEGORY": "No hay productos en esta categoría",
+      "SUBTITLE": "Intenta con otra búsqueda o categoría.",
+      "RESET_BTN": "Ver todos los productos"
+    },
+    "BADGE": {
+      "OFFER": "Oferta"
+    },
+    "CARD": {
+      "POINTS": "puntos",
+      "VIEW_MORE": "Ver más",
+      "ADDING": "Añadiendo",
+      "ADD": "Añadir",
+      "BUY": "Comprar",
+      "VIEW_DETAILS": "Ver detalles"
+    },
+    "FOOTER": {
+      "HOME": "Inicio",
+      "TESTIMONIALS": "Testimonios",
+      "TERMS": "Términos",
+      "SIGNIN": "Ingresar"
     }
   },
   "PRODUCTS-PREVIEW": {
@@ -2702,6 +2802,52 @@
     "SUCCESS_TITLE": "¡Cuenta Verificada!",
     "USER_EMAIL": "Correo Electrónico",
     "USER_NAME": "Nombre"
+  },
+  "TESTIMONIALS_PAGE": {
+    "HEADER": {
+      "TAG": "Historias de Bienestar",
+      "TITLE_START": "Lo que dicen",
+      "TITLE_HIGHLIGHT": "nuestros miembros",
+      "DESCRIPTION": "Historias reales de personas que transformaron su salud y bienestar con los suplementos de Éxito Juntos"
+    },
+    "FALLBACK": [
+      {
+        "NAME": "Ana Martínez",
+        "ROLE": "Nutricionista",
+        "QUOTE": "Desde que incorporé los suplementos de Éxito Juntos en mi práctica, mis pacientes reportan mejoras notables en energía y vitalidad. La calidad de los ingredientes es excepcional."
+      },
+      {
+        "NAME": "Carlos Vega",
+        "ROLE": "Deportista Amateur",
+        "QUOTE": "Los suplementos de Éxito Juntos cambiaron mi rendimiento deportivo. La recuperación es más rápida y mi resistencia mejoró notablemente en solo 3 meses."
+      },
+      {
+        "NAME": "Patricia López",
+        "ROLE": "Madre de Familia",
+        "QUOTE": "Encontré en Éxito Juntos la solución natural que necesitaba para toda la familia. Productos seguros, con ingredientes claros y resultados visibles desde la primera semana."
+      },
+      {
+        "NAME": "Roberto Sánchez",
+        "ROLE": "Médico General",
+        "QUOTE": "Como médico, valoro la transparencia en los ingredientes. Los suplementos de Éxito Juntos tienen formulaciones respaldadas científicamente y eso genera confianza."
+      },
+      {
+        "NAME": "Laura Jiménez",
+        "ROLE": "Instructora de Yoga",
+        "QUOTE": "La comunidad de Éxito Juntos va más allá de los productos. El acompañamiento y el apoyo del equipo han transformado completamente mi bienestar integral."
+      },
+      {
+        "NAME": "Miguel Torres",
+        "ROLE": "Empresario",
+        "QUOTE": "Tenía problemas de energía y concentración. Desde que incorporé los suplementos de Éxito Juntos en mi rutina diaria, mi productividad y bienestar mejoraron enormemente."
+      }
+    ],
+    "FOOTER": {
+      "HOME": "Inicio",
+      "PRODUCTS": "Productos",
+      "TERMS": "Términos",
+      "SIGNIN": "Ingresar"
+    }
   },
   "SIGNIN": {
     "BRAND_SUBTITLE": "Suplementos naturales para una vida más saludable",

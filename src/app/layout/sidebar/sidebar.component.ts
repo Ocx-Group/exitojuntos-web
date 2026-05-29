@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   listMaxWidth!: string;
   headerHeight = 60;
   routerObj!: Subscription;
-  homeLink = '/app/my-network';
+  homeLink = '/app/dashboard';
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -110,7 +110,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         ? ROUTES_ADMIN.filter(Boolean)
         : ROUTES.filter(Boolean);
 
-      this.homeLink = isAdmin ? '/admin/users-management' : '/app/my-network';
+      this.homeLink = isAdmin ? '/admin/users-management' : '/app/dashboard';
     }
 
     this.initLeftSidebar();

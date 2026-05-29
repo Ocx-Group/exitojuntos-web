@@ -693,5 +693,88 @@
     "SUBTITLE": "Digite o código de segurança que você recebeu em seu e-mail e crie sua nova senha",
     "SUCCESS": "Senha redefinida com sucesso",
     "TITLE": "Redefinir Senha"
+  },
+  "TESTIMONIALS_PAGE": {
+    "HEADER": {
+      "TAG": "Histórias de Bem-estar",
+      "TITLE_START": "O que dizem",
+      "TITLE_HIGHLIGHT": "nossos membros",
+      "DESCRIPTION": "Histórias reais de pessoas que transformaram sua saúde e bem-estar com os suplementos da Éxito Juntos"
+    },
+    "FALLBACK": [
+      {
+        "NAME": "Ana Martinez",
+        "ROLE": "Nutricionista",
+        "QUOTE": "Desde que incorporei os suplementos da Éxito Juntos na minha prática, meus pacientes relatam melhorias notáveis em energia e vitalidade. A qualidade dos ingredientes é excepcional."
+      },
+      {
+        "NAME": "Carlos Vega",
+        "ROLE": "Atleta Amador",
+        "QUOTE": "Os suplementos da Éxito Juntos mudaram meu desempenho esportivo. A recuperação é mais rápida e minha resistência melhorou notavelmente em apenas 3 meses."
+      },
+      {
+        "NAME": "Patricia Lopez",
+        "ROLE": "Mãe de Família",
+        "QUOTE": "Encontrei na Éxito Juntos a solução natural que minha família precisava. Produtos seguros, com ingredientes claros e resultados visíveis desde a primeira semana."
+      },
+      {
+        "NAME": "Roberto Sanchez",
+        "ROLE": "Médico Clínico Geral",
+        "QUOTE": "Como médico, valorizo a transparência nos ingredientes. Os suplementos da Éxito Juntos têm formulações com respaldo científico, o que gera confiança."
+      },
+      {
+        "NAME": "Laura Jimenez",
+        "ROLE": "Instrutora de Yoga",
+        "QUOTE": "A comunidade da Éxito Juntos vai além dos produtos. O acompanhamento e o suporte da equipe transformaram completamente meu bem-estar integral."
+      },
+      {
+        "NAME": "Miguel Torres",
+        "ROLE": "Empresário",
+        "QUOTE": "Tinha problemas de energia e concentração. Desde que incorporei os suplementos da Éxito Juntos na minha rotina diária, minha produtividade e bem-estar melhoraram enormemente."
+      }
+    ],
+    "FOOTER": {
+      "HOME": "Início",
+      "PRODUCTS": "Produtos",
+      "TERMS": "Termos",
+      "SIGNIN": "Entrar"
+    }
+  },
+  "PRODUCTS_PAGE": {
+    "HERO": {
+      "TAG": "Catálogo Premium",
+      "TITLE_START": "Nossos",
+      "TITLE_HIGHLIGHT": "Produtos",
+      "SUBTITLE": "Descubra nossa seleção exclusiva de produtos de alta qualidade, pensados para potencializar seu bem-estar e sucesso.",
+      "SEARCH_PLACEHOLDER": "Buscar produto..."
+    },
+    "FILTER": {
+      "ALL": "Todos",
+      "RESULT_ONE": "resultado",
+      "RESULT_MANY": "resultados"
+    },
+    "EMPTY": {
+      "NO_RESULTS": "Sem resultados para \"{{term}}\"",
+      "NO_CATEGORY": "Nenhum produto nesta categoria",
+      "SUBTITLE": "Tente outra pesquisa ou categoria.",
+      "RESET_BTN": "Ver todos os produtos"
+    },
+    "BADGE": {
+      "OFFER": "Oferta"
+    },
+    "CARD": {
+      "POINTS": "pontos",
+      "VIEW_MORE": "Ver mais",
+      "ADDING": "Adicionando",
+      "ADD": "Adicionar",
+      "BUY": "Comprar",
+      "VIEW_DETAILS": "Ver detalhes"
+    },
+    "FOOTER": {
+      "HOME": "Início",
+      "TESTIMONIALS": "Depoimentos",
+      "TERMS": "Termos",
+      "SIGNIN": "Entrar"
+    }
   }
 }

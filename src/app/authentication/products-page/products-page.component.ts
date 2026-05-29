@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product, ProductCategory } from '@app/core/interfaces/product';
 import { ProductsService } from '@app/core/service/products-service';
@@ -21,7 +22,7 @@ import { PublicNavbarComponent } from '@app/shared/components/public-navbar/publ
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, PublicNavbarComponent],
+  imports: [CommonModule, RouterLink, FormsModule, TranslateModule, PublicNavbarComponent],
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.scss'],
 })

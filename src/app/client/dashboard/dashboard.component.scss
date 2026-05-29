@@ -1,0 +1,444 @@
+@import '../../../assets/scss/theme-variables';
+
+:host {
+  display: block;
+}
+
+.dashboard-page {
+  background: $bg-dark !important;
+  min-height: 100vh;
+  padding: 2rem 0;
+
+  .breadcrumb-style {
+    background: transparent;
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid $border-gold;
+
+    .page-title {
+      color: $text-gold;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .bcrumb-1 a {
+      color: $text-secondary;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $primary-gold;
+      }
+    }
+  }
+}
+
+.dashboard-card {
+  background: $bg-dark-secondary;
+  border: 1px solid $border-gold;
+  border-radius: 16px;
+  box-shadow: $shadow-gold;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: $shadow-gold-lg;
+  }
+}
+
+// Welcome card
+.welcome-card {
+  background: linear-gradient(135deg, $bg-darker 0%, $bg-dark-secondary 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 20% 50%,
+        rgba(212, 175, 55, 0.12) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(255, 215, 0, 0.08) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+  }
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.welcome-avatar {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: visible;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid $primary-gold;
+    box-shadow: $shadow-gold;
+    background: $bg-darker;
+  }
+
+  .status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid $bg-dark-secondary;
+
+    &.active {
+      background: $success-color;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+
+    &.inactive {
+      background: $danger-color;
+    }
+  }
+}
+
+.welcome-text {
+  flex: 1;
+  min-width: 220px;
+}
+
+.welcome-greeting {
+  color: $text-secondary;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.welcome-name {
+  color: $text-primary;
+  font-size: 2rem;
+  margin: 0.25rem 0 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, $primary-gold, $secondary-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  color: $text-secondary;
+  font-size: 0.9rem;
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    i {
+      color: $primary-gold;
+    }
+  }
+
+  .meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8rem;
+
+    &.active {
+      background: $success-light;
+      color: $success-color;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    &.inactive {
+      background: $danger-light;
+      color: $danger-color;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+  }
+}
+
+.welcome-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+}
+
+// Stat cards
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 100%;
+
+  .stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.2),
+      rgba(184, 148, 31, 0.05)
+    );
+    color: $primary-gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    border: 1px solid $border-gold-light;
+    flex-shrink: 0;
+  }
+
+  .stat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .stat-label {
+    color: $text-secondary;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-value {
+    color: $text-primary;
+    font-weight: 600;
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &.referral-url {
+      color: $primary-gold;
+      font-family: 'Courier New', monospace;
+    }
+  }
+}
+
+.btn-link-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  color: $primary-gold;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    color: $secondary-gold;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Profile edit card
+.profile-edit-card {
+  padding: 2rem;
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid $border-gold;
+}
+
+.card-title {
+  color: $text-gold;
+  font-size: 1.25rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  i {
+    color: $primary-gold;
+  }
+}
+
+.card-subtitle {
+  color: $text-secondary;
+  font-size: 0.85rem;
+  margin: 0.35rem 0 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+// Form fields
+.profile-form {
+  .form-group-golden {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-label {
+    color: $text-secondary;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+
+    i {
+      color: $primary-gold;
+    }
+  }
+
+  .form-control-static {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $border-gold;
+    border-radius: 10px;
+    padding: 0.65rem 0.85rem;
+    color: $text-primary;
+    font-size: 0.95rem;
+    outline: none;
+    box-shadow: none;
+    pointer-events: none;
+  }
+
+  .form-control-golden {
+    background: $bg-darker;
+    border: 1px solid $border-gold-medium;
+    border-radius: 10px;
+    padding: 0.65rem 0.85rem;
+    color: $text-primary;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      border-color: $primary-gold;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    &.is-invalid {
+      border-color: $danger-color;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+  }
+
+  .form-hint {
+    color: $text-muted;
+    font-size: 0.78rem;
+  }
+
+  .invalid-feedback-msg {
+    color: $danger-color;
+    font-size: 0.8rem;
+  }
+}
+
+// Buttons
+.btn-golden,
+.btn-golden-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.btn-golden {
+  background: linear-gradient(135deg, $primary-gold, $gold-dark);
+  color: $bg-darker;
+  border-color: $primary-gold;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: $shadow-gold;
+    color: $bg-darker;
+  }
+}
+
+.btn-golden-outline {
+  background: transparent;
+  color: $primary-gold;
+  border-color: $primary-gold;
+
+  &:hover:not(:disabled) {
+    background: rgba(212, 175, 55, 0.12);
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-content {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .welcome-actions {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .welcome-name {
+    font-size: 1.5rem;
+  }
+}

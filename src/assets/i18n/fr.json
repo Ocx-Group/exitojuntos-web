@@ -693,5 +693,88 @@
     "SUBTITLE": "Entrez le code de sécurité que vous avez reçu dans votre e-mail et créez votre nouveau mot de passe",
     "SUCCESS": "Mot de passe réinitialisé avec succès",
     "TITLE": "Réinitialiser le Mot de Passe"
+  },
+  "TESTIMONIALS_PAGE": {
+    "HEADER": {
+      "TAG": "Histoires de Bien-être",
+      "TITLE_START": "Ce que disent",
+      "TITLE_HIGHLIGHT": "nos membres",
+      "DESCRIPTION": "Des histoires réelles de personnes qui ont transformé leur santé et bien-être avec les compléments d'Éxito Juntos"
+    },
+    "FALLBACK": [
+      {
+        "NAME": "Ana Martinez",
+        "ROLE": "Nutritionniste",
+        "QUOTE": "Depuis que j'ai intégré les compléments d'Éxito Juntos dans ma pratique, mes patients rapportent des améliorations notables en énergie et vitalité. La qualité des ingrédients est exceptionnelle."
+      },
+      {
+        "NAME": "Carlos Vega",
+        "ROLE": "Sportif Amateur",
+        "QUOTE": "Les compléments d'Éxito Juntos ont transformé mes performances sportives. La récupération est plus rapide et mon endurance s'est nettement améliorée en seulement 3 mois."
+      },
+      {
+        "NAME": "Patricia Lopez",
+        "ROLE": "Mère de Famille",
+        "QUOTE": "J'ai trouvé en Éxito Juntos la solution naturelle dont toute ma famille avait besoin. Des produits sûrs, avec des ingrédients clairs et des résultats visibles dès la première semaine."
+      },
+      {
+        "NAME": "Roberto Sanchez",
+        "ROLE": "Médecin Généraliste",
+        "QUOTE": "En tant que médecin, je valorise la transparence des ingrédients. Les compléments d'Éxito Juntos ont des formulations soutenues scientifiquement, ce qui inspire confiance."
+      },
+      {
+        "NAME": "Laura Jimenez",
+        "ROLE": "Instructrice de Yoga",
+        "QUOTE": "La communauté d'Éxito Juntos va au-delà des produits. L'accompagnement et le soutien de l'équipe ont complètement transformé mon bien-être global."
+      },
+      {
+        "NAME": "Miguel Torres",
+        "ROLE": "Entrepreneur",
+        "QUOTE": "J'avais des problèmes d'énergie et de concentration. Depuis que j'ai intégré les compléments d'Éxito Juntos dans ma routine, ma productivité et mon bien-être se sont considérablement améliorés."
+      }
+    ],
+    "FOOTER": {
+      "HOME": "Accueil",
+      "PRODUCTS": "Produits",
+      "TERMS": "Conditions",
+      "SIGNIN": "Se connecter"
+    }
+  },
+  "PRODUCTS_PAGE": {
+    "HERO": {
+      "TAG": "Catalogue Premium",
+      "TITLE_START": "Nos",
+      "TITLE_HIGHLIGHT": "Produits",
+      "SUBTITLE": "Découvrez notre sélection exclusive de produits de haute qualité, conçus pour améliorer votre bien-être et votre succès.",
+      "SEARCH_PLACEHOLDER": "Rechercher un produit..."
+    },
+    "FILTER": {
+      "ALL": "Tous",
+      "RESULT_ONE": "résultat",
+      "RESULT_MANY": "résultats"
+    },
+    "EMPTY": {
+      "NO_RESULTS": "Aucun résultat pour \"{{term}}\"",
+      "NO_CATEGORY": "Aucun produit dans cette catégorie",
+      "SUBTITLE": "Essayez une autre recherche ou catégorie.",
+      "RESET_BTN": "Voir tous les produits"
+    },
+    "BADGE": {
+      "OFFER": "Offre"
+    },
+    "CARD": {
+      "POINTS": "points",
+      "VIEW_MORE": "Voir plus",
+      "ADDING": "Ajout...",
+      "ADD": "Ajouter",
+      "BUY": "Acheter",
+      "VIEW_DETAILS": "Voir les détails"
+    },
+    "FOOTER": {
+      "HOME": "Accueil",
+      "TESTIMONIALS": "Témoignages",
+      "TERMS": "Conditions",
+      "SIGNIN": "Se connecter"
+    }
   }
 }

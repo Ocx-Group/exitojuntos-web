@@ -23,7 +23,7 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'my-network', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // Rutas de cliente
       {
         path: '',

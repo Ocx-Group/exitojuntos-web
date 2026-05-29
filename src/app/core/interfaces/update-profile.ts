@@ -3,6 +3,7 @@
  */
 export interface UpdateProfileDto {
   name?: string;
+  username?: string;
   lastName?: string;
   identification?: string;
   address?: string;

@@ -5,17 +5,19 @@ import { MaintenanceGuard } from '@app/core/guard/maintenance.guard';
 export const CLIENT_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: 'dashboard',
     loadComponent: () =>
-      import('@app/shared/pages/dashboard-page/dashboard-page.component').then(
-        m => m.DashboardPageComponent,
-      ),
-    data: { pageType: 'client' },
+      import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
     canActivate: [AuthGuard, MaintenanceGuard],
+  },
+  {
+    path: 'home',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   },
   {
     path: 'my-profile',

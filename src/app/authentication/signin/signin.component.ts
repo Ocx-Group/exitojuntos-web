@@ -479,7 +479,7 @@ export class SigninComponent implements OnInit, AfterViewInit {
     const targetRoute =
       normalizedRole === 'admin'
         ? '/admin/users-management'
-        : '/app/my-network';
+        : '/app/dashboard';
 
     // Navegar con replaceUrl para evitar que el usuario pueda volver al login con el botón atrás
     this.router.navigate([targetRoute], { replaceUrl: true }).then(
