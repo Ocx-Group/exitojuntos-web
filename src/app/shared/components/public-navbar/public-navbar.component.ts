@@ -147,8 +147,16 @@ export class PublicNavbarComponent implements OnInit {
     this.mobileOpen.set(false);
   }
 
+  protected goToCheckout(): void {
+    this.router.navigate(['/checkout']);
+    this.userMenuOpen.set(false);
+    this.mobileOpen.set(false);
+  }
+
   protected goToDashboard(): void {
-    const route = this.isAdmin() ? '/admin/users-management' : '/app/home';
+    const route = this.isAdmin()
+      ? '/admin/users-management'
+      : '/app/my-network';
     this.router.navigate([route]);
     this.userMenuOpen.set(false);
     this.mobileOpen.set(false);

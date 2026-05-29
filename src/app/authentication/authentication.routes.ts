@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from '@app/core/guard/auth.guard';
 import { MaintenanceGuard } from '@app/core/guard/maintenance.guard';
 
 export const AUTHENTICATION_ROUTES: Routes = [
@@ -96,6 +97,14 @@ export const AUTHENTICATION_ROUTES: Routes = [
       import('./product-detail-page/product-detail-page.component').then(
         m => m.ProductDetailPageComponent,
       ),
+  },
+  {
+    path: 'checkout',
+    loadComponent: () =>
+      import('./checkout-page/checkout-page.component').then(
+        m => m.CheckoutPageComponent,
+      ),
+    canActivate: [AuthGuard, MaintenanceGuard],
   },
   {
     path: 'terms-conditions',

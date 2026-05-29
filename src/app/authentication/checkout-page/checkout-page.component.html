@@ -1,0 +1,170 @@
+<!-- NAVBAR -->
+<app-public-navbar></app-public-navbar>
+
+<main class="co-main">
+  <div class="co-container">
+
+    <!-- Breadcrumb -->
+    <a routerLink="/products" class="co-breadcrumb">
+      <i class="fas fa-arrow-left me-2"></i>Seguir comprando
+    </a>
+
+    <!-- LOADING -->
+    @if (loading()) {
+      <div class="co-loading">
+        <div class="co-spinner"></div>
+      </div>
+    }
+
+    <!-- EMPTY -->
+    @else if (items().length === 0 && !session()) {
+      <div class="co-empty">
+        <div class="co-empty__icon"><i class="fas fa-shopping-cart"></i></div>
+        <h2>Tu carrito está vacío</h2>
+        <p>Explora el catálogo y agrega productos para continuar.</p>
+        <a routerLink="/products" class="co-btn-primary">
+          <i class="fas fa-store me-2"></i>Ver productos
+        </a>
+      </div>
+    }
+
+    <!-- ORDER CREATED (CoinPayments) -->
+    @else if (session(); as s) {
+      <section class="co-confirm">
+        <div class="co-confirm__icon"><i class="fas fa-coins"></i></div>
+        <h2>Pago listo con CoinPayments</h2>
+        <p class="co-confirm__sub">
+          Te redirigiremos a la pasarela de CoinPayments para completar el pago de forma segura.
+        </p>
+        <div class="co-confirm__details">
+          <div><span>Referencia</span><strong>{{ s.txnId }}</strong></div>
+          <div><span>Monto</span><strong>${{ s.amount | number:'1.2-2' }} {{ s.currency }}</strong></div>
+          <div><span>Estado</span><strong class="co-status">Pendiente de pago</strong></div>
+        </div>
+        <button class="co-btn-primary co-btn-block" (click)="goToCoinpayments()">
+          <i class="fas fa-external-link-alt me-2"></i>Ir a CoinPayments
+        </button>
+        <p class="co-confirm__note">
+          <i class="fas fa-info-circle me-1"></i>Modo demo: la integración real con el backend de CoinPayments está pendiente.
+        </p>
+      </section>
+    }
+
+    <!-- CHECKOUT -->
+    @else {
+      <header class="co-head">
+        <h1>Checkout</h1>
+        <p>{{ items().length }} {{ items().length === 1 ? 'producto' : 'productos' }} en tu carrito</p>
+      </header>
+
+      <div class="co-layout">
+
+        <!-- Items -->
+        <div class="co-items">
+          @for (item of items(); track trackById($index, item)) {
+            <article class="co-item" [class.is-updating]="updatingItemId() === item.id">
+              <div class="co-item__img">
+                @if (item.product?.image) {
+                  <img [src]="item.product!.image" [alt]="item.product?.name" />
+                } @else {
+                  <div class="co-item__img-ph"><i class="fas fa-image"></i></div>
+                }
+              </div>
+
+              <div class="co-item__info">
+                <h3 class="co-item__name">{{ item.product?.name ?? 'Producto' }}</h3>
+                <span class="co-item__unit">${{ item.unitPrice | number:'1.2-2' }} c/u</span>
+                @if ((item.product?.taxPercent ?? 0) > 0) {
+                  <span class="co-item__tag">
+                    <i class="fas fa-receipt me-1"></i>+{{ item.product!.taxPercent }}% impuesto
+                  </span>
+                }
+              </div>
+
+              <div class="co-item__qty">
+                <button type="button" aria-label="Disminuir cantidad"
+                  [disabled]="updatingItemId() !== null"
+                  (click)="decrement(item)">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button type="button" aria-label="Aumentar cantidad"
+                  [disabled]="updatingItemId() !== null"
+                  (click)="increment(item)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+
+              <div class="co-item__line">
+                ${{ lineTotal(item) | number:'1.2-2' }}
+              </div>
+
+              <button type="button" class="co-item__remove" aria-label="Eliminar producto"
+                [disabled]="updatingItemId() !== null"
+                (click)="removeItem(item)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </article>
+          }
+        </div>
+
+        <!-- Summary -->
+        <aside class="co-summary">
+          <h2 class="co-summary__title">Resumen</h2>
+
+          <div class="co-summary__row">
+            <span>Subtotal</span>
+            <span>${{ subtotal() | number:'1.2-2' }}</span>
+          </div>
+          <div class="co-summary__row">
+            <span>Impuestos</span>
+            <span>${{ tax() | number:'1.2-2' }}</span>
+          </div>
+          @if (totalPoints() > 0) {
+            <div class="co-summary__row co-summary__row--points">
+              <span><i class="fas fa-star me-1"></i>Puntos a ganar</span>
+              <span>{{ totalPoints() }}</span>
+            </div>
+          }
+
+          <div class="co-summary__total">
+            <span>Total</span>
+            <span>${{ total() | number:'1.2-2' }} <small>{{ currency }}</small></span>
+          </div>
+
+          <button class="co-btn-primary co-btn-block"
+            [disabled]="processing()"
+            (click)="pay()">
+            @if (processing()) {
+              <i class="fas fa-spinner fa-spin me-2"></i>Creando pago...
+            } @else {
+              <i class="fas fa-coins me-2"></i>Pagar con CoinPayments
+            }
+          </button>
+
+          <p class="co-summary__secure">
+            <i class="fas fa-lock me-1"></i>Pago en criptomonedas vía CoinPayments
+          </p>
+        </aside>
+
+      </div>
+    }
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="co-footer">
+  <div class="co-footer__inner">
+    <div class="co-footer__brand">
+      <img [src]="navbarIcon" alt="Éxito Juntos" class="co-footer__logo" />
+      <p>© {{ 2025 }} Éxito Juntos. Todos los derechos reservados.</p>
+    </div>
+    <div class="co-footer__links">
+      <a routerLink="/welcome">Inicio</a>
+      <a routerLink="/products">Productos</a>
+      <a routerLink="/testimonials">Testimonios</a>
+      <a routerLink="/terms-conditions">Términos</a>
+    </div>
+  </div>
+</footer>

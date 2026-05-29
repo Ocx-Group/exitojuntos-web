@@ -28,97 +28,95 @@
       <ng-content select="[navbar-actions]"></ng-content>
 
       <!-- Language selector -->
-      <div class="lp-lang" (click)="toggleLang($event)">
+      <div class="lp-lang" (click)="toggleLang($event)" (keydown.enter)="toggleLang($event)">
         <img [src]="currentFlag()" alt="" class="lp-lang__flag" />
         @if (langOpen()) {
-          <div class="lp-lang__menu">
-            @for (l of languages; track l.code) {
-              <button type="button" class="lp-lang__option"
-                [class.active]="currentLang() === l.code"
-                (click)="changeLanguage(l.code)">
-                <img [src]="l.flag" alt="" />
-                <span>{{ l.label }}</span>
-              </button>
-            }
-          </div>
+        <div class="lp-lang__menu">
+          @for (l of languages; track l.code) {
+          <button type="button" class="lp-lang__option" [class.active]="currentLang() === l.code"
+            (click)="changeLanguage(l.code)">
+            <img [src]="l.flag" alt="" />
+            <span>{{ l.label }}</span>
+          </button>
+          }
+        </div>
         }
       </div>
 
       @if (authService.isLoggedIn()) {
-        <div class="lp-navbar__user-area">
-          @if (!isAdmin()) {
-            <button class="lp-navbar__cart" type="button" aria-label="Carrito">
-              <i class="fas fa-shopping-cart"></i>
-              @if (cartService.itemCount() > 0) {
-                <span class="cart-badge">{{ cartService.itemCount() }}</span>
-              }
-            </button>
+      <div class="lp-navbar__user-area">
+        @if (!isAdmin()) {
+        <button class="lp-navbar__cart" type="button" (click)="goToCheckout()" [attr.aria-label]="cartService.itemCount() > 0
+                ? 'Carrito, ' + cartService.itemCount() + ' artículos'
+                : 'Carrito'">
+          <i class="fas fa-shopping-cart"></i>
+          @if (cartService.itemCount() > 0) {
+          <span class="cart-badge">{{ cartService.itemCount() }}</span>
           }
-          <div class="lp-navbar__user-menu">
-            <div class="user-trigger">
-              <button class="user-trigger__main" type="button"
-                (click)="goToDashboard()"
-                [attr.aria-label]="'Ir a mi dashboard'">
-                <img [src]="userAvatar()" [alt]="userName()" class="user-avatar" />
-                <span class="user-name">{{ userName() }}</span>
-              </button>
-              <button class="user-trigger__chevron" type="button"
-                (click)="toggleUserMenu($event)"
-                aria-label="Abrir menú de usuario">
-                <i class="fas fa-chevron-down" [class.open]="userMenuOpen()"></i>
-              </button>
-            </div>
-            @if (userMenuOpen()) {
-              <div class="user-dropdown">
-                <div class="user-dropdown__head">
-                  <img [src]="userAvatar()" [alt]="userName()" />
-                  <div>
-                    <strong>{{ userName() }}</strong>
-                    <small>{{ authService.userAffiliate()?.email }}</small>
-                  </div>
-                </div>
-                <button class="user-dropdown__action user-dropdown__action--primary"
-                  type="button" (click)="goToDashboard()">
-                  <i class="fas fa-th-large me-2"></i>Mi dashboard
-                </button>
-                <button class="user-dropdown__action user-dropdown__action--danger"
-                  type="button" (click)="logout()">
-                  <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
-                </button>
-              </div>
-            }
-          </div>
-        </div>
-      } @else {
-        <button class="lp-navbar__cta" type="button" (click)="openSignin()">
-          <i class="fas fa-sign-in-alt me-2"></i>{{ 'LANDING_PAGE.NAVBAR.LOGIN' | translate }}
         </button>
+        }
+        <div class="lp-navbar__user-menu">
+          <div class="user-trigger">
+            <button class="user-trigger__main" type="button" (click)="goToDashboard()"
+              [attr.aria-label]="'Ir a mi dashboard'">
+              <img [src]="userAvatar()" [alt]="userName()" class="user-avatar" />
+              <span class="user-name">{{ userName() }}</span>
+            </button>
+            <button class="user-trigger__chevron" type="button" (click)="toggleUserMenu($event)"
+              aria-label="Abrir menú de usuario">
+              <i class="fas fa-chevron-down" [class.open]="userMenuOpen()"></i>
+            </button>
+          </div>
+          @if (userMenuOpen()) {
+          <div class="user-dropdown">
+            <div class="user-dropdown__head">
+              <img [src]="userAvatar()" [alt]="userName()" />
+              <div>
+                <strong>{{ userName() }}</strong>
+                <small>{{ authService.userAffiliate()?.email }}</small>
+              </div>
+            </div>
+            <button class="user-dropdown__action user-dropdown__action--primary" type="button"
+              (click)="goToDashboard()">
+              <i class="fas fa-th-large me-2"></i>Mi dashboard
+            </button>
+            <button class="user-dropdown__action user-dropdown__action--danger" type="button" (click)="logout()">
+              <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+            </button>
+          </div>
+          }
+        </div>
+      </div>
+      } @else {
+      <button class="lp-navbar__cta" type="button" (click)="openSignin()">
+        <i class="fas fa-sign-in-alt me-2"></i>{{ 'LANDING_PAGE.NAVBAR.LOGIN' | translate }}
+      </button>
       }
 
-      <button class="lp-hamburger" type="button" [class.active]="mobileOpen()"
-        (click)="toggleMobile()" aria-label="Menú">
+      <button class="lp-hamburger" type="button" [class.active]="mobileOpen()" (click)="toggleMobile()"
+        aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 
   @if (mobileOpen()) {
-    <div class="lp-mobile">
-      <a routerLink="/welcome" fragment="servicios" class="lp-mobile__link" (click)="closeMobile()">
-        {{ 'LANDING_PAGE.NAVBAR.SERVICES' | translate }}
-      </a>
-      <a routerLink="/welcome" fragment="nosotros" class="lp-mobile__link" (click)="closeMobile()">
-        {{ 'LANDING_PAGE.NAVBAR.ABOUT_US' | translate }}
-      </a>
-      <a routerLink="/products" class="lp-mobile__link" (click)="closeMobile()">
-        {{ 'LANDING_PAGE.NAVBAR.PRODUCTS' | translate }}
-      </a>
-      <a routerLink="/testimonials" class="lp-mobile__link" (click)="closeMobile()">
-        {{ 'LANDING_PAGE.NAVBAR.TESTIMONIALS' | translate }}
-      </a>
-      <a routerLink="/welcome" fragment="contacto" class="lp-mobile__link" (click)="closeMobile()">
-        {{ 'LANDING_PAGE.NAVBAR.CONTACT' | translate }}
-      </a>
-    </div>
+  <div class="lp-mobile">
+    <a routerLink="/welcome" fragment="servicios" class="lp-mobile__link" (click)="closeMobile()">
+      {{ 'LANDING_PAGE.NAVBAR.SERVICES' | translate }}
+    </a>
+    <a routerLink="/welcome" fragment="nosotros" class="lp-mobile__link" (click)="closeMobile()">
+      {{ 'LANDING_PAGE.NAVBAR.ABOUT_US' | translate }}
+    </a>
+    <a routerLink="/products" class="lp-mobile__link" (click)="closeMobile()">
+      {{ 'LANDING_PAGE.NAVBAR.PRODUCTS' | translate }}
+    </a>
+    <a routerLink="/testimonials" class="lp-mobile__link" (click)="closeMobile()">
+      {{ 'LANDING_PAGE.NAVBAR.TESTIMONIALS' | translate }}
+    </a>
+    <a routerLink="/welcome" fragment="contacto" class="lp-mobile__link" (click)="closeMobile()">
+      {{ 'LANDING_PAGE.NAVBAR.CONTACT' | translate }}
+    </a>
+  </div>
   }
 </nav>

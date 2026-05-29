@@ -1,0 +1,384 @@
+// ─── Variables ─────────────────────────────────────────────────────────────
+$gold:        #d4af37;
+$gold-bright: #ffd700;
+$gold-dim:    rgba(212, 175, 55, 0.15);
+$gold-border: rgba(212, 175, 55, 0.25);
+$black:       #000000;
+$text:        #ffffff;
+$text-muted:  rgba(255,255,255,0.5);
+$text-soft:   rgba(255,255,255,0.78);
+
+@mixin gold-gradient { background: linear-gradient(135deg, $gold 0%, $gold-bright 100%); }
+@mixin gold-text {
+  background: linear-gradient(90deg, $gold 0%, $gold-bright 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+* { box-sizing: border-box; }
+
+// ─── Main ──────────────────────────────────────────────────────────────────
+.co-main {
+  background: $black;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+}
+
+.co-container {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.75rem 2rem 3rem;
+}
+
+.co-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  color: $text-muted;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  margin-bottom: 1.5rem;
+
+  &:hover { color: $gold; }
+}
+
+// ─── Loading ───────────────────────────────────────────────────────────────
+.co-loading {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.co-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212,175,55,0.18);
+  border-top-color: $gold;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+// ─── Empty ─────────────────────────────────────────────────────────────────
+.co-empty {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+
+  &__icon { font-size: 3rem; color: $gold; opacity: 0.35; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: $text; margin: 0; }
+  p  { color: $text-muted; margin: 0 0 0.75rem; font-size: 0.9rem; }
+}
+
+// ─── Head ──────────────────────────────────────────────────────────────────
+.co-head {
+  margin-bottom: 1.5rem;
+  h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: $text; margin: 0 0 0.25rem; @include gold-text; }
+  p  { color: $text-muted; margin: 0; font-size: 0.88rem; }
+}
+
+// ─── Layout ────────────────────────────────────────────────────────────────
+.co-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1.5rem;
+  align-items: start;
+
+  @media (max-width: 880px) { grid-template-columns: 1fr; }
+}
+
+// ─── Items ─────────────────────────────────────────────────────────────────
+.co-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.co-item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(155deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.012) 100%);
+  border: 1px solid rgba(212,175,55,0.16);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  transition: opacity 0.2s;
+
+  &.is-updating { opacity: 0.5; pointer-events: none; }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 60px 1fr auto;
+    grid-template-areas:
+      "img info remove"
+      "img qty  line";
+    row-gap: 0.6rem;
+  }
+
+  &__img {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0a0a0a;
+    border: 1px solid rgba(212,175,55,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 560px) { grid-area: img; width: 60px; height: 60px; }
+    img { width: 100%; height: 100%; object-fit: contain; padding: 0.35rem; }
+  }
+
+  &__img-ph i { font-size: 1.3rem; color: rgba(255,255,255,0.1); }
+
+  &__info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    @media (max-width: 560px) { grid-area: info; }
+  }
+
+  &__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__unit { font-size: 0.8rem; color: $text-muted; }
+
+  &__tag {
+    font-size: 0.68rem;
+    color: $text-muted;
+    width: fit-content;
+  }
+
+  &__qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    @media (max-width: 560px) { grid-area: qty; }
+
+    button {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 1px solid $gold-border;
+      background: $gold-dim;
+      color: $gold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      transition: background 0.15s;
+
+      &:hover:not(:disabled) { background: rgba(212,175,55,0.28); }
+      &:disabled { opacity: 0.4; cursor: not-allowed; }
+    }
+
+    span { min-width: 22px; text-align: center; font-weight: 700; color: $text; font-size: 0.9rem; }
+  }
+
+  &__line {
+    font-weight: 800;
+    color: $text;
+    font-size: 1rem;
+    min-width: 78px;
+    text-align: right;
+    @media (max-width: 560px) { grid-area: line; text-align: right; }
+  }
+
+  &__remove {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(239,68,68,0.25);
+    background: rgba(239,68,68,0.08);
+    color: #ef4444;
+    cursor: pointer;
+    transition: background 0.15s;
+    @media (max-width: 560px) { grid-area: remove; justify-self: end; }
+
+    &:hover:not(:disabled) { background: rgba(239,68,68,0.18); }
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+  }
+}
+
+// ─── Summary ───────────────────────────────────────────────────────────────
+.co-summary {
+  position: sticky;
+  top: 90px;
+  background: linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: $text;
+    margin: 0 0 1.1rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: $text-soft;
+    margin-bottom: 0.7rem;
+
+    &--points { color: $gold; font-weight: 600; }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid rgba(212,175,55,0.18);
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $text;
+
+    span:last-child { @include gold-text; font-size: 1.35rem; font-weight: 800; }
+    small { font-size: 0.75rem; color: $text-muted; -webkit-text-fill-color: $text-muted; font-weight: 500; }
+  }
+
+  &__secure {
+    text-align: center;
+    font-size: 0.72rem;
+    color: $text-muted;
+    margin: 0.85rem 0 0;
+  }
+}
+
+// ─── Confirm (CoinPayments) ──────────────────────────────────────────────────
+.co-confirm {
+  max-width: 460px;
+  margin: 1rem auto 0;
+  text-align: center;
+  background: linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+
+  &__icon {
+    font-size: 2.6rem;
+    @include gold-text;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 { font-size: 1.35rem; font-weight: 800; color: $text; margin: 0 0 0.5rem; }
+  &__sub { font-size: 0.88rem; color: $text-muted; margin: 0 0 1.5rem; line-height: 1.6; }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: left;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(212,175,55,0.14);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.5rem;
+
+    div { display: flex; justify-content: space-between; align-items: center; }
+    span { font-size: 0.82rem; color: $text-muted; }
+    strong { font-size: 0.88rem; color: $text; font-weight: 700; }
+  }
+
+  .co-status { color: $gold; }
+
+  &__note {
+    font-size: 0.72rem;
+    color: $text-muted;
+    margin: 1rem 0 0;
+    line-height: 1.5;
+  }
+}
+
+// ─── Buttons ─────────────────────────────────────────────────────────────────
+.co-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include gold-gradient;
+  color: #000;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0.85rem 1.75rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 18px rgba(212,175,55,0.22);
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(212,175,55,0.35);
+  }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.co-btn-block { width: 100%; margin-top: 0.5rem; }
+
+// ─── Footer ────────────────────────────────────────────────────────────────
+.co-footer {
+  background: $black;
+  border-top: 1px solid $gold-border;
+  padding: 2rem 24px;
+
+  &__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    p { font-size: 0.8rem; color: $text-muted; margin: 0; }
+  }
+
+  &__logo { height: 32px; width: auto; }
+
+  &__links {
+    display: flex;
+    gap: 1.5rem;
+    a {
+      color: $text-muted;
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+      &:hover { color: $gold; }
+    }
+  }
+}

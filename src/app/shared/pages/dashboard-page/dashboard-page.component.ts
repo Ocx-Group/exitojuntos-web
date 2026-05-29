@@ -9,9 +9,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Data } from '@angular/router';
 
-import { HomeComponent } from '@app/client/home/home.component';
-import { HomeAdminComponent } from '@app/admin/home/home-admin.component';
-
 export type DashboardPageType = 'client' | 'admin';
 
 @Component({
@@ -19,7 +16,7 @@ export type DashboardPageType = 'client' | 'admin';
   standalone: true,
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
-  imports: [HomeComponent, HomeAdminComponent],
+  imports: [],
 })
 export class DashboardPageComponent implements OnInit {
   pageType = input<DashboardPageType>('client');
