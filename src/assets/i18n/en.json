@@ -2062,6 +2062,7 @@
         "EMAIL": "Email",
         "ID": "ID",
         "LAST-NAME": "Last Name",
+        "LEVEL": "Level",
         "NAME": "Name",
         "PHONE": "Phone",
         "REGISTERED-AT": "Registration Date",
@@ -2093,13 +2094,9 @@
         "TEXT": "Direct and Indirect Clients"
       },
       "FILTERS": {
-        "EMAIL": {
-          "LABEL": "Search by Email",
-          "PLACEHOLDER": "Enter email..."
-        },
-        "PHONE": {
-          "LABEL": "Search by Phone",
-          "PLACEHOLDER": "Enter phone..."
+        "SEARCH": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Search by name, email or phone..."
         }
       },
       "SHARE": {

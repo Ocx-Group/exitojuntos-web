@@ -110,8 +110,8 @@ export class ReusableDatatableComponent implements OnInit, OnChanges {
   @Input() actions: TableAction[] = [];
   @Input() config: TableConfig = {};
   @Input() loadingIndicator: boolean = false;
-  @Input() customButtons: TemplateRef<any>;
-  @Input() customSearch: TemplateRef<any>;
+  @Input() customButtons!: TemplateRef<any>;
+  @Input() customSearch!: TemplateRef<any>;
   @Input() externalPaging: boolean = false;
   @Input() count: number = 0;
   @Input() offset: number = 0;
@@ -121,8 +121,8 @@ export class ReusableDatatableComponent implements OnInit, OnChanges {
   @Output() filterChanged = new EventEmitter<string>();
   @Output() pageChange = new EventEmitter<{ offset: number; limit: number }>();
 
-  @ViewChild('table') table: DatatableComponent;
-  @ContentChild('actionsTemplate') actionsTemplate: TemplateRef<any>;
+  @ViewChild('table') table!: DatatableComponent;
+  @ContentChild('actionsTemplate') actionsTemplate!: TemplateRef<any>;
 
   temp: any[] = [];
   scrollBarHorizontal = window.innerWidth < 1200;

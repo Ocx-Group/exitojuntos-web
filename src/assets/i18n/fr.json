@@ -443,6 +443,7 @@
         "EMAIL": "Email",
         "ID": "ID",
         "LAST-NAME": "Nom de famille",
+        "LEVEL": "Niveau",
         "NAME": "Prénom",
         "PHONE": "Téléphone",
         "REGISTERED-AT": "Date d'inscription",
@@ -474,13 +475,9 @@
         "TEXT": "Clients directs et indirects"
       },
       "FILTERS": {
-        "EMAIL": {
-          "LABEL": "Rechercher par e-mail",
-          "PLACEHOLDER": "Saisissez un e-mail..."
-        },
-        "PHONE": {
-          "LABEL": "Rechercher par téléphone",
-          "PLACEHOLDER": "Saisissez un téléphone..."
+        "SEARCH": {
+          "LABEL": "Rechercher",
+          "PLACEHOLDER": "Rechercher par nom, e-mail ou téléphone..."
         }
       },
       "SHARE": {

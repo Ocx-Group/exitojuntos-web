@@ -26,10 +26,6 @@
                   <i class="bi bi-clipboard me-1"></i>
                   {{ 'COMMON.COPY.TEXT' | translate }}
                 </button>
-                <button class="btn btn-gold-outline btn-sm" (click)="viewCompleteNetwork()">
-                  <i class="fas fa-project-diagram me-1"></i>
-                  {{ 'MY-NETWORK-PAGE.VIEW.BUTTONS.VIEW-COMPLETE.TEXT' | translate }}
-                </button>
                 <button class="btn btn-icon-only btn-gold-outline btn-sm" (click)="refreshClients()"
                   [disabled]="loading()">
                   <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
@@ -46,28 +42,17 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <!-- Filtros de Búsqueda y Botones -->
+            <!-- Filtro unificado y Botones -->
             <div class="row mb-2 align-items-end">
-              <div class="col-md-3">
+              <div class="col-md-6">
                 <div class="form-group">
-                  <label for="searchEmail" class="form-label">
-                    <i class="fas fa-envelope me-1"></i>
-                    {{ 'MY-NETWORK-PAGE.VIEW.FILTERS.EMAIL.LABEL' | translate }}
+                  <label for="searchTerm" class="form-label">
+                    <i class="fas fa-search me-1"></i>
+                    {{ 'MY-NETWORK-PAGE.VIEW.FILTERS.SEARCH.LABEL' | translate }}
                   </label>
-                  <input type="text" id="searchEmail" class="form-control"
-                    [placeholder]="'MY-NETWORK-PAGE.VIEW.FILTERS.EMAIL.PLACEHOLDER' | translate"
-                    [(ngModel)]="searchEmail" (ngModelChange)="applyFilters()" />
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="searchPhone" class="form-label">
-                    <i class="fas fa-phone me-1"></i>
-                    {{ 'MY-NETWORK-PAGE.VIEW.FILTERS.PHONE.LABEL' | translate }}
-                  </label>
-                  <input type="text" id="searchPhone" class="form-control"
-                    [placeholder]="'MY-NETWORK-PAGE.VIEW.FILTERS.PHONE.PLACEHOLDER' | translate"
-                    [(ngModel)]="searchPhone" (ngModelChange)="applyFilters()" />
+                  <input type="text" id="searchTerm" class="form-control"
+                    [placeholder]="'MY-NETWORK-PAGE.VIEW.FILTERS.SEARCH.PLACEHOLDER' | translate"
+                    [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" />
                 </div>
               </div>
               <div class="col-md-6 d-flex justify-content-center justify-content-md-end gap-2 mb-2">

@@ -1,7 +1,6 @@
 import { Component, OnInit, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
@@ -30,7 +29,7 @@ interface ClientData {
   state: string;
   imageProfileUrl: string;
   createdAt: string;
-  level: 'direct' | 'indirect';
+  level: number;
   referredBy?: string;
   role: {
     id: number;
@@ -53,7 +52,6 @@ interface ClientData {
 export class MyNetworkComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
   private readonly clipboardService = inject(ClipboardService);
   private readonly toastr = inject(ToastrService);
@@ -70,9 +68,8 @@ export class MyNetworkComponent implements OnInit {
   protected readonly filteredClients = signal<ClientData[]>([]);
   protected readonly loading = signal<boolean>(false);
 
-  // Filtros
-  protected searchEmail: string = '';
-  protected searchPhone: string = '';
+  // Filtro unificado
+  protected searchTerm: string = '';
 
   // Configuración de la tabla
   protected columns: TableColumn[] = [];
@@ -122,10 +119,10 @@ export class MyNetworkComponent implements OnInit {
         width: 150,
       },
       {
-        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.TYPE'),
+        name: this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.LEVEL'),
         prop: 'level',
         sortable: true,
-        width: 120,
+        width: 100,
       },
       {
         name: this.translate.instant(
@@ -138,14 +135,6 @@ export class MyNetworkComponent implements OnInit {
     ];
 
     this.actions = [
-      {
-        label: this.translate.instant(
-          'MY-NETWORK-PAGE.TABLE.ACTIONS.VIEW-NETWORK',
-        ),
-        icon: 'fas fa-project-diagram',
-        class: 'btn-sm btn-success',
-        callback: (row: ClientData) => this.viewClientNetwork(row),
-      },
       {
         label: this.translate.instant(
           'MY-NETWORK-PAGE.TABLE.ACTIONS.VIEW-PROFILE',
@@ -213,59 +202,51 @@ export class MyNetworkComponent implements OnInit {
   private mapNetworkToClients(network: any[]): ClientData[] {
     if (!network || !Array.isArray(network)) return [];
 
-    const currentUserId = this.authService.currentUserAffiliateValue?.id;
-
-    return network.map(user => {
-      // Determinar si es directo o indirecto comparando el padre con el usuario actual
-      const isDirect = user.father === currentUserId;
-
-      return {
-        id: user.id,
-        name: user.full_name?.split(' ')[0] || '',
-        lastName: user.full_name?.split(' ').slice(1).join(' ') || '',
-        email: user.email || '',
-        phone: user.phone || '',
-        identification: '',
-        address: '',
-        city: user.country_name || '',
-        state: '',
-        imageProfileUrl: '',
-        createdAt: user.created_at || '',
-        level: isDirect ? 'direct' : 'indirect',
-        role: { id: 2, name: 'Cliente' },
-      };
-    });
+    return network.map(user => ({
+      id: user.id,
+      name: user.full_name?.split(' ')[0] || '',
+      lastName: user.full_name?.split(' ').slice(1).join(' ') || '',
+      email: user.email || '',
+      phone: user.phone || '',
+      identification: '',
+      address: '',
+      city: user.country_name || '',
+      state: '',
+      imageProfileUrl: '',
+      createdAt: user.created_at || '',
+      level: Number(user.level) || 0,
+      role: { id: 2, name: 'Cliente' },
+    }));
   }
 
   /**
-   * Aplica filtros de búsqueda por email y teléfono
+   * Aplica el filtro unificado contra nombre, apellido, email y teléfono
    */
   protected applyFilters(): void {
-    const emailFilter = this.searchEmail.toLowerCase().trim();
-    const phoneFilter = this.searchPhone.toLowerCase().trim();
+    const term = this.searchTerm.toLowerCase().trim();
 
-    if (!emailFilter && !phoneFilter) {
+    if (!term) {
       this.filteredClients.set(this.clients());
       return;
     }
 
     const filtered = this.clients().filter(client => {
-      const emailMatch =
-        !emailFilter || client.email.toLowerCase().includes(emailFilter);
-      const phoneMatch =
-        !phoneFilter || client.phone.toLowerCase().includes(phoneFilter);
-      return emailMatch && phoneMatch;
+      const fullName = `${client.name} ${client.lastName}`.toLowerCase();
+      return (
+        fullName.includes(term) ||
+        client.email.toLowerCase().includes(term) ||
+        client.phone.toLowerCase().includes(term)
+      );
     });
 
     this.filteredClients.set(filtered);
   }
 
   /**
-   * Limpia los filtros de búsqueda
+   * Limpia el filtro de búsqueda
    */
   protected clearFilters(): void {
-    this.searchEmail = '';
-    this.searchPhone = '';
+    this.searchTerm = '';
     this.filteredClients.set(this.clients());
   }
 
@@ -278,26 +259,11 @@ export class MyNetworkComponent implements OnInit {
   }
 
   /**
-   * Navega a la vista de red del cliente seleccionado
-   */
-  protected viewClientNetwork(client: ClientData): void {
-    console.log('Ver red de cliente:', client);
-    // Implementación futura: navegación a vista detallada de red
-  }
-
-  /**
    * Navega al perfil del cliente seleccionado
    */
   protected viewClientProfile(client: ClientData): void {
     console.log('Ver perfil de cliente:', client);
     // Implementación futura: navegación a perfil del cliente
-  }
-
-  /**
-   * Navega a la vista completa de la red
-   */
-  protected viewCompleteNetwork(): void {
-    this.router.navigate(['/app/network-tree']);
   }
 
   /**
@@ -308,35 +274,17 @@ export class MyNetworkComponent implements OnInit {
   }
 
   /**
-   * Obtiene la clase CSS para el badge según el nivel
-   */
-  protected getLevelBadgeClass(level: string): string {
-    return level === 'direct' ? 'badge bg-success' : 'badge bg-info';
-  }
-
-  /**
-   * Obtiene el texto del badge según el nivel
-   */
-  protected getLevelBadgeText(level: string): string {
-    const key =
-      level === 'direct'
-        ? 'MY-NETWORK-PAGE.LEVELS.DIRECT'
-        : 'MY-NETWORK-PAGE.LEVELS.INDIRECT';
-    return this.translate.instant(key);
-  }
-
-  /**
-   * Obtiene el número de clientes directos
+   * Obtiene el número de clientes directos (nivel 1)
    */
   protected getDirectClientsCount(): number {
-    return this.filteredClients().filter(c => c.level === 'direct').length;
+    return this.filteredClients().filter(c => c.level === 1).length;
   }
 
   /**
-   * Obtiene el número de clientes indirectos
+   * Obtiene el número de clientes indirectos (nivel > 1)
    */
   protected getIndirectClientsCount(): number {
-    return this.filteredClients().filter(c => c.level === 'indirect').length;
+    return this.filteredClients().filter(c => c.level > 1).length;
   }
 
   /**
@@ -378,7 +326,7 @@ export class MyNetworkComponent implements OnInit {
       this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.EMAIL'),
       this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.PHONE'),
       this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.CITY'),
-      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.TYPE'),
+      this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.LEVEL'),
       this.translate.instant('MY-NETWORK-PAGE.TABLE.COLUMNS.REGISTERED-AT'),
     ];
     const rows = data.map(client => [
@@ -388,9 +336,7 @@ export class MyNetworkComponent implements OnInit {
       client.email,
       client.phone,
       client.city,
-      client.level === 'direct'
-        ? this.translate.instant('MY-NETWORK-PAGE.LEVELS.DIRECT')
-        : this.translate.instant('MY-NETWORK-PAGE.LEVELS.INDIRECT'),
+      client.level,
       client.createdAt,
     ]);
 
