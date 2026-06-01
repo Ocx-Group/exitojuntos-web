@@ -31,22 +31,61 @@
     <!-- ORDER CREATED (CoinPayments) -->
     @else if (session(); as s) {
       <section class="co-confirm">
-        <div class="co-confirm__icon"><i class="fas fa-coins"></i></div>
-        <h2>Pago listo con CoinPayments</h2>
-        <p class="co-confirm__sub">
-          Te redirigiremos a la pasarela de CoinPayments para completar el pago de forma segura.
-        </p>
+        <div class="co-confirm__icon">
+          @if (isPaid()) {
+            <i class="fas fa-check-circle"></i>
+          } @else if (isCancelled()) {
+            <i class="fas fa-times-circle"></i>
+          } @else {
+            <i class="fas fa-coins"></i>
+          }
+        </div>
+
+        @if (isPaid()) {
+          <h2>¡Pago confirmado!</h2>
+          <p class="co-confirm__sub">Tu orden #{{ s.orderId }} fue pagada correctamente.</p>
+        } @else if (isCancelled()) {
+          <h2>Pago no completado</h2>
+          <p class="co-confirm__sub">La orden #{{ s.orderId }} fue cancelada o expiró.</p>
+        } @else {
+          <h2>Pago listo con CoinPayments</h2>
+          <p class="co-confirm__sub">
+            Te redirigiremos a la pasarela de CoinPayments para completar el pago de forma segura.
+          </p>
+        }
+
         <div class="co-confirm__details">
+          <div><span>Orden</span><strong>#{{ s.orderId }}</strong></div>
           <div><span>Referencia</span><strong>{{ s.txnId }}</strong></div>
           <div><span>Monto</span><strong>${{ s.amount | number:'1.2-2' }} {{ s.currency }}</strong></div>
-          <div><span>Estado</span><strong class="co-status">Pendiente de pago</strong></div>
+          <div>
+            <span>Estado</span>
+            <strong class="co-status"
+              [class.is-paid]="isPaid()"
+              [class.is-cancelled]="isCancelled()">
+              @if (checkingStatus() && !isPaid() && !isCancelled()) {
+                <i class="fas fa-circle-notch fa-spin me-1"></i>
+              }
+              {{ statusLabel() }}
+            </strong>
+          </div>
         </div>
-        <button class="co-btn-primary co-btn-block" (click)="goToCoinpayments()">
-          <i class="fas fa-external-link-alt me-2"></i>Ir a CoinPayments
-        </button>
-        <p class="co-confirm__note">
-          <i class="fas fa-info-circle me-1"></i>Si no se abrió la pasarela automáticamente, usa el botón de arriba.
-        </p>
+
+        @if (!isPaid() && !isCancelled()) {
+          <button class="co-btn-primary co-btn-block" (click)="goToCoinpayments()">
+            <i class="fas fa-external-link-alt me-2"></i>Ir a CoinPayments
+          </button>
+          <button class="co-btn-ghost co-btn-block" (click)="refreshStatus()" [disabled]="checkingStatus()">
+            <i class="fas fa-rotate-right me-2"></i>Ya pagué, verificar estado
+          </button>
+          <p class="co-confirm__note">
+            <i class="fas fa-info-circle me-1"></i>El estado se actualiza automáticamente cuando CoinPayments confirme el pago.
+          </p>
+        } @else {
+          <button class="co-btn-primary co-btn-block" (click)="backToProducts()">
+            <i class="fas fa-store me-2"></i>Seguir comprando
+          </button>
+        }
       </section>
     }
 
@@ -58,6 +97,64 @@
       </header>
 
       <div class="co-layout">
+
+        <div class="co-left">
+
+        <!-- Shipping form -->
+        <section class="co-form" [formGroup]="shippingForm">
+          <h2 class="co-form__title"><i class="fas fa-truck me-2"></i>Datos de envío</h2>
+          <div class="co-form__grid">
+            <label class="co-field co-field--full">
+              <span>Nombre completo *</span>
+              <input type="text" formControlName="shippingName" placeholder="Juan Pérez"
+                [class.is-invalid]="isInvalid('shippingName')" />
+              @if (isInvalid('shippingName')) { <small>Ingresa el nombre del destinatario</small> }
+            </label>
+
+            <label class="co-field co-field--full">
+              <span>Correo *</span>
+              <input type="email" formControlName="shippingEmail" placeholder="correo@email.com"
+                [class.is-invalid]="isInvalid('shippingEmail')" />
+              @if (isInvalid('shippingEmail')) { <small>Ingresa un correo válido</small> }
+            </label>
+
+            <label class="co-field co-field--full">
+              <span>Dirección *</span>
+              <input type="text" formControlName="shippingAddress" placeholder="Av. Principal 123"
+                [class.is-invalid]="isInvalid('shippingAddress')" />
+              @if (isInvalid('shippingAddress')) { <small>Ingresa la dirección de entrega</small> }
+            </label>
+
+            <label class="co-field">
+              <span>Ciudad *</span>
+              <input type="text" formControlName="shippingCity" placeholder="Ciudad"
+                [class.is-invalid]="isInvalid('shippingCity')" />
+              @if (isInvalid('shippingCity')) { <small>Requerido</small> }
+            </label>
+
+            <label class="co-field">
+              <span>Provincia / Estado *</span>
+              <input type="text" formControlName="shippingProvince" placeholder="Provincia"
+                [class.is-invalid]="isInvalid('shippingProvince')" />
+              @if (isInvalid('shippingProvince')) { <small>Requerido</small> }
+            </label>
+
+            <label class="co-field">
+              <span>Código postal</span>
+              <input type="text" formControlName="shippingPostalCode" placeholder="000000" />
+            </label>
+
+            <label class="co-field">
+              <span>Teléfono</span>
+              <input type="text" formControlName="shippingPhone" placeholder="+57 300 000 0000" />
+            </label>
+
+            <label class="co-field co-field--full">
+              <span>Notas (opcional)</span>
+              <textarea formControlName="notes" rows="2" placeholder="Indicaciones de entrega"></textarea>
+            </label>
+          </div>
+        </section>
 
         <!-- Items -->
         <div class="co-items">
@@ -106,6 +203,8 @@
               </button>
             </article>
           }
+        </div>
+
         </div>
 
         <!-- Summary -->

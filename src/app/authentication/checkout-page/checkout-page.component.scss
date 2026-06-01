@@ -98,6 +98,72 @@ $text-soft:   rgba(255,255,255,0.78);
   @media (max-width: 880px) { grid-template-columns: 1fr; }
 }
 
+// ─── Left column ─────────────────────────────────────────────────────────────
+.co-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+// ─── Shipping form ───────────────────────────────────────────────────────────
+.co-form {
+  background: linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.012) 100%);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 18px;
+  padding: 1.5rem;
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: $text;
+    margin: 0 0 1.1rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+
+    @media (max-width: 560px) { grid-template-columns: 1fr; }
+  }
+}
+
+.co-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  &--full { grid-column: 1 / -1; }
+
+  span { font-size: 0.78rem; color: $text-soft; font-weight: 600; }
+
+  input,
+  textarea {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 9px;
+    padding: 0.65rem 0.8rem;
+    color: $text;
+    font-size: 0.88rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+
+    &::placeholder { color: rgba(255,255,255,0.28); }
+
+    &:focus {
+      outline: none;
+      border-color: $gold;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+
+    &.is-invalid { border-color: #ef4444; }
+  }
+
+  small { font-size: 0.7rem; color: #f87171; }
+}
+
 // ─── Items ─────────────────────────────────────────────────────────────────
 .co-items {
   display: flex;
@@ -307,7 +373,14 @@ $text-soft:   rgba(255,255,255,0.78);
     strong { font-size: 0.88rem; color: $text; font-weight: 700; }
   }
 
-  .co-status { color: $gold; }
+  .co-status {
+    color: $gold;
+    display: inline-flex;
+    align-items: center;
+
+    &.is-paid { color: #22c55e; }
+    &.is-cancelled { color: #ef4444; }
+  }
 
   &__note {
     font-size: 0.72rem;
@@ -344,6 +417,24 @@ $text-soft:   rgba(255,255,255,0.78);
 }
 
 .co-btn-block { width: 100%; margin-top: 0.5rem; }
+
+.co-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: $gold;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.7rem 1.5rem;
+  border: 1px solid $gold-border;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+
+  &:hover:not(:disabled) { background: $gold-dim; border-color: $gold; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
 
 // ─── Footer ────────────────────────────────────────────────────────────────
 .co-footer {

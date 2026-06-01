@@ -5,6 +5,8 @@ import { environment } from '@environments/environment';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 
 export interface CheckoutSession {
+  /** Id de la orden creada en el backend. */
+  orderId: number;
   /** Identificador de la factura de CoinPayments. */
   txnId: string;
   /** URL hosted de CoinPayments a la que se redirige al usuario. */
@@ -21,6 +23,8 @@ export interface CheckoutSession {
 
 /** Respuesta cruda del backend (`POST /coinpayments/checkout`). */
 interface CheckoutSessionResult {
+  orderId: number;
+  transactionId: number;
   invoiceId: string;
   checkoutUrl: string;
   statusUrl: string;
@@ -33,6 +37,30 @@ interface CheckoutSessionResult {
 interface CheckoutResponse {
   success: boolean;
   data: CheckoutSessionResult;
+}
+
+/** Estado de una orden devuelto por el backend. */
+export interface OrderStatusResult {
+  id: number;
+  status: string;
+}
+
+interface OrderResponse {
+  success: boolean;
+  data: { id: number; status: string };
+}
+
+/** Datos de envío que se envían al backend (todos opcionales). */
+export interface CheckoutShippingData {
+  shippingEmail?: string;
+  shippingName?: string;
+  shippingAddress?: string;
+  shippingCity?: string;
+  shippingProvince?: string;
+  shippingPostalCode?: string;
+  shippingPhone?: string;
+  shippingCost?: number;
+  notes?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -54,19 +82,24 @@ export class CheckoutService {
    * se calcula en el servidor), llama a la API de CoinPayments y devuelve la URL
    * hosted a la que redirigimos. La clave/HMAC privada nunca vive en el frontend.
    *
+   * @param shipping Datos de envío para crear la orden.
    * @param currency Moneda mostrada en la UI (la denominación real la define el backend).
    */
-  createCoinpaymentsCheckout(currency = 'USD'): Observable<CheckoutSession> {
+  createCoinpaymentsCheckout(
+    shipping: CheckoutShippingData,
+    currency = 'USD',
+  ): Observable<CheckoutSession> {
     return this.http
       .post<CheckoutResponse>(
         `${this.baseUrl}/checkout`,
-        {},
+        shipping,
         { headers: this.authHeaders },
       )
       .pipe(
         map((response) => {
           const data = response.data;
           return {
+            orderId: data.orderId,
             txnId: data.invoiceId,
             checkoutUrl: data.checkoutUrl,
             statusUrl: data.statusUrl,
@@ -78,5 +111,14 @@ export class CheckoutService {
           } satisfies CheckoutSession;
         }),
       );
+  }
+
+  /** Consulta el estado real de una orden propia (`GET /orders/my/:id`). */
+  getOrderStatus(orderId: number): Observable<OrderStatusResult> {
+    return this.http
+      .get<OrderResponse>(`${environment.apiUrl}/orders/my/${orderId}`, {
+        headers: this.authHeaders,
+      })
+      .pipe(map((response) => ({ id: response.data.id, status: response.data.status })));
   }
 }
