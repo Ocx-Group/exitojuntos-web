@@ -130,7 +130,7 @@ export class CheckoutPageComponent implements OnInit {
 
     this.processing.set(true);
     this.checkoutService
-      .createCoinpaymentsCheckout(this.total(), this.currency)
+      .createCoinpaymentsCheckout(this.currency)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: session => {

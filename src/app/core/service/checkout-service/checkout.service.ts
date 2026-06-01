@@ -1,55 +1,82 @@
-import { Injectable } from '@angular/core';
-import { Observable, delay, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { environment } from '@environments/environment';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
 
 export interface CheckoutSession {
-  /** Identificador de la transacción CoinPayments. */
+  /** Identificador de la factura de CoinPayments. */
   txnId: string;
   /** URL hosted de CoinPayments a la que se redirige al usuario. */
   checkoutUrl: string;
+  /** URL para consultar el estado de la factura. */
+  statusUrl?: string;
+  /** URL del código QR de pago. */
+  qrCodeUrl?: string;
   amount: number;
   currency: string;
-  status: 'pending';
+  status: string;
   createdAt: string;
+}
+
+/** Respuesta cruda del backend (`POST /coinpayments/checkout`). */
+interface CheckoutSessionResult {
+  invoiceId: string;
+  checkoutUrl: string;
+  statusUrl: string;
+  qrCodeUrl: string;
+  amount: number;
+  status: string;
+  expiresAt: string;
+}
+
+interface CheckoutResponse {
+  success: boolean;
+  data: CheckoutSessionResult;
 }
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
-  /**
-   * MODO DEMO — simula la creación de un checkout hosted de CoinPayments.
-   *
-   * La clave/HMAC privada de CoinPayments NUNCA debe vivir en el frontend, así
-   * que en producción esto debe ser una llamada al backend. El backend crea la
-   * transacción con la API de CoinPayments (cmd=create_transaction) y devuelve
-   * la URL hosted a la que redirigimos.
-   *
-   * Para conectar el backend real, inyecta HttpClient + AuthService y reemplaza
-   * el cuerpo por:
-   *
-   *   return this.http
-   *     .post<{ data: CheckoutSession }>(
-   *       `${environment.apiUrl}/checkout/coinpayments`,
-   *       { currency },
-   *       { headers: { Authorization: `Bearer ${token}` } },
-   *     )
-   *     .pipe(map(r => r.data));
-   */
-  createCoinpaymentsCheckout(
-    amount: number,
-    currency = 'USD',
-  ): Observable<CheckoutSession> {
-    const session: CheckoutSession = {
-      txnId: this.fakeTxnId(),
-      checkoutUrl: 'https://www.coinpayments.net/index.php?cmd=checkout&demo=1',
-      amount: Math.round(amount * 100) / 100,
-      currency,
-      status: 'pending',
-      createdAt: new Date().toISOString(),
-    };
-    // Simula la latencia de la llamada al backend.
-    return of(session).pipe(delay(1200));
+  private readonly baseUrl = `${environment.apiUrl}/coinpayments`;
+  private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
+
+  private get authHeaders(): HttpHeaders {
+    const token =
+      this.authService.currentUserAffiliateValue?.access_token ?? '';
+    return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
   }
 
-  private fakeTxnId(): string {
-    return 'DEMO-' + Math.random().toString(36).slice(2, 10).toUpperCase();
+  /**
+   * Crea un checkout hosted de CoinPayments en el backend.
+   *
+   * El backend construye la factura a partir del carrito del usuario (el monto
+   * se calcula en el servidor), llama a la API de CoinPayments y devuelve la URL
+   * hosted a la que redirigimos. La clave/HMAC privada nunca vive en el frontend.
+   *
+   * @param currency Moneda mostrada en la UI (la denominación real la define el backend).
+   */
+  createCoinpaymentsCheckout(currency = 'USD'): Observable<CheckoutSession> {
+    return this.http
+      .post<CheckoutResponse>(
+        `${this.baseUrl}/checkout`,
+        {},
+        { headers: this.authHeaders },
+      )
+      .pipe(
+        map((response) => {
+          const data = response.data;
+          return {
+            txnId: data.invoiceId,
+            checkoutUrl: data.checkoutUrl,
+            statusUrl: data.statusUrl,
+            qrCodeUrl: data.qrCodeUrl,
+            amount: data.amount,
+            currency,
+            status: data.status,
+            createdAt: new Date().toISOString(),
+          } satisfies CheckoutSession;
+        }),
+      );
   }
 }
