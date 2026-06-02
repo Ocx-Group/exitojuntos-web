@@ -2033,6 +2033,9 @@
     },
     "ORDERS-MANAGEMENT": {
       "TEXT": "Órdenes"
+    },
+    "MY-ORDERS": {
+      "TEXT": "Mis Órdenes"
     }
   },
   "MY-NETWORK-PAGE": {

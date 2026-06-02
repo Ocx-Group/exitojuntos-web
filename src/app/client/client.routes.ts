@@ -36,6 +36,14 @@ export const CLIENT_ROUTES: Routes = [
     canActivate: [AuthGuard, MaintenanceGuard],
   },
   {
+    path: 'my-orders',
+    loadComponent: () =>
+      import('./my-orders/my-orders.component').then(
+        m => m.MyOrdersComponent,
+      ),
+    canActivate: [AuthGuard, MaintenanceGuard],
+  },
+  {
     path: 'network-tree',
     loadComponent: () =>
       import(

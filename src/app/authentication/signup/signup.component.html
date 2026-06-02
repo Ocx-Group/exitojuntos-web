@@ -50,7 +50,7 @@
     <!-- Form container -->
     <div class="signup-form-container">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="signup-form">
-        <div class="google-registration">
+        <div class="google-registration" style="display:none">
           <div id="google-register-button" class="google-button-container"></div>
           @if (googleRegistrationActive) {
             <div class="google-registration-status">

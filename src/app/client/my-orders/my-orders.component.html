@@ -1,0 +1,216 @@
+<section class="section my-orders-page">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Mis Órdenes</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/app/dashboard"><i class="fas fa-home font-17"></i></a>
+    </li>
+  </ul>
+
+  <div class="section-body">
+
+    <!-- Detail panel -->
+    @if (selectedOrder(); as order) {
+      <div class="mo-detail mb-4">
+        <div class="mo-detail__header">
+          <h3 class="mo-detail__title">
+            <i class="fas fa-receipt me-2"></i>Orden #{{ order.id }}
+            <span class="mo-status ms-2" [ngClass]="statusClass(order.status)">
+              {{ STATUS_LABELS[order.status] }}
+            </span>
+          </h3>
+          <button class="mo-btn-close" (click)="closeDetail()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="mo-detail__body">
+          <!-- Shipping -->
+          <div class="mo-detail__section">
+            <h6 class="mo-detail__section-title">
+              <i class="fas fa-truck me-1"></i>Datos de envío
+            </h6>
+            <p class="mb-1 fw-bold text-white">{{ order.shippingName }}</p>
+            <p class="mb-1 mo-muted">{{ order.shippingEmail }}</p>
+            @if (order.shippingPhone) {
+              <p class="mb-1 mo-muted"><i class="fas fa-phone me-1"></i>{{ order.shippingPhone }}</p>
+            }
+            <p class="mb-0 mo-muted">
+              {{ order.shippingAddress }},
+              {{ order.shippingCity }}, {{ order.shippingProvince }}
+              @if (order.shippingPostalCode) { · {{ order.shippingPostalCode }} }
+            </p>
+            @if (order.notes) {
+              <p class="mb-0 mo-muted mt-1">
+                <i class="fas fa-sticky-note me-1"></i>{{ order.notes }}
+              </p>
+            }
+          </div>
+
+          <!-- Products -->
+          <div class="mo-detail__section mo-detail__section--grow">
+            <h6 class="mo-detail__section-title">
+              <i class="fas fa-box me-1"></i>Productos
+            </h6>
+            @if (order.details?.length) {
+              <div class="mo-items">
+                @for (d of order.details; track d.id) {
+                  <div class="mo-item">
+                    <div class="mo-item__img">
+                      @if (d.product?.image) {
+                        <img [src]="d.product!.image" [alt]="d.product?.name" />
+                      } @else {
+                        <i class="fas fa-box"></i>
+                      }
+                    </div>
+                    <div class="mo-item__info">
+                      <span class="mo-item__name">{{ d.product?.name ?? 'Producto #' + d.productId }}</span>
+                      <span class="mo-muted small">{{ d.quantity }} × ${{ d.unitPrice | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="mo-item__total">${{ lineTotal(d) | number:'1.2-2' }}</div>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="mo-muted">Sin ítems cargados.</p>
+            }
+          </div>
+
+          <!-- Totals -->
+          <div class="mo-detail__section">
+            <h6 class="mo-detail__section-title">
+              <i class="fas fa-calculator me-1"></i>Totales
+            </h6>
+            <div class="mo-totals">
+              <div class="mo-totals__row">
+                <span class="mo-muted">Subtotal</span>
+                <span>${{ order.subtotal | number:'1.2-2' }}</span>
+              </div>
+              <div class="mo-totals__row">
+                <span class="mo-muted">Impuestos</span>
+                <span>${{ order.taxAmount | number:'1.2-2' }}</span>
+              </div>
+              @if (+order.discountAmount > 0) {
+                <div class="mo-totals__row mo-totals__row--discount">
+                  <span>Descuento</span>
+                  <span>-${{ order.discountAmount | number:'1.2-2' }}</span>
+                </div>
+              }
+              <div class="mo-totals__row mo-totals__row--total">
+                <span>Total</span>
+                <span>${{ order.total | number:'1.2-2' }} <small>{{ order.currency }}</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        @if (canCancel(order)) {
+          <div class="mo-detail__footer">
+            <button class="mo-btn-cancel"
+              [disabled]="cancellingId() === order.id"
+              (click)="cancelOrder(order)">
+              @if (cancellingId() === order.id) {
+                <i class="fas fa-spinner fa-spin me-1"></i>Cancelando...
+              } @else {
+                <i class="fas fa-times-circle me-1"></i>Cancelar orden
+              }
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Orders list -->
+    @if (loading()) {
+      <div class="mo-loading">
+        <div class="mo-spinner"></div>
+      </div>
+    } @else if (orders().length === 0) {
+      <div class="mo-empty">
+        <i class="fas fa-shopping-bag mo-empty__icon"></i>
+        <h3>No tienes órdenes aún</h3>
+        <p>Cuando realices una compra aparecerá aquí.</p>
+        <a routerLink="/products" class="mo-btn-primary">
+          <i class="fas fa-store me-2"></i>Ir a la tienda
+        </a>
+      </div>
+    } @else {
+      <div class="mo-list">
+        @for (order of orders(); track trackById($index, order)) {
+          <div class="mo-card" [class.mo-card--active]="selectedOrder()?.id === order.id">
+            <div class="mo-card__header" (click)="viewDetail(order)">
+              <div class="mo-card__id">#{{ order.id }}</div>
+              <span class="mo-status" [ngClass]="statusClass(order.status)">
+                {{ STATUS_LABELS[order.status] }}
+              </span>
+            </div>
+
+            <div class="mo-card__body" (click)="viewDetail(order)">
+              <div class="mo-card__info">
+                <div class="mo-card__info-row">
+                  <i class="fas fa-map-marker-alt me-1"></i>
+                  {{ order.shippingCity }}, {{ order.shippingProvince }}
+                </div>
+                <div class="mo-card__info-row">
+                  <i class="fas fa-calendar me-1"></i>
+                  {{ order.createdAt | date:'dd/MM/yyyy' }}
+                </div>
+                @if (order.details?.length) {
+                  <div class="mo-card__info-row">
+                    <i class="fas fa-box me-1"></i>
+                    {{ order.details!.length }} {{ order.details!.length === 1 ? 'producto' : 'productos' }}
+                  </div>
+                }
+              </div>
+              <div class="mo-card__total">
+                ${{ order.total | number:'1.2-2' }}
+                <small>{{ order.currency }}</small>
+              </div>
+            </div>
+
+            <div class="mo-card__footer">
+              <button class="mo-btn-ghost" (click)="viewDetail(order)" [disabled]="loadingDetail()">
+                <i class="fas fa-eye me-1"></i>
+                {{ selectedOrder()?.id === order.id ? 'Ocultar detalle' : 'Ver detalle' }}
+              </button>
+              @if (canCancel(order)) {
+                <button class="mo-btn-cancel-sm"
+                  [disabled]="cancellingId() === order.id"
+                  (click)="cancelOrder(order)">
+                  <i class="fas fa-times me-1"></i>Cancelar
+                </button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (meta().totalPages > 1) {
+        <div class="mo-pagination">
+          <small class="mo-muted">
+            Página {{ meta().page }} de {{ meta().totalPages }} — {{ meta().total }} órdenes
+          </small>
+          <div class="mo-pagination__btns">
+            <button class="mo-page-btn"
+              [disabled]="meta().page === 1"
+              (click)="onPageChange(meta().page - 1)">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            @for (p of pages(); track p) {
+              <button class="mo-page-btn" [class.mo-page-btn--active]="p === meta().page"
+                (click)="onPageChange(p)">{{ p }}</button>
+            }
+            <button class="mo-page-btn"
+              [disabled]="meta().page === meta().totalPages"
+              (click)="onPageChange(meta().page + 1)">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      }
+    }
+
+  </div>
+</section>

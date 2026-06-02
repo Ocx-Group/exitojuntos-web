@@ -414,6 +414,9 @@
     },
     "ORDERS-MANAGEMENT": {
       "TEXT": "Pedidos"
+    },
+    "MY-ORDERS": {
+      "TEXT": "Meus Pedidos"
     }
   },
   "MY-NETWORK-PAGE": {

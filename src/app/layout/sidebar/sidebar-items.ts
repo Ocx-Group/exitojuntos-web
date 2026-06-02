@@ -12,6 +12,17 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
+    path: '/app/my-orders',
+    title: 'MENUITEMS.MY-ORDERS.TEXT',
+    iconType: 'feather',
+    icon: 'shopping-bag',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
+  {
     path: '/app/my-network',
     title: 'MENUITEMS.MY-NETWORK.TEXT',
     iconType: 'feather',
