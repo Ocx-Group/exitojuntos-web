@@ -1,3 +1,7 @@
+:host {
+  color: rgba(255, 255, 255, 0.95);
+}
+
 // Labels visibles sobre fondo oscuro de las cards
 .card-body {
   .form-label {
@@ -23,7 +27,7 @@
 
   .input-group-text {
     color: #d0d4dc;
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: #181818;
     border-color: rgba(255, 255, 255, 0.15);
   }
 }
@@ -194,4 +198,125 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+}
+
+// ── Form controls: dark golden theme ──────────────────────────────────────
+.form-control,
+.form-select {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 215, 0, 0.3) !important;
+  color: #ffffff !important;
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.09) !important;
+    border-color: #ffd700 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.12) !important;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.form-check-input {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 215, 0, 0.3);
+
+  &:checked {
+    background-color: #d4af37;
+    border-color: #d4af37;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+  border: none;
+  color: #000000;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+    color: #000000;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+// ── Dark golden theme: table ───────────────────────────────────────────────
+// Global _table.scss sets thead th { background: #ececec; color: #666 } — override
+// Global _table.scss sets tr/tbody { border: #ececec !important } — override
+// Explicit background-color on td/th (not just CSS vars) so the linter and
+// browsers that don't propagate --bs-table-bg both render the dark background.
+.table {
+  --bs-table-bg: #111214;
+  --bs-table-color: #e0e0e0;
+  --bs-table-hover-bg: #1c1912;
+  --bs-table-hover-color: #ffffff;
+
+  td,
+  th {
+    background-color: #111214;
+    color: #e0e0e0;
+  }
+
+  thead th {
+    background-color: #0c0e10 !important;
+    color: rgba(212, 175, 55, 0.85) !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+  }
+
+  tr,
+  tbody {
+    border-color: rgba(212, 175, 55, 0.12) !important;
+  }
+
+  .text-muted {
+    color: #8e8e8e !important;
+  }
+
+  strong {
+    color: #ffffff;
+  }
+
+  small {
+    color: #aaaaaa;
+  }
+}
+
+// Global _card.scss: .card-body p { color: #212529 } — invisible on dark bg
+.card-body p {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+// Global _black.scss sets .page-link { background-color: #fff } — override
+.pagination {
+  .page-link {
+    background-color: #141416 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+
+    &:hover {
+      background-color: #1c1912 !important;
+      border-color: rgba(212, 175, 55, 0.4) !important;
+      color: #d4af37 !important;
+    }
+  }
+
+  .page-item {
+    &.active .page-link {
+      background-color: #d4af37 !important;
+      border-color: #d4af37 !important;
+      color: #000000 !important;
+      font-weight: 600;
+    }
+
+    &.disabled .page-link {
+      background-color: #0d0d0d !important;
+      border-color: rgba(255, 255, 255, 0.06) !important;
+      color: rgba(255, 255, 255, 0.2) !important;
+    }
+  }
 }

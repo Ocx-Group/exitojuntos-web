@@ -1,15 +1,129 @@
+:host {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+// ── Badges ─────────────────────────────────────────────────────────────────
+.badge-warning   { background-color: #ffc107; color: #000; }
+.badge-success   { background-color: #1e7e34; color: #fff; }
+.badge-info      { background-color: #117a8b; color: #fff; }
+.badge-primary   { background-color: #0062cc; color: #fff; }
+.badge-danger    { background-color: #dc3545; color: #fff; }
+.badge-secondary { background-color: #6c757d; color: #fff; }
+
+// ── Table: align vertical and dark golden skin ──────────────────────────────
+.table > :not(caption) > * > * {
+  vertical-align: middle;
+}
+
 .status-select {
   min-width: 140px;
   font-size: 0.78rem;
 }
 
-.table > :not(caption) > * > * {
-  vertical-align: middle;
+.table-dark {
+  // CSS variables: match the app's #111214 dark bg, gold-tinted borders
+  --bs-table-bg: #111214;
+  --bs-table-border-color: rgba(212, 175, 55, 0.15);
+  --bs-table-hover-bg: rgba(212, 175, 55, 0.07);
+  --bs-table-hover-color: #ffffff;
+  --bs-table-color: rgba(255, 255, 255, 0.88);
+
+  // Global _table.scss sets thead th { background: #ececec; color: #666 } — override
+  thead th {
+    background-color: #0c0e10 !important;
+    color: rgba(212, 175, 55, 0.85) !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+    font-size: 0.73rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  // Global _table.scss sets tr/tbody border: #ececec !important — override
+  tr,
+  tbody {
+    border-color: rgba(212, 175, 55, 0.12) !important;
+  }
+
+  // text-muted inside dark table: Bootstrap default color is dark (invisible on dark bg)
+  .text-muted {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
 }
 
-.badge-warning  { background-color: #ffc107; color: #000; }
-.badge-success  { background-color: #28a745; color: #fff; }
-.badge-info     { background-color: #17a2b8; color: #fff; }
-.badge-primary  { background-color: #007bff; color: #fff; }
-.badge-danger   { background-color: #dc3545; color: #fff; }
-.badge-secondary { background-color: #6c757d; color: #fff; }
+// ── Detail order card ───────────────────────────────────────────────────────
+.detail-card {
+  background: #0a0a0a !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.08);
+
+  .card-header {
+    background: rgba(10, 10, 12, 0.95) !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+  }
+
+  .card-body {
+    // Global _card.scss sets .card-body p { color: #212529 } — invisible on dark bg
+    p {
+      color: rgba(255, 255, 255, 0.82) !important;
+    }
+
+    strong {
+      color: #ffffff !important;
+    }
+
+    small {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    // Section labels (text-muted h6)
+    h6 {
+      color: rgba(212, 175, 55, 0.8) !important;
+      font-size: 0.73rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    // Bootstrap text-muted inside detail card: dark color on dark bg
+    .text-muted {
+      color: rgba(255, 255, 255, 0.55) !important;
+    }
+
+    // List items in products section
+    .list-group-item {
+      background: transparent !important;
+      border-color: rgba(212, 175, 55, 0.12) !important;
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
+// ── Pagination: dark golden theme ───────────────────────────────────────────
+// Global _black.scss sets page-link { background-color: #fff } — override
+.pagination {
+  .page-link {
+    background-color: #141416 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+
+    &:hover {
+      background-color: #1c1912 !important;
+      border-color: rgba(212, 175, 55, 0.4) !important;
+      color: #d4af37 !important;
+    }
+  }
+
+  .page-item {
+    &.active .page-link {
+      background-color: #d4af37 !important;
+      border-color: #d4af37 !important;
+      color: #000000 !important;
+      font-weight: 600;
+    }
+
+    &.disabled .page-link {
+      background-color: #0d0d0d !important;
+      border-color: rgba(255, 255, 255, 0.06) !important;
+      color: rgba(255, 255, 255, 0.2) !important;
+    }
+  }
+}
