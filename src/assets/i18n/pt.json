@@ -411,6 +411,9 @@
     },
     "PRODUCTS-MANAGEMENT": {
       "TEXT": "Produtos"
+    },
+    "ORDERS-MANAGEMENT": {
+      "TEXT": "Pedidos"
     }
   },
   "MY-NETWORK-PAGE": {

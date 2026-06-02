@@ -24,6 +24,17 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     submenu: [],
   },
   {
+    path: '/admin/orders-management',
+    title: 'MENUITEMS.ORDERS-MANAGEMENT.TEXT',
+    iconType: 'feather',
+    icon: 'shopping-cart',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
+  {
     path: '/admin/testimonials-management',
     title: 'MENUITEMS.TESTIMONIALS-MANAGEMENT.TEXT',
     iconType: 'feather',

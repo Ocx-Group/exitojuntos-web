@@ -2030,6 +2030,9 @@
     },
     "WALLET": {
       "TEXT": "My wallet"
+    },
+    "ORDERS-MANAGEMENT": {
+      "TEXT": "Orders"
     }
   },
   "MY-NETWORK-PAGE": {
