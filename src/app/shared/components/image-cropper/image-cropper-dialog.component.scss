@@ -1,0 +1,108 @@
+$gold:        #d4af37;
+$gold-bright: #ffd700;
+$gold-border: rgba(212, 175, 55, 0.25);
+
+.cr-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cr-modal {
+  background: #111111;
+  border: 1px solid $gold-border;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+.cr-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+}
+.cr-hint {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 1rem;
+}
+
+.cr-viewport {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #000;
+  border-radius: 12px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+
+  &:active { cursor: grabbing; }
+  &.is-round { border-radius: 50%; }
+
+  .cr-img {
+    position: absolute;
+    max-width: none;
+    pointer-events: none;
+  }
+
+  .cr-frame {
+    position: absolute;
+    inset: 0;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.7) inset;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+.cr-zoom {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.1rem 0 1.3rem;
+
+  &__small { font-size: 0.7rem; color: rgba(255, 255, 255, 0.45); }
+  &__big { font-size: 1.05rem; color: rgba(255, 255, 255, 0.45); }
+
+  input[type='range'] {
+    flex: 1;
+    accent-color: $gold;
+    cursor: pointer;
+  }
+}
+
+.cr-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.cr-btn {
+  border-radius: 9px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &--ghost {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.7);
+    &:hover { color: #fff; border-color: rgba(255, 255, 255, 0.35); }
+  }
+  &--primary {
+    background: linear-gradient(135deg, $gold 0%, $gold-bright 100%);
+    color: #000;
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+}

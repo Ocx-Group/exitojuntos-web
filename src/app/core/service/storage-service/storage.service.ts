@@ -31,4 +31,19 @@ export class StorageService {
       })
       .pipe(map(r => r.data.url));
   }
+
+  /** Subida permitida a cualquier usuario autenticado (logo/banner de tienda). */
+  uploadStoreAsset(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http
+      .post<{
+        success: boolean;
+        data: { url: string };
+      }>(`${this.baseUrl}/store-asset`, formData, {
+        headers: this.authHeaders,
+      })
+      .pipe(map(r => r.data.url));
+  }
 }

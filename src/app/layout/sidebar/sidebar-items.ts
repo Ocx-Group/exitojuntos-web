@@ -33,4 +33,15 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: '/app/my-store',
+    title: 'MENUITEMS.MY-STORE.TEXT',
+    iconType: 'feather',
+    icon: 'shopping-cart',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];

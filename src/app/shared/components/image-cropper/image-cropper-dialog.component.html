@@ -1,0 +1,54 @@
+<div class="cr-backdrop" (click)="cancel()">
+  <div class="cr-modal" (click)="$event.stopPropagation()">
+    <h3 class="cr-title">{{ title }}</h3>
+    <p class="cr-hint">Arrastra para encuadrar y usa el control para acercar.</p>
+
+    <div
+      class="cr-viewport"
+      [class.is-round]="round"
+      [style.width.px]="vw()"
+      [style.height.px]="vh()"
+      (pointerdown)="startDrag($event)"
+    >
+      <img
+        #imgEl
+        class="cr-img"
+        [src]="src"
+        (load)="onLoad()"
+        draggable="false"
+        [style.width.px]="dispW()"
+        [style.height.px]="dispH()"
+        [style.left.px]="offsetX()"
+        [style.top.px]="offsetY()"
+      />
+      <div class="cr-frame"></div>
+    </div>
+
+    <div class="cr-zoom">
+      <i class="fas fa-image cr-zoom__small"></i>
+      <input
+        type="range"
+        min="1"
+        max="3"
+        step="0.01"
+        [value]="zoom()"
+        (input)="onZoom($event)"
+      />
+      <i class="fas fa-image cr-zoom__big"></i>
+    </div>
+
+    <div class="cr-actions">
+      <button type="button" class="cr-btn cr-btn--ghost" (click)="cancel()">
+        Cancelar
+      </button>
+      <button
+        type="button"
+        class="cr-btn cr-btn--primary"
+        [disabled]="!loaded()"
+        (click)="confirm()"
+      >
+        <i class="fas fa-crop-simple me-1"></i>Recortar y subir
+      </button>
+    </div>
+  </div>
+</div>

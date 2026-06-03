@@ -1,0 +1,274 @@
+<section class="section my-store-page">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Mi Tienda</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/app/dashboard"><i class="fas fa-home font-17"></i></a>
+    </li>
+  </ul>
+
+  <div class="section-body">
+
+    @if (loading()) {
+      <div class="ms-loading">
+        <div class="ms-spinner"></div>
+      </div>
+    } @else {
+
+      <!-- Hero -->
+      <div class="ms-hero mb-4">
+        <div class="ms-hero__icon"><i class="fas fa-store"></i></div>
+        <div class="ms-hero__text">
+          <h1 class="ms-hero__title">Mi Tienda</h1>
+          <p class="ms-hero__subtitle">
+            Comparte tu enlace, personaliza tu tienda y revisa las ventas que generas.
+          </p>
+        </div>
+        @if (store(); as s) {
+          <span class="ms-store-status" [class.is-active]="s.status === 'active'">
+            <i class="fas fa-circle"></i>
+            {{ s.status === 'active' ? 'Activa' : 'Pausada' }}
+          </span>
+        }
+      </div>
+
+      <!-- Tabs -->
+      <nav class="ms-tabs">
+        <button class="ms-tab" [class.is-active]="tab() === 'share'" (click)="setTab('share')">
+          <i class="fas fa-share-nodes"></i><span>Compartir</span>
+        </button>
+        <button class="ms-tab" [class.is-active]="tab() === 'products'" (click)="setTab('products')">
+          <i class="fas fa-star"></i><span>Destacados</span>
+          @if (featuredCount() > 0) { <span class="ms-tab__count">{{ featuredCount() }}</span> }
+        </button>
+        <button class="ms-tab" [class.is-active]="tab() === 'sales'" (click)="setTab('sales')">
+          <i class="fas fa-chart-line"></i><span>Ventas</span>
+        </button>
+      </nav>
+
+      <!-- ── COMPARTIR + BRANDING ── -->
+      @if (tab() === 'share') {
+        <section class="ms-card">
+          <h2 class="ms-card__title"><i class="fas fa-link me-2"></i>Tu enlace de tienda</h2>
+          <p class="ms-muted">Quien compre entrando por este enlace queda asociado a tu tienda.</p>
+          <div class="ms-share-row">
+            <input class="ms-input ms-input--readonly" type="text" [value]="shareUrl()" readonly />
+            <button class="ms-btn-primary" (click)="copyLink()">
+              <i class="fas fa-copy me-1"></i>Copiar enlace
+            </button>
+          </div>
+        </section>
+
+        <section class="ms-card">
+          <h2 class="ms-card__title"><i class="fas fa-palette me-2"></i>Personalización</h2>
+          <p class="ms-muted">Dale identidad a tu tienda con nombre, logo y banner.</p>
+          <div class="ms-form-grid">
+            <label class="ms-field">
+              <span class="ms-field__label">Nombre de la tienda</span>
+              <input class="ms-input" type="text" [ngModel]="form().name"
+                (ngModelChange)="updateField('name', $event)" placeholder="Mi tienda" />
+            </label>
+            <label class="ms-field">
+              <span class="ms-field__label">Eslogan</span>
+              <input class="ms-input" type="text" [ngModel]="form().tagline"
+                (ngModelChange)="updateField('tagline', $event)" placeholder="Lo mejor para ti" />
+            </label>
+            <div class="ms-field">
+              <span class="ms-field__label">Logo</span>
+              <div class="ms-upload">
+                <div class="ms-upload__preview ms-upload__preview--logo">
+                  @if (form().logoUrl) {
+                    <img [src]="form().logoUrl" alt="Logo" />
+                  } @else {
+                    <i class="fas fa-image"></i>
+                  }
+                </div>
+                <div class="ms-upload__actions">
+                  <label class="ms-btn-upload">
+                    <input type="file" accept="image/*" hidden
+                      [disabled]="uploadingLogo()" (change)="onLogoSelected($event)" />
+                    @if (uploadingLogo()) {
+                      <i class="fas fa-spinner fa-spin me-1"></i>Subiendo…
+                    } @else {
+                      <i class="fas fa-upload me-1"></i>Subir logo
+                    }
+                  </label>
+                  @if (form().logoUrl) {
+                    <button type="button" class="ms-btn-clear" (click)="clearImage('logoUrl')">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="ms-field">
+              <span class="ms-field__label">Banner</span>
+              <div class="ms-upload">
+                <div class="ms-upload__preview ms-upload__preview--banner">
+                  @if (form().bannerUrl) {
+                    <img [src]="form().bannerUrl" alt="Banner" />
+                  } @else {
+                    <i class="fas fa-image"></i>
+                  }
+                </div>
+                <div class="ms-upload__actions">
+                  <label class="ms-btn-upload">
+                    <input type="file" accept="image/*" hidden
+                      [disabled]="uploadingBanner()" (change)="onBannerSelected($event)" />
+                    @if (uploadingBanner()) {
+                      <i class="fas fa-spinner fa-spin me-1"></i>Subiendo…
+                    } @else {
+                      <i class="fas fa-upload me-1"></i>Subir banner
+                    }
+                  </label>
+                  @if (form().bannerUrl) {
+                    <button type="button" class="ms-btn-clear" (click)="clearImage('bannerUrl')">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <label class="ms-field">
+              <span class="ms-field__label">Estado</span>
+              <select class="ms-input" [ngModel]="form().status"
+                (ngModelChange)="updateField('status', $event)">
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </label>
+          </div>
+          <div class="ms-card__footer">
+            <button class="ms-btn-primary" [disabled]="saving()" (click)="saveBranding()">
+              @if (saving()) { <i class="fas fa-spinner fa-spin me-1"></i>Guardando… }
+              @else { <i class="fas fa-save me-1"></i>Guardar cambios }
+            </button>
+          </div>
+        </section>
+      }
+
+      <!-- ── DESTACADOS ── -->
+      @if (tab() === 'products') {
+        <section class="ms-card">
+          <h2 class="ms-card__title"><i class="fas fa-star me-2"></i>Destaca productos en tu tienda</h2>
+          <p class="ms-muted">Tu tienda muestra todo el catálogo; los destacados aparecen primero.</p>
+
+          @if (productsLoading()) {
+            <div class="ms-loading ms-loading--inline"><div class="ms-spinner"></div></div>
+          } @else if (products().length === 0) {
+            <div class="ms-empty">
+              <i class="fas fa-box-open ms-empty__icon"></i>
+              <h3>No hay productos disponibles</h3>
+              <p>Cuando haya catálogo activo podrás destacarlo aquí.</p>
+            </div>
+          } @else {
+            <div class="ms-product-list">
+              @for (product of products(); track trackById($index, product)) {
+                <div class="ms-product" [class.is-featured]="isFeatured(product.id)">
+                  <div class="ms-product__thumb">
+                    @if (product.image) { <img [src]="product.image" [alt]="product.name" /> }
+                    @else { <i class="fas fa-image"></i> }
+                  </div>
+                  <div class="ms-product__info">
+                    <strong class="ms-product__name">{{ product.name }}</strong>
+                    <span class="ms-product__price">${{ product.price | number:'1.2-2' }}</span>
+                  </div>
+                  <button
+                    class="ms-btn-toggle"
+                    [class.is-on]="isFeatured(product.id)"
+                    [disabled]="togglingId() === product.id"
+                    (click)="toggleFeature(product)"
+                  >
+                    @if (togglingId() === product.id) {
+                      <i class="fas fa-spinner fa-spin"></i>
+                    } @else if (isFeatured(product.id)) {
+                      <i class="fas fa-star me-1"></i>Destacado
+                    } @else {
+                      <i class="far fa-star me-1"></i>Destacar
+                    }
+                  </button>
+                </div>
+              }
+            </div>
+          }
+        </section>
+      }
+
+      <!-- ── VENTAS ── -->
+      @if (tab() === 'sales') {
+        <section class="ms-card">
+          <h2 class="ms-card__title"><i class="fas fa-chart-line me-2"></i>Ventas atribuidas a tu tienda</h2>
+
+          @if (salesLoading()) {
+            <div class="ms-loading ms-loading--inline"><div class="ms-spinner"></div></div>
+          } @else if (sales().length === 0) {
+            <div class="ms-empty">
+              <i class="fas fa-receipt ms-empty__icon"></i>
+              <h3>Aún no hay ventas</h3>
+              <p>Cuando alguien compre por tu enlace, las ventas aparecerán aquí.</p>
+            </div>
+          } @else {
+            <div class="ms-table-wrap">
+              <table class="ms-table">
+                <thead>
+                  <tr>
+                    <th>Orden</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th class="right">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (order of sales(); track trackById($index, order)) {
+                    <tr>
+                      <td class="ms-table__id">#{{ order.id }}</td>
+                      <td class="ms-muted">{{ order.createdAt | date:'dd/MM/yyyy' }}</td>
+                      <td>
+                        <span class="ms-status" [ngClass]="statusClass(order.status)">
+                          {{ statusLabel(order.status) }}
+                        </span>
+                      </td>
+                      <td class="right ms-table__total">
+                        ${{ order.total | number:'1.2-2' }} <small>{{ order.currency }}</small>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            @if (salesMeta().totalPages > 1) {
+              <div class="ms-pagination">
+                <small class="ms-muted">
+                  Página {{ salesMeta().page }} de {{ salesMeta().totalPages }} — {{ salesMeta().total }} ventas
+                </small>
+                <div class="ms-pagination__btns">
+                  @for (p of salesPages(); track p) {
+                    <button class="ms-page-btn" [class.is-active]="p === salesMeta().page"
+                      (click)="loadSales(p)">{{ p }}</button>
+                  }
+                </div>
+              </div>
+            }
+          }
+        </section>
+      }
+    }
+
+  </div>
+</section>
+
+@if (cropSrc(); as src) {
+  <app-image-cropper-dialog
+    [src]="src"
+    [aspect]="cropConfig.aspect"
+    [outputWidth]="cropConfig.outputWidth"
+    [round]="cropConfig.round"
+    [title]="cropConfig.title"
+    (cropped)="onCropped($event)"
+    (cancelled)="onCropCancelled()"
+  ></app-image-cropper-dialog>
+}

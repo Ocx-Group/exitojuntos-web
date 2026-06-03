@@ -99,6 +99,13 @@ export const AUTHENTICATION_ROUTES: Routes = [
       ),
   },
   {
+    path: 't/:token',
+    loadComponent: () =>
+      import('./storefront/storefront.component').then(
+        m => m.StorefrontComponent,
+      ),
+  },
+  {
     path: 'checkout',
     loadComponent: () =>
       import('./checkout-page/checkout-page.component').then(

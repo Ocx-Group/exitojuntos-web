@@ -3,6 +3,7 @@ import { Event, Router, NavigationStart, RouterOutlet } from '@angular/router';
 import { DOCUMENT, PlatformLocation } from '@angular/common';
 
 import { SessionService } from './core/service/session-service/session.service';
+import { ReferralService } from './core/service/referral-service';
 import { PageLoaderComponent } from './layout/page-loader/page-loader.component';
 import { PdfViewerComponent } from './shared/components/pdf-viewer/pdf-viewer.component';
 
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     public _router: Router,
     location: PlatformLocation,
     private readonly sessionService: SessionService,
+    private readonly referralService: ReferralService,
     private readonly renderer: Renderer2,
     @Inject(DOCUMENT) private readonly document: Document,
   ) {
@@ -28,9 +30,18 @@ export class AppComponent implements OnInit {
         this.currentUrl = routerEvent.url.substring(
           routerEvent.url.lastIndexOf('/') + 1,
         );
+        this.captureReferral(routerEvent.url);
       }
       window.scrollTo(0, 0);
     });
+  }
+
+  /** Atribución: captura ?ref=<token> de la URL de entrada. */
+  private captureReferral(url: string): void {
+    const queryIndex = url.indexOf('?');
+    if (queryIndex === -1) return;
+    const params = new URLSearchParams(url.substring(queryIndex + 1));
+    this.referralService.capture(params.get('ref'));
   }
 
   ngOnInit(): void {

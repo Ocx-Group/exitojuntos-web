@@ -1,0 +1,331 @@
+// ─── Variables (idénticas a products-page) ───────────────────────────────────
+$gold:        #d4af37;
+$gold-bright: #ffd700;
+$gold-dim:    rgba(212, 175, 55, 0.15);
+$gold-border: rgba(212, 175, 55, 0.25);
+$black:       #000000;
+$dark:        #0a0a0a;
+$dark-2:      #111111;
+$dark-card:   rgba(12, 12, 12, 0.96);
+$text:        #ffffff;
+$text-muted:  rgba(255, 255, 255, 0.55);
+$text-soft:   rgba(255, 255, 255, 0.75);
+
+@mixin gold-gradient { background: linear-gradient(135deg, $gold 0%, $gold-bright 100%); }
+@mixin gold-text {
+  background: linear-gradient(90deg, $gold 0%, $gold-bright 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:host {
+  display: block;
+  background: $dark;
+  min-height: 100vh;
+  color: $text;
+}
+
+* { box-sizing: border-box; }
+
+// ─── Tienda no disponible ────────────────────────────────────────────────────
+.store-missing {
+  text-align: center;
+  padding: 8rem 1.5rem;
+  background: $black;
+
+  .missing-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: $gold-dim;
+    border: 1px solid $gold-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    i { font-size: 2rem; color: $gold; opacity: 0.8; }
+  }
+  h2 { font-weight: 800; color: $text; }
+  p { color: $text-muted; margin-bottom: 1.5rem; }
+}
+
+.btn-gold {
+  display: inline-block;
+  @include gold-gradient;
+  color: #000;
+  font-weight: 700;
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+// ─── Banner ──────────────────────────────────────────────────────────────────
+.store-banner {
+  position: relative;
+  background-color: $dark;
+  background-size: cover;
+  background-position: center;
+  padding: 5rem 1.5rem 3.5rem;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // Con imagen: hero full-width con altura responsiva. `cover` rellena todo
+  // el ancho sin estirar ni dejar huecos; centrado preserva lo importante.
+  &.has-image {
+    height: clamp(240px, 30vw, 420px);
+    padding: 2rem 1.5rem;
+  }
+
+  // El overlay solo aplica cuando hay imagen de banner (legibilidad).
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(10, 10, 10, 0.78));
+  }
+  .banner-content {
+    position: relative;
+    z-index: 1;
+  }
+  .store-logo {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid $gold;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3);
+    margin-bottom: 1rem;
+  }
+  .store-name {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 800;
+    margin: 0;
+    color: $text;
+    letter-spacing: -0.02em;
+  }
+  .store-tagline {
+    color: $text-soft;
+    margin-top: 0.4rem;
+  }
+  .store-badge {
+    display: inline-block;
+    margin-top: 1rem;
+    background: $gold-dim;
+    color: $gold;
+    border: 1px solid $gold-border;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+// ─── Productos ───────────────────────────────────────────────────────────────
+.store-products {
+  background: $dark;
+  min-height: 60vh;
+  padding: 3rem 24px 5rem;
+}
+.products-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 1200px) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 860px)  { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 520px)  { grid-template-columns: 1fr; }
+}
+
+.product-card {
+  background: $dark-card;
+  border: 1px solid $gold-border;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
+    .card-image img { transform: scale(1.06); }
+  }
+  &.is-featured {
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.25);
+  }
+
+  .card-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #0e0e0e;
+    cursor: pointer;
+    flex-shrink: 0;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .card-img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+      i { font-size: 2.5rem; color: rgba(255, 255, 255, 0.12); }
+    }
+  }
+  .card-badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    span {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+    .badge-featured {
+      @include gold-gradient;
+      color: #000;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+    }
+    .badge-discount { background: rgba(220, 53, 69, 0.9); color: #fff; font-weight: 700; }
+  }
+
+  .card-body {
+    padding: 1.1rem 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.45rem;
+  }
+  .card-name {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: $text;
+    line-height: 1.35;
+    margin: 0;
+    cursor: pointer;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-pitch {
+    font-size: 0.8rem;
+    color: $gold;
+    font-style: italic;
+    margin: 0;
+    opacity: 0.9;
+  }
+  .card-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+  .price-original {
+    color: $text-muted;
+    text-decoration: line-through;
+    font-size: 0.8rem;
+  }
+  .price-main {
+    font-size: 1.3rem;
+    font-weight: 800;
+    @include gold-text;
+  }
+  .card-actions {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    button {
+      flex: 1;
+      padding: 0.6rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-detail {
+      border: 1px solid $gold-border;
+      background: transparent;
+      color: $text-soft;
+      &:hover {
+        border-color: rgba(212, 175, 55, 0.5);
+        color: $text;
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+    .btn-buy {
+      border: 1px solid $gold-border;
+      background: transparent;
+      color: $gold;
+      letter-spacing: 0.02em;
+      &:hover:not(:disabled) {
+        @include gold-gradient;
+        color: #000;
+        border-color: transparent;
+        box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+      }
+      &:disabled { opacity: 0.6; cursor: default; }
+    }
+  }
+}
+
+// ─── Estados ─────────────────────────────────────────────────────────────────
+.empty-state {
+  text-align: center;
+  padding: 5rem 1rem;
+  color: $text-muted;
+  i { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; color: $gold; opacity: 0.7; }
+}
+
+.product-skeleton {
+  background: $dark-card;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  overflow: hidden;
+  .skeleton-img { aspect-ratio: 4 / 3; }
+  .skeleton-line {
+    height: 14px;
+    margin: 0.85rem 1.1rem 0;
+    border-radius: 6px;
+    &.short { width: 50%; }
+  }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.04) 80%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

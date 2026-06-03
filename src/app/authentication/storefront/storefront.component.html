@@ -1,0 +1,117 @@
+<app-public-navbar></app-public-navbar>
+
+<!-- Tienda no encontrada / pausada -->
+@if (notFound()) {
+  <section class="store-missing">
+    <div class="missing-icon"><i class="fas fa-store-slash"></i></div>
+    <h2>Tienda no disponible</h2>
+    <p>El enlace no es válido o la tienda está pausada.</p>
+    <a routerLink="/products" class="btn-gold">Ver catálogo general</a>
+  </section>
+}
+
+@if (!notFound()) {
+  <!-- Cabecera de la tienda -->
+  <section
+    class="store-banner"
+    [class.has-image]="!!store()?.bannerUrl"
+    [style.background-image]="store()?.bannerUrl ? 'url(' + store()?.bannerUrl + ')' : null"
+  >
+    @if (store()?.bannerUrl) {
+      <div class="banner-overlay"></div>
+    }
+    <div class="banner-content">
+      @if (store()?.logoUrl) {
+        <img [src]="store()?.logoUrl" [alt]="store()?.name" class="store-logo" />
+      }
+      <h1 class="store-name">{{ store()?.name || 'Tienda' }}</h1>
+      @if (store()?.tagline) {
+        <p class="store-tagline">{{ store()?.tagline }}</p>
+      }
+      <span class="store-badge"><i class="fas fa-link me-1"></i>Tienda recomendada</span>
+    </div>
+  </section>
+
+  <section class="store-products">
+    <div class="products-container">
+      <!-- Skeletons -->
+      @if (loading()) {
+        <div class="products-grid">
+          @for (s of skeletons; track $index) {
+            <div class="product-skeleton">
+              <div class="skeleton-img shimmer"></div>
+              <div class="skeleton-line shimmer"></div>
+              <div class="skeleton-line short shimmer"></div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Vacío -->
+      @if (!loading() && products().length === 0) {
+        <div class="empty-state">
+          <i class="fas fa-box-open"></i>
+          <p>Esta tienda aún no tiene productos disponibles.</p>
+        </div>
+      }
+
+      <!-- Grid -->
+      @if (!loading() && products().length > 0) {
+        <div class="products-grid">
+          @for (product of products(); track trackById($index, product)) {
+            <article class="product-card" [class.is-featured]="product.featured">
+              <div class="card-image" (click)="goToProduct(product.id)">
+                @if (product.image) {
+                  <img [src]="product.image" [alt]="product.name" loading="lazy" />
+                } @else {
+                  <div class="card-img-placeholder"><i class="fas fa-image"></i></div>
+                }
+                <div class="card-badges">
+                  @if (product.featured) {
+                    <span class="badge-featured"><i class="fas fa-star me-1"></i>Destacado</span>
+                  }
+                  @if (product.discountPercent > 0) {
+                    <span class="badge-discount">-{{ product.discountPercent | number:'1.0-0' }}%</span>
+                  }
+                </div>
+              </div>
+
+              <div class="card-body">
+                <h3 class="card-name" (click)="goToProduct(product.id)">{{ product.name }}</h3>
+                @if (product.customPitch) {
+                  <p class="card-pitch"><i class="fas fa-quote-left me-1"></i>{{ product.customPitch }}</p>
+                }
+
+                <div class="card-price-row">
+                  @if (product.discountPercent > 0) {
+                    <span class="price-original">${{ product.price | number:'1.2-2' }}</span>
+                  }
+                  <span class="price-main">${{ getDiscountedPrice(product) | number:'1.2-2' }}</span>
+                </div>
+
+                <div class="card-actions">
+                  <button class="btn-detail" (click)="goToProduct(product.id)">
+                    <i class="fas fa-eye me-1"></i>Ver
+                  </button>
+                  @if (!isAdmin()) {
+                    <button
+                      class="btn-buy"
+                      [disabled]="addingToCart() === product.id"
+                      (click)="addToCart(product, $event)"
+                    >
+                      @if (addingToCart() === product.id) {
+                        <i class="fas fa-spinner fa-spin me-1"></i>Añadiendo
+                      } @else {
+                        <i class="fas fa-cart-plus me-1"></i>Añadir
+                      }
+                    </button>
+                  }
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}

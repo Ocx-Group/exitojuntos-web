@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
 import { environment } from '@environments/environment';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { ReferralService } from '@app/core/service/referral-service';
 import { Cart } from '@app/core/interfaces/cart';
 
 interface CartResponse {
@@ -15,6 +16,7 @@ export class CartService {
   private readonly baseUrl = `${environment.apiUrl}/cart`;
   private readonly http = inject(HttpClient);
   private readonly authService = inject(AuthService);
+  private readonly referralService = inject(ReferralService);
 
   private readonly _cart = signal<Cart | null>(null);
   public readonly cart = this._cart.asReadonly();
@@ -37,12 +39,16 @@ export class CartService {
   }
 
   addItem(productId: number, quantity = 1): Observable<Cart> {
+    const storeToken = this.referralService.getToken();
+    const body: { productId: number; quantity: number; storeToken?: string } = {
+      productId,
+      quantity,
+    };
+    if (storeToken) body.storeToken = storeToken;
     return this.http
-      .post<CartResponse>(
-        `${this.baseUrl}/items`,
-        { productId, quantity },
-        { headers: this.authHeaders },
-      )
+      .post<CartResponse>(`${this.baseUrl}/items`, body, {
+        headers: this.authHeaders,
+      })
       .pipe(
         map(r => r.data),
         tap(cart => this._cart.set(cart)),

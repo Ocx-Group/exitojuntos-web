@@ -84,6 +84,17 @@ export class MyOrdersService {
     });
   }
 
+  /** Ventas atribuidas a la tienda del usuario (no sus propias compras). */
+  getStoreSales(page = 1, limit = 10): Observable<MyOrdersResponse> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<MyOrdersResponse>(
+      `${environment.apiUrl}/orders/store-sales`,
+      { params, headers: this.authHeaders },
+    );
+  }
+
   getById(id: number): Observable<MyOrder> {
     return this.http
       .get<{ success: boolean; data: MyOrder }>(`${this.baseUrl}/${id}`, {

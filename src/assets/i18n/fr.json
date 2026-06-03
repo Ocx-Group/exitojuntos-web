@@ -269,6 +269,9 @@
     "MY-NETWORK": {
       "TEXT": "Mon Réseau"
     },
+    "MY-STORE": {
+      "TEXT": "Ma Boutique"
+    },
     "USERS-MANAGEMENT": {
       "TEXT": "Gestion des Utilisateurs",
       "BREADCRUMB": {
