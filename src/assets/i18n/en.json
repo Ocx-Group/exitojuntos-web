@@ -3491,5 +3491,81 @@
     "TITLE": {
       "TEXT": "Wallet Withdrawal"
     }
+  },
+  "MY-STORE-PAGE": {
+    "BREADCRUMB": "My Store",
+    "HERO": {
+      "TITLE": "My Store",
+      "SUBTITLE": "Share your link, customize your store, and track the sales you generate.",
+      "STATUS": {
+        "ACTIVE": "Active",
+        "PAUSED": "Paused"
+      }
+    },
+    "TABS": {
+      "SHARE": "Share",
+      "PRODUCTS": "Featured",
+      "SALES": "Sales"
+    },
+    "SHARE": {
+      "LINK_TITLE": "Your store link",
+      "LINK_DESC": "Anyone who buys through this link will be associated with your store.",
+      "COPY_BTN": "Copy link",
+      "BRAND_TITLE": "Customization",
+      "BRAND_DESC": "Give your store an identity with a name, logo, and banner.",
+      "STORE_NAME": "Store name",
+      "STORE_NAME_PLACEHOLDER": "My store",
+      "TAGLINE": "Tagline",
+      "TAGLINE_PLACEHOLDER": "The best for you",
+      "LOGO": "Logo",
+      "UPLOADING": "Uploading…",
+      "UPLOAD_LOGO": "Upload logo",
+      "BANNER": "Banner",
+      "UPLOAD_BANNER": "Upload banner",
+      "STATUS_LABEL": "Status",
+      "STATUS_ACTIVE": "Active",
+      "STATUS_PAUSED": "Paused",
+      "EXTERNAL_TITLE": "External purchase link",
+      "EXTERNAL_DESC": "Set your external link once (e.g. your Higo store). Then, in the <strong>Featured</strong> tab, use the switch to choose which products show the button.",
+      "EXTERNAL_URL_LABEL": "Link (URL)",
+      "EXTERNAL_BTN_LABEL": "Button text",
+      "EXTERNAL_BTN_PLACEHOLDER": "Buy on Higo",
+      "SAVING": "Saving…",
+      "SAVE_BTN": "Save changes"
+    },
+    "PRODUCTS": {
+      "TITLE": "Feature products in your store",
+      "DESC": "Your store shows the full catalog; featured items appear first.",
+      "NO_LINK_WARN": "To enable the external button per product, first set up your link in <strong>Share → External purchase link</strong>.",
+      "EMPTY_TITLE": "No products available",
+      "EMPTY_DESC": "Once there is an active catalog you can feature items here.",
+      "EXTERNAL_BTN_TITLE": "Show external button for this product",
+      "EXTERNAL_BTN": "External button",
+      "FEATURED": "Featured",
+      "FEATURE": "Feature"
+    },
+    "SALES": {
+      "TITLE": "Sales attributed to your store",
+      "COL_ORDER": "Order",
+      "COL_DATE": "Date",
+      "COL_STATUS": "Status",
+      "COL_TOTAL": "Total",
+      "EMPTY_TITLE": "No sales yet",
+      "EMPTY_DESC": "When someone buys through your link, sales will appear here.",
+      "PAGINATION": "Page {{page}} of {{totalPages}} — {{total}} sales",
+      "STATUS": {
+        "pending_payment": "Pending payment",
+        "paid": "Paid",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "refunded": "Refunded"
+      }
+    },
+    "CROP": {
+      "LOGO": "Crop logo",
+      "BANNER": "Crop banner"
+    }
   }
 }

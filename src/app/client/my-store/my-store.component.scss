@@ -599,4 +599,53 @@ $card-bg:     rgba(255, 255, 255, 0.035);
   .ms-hero { flex-wrap: wrap; }
   .ms-hero__icon { width: 48px; height: 48px; font-size: 1.3rem; }
   .ms-hero__title { font-size: 1.3rem; }
+
+  // ── Destacados — mobile ───────────────────────────────────────────────────
+  .ms-product {
+    padding: 0.7rem;
+
+    &__row {
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    // thumb + info stay on the first line, sharing the full width
+    &__thumb {
+      width: 44px;
+      height: 44px;
+    }
+
+    &__info {
+      flex: 1;
+    }
+
+    // actions drop to a second full-width row
+    &__actions {
+      width: 100%;
+      flex-shrink: 1;
+      justify-content: stretch;
+      gap: 0.5rem;
+      padding-top: 0.55rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  // stretch the toggle button to fill remaining space
+  .ms-btn-toggle {
+    flex: 1;
+    justify-content: center;
+  }
+
+  // stretch the switch to fill remaining space and center its content
+  .ms-switch {
+    flex: 1;
+    justify-content: center;
+  }
+
+  // hint warning: align icon to top so it doesn't float mid-text when text wraps
+  .ms-hint-warn {
+    align-items: flex-start;
+
+    i { margin-top: 0.1rem; }
+  }
 }

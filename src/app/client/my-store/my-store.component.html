@@ -1,7 +1,7 @@
 <section class="section my-store-page">
   <ul class="breadcrumb breadcrumb-style">
     <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">Mi Tienda</h5>
+      <h5 class="page-title m-b-0">{{ 'MY-STORE-PAGE.BREADCRUMB' | translate }}</h5>
     </li>
     <li class="breadcrumb-item bcrumb-1">
       <a routerLink="/app/dashboard"><i class="fas fa-home font-17"></i></a>
@@ -20,15 +20,15 @@
       <div class="ms-hero mb-4">
         <div class="ms-hero__icon"><i class="fas fa-store"></i></div>
         <div class="ms-hero__text">
-          <h1 class="ms-hero__title">Mi Tienda</h1>
+          <h1 class="ms-hero__title">{{ 'MY-STORE-PAGE.HERO.TITLE' | translate }}</h1>
           <p class="ms-hero__subtitle">
-            Comparte tu enlace, personaliza tu tienda y revisa las ventas que generas.
+            {{ 'MY-STORE-PAGE.HERO.SUBTITLE' | translate }}
           </p>
         </div>
         @if (store(); as s) {
           <span class="ms-store-status" [class.is-active]="s.status === 'active'">
             <i class="fas fa-circle"></i>
-            {{ s.status === 'active' ? 'Activa' : 'Pausada' }}
+            {{ s.status === 'active' ? ('MY-STORE-PAGE.HERO.STATUS.ACTIVE' | translate) : ('MY-STORE-PAGE.HERO.STATUS.PAUSED' | translate) }}
           </span>
         }
       </div>
@@ -36,46 +36,48 @@
       <!-- Tabs -->
       <nav class="ms-tabs">
         <button class="ms-tab" [class.is-active]="tab() === 'share'" (click)="setTab('share')">
-          <i class="fas fa-share-nodes"></i><span>Compartir</span>
+          <i class="fas fa-share-nodes"></i><span>{{ 'MY-STORE-PAGE.TABS.SHARE' | translate }}</span>
         </button>
         <button class="ms-tab" [class.is-active]="tab() === 'products'" (click)="setTab('products')">
-          <i class="fas fa-star"></i><span>Destacados</span>
+          <i class="fas fa-star"></i><span>{{ 'MY-STORE-PAGE.TABS.PRODUCTS' | translate }}</span>
           @if (featuredCount() > 0) { <span class="ms-tab__count">{{ featuredCount() }}</span> }
         </button>
         <button class="ms-tab" [class.is-active]="tab() === 'sales'" (click)="setTab('sales')">
-          <i class="fas fa-chart-line"></i><span>Ventas</span>
+          <i class="fas fa-chart-line"></i><span>{{ 'MY-STORE-PAGE.TABS.SALES' | translate }}</span>
         </button>
       </nav>
 
       <!-- ── COMPARTIR + BRANDING ── -->
       @if (tab() === 'share') {
         <section class="ms-card">
-          <h2 class="ms-card__title"><i class="fas fa-link me-2"></i>Tu enlace de tienda</h2>
-          <p class="ms-muted">Quien compre entrando por este enlace queda asociado a tu tienda.</p>
+          <h2 class="ms-card__title"><i class="fas fa-link me-2"></i>{{ 'MY-STORE-PAGE.SHARE.LINK_TITLE' | translate }}</h2>
+          <p class="ms-muted">{{ 'MY-STORE-PAGE.SHARE.LINK_DESC' | translate }}</p>
           <div class="ms-share-row">
             <input class="ms-input ms-input--readonly" type="text" [value]="shareUrl()" readonly />
             <button class="ms-btn-primary" (click)="copyLink()">
-              <i class="fas fa-copy me-1"></i>Copiar enlace
+              <i class="fas fa-copy me-1"></i>{{ 'MY-STORE-PAGE.SHARE.COPY_BTN' | translate }}
             </button>
           </div>
         </section>
 
         <section class="ms-card">
-          <h2 class="ms-card__title"><i class="fas fa-palette me-2"></i>Personalización</h2>
-          <p class="ms-muted">Dale identidad a tu tienda con nombre, logo y banner.</p>
+          <h2 class="ms-card__title"><i class="fas fa-palette me-2"></i>{{ 'MY-STORE-PAGE.SHARE.BRAND_TITLE' | translate }}</h2>
+          <p class="ms-muted">{{ 'MY-STORE-PAGE.SHARE.BRAND_DESC' | translate }}</p>
           <div class="ms-form-grid">
             <label class="ms-field">
-              <span class="ms-field__label">Nombre de la tienda</span>
+              <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.STORE_NAME' | translate }}</span>
               <input class="ms-input" type="text" [ngModel]="form().name"
-                (ngModelChange)="updateField('name', $event)" placeholder="Mi tienda" />
+                (ngModelChange)="updateField('name', $event)"
+                [placeholder]="'MY-STORE-PAGE.SHARE.STORE_NAME_PLACEHOLDER' | translate" />
             </label>
             <label class="ms-field">
-              <span class="ms-field__label">Eslogan</span>
+              <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.TAGLINE' | translate }}</span>
               <input class="ms-input" type="text" [ngModel]="form().tagline"
-                (ngModelChange)="updateField('tagline', $event)" placeholder="Lo mejor para ti" />
+                (ngModelChange)="updateField('tagline', $event)"
+                [placeholder]="'MY-STORE-PAGE.SHARE.TAGLINE_PLACEHOLDER' | translate" />
             </label>
             <div class="ms-field">
-              <span class="ms-field__label">Logo</span>
+              <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.LOGO' | translate }}</span>
               <div class="ms-upload">
                 <div class="ms-upload__preview ms-upload__preview--logo">
                   @if (form().logoUrl) {
@@ -89,9 +91,9 @@
                     <input type="file" accept="image/*" hidden
                       [disabled]="uploadingLogo()" (change)="onLogoSelected($event)" />
                     @if (uploadingLogo()) {
-                      <i class="fas fa-spinner fa-spin me-1"></i>Subiendo…
+                      <i class="fas fa-spinner fa-spin me-1"></i>{{ 'MY-STORE-PAGE.SHARE.UPLOADING' | translate }}
                     } @else {
-                      <i class="fas fa-upload me-1"></i>Subir logo
+                      <i class="fas fa-upload me-1"></i>{{ 'MY-STORE-PAGE.SHARE.UPLOAD_LOGO' | translate }}
                     }
                   </label>
                   @if (form().logoUrl) {
@@ -104,7 +106,7 @@
             </div>
 
             <div class="ms-field">
-              <span class="ms-field__label">Banner</span>
+              <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.BANNER' | translate }}</span>
               <div class="ms-upload">
                 <div class="ms-upload__preview ms-upload__preview--banner">
                   @if (form().bannerUrl) {
@@ -118,9 +120,9 @@
                     <input type="file" accept="image/*" hidden
                       [disabled]="uploadingBanner()" (change)="onBannerSelected($event)" />
                     @if (uploadingBanner()) {
-                      <i class="fas fa-spinner fa-spin me-1"></i>Subiendo…
+                      <i class="fas fa-spinner fa-spin me-1"></i>{{ 'MY-STORE-PAGE.SHARE.UPLOADING' | translate }}
                     } @else {
-                      <i class="fas fa-upload me-1"></i>Subir banner
+                      <i class="fas fa-upload me-1"></i>{{ 'MY-STORE-PAGE.SHARE.UPLOAD_BANNER' | translate }}
                     }
                   </label>
                   @if (form().bannerUrl) {
@@ -133,44 +135,40 @@
             </div>
 
             <label class="ms-field">
-              <span class="ms-field__label">Estado</span>
+              <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.STATUS_LABEL' | translate }}</span>
               <select class="ms-input" [ngModel]="form().status"
                 (ngModelChange)="updateField('status', $event)">
-                <option value="active">Activa</option>
-                <option value="paused">Pausada</option>
+                <option value="active">{{ 'MY-STORE-PAGE.SHARE.STATUS_ACTIVE' | translate }}</option>
+                <option value="paused">{{ 'MY-STORE-PAGE.SHARE.STATUS_PAUSED' | translate }}</option>
               </select>
             </label>
           </div>
 
           <div class="ms-subsection">
             <h3 class="ms-subsection__title">
-              <i class="fas fa-external-link-alt me-2"></i>Enlace de compra externo
+              <i class="fas fa-external-link-alt me-2"></i>{{ 'MY-STORE-PAGE.SHARE.EXTERNAL_TITLE' | translate }}
             </h3>
-            <p class="ms-muted">
-              Define una vez tu enlace externo (por ejemplo tu tienda en Higo).
-              Luego, en la pestaña <strong>Destacados</strong>, eliges con un switch
-              a qué productos les aparece el botón.
-            </p>
+            <p class="ms-muted" [innerHTML]="'MY-STORE-PAGE.SHARE.EXTERNAL_DESC' | translate"></p>
             <div class="ms-form-grid">
               <label class="ms-field">
-                <span class="ms-field__label">Enlace (URL)</span>
+                <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.EXTERNAL_URL_LABEL' | translate }}</span>
                 <input class="ms-input" type="url" [ngModel]="form().externalUrl"
                   (ngModelChange)="updateField('externalUrl', $event)"
                   placeholder="https://higo.com/mi-tienda" />
               </label>
               <label class="ms-field">
-                <span class="ms-field__label">Texto del botón</span>
+                <span class="ms-field__label">{{ 'MY-STORE-PAGE.SHARE.EXTERNAL_BTN_LABEL' | translate }}</span>
                 <input class="ms-input" type="text" maxlength="60"
                   [ngModel]="form().externalLabel"
                   (ngModelChange)="updateField('externalLabel', $event)"
-                  placeholder="Comprar en Higo" />
+                  [placeholder]="'MY-STORE-PAGE.SHARE.EXTERNAL_BTN_PLACEHOLDER' | translate" />
               </label>
             </div>
           </div>
           <div class="ms-card__footer">
             <button class="ms-btn-primary" [disabled]="saving()" (click)="saveBranding()">
-              @if (saving()) { <i class="fas fa-spinner fa-spin me-1"></i>Guardando… }
-              @else { <i class="fas fa-save me-1"></i>Guardar cambios }
+              @if (saving()) { <i class="fas fa-spinner fa-spin me-1"></i>{{ 'MY-STORE-PAGE.SHARE.SAVING' | translate }} }
+              @else { <i class="fas fa-save me-1"></i>{{ 'MY-STORE-PAGE.SHARE.SAVE_BTN' | translate }} }
             </button>
           </div>
         </section>
@@ -179,14 +177,13 @@
       <!-- ── DESTACADOS ── -->
       @if (tab() === 'products') {
         <section class="ms-card">
-          <h2 class="ms-card__title"><i class="fas fa-star me-2"></i>Destaca productos en tu tienda</h2>
-          <p class="ms-muted">Tu tienda muestra todo el catálogo; los destacados aparecen primero.</p>
+          <h2 class="ms-card__title"><i class="fas fa-star me-2"></i>{{ 'MY-STORE-PAGE.PRODUCTS.TITLE' | translate }}</h2>
+          <p class="ms-muted">{{ 'MY-STORE-PAGE.PRODUCTS.DESC' | translate }}</p>
 
           @if (!hasGlobalLink()) {
             <p class="ms-hint-warn">
               <i class="fas fa-circle-info me-1"></i>
-              Para activar el botón externo por producto, primero configura tu
-              enlace en <strong>Compartir → Enlace de compra externo</strong>.
+              <span [innerHTML]="'MY-STORE-PAGE.PRODUCTS.NO_LINK_WARN' | translate"></span>
             </p>
           }
 
@@ -195,8 +192,8 @@
           } @else if (products().length === 0) {
             <div class="ms-empty">
               <i class="fas fa-box-open ms-empty__icon"></i>
-              <h3>No hay productos disponibles</h3>
-              <p>Cuando haya catálogo activo podrás destacarlo aquí.</p>
+              <h3>{{ 'MY-STORE-PAGE.PRODUCTS.EMPTY_TITLE' | translate }}</h3>
+              <p>{{ 'MY-STORE-PAGE.PRODUCTS.EMPTY_DESC' | translate }}</p>
             </div>
           } @else {
             <div class="ms-product-list">
@@ -215,14 +212,14 @@
                       @if (hasGlobalLink()) {
                         <label class="ms-switch"
                           [class.is-on]="isExternalEnabled(product.id)"
-                          title="Mostrar botón externo en este producto">
+                          [title]="'MY-STORE-PAGE.PRODUCTS.EXTERNAL_BTN_TITLE' | translate">
                           <input type="checkbox" hidden
                             [disabled]="togglingExternalId() === product.id"
                             [checked]="isExternalEnabled(product.id)"
                             (change)="toggleExternal(product, $any($event.target).checked)" />
                           <span class="ms-switch__track"><span class="ms-switch__dot"></span></span>
                           <span class="ms-switch__label">
-                            <i class="fas fa-external-link-alt me-1"></i>Botón externo
+                            <i class="fas fa-external-link-alt me-1"></i>{{ 'MY-STORE-PAGE.PRODUCTS.EXTERNAL_BTN' | translate }}
                           </span>
                         </label>
                       }
@@ -235,9 +232,9 @@
                         @if (togglingId() === product.id) {
                           <i class="fas fa-spinner fa-spin"></i>
                         } @else if (isFeatured(product.id)) {
-                          <i class="fas fa-star me-1"></i>Destacado
+                          <i class="fas fa-star me-1"></i>{{ 'MY-STORE-PAGE.PRODUCTS.FEATURED' | translate }}
                         } @else {
-                          <i class="far fa-star me-1"></i>Destacar
+                          <i class="far fa-star me-1"></i>{{ 'MY-STORE-PAGE.PRODUCTS.FEATURE' | translate }}
                         }
                       </button>
                     </div>
@@ -252,25 +249,25 @@
       <!-- ── VENTAS ── -->
       @if (tab() === 'sales') {
         <section class="ms-card">
-          <h2 class="ms-card__title"><i class="fas fa-chart-line me-2"></i>Ventas atribuidas a tu tienda</h2>
+          <h2 class="ms-card__title"><i class="fas fa-chart-line me-2"></i>{{ 'MY-STORE-PAGE.SALES.TITLE' | translate }}</h2>
 
           @if (salesLoading()) {
             <div class="ms-loading ms-loading--inline"><div class="ms-spinner"></div></div>
           } @else if (sales().length === 0) {
             <div class="ms-empty">
               <i class="fas fa-receipt ms-empty__icon"></i>
-              <h3>Aún no hay ventas</h3>
-              <p>Cuando alguien compre por tu enlace, las ventas aparecerán aquí.</p>
+              <h3>{{ 'MY-STORE-PAGE.SALES.EMPTY_TITLE' | translate }}</h3>
+              <p>{{ 'MY-STORE-PAGE.SALES.EMPTY_DESC' | translate }}</p>
             </div>
           } @else {
             <div class="ms-table-wrap">
               <table class="ms-table">
                 <thead>
                   <tr>
-                    <th>Orden</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                    <th class="right">Total</th>
+                    <th>{{ 'MY-STORE-PAGE.SALES.COL_ORDER' | translate }}</th>
+                    <th>{{ 'MY-STORE-PAGE.SALES.COL_DATE' | translate }}</th>
+                    <th>{{ 'MY-STORE-PAGE.SALES.COL_STATUS' | translate }}</th>
+                    <th class="right">{{ 'MY-STORE-PAGE.SALES.COL_TOTAL' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -280,7 +277,7 @@
                       <td class="ms-muted">{{ order.createdAt | date:'dd/MM/yyyy' }}</td>
                       <td>
                         <span class="ms-status" [ngClass]="statusClass(order.status)">
-                          {{ statusLabel(order.status) }}
+                          {{ 'MY-STORE-PAGE.SALES.STATUS.' + order.status | translate }}
                         </span>
                       </td>
                       <td class="right ms-table__total">
@@ -295,7 +292,7 @@
             @if (salesMeta().totalPages > 1) {
               <div class="ms-pagination">
                 <small class="ms-muted">
-                  Página {{ salesMeta().page }} de {{ salesMeta().totalPages }} — {{ salesMeta().total }} ventas
+                  {{ 'MY-STORE-PAGE.SALES.PAGINATION' | translate:{ page: salesMeta().page, totalPages: salesMeta().totalPages, total: salesMeta().total } }}
                 </small>
                 <div class="ms-pagination__btns">
                   @for (p of salesPages(); track p) {
@@ -319,7 +316,7 @@
     [aspect]="cropConfig.aspect"
     [outputWidth]="cropConfig.outputWidth"
     [round]="cropConfig.round"
-    [title]="cropConfig.title"
+    [title]="cropConfig.title | translate"
     (cropped)="onCropped($event)"
     (cancelled)="onCropCancelled()"
   ></app-image-cropper-dialog>

@@ -782,5 +782,81 @@
       "TERMS": "Conditions",
       "SIGNIN": "Se connecter"
     }
+  },
+  "MY-STORE-PAGE": {
+    "BREADCRUMB": "Ma Boutique",
+    "HERO": {
+      "TITLE": "Ma Boutique",
+      "SUBTITLE": "Partagez votre lien, personnalisez votre boutique et suivez les ventes que vous générez.",
+      "STATUS": {
+        "ACTIVE": "Active",
+        "PAUSED": "En pause"
+      }
+    },
+    "TABS": {
+      "SHARE": "Partager",
+      "PRODUCTS": "En vedette",
+      "SALES": "Ventes"
+    },
+    "SHARE": {
+      "LINK_TITLE": "Votre lien de boutique",
+      "LINK_DESC": "Toute personne qui achète via ce lien sera associée à votre boutique.",
+      "COPY_BTN": "Copier le lien",
+      "BRAND_TITLE": "Personnalisation",
+      "BRAND_DESC": "Donnez une identité à votre boutique avec un nom, un logo et une bannière.",
+      "STORE_NAME": "Nom de la boutique",
+      "STORE_NAME_PLACEHOLDER": "Ma boutique",
+      "TAGLINE": "Slogan",
+      "TAGLINE_PLACEHOLDER": "Le meilleur pour vous",
+      "LOGO": "Logo",
+      "UPLOADING": "Envoi en cours…",
+      "UPLOAD_LOGO": "Envoyer le logo",
+      "BANNER": "Bannière",
+      "UPLOAD_BANNER": "Envoyer la bannière",
+      "STATUS_LABEL": "Statut",
+      "STATUS_ACTIVE": "Active",
+      "STATUS_PAUSED": "En pause",
+      "EXTERNAL_TITLE": "Lien d'achat externe",
+      "EXTERNAL_DESC": "Définissez une fois votre lien externe (par exemple votre boutique Higo). Ensuite, dans l'onglet <strong>En vedette</strong>, choisissez avec un interrupteur pour quels produits le bouton s'affiche.",
+      "EXTERNAL_URL_LABEL": "Lien (URL)",
+      "EXTERNAL_BTN_LABEL": "Texte du bouton",
+      "EXTERNAL_BTN_PLACEHOLDER": "Acheter sur Higo",
+      "SAVING": "Enregistrement…",
+      "SAVE_BTN": "Enregistrer les modifications"
+    },
+    "PRODUCTS": {
+      "TITLE": "Mettez des produits en vedette dans votre boutique",
+      "DESC": "Votre boutique affiche tout le catalogue ; les articles en vedette apparaissent en premier.",
+      "NO_LINK_WARN": "Pour activer le bouton externe par produit, configurez d'abord votre lien dans <strong>Partager → Lien d'achat externe</strong>.",
+      "EMPTY_TITLE": "Aucun produit disponible",
+      "EMPTY_DESC": "Lorsqu'un catalogue actif sera disponible, vous pourrez y mettre des articles en vedette.",
+      "EXTERNAL_BTN_TITLE": "Afficher le bouton externe pour ce produit",
+      "EXTERNAL_BTN": "Bouton externe",
+      "FEATURED": "En vedette",
+      "FEATURE": "Mettre en vedette"
+    },
+    "SALES": {
+      "TITLE": "Ventes attribuées à votre boutique",
+      "COL_ORDER": "Commande",
+      "COL_DATE": "Date",
+      "COL_STATUS": "Statut",
+      "COL_TOTAL": "Total",
+      "EMPTY_TITLE": "Aucune vente pour l'instant",
+      "EMPTY_DESC": "Lorsque quelqu'un achètera via votre lien, les ventes apparaîtront ici.",
+      "PAGINATION": "Page {{page}} sur {{totalPages}} — {{total}} ventes",
+      "STATUS": {
+        "pending_payment": "Paiement en attente",
+        "paid": "Payée",
+        "processing": "En préparation",
+        "shipped": "Expédiée",
+        "delivered": "Livrée",
+        "cancelled": "Annulée",
+        "refunded": "Remboursée"
+      }
+    },
+    "CROP": {
+      "LOGO": "Recadrer le logo",
+      "BANNER": "Recadrer la bannière"
+    }
   }
 }

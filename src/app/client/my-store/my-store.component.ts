@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -35,7 +36,7 @@ type Tab = 'share' | 'products' | 'sales';
 @Component({
   selector: 'app-my-store',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ImageCropperDialogComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ImageCropperDialogComponent, TranslateModule],
   templateUrl: './my-store.component.html',
   styleUrls: ['./my-store.component.scss'],
 })
@@ -65,12 +66,12 @@ export class MyStoreComponent implements OnInit {
 
   // Config de recorte por tipo: logo cuadrado/redondo, banner panorámico 3:1.
   protected readonly CROP_CONFIG = {
-    logoUrl: { aspect: 1, outputWidth: 256, round: true, title: 'Recortar logo' },
+    logoUrl: { aspect: 1, outputWidth: 256, round: true, title: 'MY-STORE-PAGE.CROP.LOGO' },
     bannerUrl: {
       aspect: 3,
       outputWidth: 1200,
       round: false,
-      title: 'Recortar banner',
+      title: 'MY-STORE-PAGE.CROP.BANNER',
     },
   } as const;
 

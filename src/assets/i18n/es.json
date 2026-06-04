@@ -3488,5 +3488,81 @@
     "TITLE": {
       "TEXT": "Retiro de Billetera"
     }
+  },
+  "MY-STORE-PAGE": {
+    "BREADCRUMB": "Mi Tienda",
+    "HERO": {
+      "TITLE": "Mi Tienda",
+      "SUBTITLE": "Comparte tu enlace, personaliza tu tienda y revisa las ventas que generas.",
+      "STATUS": {
+        "ACTIVE": "Activa",
+        "PAUSED": "Pausada"
+      }
+    },
+    "TABS": {
+      "SHARE": "Compartir",
+      "PRODUCTS": "Destacados",
+      "SALES": "Ventas"
+    },
+    "SHARE": {
+      "LINK_TITLE": "Tu enlace de tienda",
+      "LINK_DESC": "Quien compre entrando por este enlace queda asociado a tu tienda.",
+      "COPY_BTN": "Copiar enlace",
+      "BRAND_TITLE": "Personalización",
+      "BRAND_DESC": "Dale identidad a tu tienda con nombre, logo y banner.",
+      "STORE_NAME": "Nombre de la tienda",
+      "STORE_NAME_PLACEHOLDER": "Mi tienda",
+      "TAGLINE": "Eslogan",
+      "TAGLINE_PLACEHOLDER": "Lo mejor para ti",
+      "LOGO": "Logo",
+      "UPLOADING": "Subiendo…",
+      "UPLOAD_LOGO": "Subir logo",
+      "BANNER": "Banner",
+      "UPLOAD_BANNER": "Subir banner",
+      "STATUS_LABEL": "Estado",
+      "STATUS_ACTIVE": "Activa",
+      "STATUS_PAUSED": "Pausada",
+      "EXTERNAL_TITLE": "Enlace de compra externo",
+      "EXTERNAL_DESC": "Define una vez tu enlace externo (por ejemplo tu tienda en Higo). Luego, en la pestaña <strong>Destacados</strong>, eliges con un switch a qué productos les aparece el botón.",
+      "EXTERNAL_URL_LABEL": "Enlace (URL)",
+      "EXTERNAL_BTN_LABEL": "Texto del botón",
+      "EXTERNAL_BTN_PLACEHOLDER": "Comprar en Higo",
+      "SAVING": "Guardando…",
+      "SAVE_BTN": "Guardar cambios"
+    },
+    "PRODUCTS": {
+      "TITLE": "Destaca productos en tu tienda",
+      "DESC": "Tu tienda muestra todo el catálogo; los destacados aparecen primero.",
+      "NO_LINK_WARN": "Para activar el botón externo por producto, primero configura tu enlace en <strong>Compartir → Enlace de compra externo</strong>.",
+      "EMPTY_TITLE": "No hay productos disponibles",
+      "EMPTY_DESC": "Cuando haya catálogo activo podrás destacarlo aquí.",
+      "EXTERNAL_BTN_TITLE": "Mostrar botón externo en este producto",
+      "EXTERNAL_BTN": "Botón externo",
+      "FEATURED": "Destacado",
+      "FEATURE": "Destacar"
+    },
+    "SALES": {
+      "TITLE": "Ventas atribuidas a tu tienda",
+      "COL_ORDER": "Orden",
+      "COL_DATE": "Fecha",
+      "COL_STATUS": "Estado",
+      "COL_TOTAL": "Total",
+      "EMPTY_TITLE": "Aún no hay ventas",
+      "EMPTY_DESC": "Cuando alguien compre por tu enlace, las ventas aparecerán aquí.",
+      "PAGINATION": "Página {{page}} de {{totalPages}} — {{total}} ventas",
+      "STATUS": {
+        "pending_payment": "Pendiente de pago",
+        "paid": "Pagada",
+        "processing": "En preparación",
+        "shipped": "Enviada",
+        "delivered": "Entregada",
+        "cancelled": "Cancelada",
+        "refunded": "Reembolsada"
+      }
+    },
+    "CROP": {
+      "LOGO": "Recortar logo",
+      "BANNER": "Recortar banner"
+    }
   }
 }
