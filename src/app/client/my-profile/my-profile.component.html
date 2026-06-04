@@ -22,9 +22,25 @@
                 <div class="profile-picture-wrapper">
                   <img [src]="user.imageProfileUrl || 'assets/images/user.png'" alt="Foto de perfil"
                     class="profile-picture" />
-                  <div class="profile-picture-badge" *ngIf="user.status">
+                  <div class="profile-picture-badge" *ngIf="user.status && !isUploadingPhoto">
                     <i class="bi bi-check-circle-fill"></i>
                   </div>
+
+                  <!-- Botón para cambiar la foto -->
+                  <button type="button" class="btn-change-picture" (click)="photoInput.click()"
+                    [disabled]="isUploadingPhoto"
+                    [title]="'CLIENT-MY-PROFILE.HEADER.BTN-CHANGE-PHOTO' | translate">
+                    <i class="bi bi-camera-fill" *ngIf="!isUploadingPhoto"></i>
+                    <span class="spinner-border spinner-border-sm" *ngIf="isUploadingPhoto"></span>
+                  </button>
+
+                  <!-- Overlay de carga -->
+                  <div class="profile-picture-uploading" *ngIf="isUploadingPhoto">
+                    <span class="spinner-border" role="status"></span>
+                  </div>
+
+                  <input #photoInput type="file" class="d-none" accept="image/jpeg,image/png,image/webp,image/gif"
+                    (change)="onPhotoSelected($event)" />
                 </div>
               </div>
 

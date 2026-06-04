@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { StorageService } from '@app/core/service/storage-service/storage.service';
+import { ImageProfileService } from '@app/core/service/image-profile-service/image-profile.service';
 
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
@@ -38,6 +40,15 @@ export class MyProfileComponent implements OnInit {
   public profileForm: FormGroup;
   public isEditMode = false;
   public isLoading = false;
+  public isUploadingPhoto = false;
+
+  private static readonly ALLOWED_IMAGE_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/gif',
+  ];
+  private static readonly MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 
   rows = [];
   temp = [];
@@ -48,6 +59,8 @@ export class MyProfileComponent implements OnInit {
     private readonly clipboardService: ClipboardService,
     private readonly toastr: ToastrService,
     private readonly authService: AuthService,
+    private readonly storageService: StorageService,
+    private readonly imageProfileService: ImageProfileService,
     private readonly fb: FormBuilder,
     private readonly translate: TranslateService,
   ) {
@@ -85,6 +98,84 @@ export class MyProfileComponent implements OnInit {
     if (!this.isEditMode) {
       this.populateForm();
     }
+  }
+
+  onPhotoSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (!MyProfileComponent.ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      this.toastr.error(
+        this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.INVALID-IMAGE'),
+      );
+      input.value = '';
+      return;
+    }
+
+    if (file.size > MyProfileComponent.MAX_IMAGE_SIZE_BYTES) {
+      this.toastr.error(
+        this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.IMAGE-TOO-LARGE'),
+      );
+      input.value = '';
+      return;
+    }
+
+    this.uploadPhoto(file);
+    // Permite volver a seleccionar el mismo archivo si fuese necesario.
+    input.value = '';
+  }
+
+  private uploadPhoto(file: File): void {
+    this.isUploadingPhoto = true;
+
+    this.storageService.uploadProfilePhoto(file).subscribe({
+      next: url => this.persistPhotoUrl(url),
+      error: error => {
+        this.isUploadingPhoto = false;
+        const errorMessage =
+          error.error?.message ||
+          this.translate.instant(
+            'CLIENT-MY-PROFILE.MESSAGES.ERROR-UPLOAD-IMAGE',
+          );
+        this.toastr.error(errorMessage, 'Error');
+        console.error('Error al subir la foto de perfil:', error);
+      },
+    });
+  }
+
+  private persistPhotoUrl(url: string): void {
+    this.authService.updateProfile({ imageProfileUrl: url }).subscribe({
+      next: response => {
+        this.isUploadingPhoto = false;
+        if (response.success) {
+          this.user.imageProfileUrl = url;
+          // Refresca el avatar mostrado en el navbar/sidebar.
+          this.imageProfileService.setImageURL(url);
+          this.toastr.success(
+            this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.PHOTO-SUCCESS'),
+            'Éxito',
+          );
+        } else {
+          this.toastr.error(
+            response.message ||
+              this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR'),
+            'Error',
+          );
+        }
+      },
+      error: error => {
+        this.isUploadingPhoto = false;
+        const errorMessage =
+          error.error?.message ||
+          this.translate.instant('CLIENT-MY-PROFILE.MESSAGES.ERROR');
+        this.toastr.error(errorMessage, 'Error');
+        console.error('Error al guardar la foto de perfil:', error);
+      },
+    });
   }
 
   saveProfile() {

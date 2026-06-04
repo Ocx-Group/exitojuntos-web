@@ -15,6 +15,7 @@
       "BTN-EDIT": "Editar Perfil",
       "BTN-SAVE": "Salvar Alterações",
       "BTN-SAVING": "Salvando...",
+      "BTN-CHANGE-PHOTO": "Alterar foto",
       "BTN-SHARE-NETWORK": "Compartilhar Minha Rede",
       "REFERRAL-LINK-COPIED": "Link de indicação copiado!",
       "REFERRAL-LINK-ERROR": "Erro ao copiar o link"
@@ -30,7 +31,11 @@
     "MESSAGES": {
       "ERROR": "Erro ao atualizar o perfil",
       "ERROR-UPLOAD-IMAGE": "Erro ao enviar a imagem",
-      "SUCCESS": "Perfil atualizado com sucesso"
+      "IMAGE-TOO-LARGE": "A imagem excede o tamanho máximo de 5 MB",
+      "INVALID-IMAGE": "Formato de imagem inválido. Use JPEG, PNG, WebP ou GIF",
+      "PHOTO-SUCCESS": "Foto de perfil atualizada",
+      "SUCCESS": "Perfil atualizado com sucesso",
+      "UPLOADING-PHOTO": "Enviando foto..."
     },
     "PERSONAL-INFO": {
       "BIRTHDATE": "Data de Nascimento",

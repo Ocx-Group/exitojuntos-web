@@ -46,4 +46,19 @@ export class StorageService {
       })
       .pipe(map(r => r.data.url));
   }
+
+  /** Subida de la foto de perfil del usuario autenticado. */
+  uploadProfilePhoto(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http
+      .post<{
+        success: boolean;
+        data: { url: string };
+      }>(`${this.baseUrl}/profile-photo`, formData, {
+        headers: this.authHeaders,
+      })
+      .pipe(map(r => r.data.url));
+  }
 }
