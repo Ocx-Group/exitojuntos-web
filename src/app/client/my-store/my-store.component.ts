@@ -13,7 +13,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '@app/core/interfaces/product';
-import { Store, UpdateStorePayload } from '@app/core/interfaces/store';
+import {
+  Store,
+  StoreFeaturedProduct,
+  UpdateStorePayload,
+} from '@app/core/interfaces/store';
 import { ProductsService } from '@app/core/service/products-service';
 import { StoresService } from '@app/core/service/stores-service';
 import { StorageService } from '@app/core/service/storage-service/storage.service';
@@ -80,6 +84,15 @@ export class MyStoreComponent implements OnInit {
   protected readonly togglingId = signal<number | null>(null);
   protected readonly productsLoading = signal(false);
 
+  // Productos con el botón externo activado.
+  protected readonly externalEnabledIds = signal<Set<number>>(new Set());
+  protected readonly togglingExternalId = signal<number | null>(null);
+
+  // Si el dueño aún no configuró el enlace global, el toggle no sirve.
+  protected readonly hasGlobalLink = computed(
+    () => !!this.store()?.externalUrl,
+  );
+
   // Ventas
   protected readonly sales = signal<MyOrder[]>([]);
   protected readonly salesLoading = signal(false);
@@ -118,6 +131,8 @@ export class MyStoreComponent implements OnInit {
             tagline: store.tagline ?? '',
             logoUrl: store.logoUrl ?? '',
             bannerUrl: store.bannerUrl ?? '',
+            externalUrl: store.externalUrl ?? '',
+            externalLabel: store.externalLabel ?? '',
             status: store.status,
           });
           this.loading.set(false);
@@ -268,7 +283,12 @@ export class MyStoreComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: list => {
-          this.featuredIds.set(new Set(list.map(f => f.productId)));
+          this.featuredIds.set(
+            new Set(list.filter(f => f.featured).map(f => f.productId)),
+          );
+          this.externalEnabledIds.set(
+            new Set(list.filter(f => f.externalEnabled).map(f => f.productId)),
+          );
           this.productsLoading.set(false);
         },
         error: () => this.productsLoading.set(false),
@@ -303,6 +323,35 @@ export class MyStoreComponent implements OnInit {
         this.togglingId.set(null);
       },
     });
+  }
+
+  // ─── Botón externo por producto ──────────────────────────────────
+
+  protected isExternalEnabled(productId: number): boolean {
+    return this.externalEnabledIds().has(productId);
+  }
+
+  protected toggleExternal(product: Product, enabled: boolean): void {
+    if (this.togglingExternalId() === product.id) return;
+    this.togglingExternalId.set(product.id);
+    this.storesService
+      .setExternalEnabled(product.id, enabled)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.externalEnabledIds.update(set => {
+            const next = new Set(set);
+            if (enabled) next.add(product.id);
+            else next.delete(product.id);
+            return next;
+          });
+          this.togglingExternalId.set(null);
+        },
+        error: () => {
+          this.toastr.error('No se pudo actualizar el botón externo', 'Error');
+          this.togglingExternalId.set(null);
+        },
+      });
   }
 
   // ─── Ventas atribuidas ───────────────────────────────────────────

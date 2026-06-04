@@ -141,6 +141,32 @@
               </select>
             </label>
           </div>
+
+          <div class="ms-subsection">
+            <h3 class="ms-subsection__title">
+              <i class="fas fa-external-link-alt me-2"></i>Enlace de compra externo
+            </h3>
+            <p class="ms-muted">
+              Define una vez tu enlace externo (por ejemplo tu tienda en Higo).
+              Luego, en la pestaña <strong>Destacados</strong>, eliges con un switch
+              a qué productos les aparece el botón.
+            </p>
+            <div class="ms-form-grid">
+              <label class="ms-field">
+                <span class="ms-field__label">Enlace (URL)</span>
+                <input class="ms-input" type="url" [ngModel]="form().externalUrl"
+                  (ngModelChange)="updateField('externalUrl', $event)"
+                  placeholder="https://higo.com/mi-tienda" />
+              </label>
+              <label class="ms-field">
+                <span class="ms-field__label">Texto del botón</span>
+                <input class="ms-input" type="text" maxlength="60"
+                  [ngModel]="form().externalLabel"
+                  (ngModelChange)="updateField('externalLabel', $event)"
+                  placeholder="Comprar en Higo" />
+              </label>
+            </div>
+          </div>
           <div class="ms-card__footer">
             <button class="ms-btn-primary" [disabled]="saving()" (click)="saveBranding()">
               @if (saving()) { <i class="fas fa-spinner fa-spin me-1"></i>Guardando… }
@@ -156,6 +182,14 @@
           <h2 class="ms-card__title"><i class="fas fa-star me-2"></i>Destaca productos en tu tienda</h2>
           <p class="ms-muted">Tu tienda muestra todo el catálogo; los destacados aparecen primero.</p>
 
+          @if (!hasGlobalLink()) {
+            <p class="ms-hint-warn">
+              <i class="fas fa-circle-info me-1"></i>
+              Para activar el botón externo por producto, primero configura tu
+              enlace en <strong>Compartir → Enlace de compra externo</strong>.
+            </p>
+          }
+
           @if (productsLoading()) {
             <div class="ms-loading ms-loading--inline"><div class="ms-spinner"></div></div>
           } @else if (products().length === 0) {
@@ -168,28 +202,46 @@
             <div class="ms-product-list">
               @for (product of products(); track trackById($index, product)) {
                 <div class="ms-product" [class.is-featured]="isFeatured(product.id)">
-                  <div class="ms-product__thumb">
-                    @if (product.image) { <img [src]="product.image" [alt]="product.name" /> }
-                    @else { <i class="fas fa-image"></i> }
+                  <div class="ms-product__row">
+                    <div class="ms-product__thumb">
+                      @if (product.image) { <img [src]="product.image" [alt]="product.name" /> }
+                      @else { <i class="fas fa-image"></i> }
+                    </div>
+                    <div class="ms-product__info">
+                      <strong class="ms-product__name">{{ product.name }}</strong>
+                      <span class="ms-product__price">${{ product.price | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="ms-product__actions">
+                      @if (hasGlobalLink()) {
+                        <label class="ms-switch"
+                          [class.is-on]="isExternalEnabled(product.id)"
+                          title="Mostrar botón externo en este producto">
+                          <input type="checkbox" hidden
+                            [disabled]="togglingExternalId() === product.id"
+                            [checked]="isExternalEnabled(product.id)"
+                            (change)="toggleExternal(product, $any($event.target).checked)" />
+                          <span class="ms-switch__track"><span class="ms-switch__dot"></span></span>
+                          <span class="ms-switch__label">
+                            <i class="fas fa-external-link-alt me-1"></i>Botón externo
+                          </span>
+                        </label>
+                      }
+                      <button
+                        class="ms-btn-toggle"
+                        [class.is-on]="isFeatured(product.id)"
+                        [disabled]="togglingId() === product.id"
+                        (click)="toggleFeature(product)"
+                      >
+                        @if (togglingId() === product.id) {
+                          <i class="fas fa-spinner fa-spin"></i>
+                        } @else if (isFeatured(product.id)) {
+                          <i class="fas fa-star me-1"></i>Destacado
+                        } @else {
+                          <i class="far fa-star me-1"></i>Destacar
+                        }
+                      </button>
+                    </div>
                   </div>
-                  <div class="ms-product__info">
-                    <strong class="ms-product__name">{{ product.name }}</strong>
-                    <span class="ms-product__price">${{ product.price | number:'1.2-2' }}</span>
-                  </div>
-                  <button
-                    class="ms-btn-toggle"
-                    [class.is-on]="isFeatured(product.id)"
-                    [disabled]="togglingId() === product.id"
-                    (click)="toggleFeature(product)"
-                  >
-                    @if (togglingId() === product.id) {
-                      <i class="fas fa-spinner fa-spin"></i>
-                    } @else if (isFeatured(product.id)) {
-                      <i class="fas fa-star me-1"></i>Destacado
-                    } @else {
-                      <i class="far fa-star me-1"></i>Destacar
-                    }
-                  </button>
                 </div>
               }
             </div>

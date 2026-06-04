@@ -82,6 +82,20 @@ export class StoresService {
     });
   }
 
+  /** Activa o desactiva el botón externo (enlace global de la tienda) para un producto. */
+  setExternalEnabled(
+    productId: number,
+    enabled: boolean,
+  ): Observable<StoreFeaturedProduct> {
+    return this.http
+      .patch<{ success: boolean; data: StoreFeaturedProduct }>(
+        `${this.baseUrl}/me/products/${productId}/external`,
+        { enabled },
+        { headers: this.authHeaders },
+      )
+      .pipe(map(r => r.data));
+  }
+
   // ─── Público (por token) ─────────────────────────────────────────
 
   getByToken(token: string): Observable<Store> {

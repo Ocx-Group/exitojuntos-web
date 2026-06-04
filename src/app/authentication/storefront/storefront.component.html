@@ -107,6 +107,16 @@
                     </button>
                   }
                 </div>
+
+                @if (product.externalEnabled && store()?.externalUrl) {
+                  <button
+                    class="btn-external"
+                    (click)="openExternal($event)"
+                  >
+                    <i class="fas fa-external-link-alt me-1"></i>
+                    {{ store()?.externalLabel || 'Comprar externo' }}
+                  </button>
+                }
               </div>
             </article>
           }

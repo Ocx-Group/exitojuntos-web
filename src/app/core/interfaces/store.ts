@@ -10,6 +10,8 @@ export interface Store {
   tagline?: string | null;
   logoUrl?: string | null;
   bannerUrl?: string | null;
+  externalUrl?: string | null;
+  externalLabel?: string | null;
   theme?: Record<string, unknown> | null;
   status: StoreStatus;
   isDefault: boolean;
@@ -21,6 +23,7 @@ export interface Store {
 export interface StoreCatalogItem extends Product {
   featured: boolean;
   customPitch: string | null;
+  externalEnabled: boolean;
 }
 
 /** Entrada de producto destacado, tal como la administra el dueño. */
@@ -31,6 +34,7 @@ export interface StoreFeaturedProduct {
   featured: boolean;
   sortOrder: number;
   customPitch: string | null;
+  externalEnabled: boolean;
   product?: Product;
 }
 
@@ -39,6 +43,8 @@ export interface UpdateStorePayload {
   tagline?: string;
   logoUrl?: string;
   bannerUrl?: string;
+  externalUrl?: string;
+  externalLabel?: string;
   theme?: Record<string, unknown>;
   status?: StoreStatus;
 }

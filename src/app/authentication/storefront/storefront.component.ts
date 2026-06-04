@@ -122,6 +122,14 @@ export class StorefrontComponent implements OnInit {
     this.router.navigate(['/products', id]);
   }
 
+  /** Abre el enlace de compra externo global de la tienda en una pestaña nueva. */
+  protected openExternal(event?: Event): void {
+    event?.stopPropagation();
+    const url = this.store()?.externalUrl;
+    if (!url) return;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
   protected trackById(_i: number, item: { id: number }): number {
     return item.id;
   }
