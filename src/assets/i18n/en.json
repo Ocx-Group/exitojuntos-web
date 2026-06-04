@@ -888,7 +888,8 @@
       "ACCOUNT-ACTIVE": "Account Active",
       "ACCOUNT-INACTIVE": "Account Inactive",
       "BTN-SHARE": "Share My Network",
-      "BTN-MY-NETWORK": "View My Network"
+      "BTN-MY-NETWORK": "View My Network",
+      "CHANGE-PHOTO": "Change photo"
     },
     "STATS": {
       "MEMBER-SINCE": "Member since",
@@ -936,7 +937,11 @@
     "MESSAGES": {
       "SUCCESS-TITLE": "Success",
       "SUCCESS": "Profile updated successfully",
-      "ERROR": "Error updating profile"
+      "ERROR": "Error updating profile",
+      "PHOTO-SUCCESS": "Profile photo updated",
+      "PHOTO-ERROR": "Error updating the profile photo",
+      "INVALID-IMAGE": "Invalid image format. Use JPEG, PNG, WebP or GIF",
+      "IMAGE-TOO-LARGE": "The image exceeds the 5 MB maximum size"
     }
   },
   "CLIENT-MY-PROFILE": {
@@ -955,7 +960,6 @@
       "BTN-EDIT": "Edit Profile",
       "BTN-SAVE": "Save Changes",
       "BTN-SAVING": "Saving...",
-      "BTN-CHANGE-PHOTO": "Change photo",
       "BTN-SHARE-NETWORK": "Share My Network",
       "REFERRAL-LINK-COPIED": "Referral link copied!",
       "REFERRAL-LINK-ERROR": "Error copying link"
@@ -971,11 +975,7 @@
     "MESSAGES": {
       "ERROR": "Error updating profile",
       "ERROR-UPLOAD-IMAGE": "Error uploading image",
-      "IMAGE-TOO-LARGE": "The image exceeds the 5 MB maximum size",
-      "INVALID-IMAGE": "Invalid image format. Use JPEG, PNG, WebP or GIF",
-      "PHOTO-SUCCESS": "Profile photo updated",
-      "SUCCESS": "Profile updated successfully",
-      "UPLOADING-PHOTO": "Uploading photo..."
+      "SUCCESS": "Profile updated successfully"
     },
     "PERSONAL-INFO": {
       "BIRTHDATE": "Date of Birth",

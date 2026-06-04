@@ -14,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { StorageService } from '@app/core/service/storage-service/storage.service';
+import { ImageProfileService } from '@app/core/service/image-profile-service/image-profile.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,11 +36,22 @@ export class DashboardComponent implements OnInit {
   private readonly toastr = inject(ToastrService);
   private readonly translate = inject(TranslateService);
   private readonly clipboardService = inject(ClipboardService);
+  private readonly storageService = inject(StorageService);
+  private readonly imageProfileService = inject(ImageProfileService);
 
   protected user: UserAffiliate = new UserAffiliate();
   protected profileForm: FormGroup;
   protected readonly isEditMode = signal(false);
   protected readonly isLoading = signal(false);
+  protected readonly isUploadingPhoto = signal(false);
+
+  private static readonly ALLOWED_IMAGE_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/gif',
+  ];
+  private static readonly MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 
   constructor() {
     this.profileForm = this.fb.group({
@@ -85,6 +98,76 @@ export class DashboardComponent implements OnInit {
     if (!this.isEditMode()) {
       this.populateForm();
     }
+  }
+
+  protected onPhotoSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    // Permite volver a seleccionar el mismo archivo más tarde.
+    input.value = '';
+
+    if (!file) {
+      return;
+    }
+
+    if (!DashboardComponent.ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      this.toastr.error(
+        this.translate.instant('CLIENT-DASHBOARD.MESSAGES.INVALID-IMAGE'),
+      );
+      return;
+    }
+
+    if (file.size > DashboardComponent.MAX_IMAGE_SIZE_BYTES) {
+      this.toastr.error(
+        this.translate.instant('CLIENT-DASHBOARD.MESSAGES.IMAGE-TOO-LARGE'),
+      );
+      return;
+    }
+
+    this.isUploadingPhoto.set(true);
+
+    this.storageService.uploadProfilePhoto(file).subscribe({
+      next: url => this.persistPhotoUrl(url),
+      error: error => {
+        this.isUploadingPhoto.set(false);
+        const errorMessage =
+          error?.error?.message ||
+          this.translate.instant('CLIENT-DASHBOARD.MESSAGES.PHOTO-ERROR');
+        this.toastr.error(errorMessage);
+      },
+    });
+  }
+
+  private persistPhotoUrl(url: string): void {
+    this.authService.updateProfile({ imageProfileUrl: url }).subscribe({
+      next: response => {
+        this.isUploadingPhoto.set(false);
+        if (response.success) {
+          const refreshedUser = this.authService.currentUserAffiliateValue;
+          if (refreshedUser) {
+            this.user = { ...refreshedUser };
+          }
+          // Refresca el avatar mostrado en el navbar.
+          this.imageProfileService.setImageURL(url);
+          this.toastr.success(
+            this.translate.instant('CLIENT-DASHBOARD.MESSAGES.PHOTO-SUCCESS'),
+            this.translate.instant('CLIENT-DASHBOARD.MESSAGES.SUCCESS-TITLE'),
+          );
+        } else {
+          this.toastr.error(
+            response.message ||
+              this.translate.instant('CLIENT-DASHBOARD.MESSAGES.PHOTO-ERROR'),
+          );
+        }
+      },
+      error: error => {
+        this.isUploadingPhoto.set(false);
+        const errorMessage =
+          error?.error?.message ||
+          this.translate.instant('CLIENT-DASHBOARD.MESSAGES.PHOTO-ERROR');
+        this.toastr.error(errorMessage);
+      },
+    });
   }
 
   protected saveProfile(): void {

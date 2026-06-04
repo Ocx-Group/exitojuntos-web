@@ -885,7 +885,8 @@
       "ACCOUNT-ACTIVE": "Cuenta Activa",
       "ACCOUNT-INACTIVE": "Cuenta Inactiva",
       "BTN-SHARE": "Compartir Mi Red",
-      "BTN-MY-NETWORK": "Ver Mi Red"
+      "BTN-MY-NETWORK": "Ver Mi Red",
+      "CHANGE-PHOTO": "Cambiar foto"
     },
     "STATS": {
       "MEMBER-SINCE": "Miembro desde",
@@ -933,7 +934,11 @@
     "MESSAGES": {
       "SUCCESS-TITLE": "Éxito",
       "SUCCESS": "Perfil actualizado exitosamente",
-      "ERROR": "Error al actualizar el perfil"
+      "ERROR": "Error al actualizar el perfil",
+      "PHOTO-SUCCESS": "Foto de perfil actualizada",
+      "PHOTO-ERROR": "Error al actualizar la foto de perfil",
+      "INVALID-IMAGE": "Formato de imagen no válido. Use JPEG, PNG, WebP o GIF",
+      "IMAGE-TOO-LARGE": "La imagen supera el tamaño máximo de 5 MB"
     }
   },
   "CLIENT-MY-PROFILE": {
@@ -952,7 +957,6 @@
       "BTN-EDIT": "Editar Perfil",
       "BTN-SAVE": "Guardar Cambios",
       "BTN-SAVING": "Guardando...",
-      "BTN-CHANGE-PHOTO": "Cambiar foto",
       "BTN-SHARE-NETWORK": "Compartir Mi Red",
       "REFERRAL-LINK-COPIED": "¡Enlace de referido copiado!",
       "REFERRAL-LINK-ERROR": "Error al copiar el enlace"
@@ -968,11 +972,7 @@
     "MESSAGES": {
       "ERROR": "Error al actualizar el perfil",
       "ERROR-UPLOAD-IMAGE": "Error al subir la imagen",
-      "IMAGE-TOO-LARGE": "La imagen supera el tamaño máximo de 5 MB",
-      "INVALID-IMAGE": "Formato de imagen no válido. Use JPEG, PNG, WebP o GIF",
-      "PHOTO-SUCCESS": "Foto de perfil actualizada",
-      "SUCCESS": "Perfil actualizado exitosamente",
-      "UPLOADING-PHOTO": "Subiendo foto..."
+      "SUCCESS": "Perfil actualizado exitosamente"
     },
     "PERSONAL-INFO": {
       "BIRTHDATE": "Fecha de Nacimiento",
