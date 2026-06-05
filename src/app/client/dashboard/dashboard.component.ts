@@ -188,9 +188,7 @@ export class DashboardComponent implements OnInit {
       name: formValue.name,
       lastName: formValue.lastName,
       username: trimmedUsername,
-      birtDate: formValue.birthDate
-        ? new Date(formValue.birthDate)
-        : undefined,
+      birtDate: formValue.birthDate ? new Date(formValue.birthDate) : undefined,
       address: formValue.address,
       city: formValue.city,
     };
@@ -263,7 +261,7 @@ export class DashboardComponent implements OnInit {
 
   private formatDateForInput(value: string | Date): string {
     const date = value instanceof Date ? value : new Date(value);
-    if (isNaN(date.getTime())) {
+    if (Number.isNaN(date.getTime())) {
       return '';
     }
     const yyyy = date.getFullYear();
